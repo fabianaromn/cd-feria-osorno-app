@@ -1,254 +1,622 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>CD Feria Osorno</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    body {
-      background: #f3f5f9;
-      color: #111827;
-    }
+<title>CD Feria Osorno</title>
 
-    header {
-      background: linear-gradient(135deg, #071b4a, #123c8c);
-      color: white;
-      padding: 22px 18px;
-      border-radius: 0 0 25px 25px;
-    }
+<style>
 
-    .club {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
 
-    .escudo {
-      width: 55px;
-      height: 55px;
-      background: #c82032;
-      border: 3px solid white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 17px;
-    }
+body{
+background:#f3f5f9;
+color:#111827;
+padding-bottom:30px;
+}
 
-    header h1 {
-      font-size: 21px;
-    }
+header{
+background:linear-gradient(135deg,#071b4a,#123c8c);
+color:white;
+padding:22px 18px;
+border-radius:0 0 25px 25px;
+}
 
-    header p {
-      font-size: 13px;
-      opacity: 0.8;
-      margin-top: 4px;
-    }
+.club{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-    .bienvenida {
-      padding: 22px 18px 10px;
-    }
+.escudo{
+width:55px;
+height:55px;
+background:#c82032;
+border:3px solid white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
 
-    .bienvenida h2 {
-      font-size: 24px;
-      margin-bottom: 5px;
-    }
+header h1{
+font-size:21px;
+}
 
-    .bienvenida p {
-      color: #667085;
-    }
+header p{
+font-size:13px;
+opacity:.8;
+margin-top:4px;
+}
 
-    .partido {
-      margin: 18px;
-      background: linear-gradient(135deg, #071b4a, #16469d);
-      color: white;
-      border-radius: 20px;
-      padding: 22px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,.15);
-    }
+.bienvenida{
+padding:22px 18px 10px;
+}
 
-    .partido small {
-      opacity: .75;
-    }
+.bienvenida h2{
+font-size:24px;
+margin-bottom:5px;
+}
 
-    .equipos {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
+.bienvenida p{
+color:#667085;
+}
 
-    .vs {
-      color: #ffcc00;
-      font-size: 14px;
-      margin: 0 8px;
-    }
+.partido{
+margin:18px;
+background:linear-gradient(135deg,#071b4a,#16469d);
+color:white;
+border-radius:20px;
+padding:22px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
 
-    .boton {
-      display: inline-block;
-      background: #c82032;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.partido small{
+opacity:.75;
+}
 
-    .menu {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 0 18px;
-    }
+.equipos{
+font-size:22px;
+font-weight:bold;
+margin:15px 0;
+}
 
-    .card {
-      background: white;
-      border-radius: 17px;
-      padding: 20px 15px;
-      text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,.07);
-    }
+.vs{
+color:#ffcc00;
+font-size:14px;
+margin:0 8px;
+}
 
-    .icono {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:0 18px;
+}
 
-    .card h3 {
-      font-size: 15px;
-    }
+.card{
+background:white;
+border-radius:17px;
+padding:20px 15px;
+text-align:center;
+box-shadow:0 3px 12px rgba(0,0,0,.07);
+cursor:pointer;
+}
 
-    .novedades {
-      margin: 22px 18px;
-      background: white;
-      padding: 18px;
-      border-radius: 17px;
-    }
+.icono{
+font-size:30px;
+margin-bottom:8px;
+}
 
-    .novedades h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
+.card h3{
+font-size:15px;
+}
 
-    .aviso {
-      border-top: 1px solid #eee;
-      padding: 13px 0;
-    }
+.seccion{
+margin:22px 18px;
+background:white;
+padding:18px;
+border-radius:17px;
+}
 
-    .aviso:first-of-type {
-      border-top: none;
-    }
+.seccion h2{
+font-size:20px;
+margin-bottom:15px;
+}
 
-    .aviso strong {
-      display: block;
-      margin-bottom: 5px;
-    }
+.categoria{
+width:100%;
+border:0;
+background:#f5f7fb;
+margin:7px 0;
+padding:15px;
+border-radius:12px;
+text-align:left;
+font-size:15px;
+font-weight:bold;
+color:#071b4a;
+cursor:pointer;
+}
 
-    .aviso p {
-      color: #667085;
-      font-size: 13px;
-    }
+.categoria:hover{
+background:#e8edf7;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #98a2b3;
-      font-size: 12px;
-    }
-  </style>
+.jugador{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#f5f7fb;
+padding:14px;
+border-radius:12px;
+margin:8px 0;
+}
+
+.jugador small{
+display:block;
+color:#667085;
+margin-top:4px;
+}
+
+.numero{
+background:#c82032;
+color:white;
+width:38px;
+height:38px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+}
+
+.boton{
+background:#c82032;
+color:white;
+border:0;
+padding:11px 16px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:12px;
+}
+
+.oculto{
+display:none;
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:#98a2b3;
+font-size:12px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <header>
-    <div class="club">
-      <div class="escudo">FO</div>
+<header>
 
-      <div>
-        <h1>CD Feria Osorno</h1>
-        <p>Puerto Montt · Aplicación Oficial</p>
-      </div>
-    </div>
-  </header>
+<div class="club">
 
-  <section class="bienvenida">
-    <h2>¡Bienvenidos! 👋</h2>
-    <p>Todo el club en un solo lugar.</p>
-  </section>
+<div class="escudo">
+FO
+</div>
 
-  <section class="partido">
+<div>
 
-    <small>⚽ PRÓXIMO PARTIDO</small>
+<h1>
+CD Feria Osorno
+</h1>
 
-    <div class="equipos">
-      Feria Osorno
-      <span class="vs">VS</span>
-      Rival
-    </div>
+<p>
+Puerto Montt · Aplicación Oficial
+</p>
 
-    <p>📅 Fecha por confirmar</p>
-    <p>📍 Cancha por confirmar</p>
+</div>
 
-    <br>
+</div>
 
-    <a class="boton" href="#">Ver partido</a>
+</header>
 
-  </section>
 
-  <section class="menu">
+<section class="bienvenida">
 
-    <div class="card">
-      <div class="icono">⚽</div>
-      <h3>Partidos</h3>
-    </div>
+<h2>
+¡Bienvenidos! 👋
+</h2>
 
-    <div class="card">
-      <div class="icono">📊</div>
-      <h3>Tabla de posiciones</h3>
-    </div>
+<p>
+Todo el club en un solo lugar.
+</p>
 
-    <div class="card">
-      <div class="icono">👥</div>
-      <h3>Jugadores</h3>
-    </div>
+</section>
 
-    <div class="card">
-      <div class="icono">📈</div>
-      <h3>Estadísticas</h3>
-    </div>
 
-  </section>
+<section class="partido">
 
-  <section class="novedades">
+<small>
+⚽ PRÓXIMO PARTIDO
+</small>
 
-    <h2>📢 Últimas novedades</h2>
+<div class="equipos">
 
-    <div class="aviso">
-      <strong>🔵🔴 Bienvenidos a la App Oficial</strong>
-      <p>Aquí podrás encontrar información, partidos y estadísticas del club.</p>
-    </div>
+Feria Osorno
 
-    <div class="aviso">
-      <strong>🏆 CD Feria Osorno</strong>
-      <p>Estamos construyendo nuestra nueva plataforma deportiva.</p>
-    </div>
+<span class="vs">
+VS
+</span>
 
-  </section>
+Rival
 
-  <footer>
-    CD Feria Osorno · Puerto Montt<br>
-    La aplicación oficial del club
-  </footer>
+</div>
+
+<p>
+📅 Fecha por confirmar
+</p>
+
+<p>
+📍 Cancha por confirmar
+</p>
+
+</section>
+
+
+<section class="menu">
+
+
+<div class="card"
+onclick="mostrar('partidos')">
+
+<div class="icono">
+⚽
+</div>
+
+<h3>
+Partidos
+</h3>
+
+</div>
+
+
+<div class="card"
+onclick="mostrar('tabla')">
+
+<div class="icono">
+📊
+</div>
+
+<h3>
+Tabla de posiciones
+</h3>
+
+</div>
+
+
+<div class="card"
+onclick="mostrar('jugadores')">
+
+<div class="icono">
+👥
+</div>
+
+<h3>
+Jugadores
+</h3>
+
+</div>
+
+
+<div class="card"
+onclick="mostrar('estadisticas')">
+
+<div class="icono">
+📈
+</div>
+
+<h3>
+Estadísticas
+</h3>
+
+</div>
+
+
+</section>
+
+
+<section
+id="inicio"
+class="seccion">
+
+<h2>
+📢 Últimas novedades
+</h2>
+
+<p>
+Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
+</p>
+
+<br>
+
+<p>
+🔵🔴 Estamos construyendo nuestra plataforma deportiva.
+</p>
+
+</section>
+
+
+<section
+id="jugadores"
+class="seccion oculto">
+
+<button
+class="boton"
+onclick="volver()">
+
+← Volver
+
+</button>
+
+<h2>
+👥 Plantel del Club
+</h2>
+
+
+<button
+class="categoria"
+onclick="categoria('Primera Serie')">
+
+⚽ Primera Serie
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Segunda Serie')">
+
+⚽ Segunda Serie
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Senior')">
+
+👴 Senior
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Super Senior')">
+
+👴 Super Senior
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Infantil U8')">
+
+🧒 Infantil U8
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Infantil U10')">
+
+🧒 Infantil U10
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Infantil U13')">
+
+🧒 Infantil U13
+
+</button>
+
+
+<button
+class="categoria"
+onclick="categoria('Infantil U15')">
+
+🧒 Infantil U15
+
+</button>
+
+</section>
+
+
+<section
+id="categoria"
+class="seccion oculto">
+
+<button
+class="boton"
+onclick="mostrar('jugadores')">
+
+← Categorías
+
+</button>
+
+<h2 id="nombreCategoria">
+</h2>
+
+<div
+id="listaJugadores">
+
+<p>
+Todavía no hay jugadores registrados.
+</p>
+
+</div>
+
+</section>
+
+
+<section
+id="partidos"
+class="seccion oculto">
+
+<button
+class="boton"
+onclick="volver()">
+
+← Volver
+
+</button>
+
+<h2>
+⚽ Partidos
+</h2>
+
+<p>
+Aquí aparecerá el calendario y los resultados del club.
+</p>
+
+</section>
+
+
+<section
+id="tabla"
+class="seccion oculto">
+
+<button
+class="boton"
+onclick="volver()">
+
+← Volver
+
+</button>
+
+<h2>
+📊 Tabla de posiciones
+</h2>
+
+<p>
+Aquí aparecerá la tabla de cada campeonato.
+</p>
+
+</section>
+
+
+<section
+id="estadisticas"
+class="seccion oculto">
+
+<button
+class="boton"
+onclick="volver()">
+
+← Volver
+
+</button>
+
+<h2>
+📈 Estadísticas
+</h2>
+
+<p>
+Aquí aparecerán goles, asistencias, partidos y tarjetas.
+</p>
+
+</section>
+
+
+<footer>
+
+CD Feria Osorno · Puerto Montt
+
+<br><br>
+
+La aplicación oficial del club 🔵🔴
+
+</footer>
+
+
+<script>
+
+function ocultarTodo(){
+
+document
+.querySelectorAll(".seccion")
+.forEach(function(seccion){
+
+seccion.classList.add("oculto");
+
+});
+
+}
+
+
+function mostrar(id){
+
+ocultarTodo();
+
+document
+.getElementById(id)
+.classList.remove("oculto");
+
+window.scrollTo(0,0);
+
+}
+
+
+function volver(){
+
+ocultarTodo();
+
+document
+.getElementById("inicio")
+.classList.remove("oculto");
+
+window.scrollTo(0,0);
+
+}
+
+
+function categoria(nombre){
+
+mostrar("categoria");
+
+document
+.getElementById("nombreCategoria")
+.innerText="👥 "+nombre;
+
+document
+.getElementById("listaJugadores")
+.innerHTML=
+
+"<p>Aún no hay jugadores registrados en esta categoría.</p>";
+
+}
+
+</script>
+
 
 </body>
+
 </html>
