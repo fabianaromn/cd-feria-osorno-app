@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CD Feria Osorno</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f3f5f9;
+      color: #111827;
+    }
+
+    header {
+      background: linear-gradient(135deg, #071b4a, #123c8c);
+      color: white;
+      padding: 22px 18px;
+      border-radius: 0 0 25px 25px;
+    }
+
+    .club {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .escudo {
+      width: 55px;
+      height: 55px;
+      background: #c82032;
+      border: 3px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    header h1 {
+      font-size: 21px;
+    }
+
+    header p {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    .bienvenida {
+      padding: 22px 18px 10px;
+    }
+
+    .bienvenida h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .bienvenida p {
+      color: #667085;
+    }
+
+    .partido {
+      margin: 18px;
+      background: linear-gradient(135deg, #071b4a, #16469d);
+      color: white;
+      border-radius: 20px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+
+    .partido small {
+      opacity: .75;
+    }
+
+    .equipos {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .vs {
+      color: #ffcc00;
+      font-size: 14px;
+      margin: 0 8px;
+    }
+
+    .boton {
+      display: inline-block;
+      background: #c82032;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 17px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .icono {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+    }
+
+    .novedades {
+      margin: 22px 18px;
+      background: white;
+      padding: 18px;
+      border-radius: 17px;
+    }
+
+    .novedades h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .aviso {
+      border-top: 1px solid #eee;
+      padding: 13px 0;
+    }
+
+    .aviso:first-of-type {
+      border-top: none;
+    }
+
+    .aviso strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .aviso p {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #98a2b3;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="club">
+      <div class="escudo">FO</div>
+
+      <div>
+        <h1>CD Feria Osorno</h1>
+        <p>Puerto Montt · Aplicación Oficial</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="bienvenida">
+    <h2>¡Bienvenidos! 👋</h2>
+    <p>Todo el club en un solo lugar.</p>
+  </section>
+
+  <section class="partido">
+
+    <small>⚽ PRÓXIMO PARTIDO</small>
+
+    <div class="equipos">
+      Feria Osorno
+      <span class="vs">VS</span>
+      Rival
+    </div>
+
+    <p>📅 Fecha por confirmar</p>
+    <p>📍 Cancha por confirmar</p>
+
+    <br>
+
+    <a class="boton" href="#">Ver partido</a>
+
+  </section>
+
+  <section class="menu">
+
+    <div class="card">
+      <div class="icono">⚽</div>
+      <h3>Partidos</h3>
+    </div>
+
+    <div class="card">
+      <div class="icono">📊</div>
+      <h3>Tabla de posiciones</h3>
+    </div>
+
+    <div class="card">
+      <div class="icono">👥</div>
+      <h3>Jugadores</h3>
+    </div>
+
+    <div class="card">
+      <div class="icono">📈</div>
+      <h3>Estadísticas</h3>
+    </div>
+
+  </section>
+
+  <section class="novedades">
+
+    <h2>📢 Últimas novedades</h2>
+
+    <div class="aviso">
+      <strong>🔵🔴 Bienvenidos a la App Oficial</strong>
+      <p>Aquí podrás encontrar información, partidos y estadísticas del club.</p>
+    </div>
+
+    <div class="aviso">
+      <strong>🏆 CD Feria Osorno</strong>
+      <p>Estamos construyendo nuestra nueva plataforma deportiva.</p>
+    </div>
+
+  </section>
+
+  <footer>
+    CD Feria Osorno · Puerto Montt<br>
+    La aplicación oficial del club
+  </footer>
+
+</body>
+</html>
