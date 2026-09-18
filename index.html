@@ -604,22 +604,72 @@ window.scrollTo(0,0);
 
 }
 
+async function categoria(nombre){
+  mostrar("categoria");
 
-function categoria(nombre){
+  document.getElementById("nombreCategoria").innerText = "👥 " + nombre;
 
-mostrar("categoria");
+  const equivalencias = {
+    "Primera Serie": "Primera serie",
+    "Segunda Serie": "Segunda Serie",
+    "Senior": "Serie senior",
+    "Super Senior": "Serie super senior",
+    "Infantil U8": "Infantil U8",
+    "Infantil U10": "Infantil U10",
+    "Infantil U13": "Infantil U13",
+    "Infantil U15": "Infantil U15"
+  };
 
-document
-.getElementById("nombreCategoria")
-.innerText="👥 "+nombre;
+  const nombreBD = equivalencias[nombre];
 
-document
-.getElementById("listaJugadores")
-.innerHTML=
+  document.getElementById("listaJugadores").innerHTML =
+    "<p>Cargando jugadores...</p>";
 
-"<p>Aún no hay jugadores registrados en esta categoría.</p>";
+  const { data: categoriaData, error: categoriaError } =
+    await supabaseClient
+      .from("categories")
+      .select("id")
+      .eq("name", nombreBD)
+      .single();
 
-}
+  if (categoriaError) {
+    document.getElementById("listaJugadores").innerHTML =
+      "<p>Error al buscar la categoría.</p>";
+    console.error(categoriaError);
+    return;
+  }
+
+  const { data: jugadores, error: jugadoresError } =
+    await supabaseClient
+      .from("Jugadores")
+      .select("name, number, position, photo_url")
+      .eq("category_id", categoriaData.id)
+      .order("number");
+
+  if (jugadoresError) {
+    document.getElementById("listaJugadores").innerHTML =
+      "<p>Error al cargar los jugadores.</p>";
+    console.error(jugadoresError);
+    return;
+  }
+
+  if (!jugadores || jugadores.length === 0) {
+    document.getElementById("listaJugadores").innerHTML =
+      "<p>Aún no hay jugadores registrados en esta categoría.</p>";
+    return;
+  }
+
+  document.getElementById("listaJugadores").innerHTML =
+    jugadores.map(function(jugador){
+      return `
+        <div class="jugador-card">
+          <h3>${jugador.name}</h3>
+          <p>🔢 Número: ${jugador.number}</p>
+          <p>⚽ Posición: ${jugador.position}</p>
+        </div>
+      `;
+    }).join("");
+      }
 
 </script>
 
