@@ -316,7 +316,7 @@ FO
 <div>
 
 <h1>
-CD Feria Osorno
+Club Deportivo Feria Osorno
 </h1>
 
 <p>
@@ -333,7 +333,7 @@ Puerto Montt · Aplicación Oficial
 <section class="bienvenida">
 
 <h2>
-¡Bienvenidos! 👋
+¡Bienvenidos Ferianos ! ❤️💙
 </h2>
 
 <p>
@@ -695,7 +695,7 @@ window.scrollTo(0,0);
 
 }
 
-function verJugador(numero, nombre, posicion, foto){
+function verJugador(numero, nombre, posicion, foto, fechaNacimiento){
   mostrar("jugadorDetalle");
 
   document.getElementById("detalleJugador").innerHTML = `
@@ -712,6 +712,8 @@ function verJugador(numero, nombre, posicion, foto){
       <h2>${nombre}</h2>
 
       <p>⚽ ${posicion}</p>
+
+      <p>🎂 ${fechaNacimiento || 'Fecha de nacimiento no registrada'}</p>
 
       <p>🔵🔴 Club Deportivo Feria Osorno</p>
 
@@ -772,7 +774,7 @@ async function categoria(nombre){
   const { data: jugadores, error: jugadoresError } =
     await supabaseClient
       .from("Jugadores")
-      .select("name, number, position, photo_url")
+      .select("name, number, position, photo_url, birth_date")
       .eq("category_id", categoriaData.id)
       .order("number");
 
@@ -792,12 +794,13 @@ async function categoria(nombre){
   document.getElementById("listaJugadores").innerHTML =
     jugadores.map(function(jugador){
       return `
-        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}')">
+        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}', '${jugador.birth_date || ''}')">
 
           <img
             class="jugador-foto"
             src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
             alt="${jugador.name}"
+            
           >
 
           <div class="jugador-numero">${jugador.number}</div>
