@@ -715,13 +715,21 @@ async function categoria(nombre){
     jugadores.map(function(jugador){
       return `
         <div class="jugador-card">
-          <div class="jugador-numero">${jugador.number}</div>
 
-          <div class="jugador-info">
-            <h3>${jugador.name}</h3>
-            <p>⚽ ${jugador.position}</p>
-          </div>
-        </div>
+  <img
+    class="jugador-foto"
+    src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
+    alt="${jugador.name}"
+  >
+
+  <div class="jugador-numero">${jugador.number}</div>
+
+  <div class="jugador-info">
+    <h3>${jugador.name}</h3>
+    <p>⚽ ${jugador.position}</p>
+  </div>
+
+</div>
       `;
     }).join("");
 }
