@@ -705,14 +705,16 @@ async function categoria(nombre){
     jugadores.map(function(jugador){
       return `
         <div class="jugador-card">
-          <h3>${jugador.name}</h3>
-          <p>🔢 Número: ${jugador.number}</p>
-          <p>⚽ Posición: ${jugador.position}</p>
+          <div class="jugador-numero">${jugador.number}</div>
+
+          <div class="jugador-info">
+            <h3>${jugador.name}</h3>
+            <p>⚽ ${jugador.position}</p>
+          </div>
         </div>
       `;
     }).join("");
-      }
-
+}
 </script>
 
 
