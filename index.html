@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
 
 <meta charset="UTF-8">
@@ -558,7 +559,13 @@ La aplicación oficial del club 🔵🔴
 
 
 <script>
+const SUPABASE_URL = 'https://jqnfmcckavbtfgdilirp.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ATMrlbOmPaLHm4gki3wGYg_fgj8mAVm';
 
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 function ocultarTodo(){
 
 document
