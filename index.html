@@ -695,6 +695,26 @@ window.scrollTo(0,0);
 
 }
 
+ function calcularEdad(fechaNacimiento){
+
+  const hoy = new Date();
+  const nacimiento = new Date(fechaNacimiento + 'T00:00:00');
+
+  let edad = hoy.getFullYear() - nacimiento.getFullYear();
+
+  const mes = hoy.getMonth() - nacimiento.getMonth();
+
+  if (
+    mes < 0 ||
+    (mes === 0 && hoy.getDate() < nacimiento.getDate())
+  ) {
+    edad--;
+  }
+
+  return edad;
+ } 
+  
+
 function verJugador(numero, nombre, posicion, foto, fechaNacimiento){
   mostrar("jugadorDetalle");
 
@@ -713,7 +733,15 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento){
 
       <p>⚽ ${posicion}</p>
 
-      <p>🎂 ${fechaNacimiento || 'Fecha de nacimiento no registrada'}</p>
+      <p>🎂 ${fechaNacimiento ? new Date(fechaNacimiento + 'T00:00:00').toLocaleDateString('es-CL', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}) : 'Fecha de nacimiento no registrada'}</p>
+
+${fechaNacimiento ? `
+<p>🎈 ${calcularEdad(fechaNacimiento)} años</p>
+` : ''}
 
       <p>🔵🔴 Club Deportivo Feria Osorno</p>
 
