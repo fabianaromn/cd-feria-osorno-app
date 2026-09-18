@@ -715,7 +715,7 @@ window.scrollTo(0,0);
  } 
   
 
-function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria){
+function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, yearJoined){
   mostrar("jugadorDetalle");
 
   document.getElementById("detalleJugador").innerHTML = `
@@ -733,6 +733,7 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria){
 
       <p>⚽ ${posicion}</p>
       <p>🏆 ${categoria}</p>
+      <p>🔵🔴 Desde ${yearJoined || 'Año no registrado'}</p>
 
       <p>🎂 ${fechaNacimiento ? new Date(fechaNacimiento + 'T00:00:00').toLocaleDateString('es-CL', {
   day: 'numeric',
@@ -803,7 +804,7 @@ async function categoria(nombre){
   const { data: jugadores, error: jugadoresError } =
     await supabaseClient
       .from("Jugadores")
-      .select("name, number, position, photo_url, birth_date, category_id")
+      .select("name, number, position, photo_url, birth_date, category_id, year_joined ")
       .eq("category_id", categoriaData.id)
       .order("number");
 
@@ -823,7 +824,7 @@ async function categoria(nombre){
   document.getElementById("listaJugadores").innerHTML =
     jugadores.map(function(jugador){
       return `
-        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}', '${jugador.birth_date || ''}', '${nombreBD}')">
+        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}', '${jugador.birth_date || ''}', '${nombreBD}', '${jugador.year_joined || ''}')">
           <img
             class="jugador-foto"
             src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
