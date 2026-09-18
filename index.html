@@ -643,6 +643,32 @@ window.scrollTo(0,0);
 
 }
 
+function verJugador(numero, nombre, posicion, foto){
+  mostrar("jugadorDetalle");
+
+  document.getElementById("detalleJugador").innerHTML = `
+    <div class="ficha-jugador">
+
+      <img
+        class="foto-jugador-grande"
+        src="${foto || 'https://via.placeholder.com/200'}"
+        alt="${nombre}"
+      >
+
+      <div class="detalle-numero">${numero}</div>
+
+      <h2>${nombre}</h2>
+
+      <p>⚽ ${posicion}</p>
+
+      <p>🔵🔴 Club Deportivo Feria Osorno</p>
+
+      <button class="boton" onclick="volver()">⬅ Volver</button>
+
+    </div>
+  `;
+  }
+
 
 function volver(){
 
@@ -714,22 +740,22 @@ async function categoria(nombre){
   document.getElementById("listaJugadores").innerHTML =
     jugadores.map(function(jugador){
       return `
-        <div class="jugador-card">
+        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}')">
 
-  <img
-    class="jugador-foto"
-    src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
-    alt="${jugador.name}"
-  >
+          <img
+            class="jugador-foto"
+            src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
+            alt="${jugador.name}"
+          >
 
-  <div class="jugador-numero">${jugador.number}</div>
+          <div class="jugador-numero">${jugador.number}</div>
 
-  <div class="jugador-info">
-    <h3>${jugador.name}</h3>
-    <p>⚽ ${jugador.position}</p>
-  </div>
+          <div class="jugador-info">
+            <h3>${jugador.name}</h3>
+            <p>⚽ ${jugador.position}</p>
+          </div>
 
-</div>
+        </div>
       `;
     }).join("");
 }
