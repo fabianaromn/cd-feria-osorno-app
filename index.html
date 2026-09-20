@@ -856,6 +856,35 @@ async function categoria(nombre){
       `;  
     }).join("");  
 }  
+
+async function iniciarSesion(){
+
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const mensaje = document.getElementById("mensajeLogin");
+
+  if(!email || !password){
+    mensaje.innerText = "⚠️ Completa correo y contraseña.";
+    return;
+  }
+
+  mensaje.innerText = "⏳ Iniciando sesión...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if(error){
+    mensaje.innerText = "❌ Correo o contraseña incorrectos.";
+    return;
+  }
+
+  mensaje.innerText = "✅ Sesión iniciada.";
+
+  mostrar("agregarJugador");
+}
+
   
   async function guardarJugador(){  
   
