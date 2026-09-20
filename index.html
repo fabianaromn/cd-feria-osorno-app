@@ -390,7 +390,23 @@ Estadísticas
     Administración
   </h3>
 </div>
+<div class="card" onclick="mostrar('socios')">
+  <div class="icono">
+    👤
+  </div>
+  <h3>
+    Socios
+  </h3>
+</div>
 
+<div class="card" onclick="mostrar('store')">
+  <div class="icono">
+    🛒
+  </div>
+  <h3>
+    Store
+  </h3>
+</div>
   
 </section>  <section  
 id="inicio"  
@@ -554,7 +570,9 @@ onclick="guardarJugador()">
 </button>  <p  
 id="mensajeJugador"  
 style="margin-top:15px; text-align:center;">  
-</p>  </section>  <section  
+</p>  </section> 
+  
+  <section  
 id="categoria"  
 class="seccion oculto">  <button  
 class="boton"  
@@ -582,7 +600,8 @@ onclick="volver()">
 ⚽ Partidos  
 </h2>  <p>  
 Aquí aparecerá el calendario y los resultados del club.  
-</p>  </section>  <section  
+</p>  </section> 
+  <section  
 id="tabla"  
 class="seccion oculto">  <button  
 class="boton"  
@@ -606,7 +625,51 @@ onclick="volver()">
 📈 Estadísticas  
 </h2>  <p>  
 Aquí aparecerán goles, asistencias, partidos y tarjetas.  
-</p>  </section>  <footer>  CD Feria Osorno · Puerto Montt
+</p>  </section>  
+
+
+<section
+id="socios"
+class="seccion oculto">
+
+  <button
+    class="boton"
+    onclick="volver()">
+    ← Volver
+  </button>
+
+  <h2>
+    👤 Socios
+  </h2>
+
+  <p>
+    Aquí estará la información de los socios del Club Deportivo Feria Osorno.
+  </p>
+
+</section>
+
+<section
+id="store"
+class="seccion oculto">
+
+  <button
+    class="boton"
+    onclick="volver()">
+    ← Volver
+  </button>
+
+  <h2>
+    🛒 Store
+  </h2>
+
+  <p>
+    Próximamente encontrarás aquí productos oficiales del Club Deportivo Feria Osorno.
+  </p>
+
+</section>
+
+<footer>
+  CD Feria Osorno · Puerto Montt
 
 <br><br>
 
