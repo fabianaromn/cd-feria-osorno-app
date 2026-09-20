@@ -1,978 +1,1170 @@
-<!DOCTYPE html>  <html lang="es">  
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  
-<head>  <meta charset="UTF-8">  <meta name="viewport"  
-content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="es">
 
-<title>CD Feria Osorno</title>  <style>  
-  
-*{  
-box-sizing:border-box;  
-margin:0;  
-padding:0;  
-font-family:Arial,sans-serif;  
-}  
-  
-body{  
-background:#f3f5f9;  
-color:#111827;  
-padding-bottom:30px;  
-}  
-  
-header{  
-background:linear-gradient(135deg,#071b4a,#123c8c);  
-color:white;  
-padding:22px 18px;  
-border-radius:0 0 25px 25px;  
-}  
-  
-.club{  
-display:flex;  
-align-items:center;  
-gap:12px;  
-}  
-  
-.escudo{  
-width:55px;  
-height:55px;  
-background:#c82032;  
-border:3px solid white;  
-border-radius:50%;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-weight:bold;  
-}  
-  
-header h1{  
-font-size:21px;  
-}  
-  
-header p{  
-font-size:13px;  
-opacity:.8;  
-margin-top:4px;  
-}  
-  
-.bienvenida{  
-padding:22px 18px 10px;  
-}  
-  
-.bienvenida h2{  
-font-size:24px;  
-margin-bottom:5px;  
-}  
-  
-.bienvenida p{  
-color:#667085;  
-}  
-  
-.partido{  
-margin:18px;  
-background:linear-gradient(135deg,#071b4a,#16469d);  
-color:white;  
-border-radius:20px;  
-padding:22px;  
-text-align:center;  
-box-shadow:0 8px 20px rgba(0,0,0,.15);  
-}  
-  
-.partido small{  
-opacity:.75;  
-}  
-  
-.equipos{  
-font-size:22px;  
-font-weight:bold;  
-margin:15px 0;  
-}  
-  
-.vs{  
-color:#ffcc00;  
-font-size:14px;  
-margin:0 8px;  
-}  
-  
-.menu{  
-display:grid;  
-grid-template-columns:1fr 1fr;  
-gap:12px;  
-padding:0 18px;  
-}  
-  
-.card{  
-background:white;  
-border-radius:17px;  
-padding:20px 15px;  
-text-align:center;  
-box-shadow:0 3px 12px rgba(0,0,0,.07);  
-cursor:pointer;  
-}  
-  
-.icono{  
-font-size:30px;  
-margin-bottom:8px;  
-}  
-  
-.card h3{  
-font-size:15px;  
-}  
-  
-.seccion{  
-margin:22px 18px;  
-background:white;  
-padding:18px;  
-border-radius:17px;  
-}  
-  
-.seccion h2{  
-font-size:20px;  
-margin-bottom:15px;  
-}  
-  
-.categoria{  
-width:100%;  
-border:0;  
-background:#f5f7fb;  
-margin:7px 0;  
-padding:15px;  
-border-radius:12px;  
-text-align:left;  
-font-size:15px;  
-font-weight:bold;  
-color:#071b4a;  
-cursor:pointer;  
-}  
-  
-.categoria:hover{  
-background:#e8edf7;  
-}  
-  
-.jugador{  
-display:flex;  
-justify-content:space-between;  
-align-items:center;  
-background:#f5f7fb;  
-padding:14px;  
-border-radius:12px;  
-margin:8px 0;  
-}  
-  
-.jugador small{  
-display:block;  
-color:#667085;  
-margin-top:4px;  
-}  
-  
-.numero{  
-background:#c82032;  
-color:white;  
-width:38px;  
-height:38px;  
-border-radius:50%;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-weight:bold;  
-}  
-  
-.boton{  
-background:#c82032;  
-color:white;  
-border:0;  
-padding:11px 16px;  
-border-radius:10px;  
-font-weight:bold;  
-cursor:pointer;  
-margin-bottom:12px;  
-}  
-  
-.oculto{  
-display:none;  
-}  
-  
-footer{  
-text-align:center;  
-padding:25px;  
-color:#98a2b3;  
-font-size:12px;  
-}  
-  
-.jugador-card {  
-  background: linear-gradient(135deg, #ffffff, #f3f3f3);  
-  border-radius: 18px;  
-  padding: 18px;  
-  margin: 12px 0;  
-  display: flex;  
-  align-items: center;  
-  gap: 16px;  
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);  
-  border-left: 6px solid #d71920;  
-}  
-  
-.jugador-numero {  
-  width: 55px;  
-  height: 55px;  
-  border-radius: 50%;  
-  background: #17479e;  
-  color: white;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
-  font-size: 22px;  
-  font-weight: bold;  
-  flex-shrink: 0;  
-}  
-  
-.jugador-info {  
-  flex: 1;  
-}  
-  
-.jugador-info h3 {  
-  margin: 0 0 5px;  
-  font-size: 19px;  
-}  
-  
-.jugador-info p {  
-  margin: 0;  
-  color: #666;  
-  font-size: 14px;  
-  
-  }  
-  
-  .jugador-foto {  
-  width: 65px;  
-  height: 65px;  
-  border-radius: 50%;  
-  object-fit: cover;  
-  border: 3px solid #17479e;  
-  flex-shrink: 0;  
-  }  
-  
-  .ficha-jugador {  
-  background: white;  
-  border-radius: 20px;  
-  padding: 25px;  
-  margin: 20px 0;  
-  text-align: center;  
-  box-shadow: 0 5px 18px rgba(0,0,0,0.15);  
-}  
-  
-.foto-jugador-grande {  
-  width: 180px;  
-  height: 180px;  
-  object-fit: cover;  
-  border-radius: 50%;  
-  border: 5px solid #17479e;  
-  display: block;  
-  margin: 0 auto 15px;  
-}  
-  
-.detalle-numero {  
-  width: 55px;  
-  height: 55px;  
-  border-radius: 50%;  
-  background: #d71920;  
-  color: white;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
-  font-size: 24px;  
-  font-weight: bold;  
-  margin: 10px auto;  
-}  
-  
-.ficha-jugador h2 {  
-  margin: 10px 0 5px;  
-  font-size: 26px;  
-}  
-  
-.ficha-jugador p {  
-  margin: 8px 0;  
-  color: #555;  
-  font-size: 16px;  
-}  
-  
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>CD Feria Osorno</title>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- =====================================================
+       ESTILOS
+  ====================================================== -->
+
+  <style>
+
+    /* =========================
+       ESTILOS GENERALES
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f3f5f9;
+      color: #111827;
+      padding-bottom: 30px;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: linear-gradient(135deg, #071b4a, #123c8c);
+      color: white;
+      padding: 22px 18px;
+      border-radius: 0 0 25px 25px;
+    }
+
+    .club {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .escudo {
+      width: 55px;
+      height: 55px;
+      background: #c82032;
+      border: 3px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    header h1 {
+      font-size: 21px;
+    }
+
+    header p {
+      font-size: 13px;
+      opacity: .8;
+      margin-top: 4px;
+    }
+
+
+    /* =========================
+       BIENVENIDA
+    ========================= */
+
+    .bienvenida {
+      padding: 22px 18px 10px;
+    }
+
+    .bienvenida h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .bienvenida p {
+      color: #667085;
+    }
+
+
+    /* =========================
+       PRÓXIMO PARTIDO
+    ========================= */
+
+    .partido {
+      margin: 18px;
+      background: linear-gradient(135deg, #071b4a, #16469d);
+      color: white;
+      border-radius: 20px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+
+    .partido small {
+      opacity: .75;
+    }
+
+    .equipos {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .vs {
+      color: #ffcc00;
+      font-size: 14px;
+      margin: 0 8px;
+    }
+
+
+    /* =========================
+       MENÚ PRINCIPAL
+    ========================= */
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 17px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+      cursor: pointer;
+    }
+
+    .icono {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       SECCIONES
+    ========================= */
+
+    .seccion {
+      margin: 22px 18px;
+      background: white;
+      padding: 18px;
+      border-radius: 17px;
+    }
+
+    .seccion h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+
+    /* =========================
+       BOTONES
+    ========================= */
+
+    .boton {
+      background: #c82032;
+      color: white;
+      border: 0;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
+
+
+    /* =========================
+       CATEGORÍAS
+    ========================= */
+
+    .categoria {
+      width: 100%;
+      border: 0;
+      background: #f5f7fb;
+      margin: 7px 0;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: bold;
+      color: #071b4a;
+      cursor: pointer;
+    }
+
+    .categoria:hover {
+      background: #e8edf7;
+    }
+
+
+    /* =========================
+       JUGADORES
+    ========================= */
+
+    .jugador {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5f7fb;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 8px 0;
+    }
+
+    .jugador small {
+      display: block;
+      color: #667085;
+      margin-top: 4px;
+    }
+
+    .numero {
+      background: #c82032;
+      color: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .jugador-card {
+      background: linear-gradient(135deg, #ffffff, #f3f3f3);
+      border-radius: 18px;
+      padding: 18px;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      border-left: 6px solid #d71920;
+    }
+
+    .jugador-numero {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #17479e;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .jugador-info {
+      flex: 1;
+    }
+
+    .jugador-info h3 {
+      margin: 0 0 5px;
+      font-size: 19px;
+    }
+
+    .jugador-info p {
+      margin: 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .jugador-foto {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #17479e;
+      flex-shrink: 0;
+    }
+
+
+    /* =========================
+       FICHA DEL JUGADOR
+    ========================= */
+
+    .ficha-jugador {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin: 20px 0;
+      text-align: center;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+    }
+
+    .foto-jugador-grande {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #17479e;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .detalle-numero {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #d71920;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px auto;
+    }
+
+    .ficha-jugador h2 {
+      margin: 10px 0 5px;
+      font-size: 26px;
+    }
+
+    .ficha-jugador p {
+      margin: 8px 0;
+      color: #555;
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #98a2b3;
+      font-size: 12px;
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-<section id="login" class="seccion oculto">
 
-  <h2>🔐 Acceso administrador</h2>
+  <!-- =====================================================
+       LOGIN ADMINISTRADOR
+  ====================================================== -->
 
-  <p style="color:#667085; margin-bottom:18px;">
-    Ingresa tus datos para administrar el plantel.
-  </p>
-
-  <input
-    id="loginEmail"
-    type="email"
-    placeholder="Correo electrónico"
-    style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  <section
+    id="login"
+    class="seccion oculto"
   >
 
-  <input
-    id="loginPassword"
-    type="password"
-    placeholder="Contraseña"
-    style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    <h2>🔐 Acceso administrador</h2>
+
+    <p style="color:#667085; margin-bottom:18px;">
+      Ingresa tus datos para administrar el plantel.
+    </p>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="Correo electrónico"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Contraseña"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+    <button
+      class="boton"
+      style="width:100%; margin-top:15px;"
+      onclick="iniciarSesion()"
+    >
+      🔐 Ingresar
+    </button>
+
+    <p
+      id="mensajeLogin"
+      style="margin-top:15px; text-align:center;"
+    ></p>
+
+  </section>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header>
+
+    <div class="club">
+
+      <div class="escudo">
+        FO
+      </div>
+
+      <div>
+
+        <h1>
+          Club Deportivo Feria Osorno
+        </h1>
+
+        <p>
+          Puerto Montt · Aplicación Oficial
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       BIENVENIDA
+  ====================================================== -->
+
+  <section class="bienvenida">
+
+    <h2>
+      ¡Bienvenidos Ferianos! ❤️💙
+    </h2>
+
+    <p>
+      Todo el club en un solo lugar.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       PRÓXIMO PARTIDO
+  ====================================================== -->
+
+  <section class="partido">
+
+    <small>
+      ⚽ PRÓXIMO PARTIDO
+    </small>
+
+    <div class="equipos">
+
+      Feria Osorno
+
+      <span class="vs">
+        VS
+      </span>
+
+      Deportivo Austral
+
+    </div>
+
+    <p>
+      📅 Fecha por confirmar
+    </p>
+
+    <p>
+      📍 Cancha por confirmar
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       MENÚ PRINCIPAL
+  ====================================================== -->
+
+  <section class="menu">
+
+
+    <!-- PARTIDOS -->
+
+    <div
+      class="card"
+      onclick="mostrar('partidos')"
+    >
+
+      <div class="icono">
+        ⚽
+      </div>
+
+      <h3>
+        Partidos
+      </h3>
+
+    </div>
+
+
+    <!-- TABLA -->
+
+    <div
+      class="card"
+      onclick="mostrar('tabla')"
+    >
+
+      <div class="icono">
+        📊
+      </div>
+
+      <h3>
+        Tabla de posiciones
+      </h3>
+
+    </div>
+
+
+    <!-- JUGADORES -->
+
+    <div
+      class="card"
+      onclick="mostrar('jugadores')"
+    >
+
+      <div class="icono">
+        👥
+      </div>
+
+      <h3>
+        Jugadores
+      </h3>
+
+    </div>
+
+
+    <!-- ESTADÍSTICAS -->
+
+    <div
+      class="card"
+      onclick="mostrar('estadisticas')"
+    >
+
+      <div class="icono">
+        📈
+      </div>
+
+      <h3>
+        Estadísticas
+      </h3>
+
+    </div>
+
+
+    <!-- ADMINISTRACIÓN -->
+
+    <div
+      class="card"
+      onclick="mostrar('login')"
+    >
+
+      <div class="icono">
+        ⚙️
+      </div>
+
+      <h3>
+        Administración
+      </h3>
+
+    </div>
+
+
+    <!-- SOCIOS -->
+
+    <div
+      class="card"
+      onclick="mostrar('socios')"
+    >
+
+      <div class="icono">
+        👤
+      </div>
+
+      <h3>
+        Socios
+      </h3>
+
+    </div>
+
+
+    <!-- STORE -->
+
+    <div
+      class="card"
+      onclick="mostrar('store')"
+    >
+
+      <div class="icono">
+        🛒
+      </div>
+
+      <h3>
+        Store
+      </h3>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =====================================================
+       INICIO
+  ====================================================== -->
+
+  <section
+    id="inicio"
+    class="seccion"
   >
 
-  <button
-    class="boton"
-    style="width:100%; margin-top:15px;"
-    onclick="iniciarSesion()"
+    <h2>
+      📢 Últimas novedades
+    </h2>
+
+    <p>
+      Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
+    </p>
+
+    <br>
+
+    <p>
+      🔵🔴 Estamos construyendo nuestra plataforma deportiva.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       JUGADORES
+  ====================================================== -->
+
+  <section
+    id="jugadores"
+    class="seccion oculto"
   >
-    🔐 Ingresar
-  </button>
-
-  <p
-    id="mensajeLogin"
-    style="margin-top:15px; text-align:center;"
-  ></p>
-
-</section>
-    
-    
-<header> 
-  
-  <div class="club">  <div class="escudo">  
-FO  
-</div>  <div>  <h1>  
-Club Deportivo Feria Osorno  
-</h1>  <p>  
-Puerto Montt · Aplicación Oficial  
-</p>  </div>  </div>  </header>  <section class="bienvenida">  <h2>  
-¡Bienvenidos Ferianos ! ❤️💙  
-</h2>  <p>  
-Todo el club en un solo lugar.  
-</p>  </section>  <section class="partido">  <small>  
-⚽ PRÓXIMO PARTIDO  
-</small>  <div class="equipos">  Feria Osorno
-
-<span class="vs">  
-VS  
-</span>  Deportivo Austral
-
-</div>  <p>  
-📅 Fecha por confirmar  
-</p>  <p>  
-📍 Cancha por confirmar  
-</p>  </section>  <section class="menu">  <div class="card"  
-onclick="mostrar('partidos')">  <div class="icono">  
-⚽  
-</div>  <h3>  
-Partidos  
-</h3>  </div>  <div class="card"  
-onclick="mostrar('tabla')">  <div class="icono">  
-📊  
-</div>  <h3>  
-Tabla de posiciones  
-</h3>  </div>  <div class="card"  
-onclick="mostrar('jugadores')">  <div class="icono">  
-👥  
-</div>  <h3>  
-Jugadores  
-</h3>  </div> 
-
-<div class="card"  
-onclick="mostrar('estadisticas')">  <div class="icono">  
-📈  
-</div>  <h3>  
-Estadísticas  
-</h3>  </div>  
-<div class="card" onclick="mostrar('login')">
-  <div class="icono">
-    ⚙️
-  </div>
-  <h3>
-    Administración
-  </h3>
-</div>
-<div class="card" onclick="mostrar('socios')">
-  <div class="icono">
-    👤
-  </div>
-  <h3>
-    Socios
-  </h3>
-</div>
-
-<div class="card" onclick="mostrar('store')">
-  <div class="icono">
-    🛒
-  </div>
-  <h3>
-    Store
-  </h3>
-</div>
-  
-</section>  <section  
-id="inicio"  
-class="seccion">  <h2>  
-📢 Últimas novedades  
-</h2>  <p>  
-Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.  
-</p>  <br>  <p>  
-🔵🔴 Estamos construyendo nuestra plataforma deportiva.  
-</p>  </section>  <section  
-id="jugadores"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="volver()">
-
-← Volver
-
-</button>  <h2>  
-👥 Plantel del Club  
-</h2> 
 
-<button
-class="boton"
-onclick="mostrarAgregarJugador()">
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
 
-➕ Agregar jugador
-
-</button>
-  
-  <button  
-class="categoria"  
-onclick="categoria('Primera Serie')">
-
-⚽ Primera Serie
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Segunda Serie')">
-
-⚽ Segunda Serie
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Senior')">
-
-👴 Senior
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Super Senior')">
-
-👴 Super Senior
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Infantil U8')">
-
-🧒 Infantil U8
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Infantil U10')">
-
-🧒 Infantil U10
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Infantil U13')">
-
-🧒 Infantil U13
-
-</button>  <button  
-class="categoria"  
-onclick="categoria('Infantil U15')">
-
-🧒 Infantil U15
-
-</button>  </section>  
-<section  
-id="agregarJugador"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="mostrar('jugadores')">
-
-← Volver
-
-</button>  <h2>  
-➕ Agregar jugador  
-</h2>  <p style="color:#667085; margin-bottom:18px;">  
-Ingresa los datos del nuevo jugador.  
-</p>  <input
-id="nuevoNombre"
-type="text"
-placeholder="Nombre completo"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<input
-id="nuevoNumero"
-type="number"
-placeholder="Número de camiseta"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<select  
-id="nuevaPosicion"  
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
-
-<option value="">  
-Selecciona posición  
-</option>  <option value="Arquero">  
-Arquero  
-</option>  <option value="Defensa">  
-Defensa  
-</option>  <option value="Mediocampista">  
-Mediocampista  
-</option>  <option value="Delantero">  
-Delantero  
-</option>  </select>  <select  
-id="nuevaCategoria"  
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
-
-<option value="">  
-Selecciona categoría  
-</option>  <option value="Primera Serie">  
-Primera Serie  
-</option>  <option value="Segunda Serie">  
-Segunda Serie  
-</option>  <option value="Serie Senior">  
-Serie Senior  
-</option>  <option value="Serie Super Senior">  
-Serie Super Senior  
-</option>  <option value="Infantil U8">  
-Infantil U8  
-</option>  <option value="Infantil U10">  
-Infantil U10  
-</option>  <option value="Infantil U13">  
-Infantil U13  
-</option>  <option value="Infantil U15">  
-Infantil U15  
-</option>  </select>  <input
-id="nuevoNacimiento"
-type="date"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<input
-id="nuevoIngreso"
-type="number"
-placeholder="Año de ingreso"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<button  
-class="boton"  
-style="width:100%; margin-top:15px;"  
-onclick="guardarJugador()">
-
-💾 Guardar jugador
-
-</button>  <p  
-id="mensajeJugador"  
-style="margin-top:15px; text-align:center;">  
-</p>  </section> 
-  
-  <section  
-id="categoria"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="mostrar('jugadores')">
-
-← Categorías
-
-</button>  <h2 id="nombreCategoria">  
-</h2>  <div  
-id="listaJugadores">  <p>  
-Todavía no hay jugadores registrados.  
-</p>  </div>  </section>  <section  
-id="jugadorDetalle"  
-class="seccion oculto">  <div  
-id="detalleJugador">  
-</div>  </section>  <section  
-id="partidos"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="volver()">
-
-← Volver
-
-</button>  <h2>  
-⚽ Partidos  
-</h2>  <p>  
-Aquí aparecerá el calendario y los resultados del club.  
-</p>  </section> 
-  <section  
-id="tabla"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="volver()">
-
-← Volver
-
-</button>  <h2>  
-📊 Tabla de posiciones  
-</h2>  <p>  
-Aquí aparecerá la tabla de cada campeonato.  
-</p>  </section>  <section  
-id="estadisticas"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="volver()">
-
-← Volver
-
-</button>  <h2>  
-📈 Estadísticas  
-</h2>  <p>  
-Aquí aparecerán goles, asistencias, partidos y tarjetas.  
-</p>  </section>  
-
-
-<section
-id="socios"
-class="seccion oculto">
-
-  <button
-    class="boton"
-    onclick="volver()">
-    ← Volver
-  </button>
-
-  <h2>
-    👤 Socios
-  </h2>
-
-  <p>
-    Aquí estará la información de los socios del Club Deportivo Feria Osorno.
-  </p>
-
-</section>
-
-<section
-id="store"
-class="seccion oculto">
-
-  <button
-    class="boton"
-    onclick="volver()">
-    ← Volver
-  </button>
-
-  <h2>
-    🛒 Store
-  </h2>
-
-  <p>
-    Próximamente encontrarás aquí productos oficiales del Club Deportivo Feria Osorno.
-  </p>
-
-</section>
-
-<footer>
-  CD Feria Osorno · Puerto Montt
-
-<br><br>
-
-La aplicación oficial del club 🔵🔴
-
-</footer>  <script>  
-const SUPABASE_URL = 'https://jqnfmcckavbtfgdilirp.supabase.co';  
-const SUPABASE_KEY = 'sb_publishable_ATMrlbOmPaLHm4gki3wGYg_fgj8mAVm';  
-  
-const supabaseClient = window.supabase.createClient(  
-  SUPABASE_URL,  
-  SUPABASE_KEY  
-);  
-function ocultarTodo(){  
-  
-document  
-.querySelectorAll(".seccion")  
-.forEach(function(seccion){  
-  
-seccion.classList.add("oculto");  
-  
-});  
-  
-}  
-  
-  
-function mostrar(id){  
-  
-ocultarTodo();  
-  
-document  
-.getElementById(id)  
-.classList.remove("oculto");  
-  
-window.scrollTo(0,0);  
-  
-}  
-  
- function calcularEdad(fechaNacimiento){  
-  
-  const hoy = new Date();  
-  const nacimiento = new Date(fechaNacimiento + 'T00:00:00');  
-  
-  let edad = hoy.getFullYear() - nacimiento.getFullYear();  
-  
-  const mes = hoy.getMonth() - nacimiento.getMonth();  
-  
-  if (  
-    mes < 0 ||  
-    (mes === 0 && hoy.getDate() < nacimiento.getDate())  
-  ) {  
-    edad--;  
-  }  
-  
-  return edad;  
- }   
-    
-  
-function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, yearJoined){  
-  mostrar("jugadorDetalle");  
-  
-  document.getElementById("detalleJugador").innerHTML = `  
-    <div class="ficha-jugador">  
-  
-      <img  
-        class="foto-jugador-grande"  
-        src="${foto || 'https://via.placeholder.com/200'}"  
-        alt="${nombre}"  
-      >  
-  
-      <div class="detalle-numero">${numero}</div>  
-  
-      <h2>${nombre}</h2>  
-  
-      <p>⚽ ${posicion}</p>  
-      <p>🏆 ${categoria}</p>  
-      <p>🔵🔴 Desde ${yearJoined || 'Año no registrado'}</p>  
-  
-      <p>🎂 ${fechaNacimiento ? new Date(fechaNacimiento + 'T00:00:00').toLocaleDateString('es-CL', {  
-  day: 'numeric',  
-  month: 'long',  
-  year: 'numeric'  
-}) : 'Fecha de nacimiento no registrada'}</p>  
-  
-${fechaNacimiento ? `  
-<p>🎈 ${calcularEdad(fechaNacimiento)} años</p>  
-` : ''}  
-  
-      <p>🔵🔴 Club Deportivo Feria Osorno</p>  
-  
-      <button class="boton" onclick="volver()">⬅ Volver</button>  
-  
-    </div>  
-  `;  
-  }  
-  
-  
-function volver(){  
-  
-ocultarTodo();  
-  
-document  
-.getElementById("inicio")  
-.classList.remove("oculto");  
-  
-window.scrollTo(0,0);  
-  
-}  
-  
-async function categoria(nombre){  
-  mostrar("categoria");  
-  
-  document.getElementById("nombreCategoria").innerText = "👥 " + nombre;  
-  
-  const equivalencias = {  
-    "Primera Serie": "Primera Serie",  
-    "Segunda Serie": "Segunda Serie",  
-    "Senior": "Serie Senior",  
-    "Super Senior": "Serie Super Senior",  
-    "Infantil U8": "Infantil U8",  
-    "Infantil U10": "Infantil U10",  
-    "Infantil U13": "Infantil U13",  
-    "Infantil U15": "Infantil U15"  
-  };  
-  
-  const nombreBD = equivalencias[nombre];  
-  
-  document.getElementById("listaJugadores").innerHTML =  
-    "<p>Cargando jugadores...</p>";  
-  
-  const { data: categoriaData, error: categoriaError } =  
-    await supabaseClient  
-      .from("categories")  
-      .select("id")  
-      .eq("name", nombreBD)  
-      .single();  
-  
-  if (categoriaError) {  
-    document.getElementById("listaJugadores").innerHTML =  
-      "<p>Error al buscar la categoría.</p>";  
-    console.error(categoriaError);  
-    return;  
-  }  
-  
-  const { data: jugadores, error: jugadoresError } =  
-    await supabaseClient  
-      .from("Jugadores")  
-      .select("name, number, position, photo_url, birth_date, category_id, year_joined ")  
-      .eq("category_id", categoriaData.id)  
-      .order("number");  
-  
-  if (jugadoresError) {  
-    document.getElementById("listaJugadores").innerHTML =  
-      "<p>Error al cargar los jugadores.</p>";  
-    console.error(jugadoresError);  
-    return;  
-  }  
-  
-  if (!jugadores || jugadores.length === 0) {  
-    document.getElementById("listaJugadores").innerHTML =  
-      "<p>Aún no hay jugadores registrados en esta categoría.</p>";  
-    return;  
-  }  
-  
-  document.getElementById("listaJugadores").innerHTML =  
-    jugadores.map(function(jugador){  
-      return `  
-        <div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}', '${jugador.birth_date || ''}', '${nombreBD}', '${jugador.year_joined || ''}')">  
-          <img  
-            class="jugador-foto"  
-            src="${jugador.photo_url || 'https://via.placeholder.com/65'}"  
-            alt="${jugador.name}"  
-              
-          >  
-  
-          <div class="jugador-numero">${jugador.number}</div>  
-  
-          <div class="jugador-info">  
-            <h3>${jugador.name}</h3>  
-            <p>⚽ ${jugador.position}</p>  
-          </div>  
-  
-        </div>  
-      `;  
-    }).join("");  
-}  
-
-async function mostrarAgregarJugador(){
-
-  const { data } = await supabaseClient.auth.getSession();
-
-  if(!data.session){
-    mostrar("login");
-    return;
-  }
-
-  mostrar("agregarJugador");
-}
-
-  
-async function iniciarSesion(){
-
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-  const mensaje = document.getElementById("mensajeLogin");
-
-  if(!email || !password){
-    mensaje.innerText = "⚠️ Completa correo y contraseña.";
-    return;
-  }
-
-  mensaje.innerText = "⏳ Iniciando sesión...";
-
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
-  if(error){
-    mensaje.innerText = "❌ Correo o contraseña incorrectos.";
-    return;
-  }
-
-  mensaje.innerText = "✅ Sesión iniciada.";
-
-  mostrar("agregarJugador");
-}
-
-  
-  async function guardarJugador(){  
-  
-  const nombre = document.getElementById("nuevoNombre").value.trim();  
-  const numero = document.getElementById("nuevoNumero").value;  
-  const posicion = document.getElementById("nuevaPosicion").value;  
-  const categoria = document.getElementById("nuevaCategoria").value;  
-  const nacimiento = document.getElementById("nuevoNacimiento").value;  
-  const ingreso = document.getElementById("nuevoIngreso").value;  
-  
-  const mensaje = document.getElementById("mensajeJugador");  
-  
-  if (!nombre || !numero || !posicion || !categoria) {  
-    mensaje.innerText = "⚠️ Completa nombre, número, posición y categoría.";  
-    mensaje.style.color = "#c82032";  
-    return;  
-  }  
-  
-  mensaje.innerText = "⏳ Guardando jugador...";  
-  mensaje.style.color = "#17479e";  
-  
-  const { data: categoriaData, error: categoriaError } =  
-    await supabaseClient  
-      .from("categories")  
-      .select("id")  
-      .eq("name", categoria)  
-      .single();  
-  
-  if (categoriaError) {  
-  
-    console.error(categoriaError);  
-  
-    mensaje.innerText = "❌ No se encontró la categoría.";  
-    mensaje.style.color = "#c82032";  
-  
-    return;  
-  }  
-  
-  const { error: jugadorError } =  
-    await supabaseClient  
-      .from("Jugadores")  
-      .insert([  
-        {  
-          name: nombre,  
-          number: Number(numero),  
-          position: posicion,  
-          category_id: categoriaData.id,  
-          birth_date: nacimiento || null,  
-          year_joined: ingreso ? Number(ingreso) : null  
-        }  
-      ]);  
-  
-  if (jugadorError) {  
-  
-    console.error(jugadorError);  
-  
-    mensaje.innerText = "❌ Error al guardar el jugador.";  
-    mensaje.style.color = "#c82032";  
-  
-    return;  
-  }  
-  
-  mensaje.innerText = "✅ Jugador guardado correctamente.";  
-  mensaje.style.color = "#16803c";  
-  
-  document.getElementById("nuevoNombre").value = "";  
-  document.getElementById("nuevoNumero").value = "";  
-  document.getElementById("nuevaPosicion").value = "";  
-  document.getElementById("nuevaCategoria").value = "";  
-  document.getElementById("nuevoNacimiento").value = "";  
-  document.getElementById("nuevoIngreso").value = "";  
-  
-  }  
-</script>  </body>  </html> 
+    <h2>
+      👥 Plantel del Club
+    </h2>
+
+
+    <!-- AGREGAR JUGADOR -->
+
+    <button
+      class="boton"
+      onclick="mostrarAgregarJugador()"
+    >
+      ➕ Agregar jugador
+    </button>
+
+
+    <!-- CATEGORÍAS -->
+
+    <button
+      class="categoria"
+      onclick="categoria('Primera Serie')"
+    >
+      ⚽ Primera Serie
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Segunda Serie')"
+    >
+      ⚽ Segunda Serie
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Senior')"
+    >
+      👴 Senior
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Super Senior')"
+    >
+      👴 Super Senior
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Infantil U8')"
+    >
+      🧒 Infantil U8
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Infantil U10')"
+    >
+      🧒 Infantil U10
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Infantil U13')"
+    >
+      🧒 Infantil U13
+    </button>
+
+
+    <button
+      class="categoria"
+      onclick="categoria('Infantil U15')"
+    >
+      🧒 Infantil U15
+    </button>
+
+  </section>
+
+
+  <!-- =====================================================
+       AGREGAR JUGADOR
+  ====================================================== -->
+
+  <section
+    id="agregarJugador"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="mostrar('jugadores')"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      ➕ Agregar jugador
+    </h2>
+
+    <p style="color:#667085; margin-bottom:18px;">
+      Ingresa los datos del nuevo jugador.
+    </p>
+
+
+    <input
+      id="nuevoNombre"
+      type="text"
+      placeholder="Nombre completo"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+
+    <input
+      id="nuevoNumero"
+      type="number"
+      placeholder="Número de camiseta"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+
+    <select
+      id="nuevaPosicion"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+      <option value="">
+        Selecciona posición
+      </option>
+
+      <option value="Arquero">
+        Arquero
+      </option>
+
+      <option value="Defensa">
+        Defensa
+      </option>
+
+      <option value="Mediocampista">
+        Mediocampista
+      </option>
+
+      <option value="Delantero">
+        Delantero
+      </option>
+
+    </select>
+
+
+    <select
+      id="nuevaCategoria"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+      <option value="">
+        Selecciona categoría
+      </option>
+
+      <option value="Primera Serie">
+        Primera Serie
+      </option>
+
+      <option value="Segunda Serie">
+        Segunda Serie
+      </option>
+
+      <option value="Serie Senior">
+        Serie Senior
+      </option>
+
+      <option value="Serie Super Senior">
+        Serie Super Senior
+      </option>
+
+      <option value="Infantil U8">
+        Infantil U8
+      </option>
+
+      <option value="Infantil U10">
+        Infantil U10
+      </option>
+
+      <option value="Infantil U13">
+        Infantil U13
+      </option>
+
+      <option value="Infantil U15">
+        Infantil U15
+      </option>
+
+    </select>
+
+
+    <input
+      id="nuevoNacimiento"
+      type="date"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+
+    <input
+      id="nuevoIngreso"
+      type="number"
+      placeholder="Año de ingreso"
+      style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+    >
+
+
+    <button
+      class="boton"
+      style="width:100%; margin-top:15px;"
+      onclick="guardarJugador()"
+    >
+      💾 Guardar jugador
+    </button>
+
+
+    <p
+      id="mensajeJugador"
+      style="margin-top:15px; text-align:center;"
+    ></p>
+
+  </section>
+
+
+  <!-- =====================================================
+       CATEGORÍA
+  ====================================================== -->
+
+  <section
+    id="categoria"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="mostrar('jugadores')"
+    >
+      ← Categorías
+    </button>
+
+    <h2 id="nombreCategoria"></h2>
+
+    <div id="listaJugadores">
+
+      <p>
+        Todavía no hay jugadores registrados.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FICHA INDIVIDUAL DEL JUGADOR
+  ====================================================== -->
+
+  <section
+    id="jugadorDetalle"
+    class="seccion oculto"
+  >
+
+    <div id="detalleJugador"></div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PARTIDOS
+  ====================================================== -->
+
+  <section
+    id="partidos"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      ⚽ Partidos
+    </h2>
+
+    <p>
+      Aquí aparecerá el calendario y los resultados del club.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       TABLA DE POSICIONES
+  ====================================================== -->
+
+  <section
+    id="tabla"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      📊 Tabla de posiciones
+    </h2>
+
+    <p>
+      Aquí aparecerá la tabla de cada campeonato.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       ESTADÍSTICAS
+  ====================================================== -->
+
+  <section
+    id="estadisticas"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      📈 Estadísticas
+    </h2>
+
+    <p>
+      Aquí aparecerán goles, asistencias, partidos y tarjetas.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       SOCIOS
+  ====================================================== -->
+
+  <section
+    id="socios"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      👤 Socios
+    </h2>
+
+    <p>
+      Aquí estará la información de los socios del Club Deportivo Feria Osorno.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       STORE
+  ====================================================== -->
+
+  <section
+    id="store"
+    class="seccion oculto"
+  >
+
+    <button
+      class="boton"
+      onclick="volver()"
+    >
+      ← Volver
+    </button>
+
+    <h2>
+      🛒 Store
+    </h2>
+
+    <p>
+      Próximamente encontrarás aquí productos oficiales del Club Deportivo Feria Osorno.
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    CD Feria Osorno · Puerto Montt
+
+    <br><br>
+
+    La aplicación oficial del club 🔵🔴
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       CONFIGURACIÓN SUPABASE
+    ====================================================== */
+
+    const SUPABASE_URL =
+      'https://jqnfmcckavbtfgdilirp.supabase.co';
+
+    const SUPABASE_KEY =
+      'sb_publishable_ATMrlbOmPaLHm4gki3wGYg_fgj8mAVm';
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    /* =====================================================
+       OCULTAR TODAS LAS SECCIONES
+    ====================================================== */
+
+    function ocultarTodo() {
+
+      document
+        .querySelectorAll(".seccion")
+        .forEach(function(seccion) {
+
+          seccion.classList.add("oculto");
+
+        });
+
+    }
+
+
+    /* =====================================================
+       MOSTRAR UNA SECCIÓN
+    ====================================================== */
+
+    function mostrar(id) {
+
+      ocultarTodo();
+
+      document
+        .getElementById(id)
+        .classList.remove("oculto");
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* =====================================================
+       CALCULAR EDAD
+    ====================================================== */
+
+    function calcularEdad(fechaNacimiento) {
+
+      const hoy = new Date();
+
+      const nacimiento =
+        new Date(fechaNacimiento + 'T00:00:00');
+
+      let edad =
+        hoy.getFullYear() -
+        nacimiento.getFullYear();
+
+      const mes =
+        hoy.getMonth() -
+        nacimiento.getMonth() 
