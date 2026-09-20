@@ -292,7 +292,52 @@ font-size:12px;
   font-size: 16px;  
 }  
   
-</style>  </head>  <body>  <header>  <div class="club">  <div class="escudo">  
+  </style>
+</head>
+
+<body>
+
+<section id="login" class="seccion">
+
+  <h2>🔐 Acceso administrador</h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Ingresa tus datos para administrar el plantel.
+  </p>
+
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Correo electrónico"
+    style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Contraseña"
+    style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <button
+    class="boton"
+    style="width:100%; margin-top:15px;"
+    onclick="iniciarSesion()"
+  >
+    🔐 Ingresar
+  </button>
+
+  <p
+    id="mensajeLogin"
+    style="margin-top:15px; text-align:center;"
+  ></p>
+
+</section>
+    
+    
+<header> 
+  
+  <div class="club">  <div class="escudo">  
 FO  
 </div>  <div>  <h1>  
 Club Deportivo Feria Osorno  
@@ -808,4 +853,4 @@ async function categoria(nombre){
   document.getElementById("nuevoIngreso").value = "";  
   
   }  
-</script>  </body>  </html>  quedo bien?
+</script>  </body>  </html> 
