@@ -426,13 +426,17 @@ onclick="volver()">
 
 </button>  <h2>  
 👥 Plantel del Club  
-</h2>  <button  
-class="boton"  
-onclick="mostrar('agregarJugador')">
+</h2> 
+
+<button
+class="boton"
+onclick="mostrarAgregarJugador()">
 
 ➕ Agregar jugador
 
-  </button>  <button  
+</button>
+  
+  <button  
 class="categoria"  
 onclick="categoria('Primera Serie')">
 
@@ -857,6 +861,19 @@ async function categoria(nombre){
     }).join("");  
 }  
 
+async function mostrarAgregarJugador(){
+
+  const { data } = await supabaseClient.auth.getSession();
+
+  if(!data.session){
+    mostrar("login");
+    return;
+  }
+
+  mostrar("agregarJugador");
+}
+
+  
 async function iniciarSesion(){
 
   const email = document.getElementById("loginEmail").value.trim();
