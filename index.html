@@ -511,16 +511,29 @@ class="seccion oculto">  <button
 class="boton"    
 onclick="volver()">  ← Volver
 
-</button>  <h2>
-👥 Plantel del Club
-
-</h2>   <button  
+</button> 
+  
+<h2> 👥 Plantel del Club </h2>   
+  
+<button  
 class="boton"  
 onclick="mostrarAgregarJugador()">
 
 ➕ Agregar jugador
 
-</button>  <button    
+</button> 
+  
+
+  <button
+class="boton"
+onclick="mostrarAgregarPartido()">
+
+➕ Agregar partido
+
+</button>
+
+  
+<button    
 class="categoria"    
 onclick="categoria('Primera Serie')">
 
@@ -572,7 +585,9 @@ onclick="categoria('Infantil U15')">
 
 <section    
 id="agregarJugador"    
-class="seccion oculto">  <button    
+class="seccion oculto"> 
+  
+<button    
 class="boton"    
 onclick="mostrar('jugadores')">  ← Volver
 
@@ -1092,6 +1107,18 @@ return;
 }
 
 mostrar("agregarJugador");
+}
+
+async function mostrarAgregarPartido(){
+
+const { data } = await supabaseClient.auth.getSession();
+
+if(!data.session){
+mostrar("login");
+return;
+}
+
+mostrar("agregarPartido");
 }
 
 async function iniciarSesion(){
