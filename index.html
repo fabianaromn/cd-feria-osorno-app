@@ -918,4 +918,97 @@ document.getElementById("nuevoNacimiento").value = "";
 document.getElementById("nuevoIngreso").value = "";
 
 }
+
+async function cargarPartidos(){
+
+  const lista = document.getElementById("listaPartidos");
+
+  lista.innerHTML = "<p>⏳ Cargando partidos...</p>";
+
+  const { data: partidos, error } = await supabaseClient
+    .from("Partidos")
+    .select(`
+      id,
+      campeonato,
+      rival,
+      fecha,
+      local_visitante,
+      goles_favor,
+      goles_contra,
+      estado,
+      tipo_partido,
+      jornada,
+      category_id,
+      categories(name)
+    `)
+    .order("jornada", { ascending: true });
+
+  if(error){
+
+    console.error(error);
+
+    lista.innerHTML =
+      "<p>❌ Error al cargar los partidos.</p>";
+
+    return;
+  }
+
+  if(!partidos || partidos.length === 0){
+
+    lista.innerHTML =
+      "<p>⚽ Todavía no hay partidos registrados.</p>";
+
+    return;
+  }
+
+  lista.innerHTML = partidos.map(function(partido){
+
+    const categoria =
+      partido.categories
+        ? partido.categories.name
+        : "Categoría no registrada";
+
+    const fecha =
+      partido.fecha
+        ? new Date(partido.fecha + "T00:00:00")
+            .toLocaleDateString("es-CL")
+        : "Fecha por confirmar";
+
+    const localEsFeria =
+      partido.local_visitante === "Local";
+
+    const equipoLocal =
+      localEsFeria ? "Feria Osorno" : partido.rival;
+
+    const equipoVisitante =
+      localEsFeria ? partido.rival : "Feria Osorno";
+
+    return `
+      <div class="seccion">
+
+        <p><strong>${partido.campeonato || "Campeonato"}</strong></p>
+
+        <p>
+          Jornada ${partido.jornada || "-"} · ${categoria}
+        </p>
+
+        <div class="equipos">
+          ${equipoLocal}
+          <span class="vs">VS</span>
+          ${equipoVisitante}
+        </div>
+
+        <p>📅 ${fecha}</p>
+
+        <p>📍 ${partido.local_visitante}</p>
+
+        <p>🟡 ${partido.estado}</p>
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+  
 </script>  </body>  </html>
