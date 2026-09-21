@@ -653,7 +653,168 @@ onclick="guardarJugador()">
 id="mensajeJugador"    
 style="margin-top:15px; text-align:center;">
 
-</p>  </section>     <section    
+</p>  </section>   
+  
+<section
+id="agregarPartido"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('partidos')">
+
+    ← Volver
+
+  </button>
+
+  <h2>
+    ➕ Agregar partido
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Ingresa los datos del nuevo partido.
+  </p>
+
+  <input
+  id="nuevoCampeonato"
+  type="text"
+  placeholder="Campeonato"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <input
+  id="nuevoRival"
+  type="text"
+  placeholder="Equipo rival"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <input
+  id="nuevaFecha"
+  type="date"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <select
+  id="nuevoLocalVisitante"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      ¿Local o visitante?
+    </option>
+
+    <option value="Local">
+      🏠 Local
+    </option>
+
+    <option value="Visitante">
+      ✈️ Visitante
+    </option>
+
+  </select>
+
+  <select
+  id="nuevaCategoriaPartido"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      Selecciona categoría
+    </option>
+
+    <option value="Primera Serie">
+      Primera Serie
+    </option>
+
+    <option value="Segunda Serie">
+      Segunda Serie
+    </option>
+
+    <option value="Serie Senior">
+      Serie Senior
+    </option>
+
+    <option value="Serie Super Senior">
+      Serie Super Senior
+    </option>
+
+    <option value="Infantil U8">
+      Infantil U8
+    </option>
+
+    <option value="Infantil U10">
+      Infantil U10
+    </option>
+
+    <option value="Infantil U13">
+      Infantil U13
+    </option>
+
+    <option value="Infantil U15">
+      Infantil U15
+    </option>
+
+  </select>
+
+  <input
+  id="nuevaJornada"
+  type="number"
+  placeholder="Número de jornada"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <select
+  id="nuevoEstadoPartido"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="Pendiente">
+      Pendiente
+    </option>
+
+    <option value="Terminado">
+      Terminado
+    </option>
+
+    <option value="Suspendido">
+      Suspendido
+    </option>
+
+  </select>
+
+  <input
+  id="nuevosGolesFavor"
+  type="number"
+  placeholder="Goles Feria Osorno"
+  min="0"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <input
+  id="nuevosGolesContra"
+  type="number"
+  placeholder="Goles rival"
+  min="0"
+  style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  >
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:15px;"
+  onclick="guardarPartido()">
+
+    💾 Guardar partido
+
+  </button>
+
+  <p
+  id="mensajePartido"
+  style="margin-top:15px; text-align:center;">
+
+  </p>
+
+</section>
+  
+  
+  <section    
 id="categoria"    
 class="seccion oculto">  <button    
 class="boton"    
