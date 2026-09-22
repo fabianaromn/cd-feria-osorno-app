@@ -1502,7 +1502,7 @@ async function cargarPartidos(){
 
   const lista = document.getElementById("listaPartidos");
 
-  lista.innerHTML = "<p>⏳ Cargando partidos...</p>";
+  lista.innerHTML = "";
 
   const { data: partidos, error } = await supabaseClient
     .from("Partidos")
