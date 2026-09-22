@@ -440,7 +440,9 @@ font-size: 16px;
 </style>  
 
   
-</head>  <body>  
+</head>  
+  
+  <body>  
   
   <section id="login" class="seccion oculto">    <h2>🔐 Acceso administrador</h2>    <p style="color:#667085; margin-bottom:18px;">  
     Ingresa tus datos para administrar el plantel.  
@@ -472,8 +474,12 @@ onclick="iniciarSesion()"
   </button>    <p  
     id="mensajeLogin"  
     style="margin-top:15px; text-align:center;"  
-  ></p>  </section> 
-  
+  ></p>  
+
+      </section>
+
+  <div id="pantallaPublica">
+
   <header>
 
   <button class="admin-icon" onclick="mostrar('login')">
@@ -551,7 +557,9 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
 🔵🔴 Estamos construyendo nuestra plataforma deportiva.    
 </p>  </section> 
   
-  
+
+  </div>
+    
   <section    
 id="jugadores"    
 class="seccion oculto">  <button    
@@ -1210,6 +1218,8 @@ seccion.classList.add("oculto");
 function mostrar(id){
 
 ocultarTodo();
+
+document.getElementById("pantallaPublica").classList.add("oculto");
 
 document
 .getElementById(id)
