@@ -1223,6 +1223,131 @@ document.getElementById("nuevoIngreso").value = "";
 
 }
 
+
+async function guardarPartido(){
+
+const campeonato =
+document.getElementById("nuevoCampeonato").value.trim();
+
+const rival =
+document.getElementById("nuevoRival").value.trim();
+
+const fecha =
+document.getElementById("nuevaFecha").value;
+
+const localVisitante =
+document.getElementById("nuevoLocalVisitante").value;
+
+const categoria =
+document.getElementById("nuevaCategoriaPartido").value;
+
+const jornada =
+document.getElementById("nuevaJornada").value;
+
+const estado =
+document.getElementById("nuevoEstadoPartido").value;
+
+const golesFavor =
+document.getElementById("nuevosGolesFavor").value;
+
+const golesContra =
+document.getElementById("nuevosGolesContra").value;
+
+const mensaje =
+document.getElementById("mensajePartido");
+
+
+if(!campeonato || !rival || !fecha || !localVisitante || !categoria){
+
+mensaje.innerText =
+"⚠️ Completa campeonato, rival, fecha, local/visitante y categoría.";
+
+mensaje.style.color = "#c82032";
+
+return;
+
+}
+
+
+mensaje.innerText =
+"⏳ Guardando partido...";
+
+mensaje.style.color = "#17479e";
+
+
+const { data: categoriaData, error: categoriaError } =
+await supabaseClient
+.from("categories")
+.select("id")
+.eq("name", categoria)
+.single();
+
+
+if(categoriaError){
+
+console.error(categoriaError);
+
+mensaje.innerText =
+"❌ No se encontró la categoría.";
+
+mensaje.style.color = "#c82032";
+
+return;
+
+}
+
+
+const { error: partidoError } =
+await supabaseClient
+.from("Partidos")
+.insert([
+{
+campeonato: campeonato,
+rival: rival,
+fecha: fecha,
+local_visitante: localVisitante,
+goles_favor: golesFavor !== "" ? Number(golesFavor) : null,
+goles_contra: golesContra !== "" ? Number(golesContra) : null,
+estado: estado,
+tipo_partido: "campeonato",
+category_id: categoriaData.id,
+jornada: jornada ? Number(jornada) : null
+}
+]);
+
+
+if(partidoError){
+
+console.error(partidoError);
+
+mensaje.innerText =
+"❌ Error al guardar el partido.";
+
+mensaje.style.color = "#c82032";
+
+return;
+
+}
+
+
+mensaje.innerText =
+"✅ Partido guardado correctamente.";
+
+mensaje.style.color = "#16803c";
+
+
+document.getElementById("nuevoCampeonato").value = "";
+document.getElementById("nuevoRival").value = "";
+document.getElementById("nuevaFecha").value = "";
+document.getElementById("nuevoLocalVisitante").value = "";
+document.getElementById("nuevaCategoriaPartido").value = "";
+document.getElementById("nuevaJornada").value = "";
+document.getElementById("nuevoEstadoPartido").value = "Pendiente";
+document.getElementById("nuevosGolesFavor").value = "";
+document.getElementById("nuevosGolesContra").value = "";
+
+}
+
 async function cargarPartidos(){
 
   const lista = document.getElementById("listaPartidos");
