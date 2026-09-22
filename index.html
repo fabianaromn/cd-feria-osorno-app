@@ -614,8 +614,7 @@ onclick="categoria('Infantil U15')">
 
 </button>  </section>
 
-
-  <section
+<section
 id="administracion"
 class="seccion oculto">
 
@@ -635,34 +634,111 @@ class="seccion oculto">
     Panel de administración del Club Deportivo Feria Osorno.
   </p>
 
+  <!-- PARTIDOS -->
+
   <button
   class="boton"
-  style="width:100%; margin-top:10px;"
-  onclick="mostrar('agregarJugador')">
+  style="width:100%; margin-top:10px; font-size:18px; padding:18px;"
+  onclick="mostrarMenuAdmin('menuAdminPartidos')">
 
-    👥 Agregar jugador
+    ⚽ PARTIDOS
 
   </button>
 
+  <div
+  id="menuAdminPartidos"
+  class="oculto"
+  style="margin-top:10px;">
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="mostrar('agregarPartido')">
+
+      ➕ Agregar partido
+
+    </button>
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="editarPartido()">
+
+      ✏️ Editar partido
+
+    </button>
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="eliminarPartido()">
+
+      🗑️ Eliminar partido
+
+    </button>
+
+  </div>
+
+
+  <!-- JUGADORES -->
+
   <button
   class="boton"
-  style="width:100%; margin-top:10px;"
-  onclick="mostrar('agregarPartido')">
+  style="width:100%; margin-top:14px; font-size:18px; padding:18px;"
+  onclick="mostrarMenuAdmin('menuAdminJugadores')">
 
-    ⚽ Agregar partido
+    👥 JUGADORES
 
   </button>
 
+  <div
+  id="menuAdminJugadores"
+  class="oculto"
+  style="margin-top:10px;">
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="mostrar('agregarJugador')">
+
+      ➕ Agregar jugador
+
+    </button>
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="editarJugador()">
+
+      ✏️ Editar jugador
+
+    </button>
+
+    <button
+    class="boton"
+    style="width:100%; margin-top:8px;"
+    onclick="eliminarJugador()">
+
+      🗑️ Eliminar jugador
+
+    </button>
+
+  </div>
+
+
+  <!-- CERRAR SESIÓN -->
+
   <button
   class="boton"
-  style="width:100%; margin-top:10px; background:#071b4a;"
+  style="width:100%; margin-top:20px; background:#071b4a;"
   onclick="cerrarSesion()">
 
     🚪 Cerrar sesión
 
   </button>
 
-  </section>
+</section>
+  
 
 <section    
 id="agregarJugador"    
