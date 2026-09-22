@@ -489,11 +489,15 @@ onclick="iniciarSesion()"
   <div class="club">
       <div class="escudo">    
 FO    
-</div>  <div>  <h1>    
+</div> 
+    
+<div>  <h1>    
 Club Deportivo Feria Osorno    
 </h1>  <p>    
 Puerto Montt · Aplicación Oficial    
-</p>  </div>  </div>  </header>  <section class="bienvenida">  <h2>    
+</p>  </div>
+  
+</div>  </header>  <section class="bienvenida">  <h2>    
 ¡Bienvenidos Ferianos !  
 </h2>  <p>    
 Todo el club en un solo lugar.    
@@ -726,7 +730,7 @@ onclick="mostrar('agregarPartido')">
 <div
 class="card"
 style="margin-top:10px;"
-onclick="editarPartido()">
+onclick="mostrar('editarPartido')"
 
   <div class="icono">
     ✏️
@@ -906,7 +910,37 @@ onclick="cerrarSesion()">
 
 </button>
 </section>
-  
+
+<section
+id="editarPartido"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+
+    ← Volver
+
+  </button>
+
+  <h2>
+    ✏️ Editar partido
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Selecciona el partido que quieres modificar.
+  </p>
+
+  <div id="listaEditarPartidos">
+
+    <p>
+      ⏳ Cargando partidos...
+    </p>
+
+  </div>
+
+</section>
+    
 <section
 id="agregarPartido"
 class="seccion oculto">
