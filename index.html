@@ -989,10 +989,6 @@ onclick="volver()">  ← Volver
   <p>Cargando partidos...</p>
 </div>
   
-<div id="listaPartidos">
-  <p>Cargando partidos...</p>
-</div>
-
 </section>   
   <section    
 id="tabla"    
@@ -1690,5 +1686,178 @@ async function cargarPartidos(){
   }).join("");
 
 }
+
+function filtrarPartidos(categoriaSeleccionada){
+
+  const lista =
+    document.getElementById("listaPartidos");
+
+  const partidosFiltrados =
+    todosLosPartidos.filter(function(partido){
+
+      return partido.categories &&
+             partido.categories.name === categoriaSeleccionada;
+
+    });
+
+  if(partidosFiltrados.length === 0){
+
+    lista.innerHTML =
+      "<p>⚽ No hay partidos registrados para esta categoría.</p>";
+
+    return;
+  }
+
+  lista.innerHTML =
+    partidosFiltrados.map(function(partido){
+
+      const categoria =
+        partido.categories
+          ? partido.categories.name
+          : "Categoría no registrada";
+
+      const fecha =
+        partido.fecha
+          ? new Date(partido.fecha + "T00:00:00")
+              .toLocaleDateString("es-CL", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+              })
+          : "Fecha por confirmar";
+
+      const localEsFeria =
+        partido.local_visitante === "Local";
+
+      const equipoLocal =
+        localEsFeria
+          ? "Feria Osorno"
+          : partido.rival;
+
+      const equipoVisitante =
+        localEsFeria
+          ? partido.rival
+          : "Feria Osorno";
+
+      const partidoTerminado =
+        partido.estado &&
+        partido.estado.toLowerCase() === "terminado";
+
+      let equiposHTML = "";
+
+      if(
+        partidoTerminado &&
+        partido.goles_favor !== null &&
+        partido.goles_contra !== null
+      ){
+
+        const golesLocal =
+          localEsFeria
+            ? partido.goles_favor
+            : partido.goles_contra;
+
+        const golesVisitante =
+          localEsFeria
+            ? partido.goles_contra
+            : partido.goles_favor;
+
+        equiposHTML = `
+          <div class="equipo">
+            ${equipoLocal}
+            <div class="partido-resultado">
+              ${golesLocal}
+            </div>
+          </div>
+
+          <div class="partido-vs">
+            FINAL
+          </div>
+
+          <div class="equipo">
+            ${equipoVisitante}
+            <div class="partido-resultado">
+              ${golesVisitante}
+            </div>
+          </div>
+        `;
+
+      }else{
+
+        equiposHTML = `
+          <div class="equipo">
+            ${equipoLocal}
+          </div>
+
+          <div class="partido-vs">
+            VS
+          </div>
+
+          <div class="equipo">
+            ${equipoVisitante}
+          </div>
+        `;
+
+      }
+
+      let claseEstado = "estado-pendiente";
+
+      if(partido.estado){
+
+        const estadoTexto =
+          partido.estado.toLowerCase();
+
+        if(estadoTexto === "terminado"){
+          claseEstado = "estado-terminado";
+        }
+
+        if(estadoTexto === "suspendido"){
+          claseEstado = "estado-suspendido";
+        }
+
+      }
+
+      return `
+        <div class="partido-card">
+
+          <div class="partido-cabecera">
+
+            <strong>
+              🏆 ${partido.campeonato || "Campeonato"}
+            </strong>
+
+            <small>
+              ${categoria} · Jornada ${partido.jornada || "-"}
+            </small>
+
+          </div>
+
+          <div class="partido-fecha">
+            📅 ${fecha}
+          </div>
+
+          <div class="partido-equipos">
+            ${equiposHTML}
+          </div>
+
+          <div class="partido-info">
+
+            <span class="partido-etiqueta">
+              ${localEsFeria ? "🏠 Local" : "✈️ Visitante"}
+            </span>
+
+            <span class="partido-etiqueta ${claseEstado}">
+              ${partido.estado || "Pendiente"}
+            </span>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+  
   
 </script>  </body>  </html>
