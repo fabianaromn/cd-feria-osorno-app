@@ -23,7 +23,22 @@ background:linear-gradient(135deg,#071b4a,#123c8c);
 color:white;
 padding:22px 18px;
 border-radius:0 0 25px 25px;
+position: relative;
 }
+
+.admin-icon{
+position:absolute;
+top:18px;
+right:18px;
+background:rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.3);
+color:white;
+width:38px;
+height:38px;
+border-radius:50%;
+font-size:18px;
+cursor:pointer;
+  }
 
 .club{
 display:flex;
@@ -402,7 +417,9 @@ font-size: 16px;
 </style>  
 
   
-</head>  <body>  <section id="login" class="seccion oculto">    <h2>🔐 Acceso administrador</h2>    <p style="color:#667085; margin-bottom:18px;">  
+</head>  <body>  
+  
+  <section id="login" class="seccion oculto">    <h2>🔐 Acceso administrador</h2>    <p style="color:#667085; margin-bottom:18px;">  
     Ingresa tus datos para administrar el plantel.  
   </p>  <input
 id="loginEmail"
@@ -432,7 +449,16 @@ onclick="iniciarSesion()"
   </button>    <p  
     id="mensajeLogin"  
     style="margin-top:15px; text-align:center;"  
-  ></p>  </section>  <header>     <div class="club">  <div class="escudo">    
+  ></p>  </section> 
+  
+  <header>
+
+  <button class="admin-icon" onclick="mostrar('login')">
+    🔐
+  </button>
+
+  <div class="club">
+      <div class="escudo">    
 FO    
 </div>  <div>  <h1>    
 Club Deportivo Feria Osorno    
@@ -473,14 +499,9 @@ onclick="mostrar('estadisticas')">  <div class="icono">
 </div>  <h3>    
 Estadísticas    
 </h3>  </div>    
-<div class="card" onclick="mostrar('login')">  
-  <div class="icono">  
-    ⚙️  
-  </div>  
-  <h3>  
-    Administración  
-  </h3>  
-</div>  
+  
+
+  
 <div class="card" onclick="mostrar('socios')">  
   <div class="icono">  
     👤  
