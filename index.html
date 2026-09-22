@@ -1525,6 +1525,7 @@ async function cargarPartidos(){
       categories(name)
     `)
     .order("fecha", { ascending: true });
+  todosLosPartidos = partidos || [];
 
   if(error){
 
