@@ -162,6 +162,29 @@ cursor:pointer;
 background:#e8edf7;
 }
 
+.categorias-partidos{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:15px 0 20px;
+}
+
+.categoria-partido{
+  background:linear-gradient(135deg,#071b4a,#123c8c);
+  color:white;
+  border:none;
+  border-radius:14px;
+  padding:13px 8px;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.10);
+}
+
+.categoria-partido:active{
+  transform:scale(.97);
+}
+  
 .jugador{
 display:flex;
 justify-content:space-between;
@@ -465,7 +488,7 @@ Club Deportivo Feria Osorno
 </h1>  <p>    
 Puerto Montt · Aplicación Oficial    
 </p>  </div>  </div>  </header>  <section class="bienvenida">  <h2>    
-¡Bienvenidos Ferianos ! ❤️💙    
+¡Bienvenidos Ferianos !  
 </h2>  <p>    
 Todo el club en un solo lugar.    
 </p>  </section>  <section class="partido">  <small>    
@@ -924,8 +947,47 @@ onclick="volver()">  ← Volver
   
 <h2>
 ⚽ Partidos
-</h2> 
+</h2>
 
+<div class="categorias-partidos">
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Primera Serie')">
+    ⚽ Primera Serie
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Segunda Serie')">
+    ⚽ Segunda Serie
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Serie Senior')">
+    👴 Senior
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Serie Super Senior')">
+    👴 Super Senior
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U8')">
+    🧒 Infantil U8
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U10')">
+    🧒 Infantil U10
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U13')">
+    🧒 Infantil U13
+  </button>
+
+  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U15')">
+    🧒 Infantil U15
+  </button>
+
+</div>
+
+<div id="listaPartidos">
+  <p>Cargando partidos...</p>
+</div>
   
 <div id="listaPartidos">
   <p>Cargando partidos...</p>
