@@ -659,7 +659,17 @@ onclick="guardarJugador()">
 id="mensajeJugador"    
 style="margin-top:15px; text-align:center;">
 
-</p>  </section>   
+</p>     
+
+<button
+class="boton"
+style="width:100%; margin-top:15px; background:#071b4a;"
+onclick="cerrarSesion()">
+
+  🚪 Cerrar sesión
+
+</button>
+</section>
   
 <section
 id="agregarPartido"
@@ -1120,6 +1130,24 @@ return;
 mostrar("agregarPartido");
 }
 
+async function cerrarSesion(){
+
+const { error } =
+await supabaseClient.auth.signOut();
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+mostrar("login");
+
+}
+
+  
 async function iniciarSesion(){
 
 const email = document.getElementById("loginEmail").value.trim();
