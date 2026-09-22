@@ -953,7 +953,10 @@ if(id === "partidos"){
   cargarPartidos();
 }
 
-window.scrollTo(0,0);
+document.getElementById(id).scrollIntoView({
+  behavior: "smooth",
+  block: "start"
+});
 
 }
 
