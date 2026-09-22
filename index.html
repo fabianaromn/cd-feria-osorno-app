@@ -1663,6 +1663,168 @@ document.getElementById("nuevosGolesFavor").value = "";
 document.getElementById("nuevosGolesContra").value = "";
 
 }
+
+
+async function editarPartido(){
+
+  const { data } = await supabaseClient.auth.getSession();
+
+  if(!data.session){
+    mostrar("login");
+    return;
+  }
+
+  const { data: partidos, error } =
+    await supabaseClient
+    .from("Partidos")
+    .select(`
+      id,
+      campeonato,
+      rival,
+      fecha,
+      local_visitante,
+      goles_favor,
+      goles_contra,
+      estado,
+      jornada,
+      category_id,
+      categories(name)
+    `)
+    .order("fecha", { ascending: true });
+
+  if(error){
+    console.error(error);
+    alert("❌ Error al cargar los partidos.");
+    return;
+  }
+
+  if(!partidos || partidos.length === 0){
+    alert("⚽ No hay partidos registrados para editar.");
+    return;
+  }
+
+  let lista = "Selecciona el número del partido que quieres editar:\n\n";
+
+  partidos.forEach(function(partido, index){
+
+    lista +=
+      (index + 1) +
+      ". " +
+      partido.campeonato +
+      " - Feria Osorno vs " +
+      partido.rival +
+      " - " +
+      partido.fecha +
+      "\n";
+
+  });
+
+  const seleccion = prompt(lista);
+
+  if(seleccion === null){
+    return;
+  }
+
+  const indice = Number(seleccion) - 1;
+
+  if(
+    isNaN(indice) ||
+    indice < 0 ||
+    indice >= partidos.length
+  ){
+    alert("❌ Selección no válida.");
+    return;
+  }
+
+  const partido = partidos[indice];
+
+  const campeonato = prompt(
+    "Campeonato:",
+    partido.campeonato || ""
+  );
+
+  if(campeonato === null) return;
+
+  const rival = prompt(
+    "Equipo rival:",
+    partido.rival || ""
+  );
+
+  if(rival === null) return;
+
+  const fecha = prompt(
+    "Fecha (AAAA-MM-DD):",
+    partido.fecha || ""
+  );
+
+  if(fecha === null) return;
+
+  const localVisitante = prompt(
+    "Escribe Local o Visitante:",
+    partido.local_visitante || ""
+  );
+
+  if(localVisitante === null) return;
+
+  const jornada = prompt(
+    "Número de jornada:",
+    partido.jornada ?? ""
+  );
+
+  if(jornada === null) return;
+
+  const estado = prompt(
+    "Estado: Pendiente, Terminado o Suspendido:",
+    partido.estado || "Pendiente"
+  );
+
+  if(estado === null) return;
+
+  const golesFavor = prompt(
+    "Goles Feria Osorno:",
+    partido.goles_favor ?? ""
+  );
+
+  if(golesFavor === null) return;
+
+  const golesContra = prompt(
+    "Goles rival:",
+    partido.goles_contra ?? ""
+  );
+
+  if(golesContra === null) return;
+
+  const { error: actualizarError } =
+    await supabaseClient
+    .from("Partidos")
+    .update({
+      campeonato: campeonato,
+      rival: rival,
+      fecha: fecha,
+      local_visitante: localVisitante,
+      jornada: jornada !== "" ? Number(jornada) : null,
+      estado: estado,
+      goles_favor: golesFavor !== "" ? Number(golesFavor) : null,
+      goles_contra: golesContra !== "" ? Number(golesContra) : null
+    })
+    .eq("id", partido.id);
+
+  if(actualizarError){
+
+    console.error(actualizarError);
+
+    alert("❌ Error al actualizar el partido.");
+
+    return;
+  }
+
+  alert("✅ Partido actualizado correctamente.");
+
+  cargarPartidos();
+
+}
+
+  
   let todosLosPartidos = [];
 
 async function cargarPartidos(){
