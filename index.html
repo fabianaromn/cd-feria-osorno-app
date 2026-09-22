@@ -1228,6 +1228,23 @@ document.getElementById(id).scrollIntoView({
 
 }
 
+
+function mostrarMenuAdmin(id){
+
+  document
+  .getElementById("menuAdminPartidos")
+  .classList.add("oculto");
+
+  document
+  .getElementById("menuAdminJugadores")
+  .classList.add("oculto");
+
+  document
+  .getElementById(id)
+  .classList.remove("oculto");
+
+}
+
 function calcularEdad(fechaNacimiento){
 
 const hoy = new Date();
