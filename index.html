@@ -660,14 +660,39 @@ class="seccion oculto">
   
   <!-- PARTIDOS -->
 
-  <button
-  class="boton"
-  style="width:100%; margin-top:10px; font-size:18px; padding:18px;"
+  <!-- PARTIDOS Y JUGADORES -->
+
+<section class="menu" style="padding:0;">
+
+  <div
+  class="card"
   onclick="mostrarMenuAdmin('menuAdminPartidos')">
 
-    ⚽ PARTIDOS
+    <div class="icono">
+      ⚽
+    </div>
 
-  </button>
+    <h3>
+      Partidos
+    </h3>
+
+  </div>
+
+  <div
+  class="card"
+  onclick="mostrarMenuAdmin('menuAdminJugadores')">
+
+    <div class="icono">
+      👥
+    </div>
+
+    <h3>
+      Jugadores
+    </h3>
+
+  </div>
+
+</section>
 
   <div
   id="menuAdminPartidos"
