@@ -595,6 +595,56 @@ onclick="categoria('Infantil U15')">
 
 </button>  </section>
 
+
+  <section
+id="administracion"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('inicio')">
+
+    ← Volver
+
+  </button>
+
+  <h2>
+    ⚙️ Administración
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Panel de administración del Club Deportivo Feria Osorno.
+  </p>
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="mostrar('agregarJugador')">
+
+    👥 Agregar jugador
+
+  </button>
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="mostrar('agregarPartido')">
+
+    ⚽ Agregar partido
+
+  </button>
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px; background:#071b4a;"
+  onclick="cerrarSesion()">
+
+    🚪 Cerrar sesión
+
+  </button>
+
+  </section>
+
 <section    
 id="agregarJugador"    
 class="seccion oculto"> 
@@ -1197,7 +1247,7 @@ return;
 
 mensaje.innerText = "✅ Sesión iniciada.";
 
-mostrar("agregarJugador");
+mostrar("administracion");
 }
 
 async function guardarJugador(){
