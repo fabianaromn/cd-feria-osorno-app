@@ -1223,6 +1223,10 @@ document
 .getElementById(id)
 .classList.remove("oculto");
 
+if(id === "administracion"){
+  document.getElementById("pantallaPublica").classList.add("oculto");
+}
+
 if(id === "partidos"){
   cargarPartidos();
 }
