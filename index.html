@@ -1525,7 +1525,7 @@ async function cargarPartidos(){
 
   if(error){
 
-    console.error(error);
+    console.error(error)
 
     lista.innerHTML =
       "<p>❌ Error al cargar los partidos.</p>";
@@ -1533,14 +1533,16 @@ async function cargarPartidos(){
     return;
   }
 
-  if(!partidos || partidos.length === 0){
+if(!partidos || partidos.length === 0){
 
-    lista.innerHTML =
-      "<p>⚽ Todavía no hay partidos registrados.</p>";
+  lista.innerHTML =
+    "<p>⚽ Todavía no hay partidos registrados.</p>";
 
-    return;
-  }
+  return;
+}
 
+return;
+  
   lista.innerHTML = partidos.map(function(partido){
 
     const categoria =
