@@ -1758,6 +1758,10 @@ document.getElementById("nuevoIngreso").value = "";
 
 }
 
+const categoriasEditarHTML =
+document.getElementById("listaEditarPartidos").innerHTML;
+
+  
 async function seleccionarCategoriaEditar(categoria){
 
   const lista =
@@ -1910,7 +1914,132 @@ async function seleccionarCategoriaEditar(categoria){
 }
 
 
-  
+function restaurarCategoriasEditar(){
+
+  document.getElementById("listaEditarPartidos").innerHTML = `
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Primera Serie')">
+
+      <div class="icono" style="font-size:24px;">
+        ⚽
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Primera Serie
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Segunda Serie')">
+
+      <div class="icono" style="font-size:24px;">
+        ⚽
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Segunda Serie
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Serie Senior')">
+
+      <div class="icono" style="font-size:24px;">
+        🧓
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Serie Senior
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Serie Super Senior')">
+
+      <div class="icono" style="font-size:24px;">
+        🧓
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Super Senior
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Infantil U8')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U8
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Infantil U10')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U10
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Infantil U13')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U13
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEditar('Infantil U15')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U15
+      </h3>
+
+    </div>
+
+  `;
+}  
 
   
 async function guardarPartido(){
