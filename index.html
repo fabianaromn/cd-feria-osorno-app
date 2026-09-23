@@ -1093,7 +1093,168 @@ class="seccion oculto">
 </section>
 
 
-      
+<section
+id="formularioEditarPartido"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('editarPartido')">
+
+    ← Volver
+
+  </button>
+
+  <h2>
+    ✏️ Editar partido
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Modifica los datos del partido seleccionado.
+  </p>
+
+  <input
+  type="hidden"
+  id="editarPartidoId">
+
+  <label>🏆 Campeonato</label>
+
+  <input
+  type="text"
+  id="editarCampeonato"
+  placeholder="Ej: Clausura 2026">
+
+  <label>⚽ Rival</label>
+
+  <input
+  type="text"
+  id="editarRival"
+  placeholder="Nombre del rival">
+
+  <label>📅 Fecha</label>
+
+  <input
+  type="date"
+  id="editarFecha">
+
+  <label>📍 Local / Visitante</label>
+
+  <select id="editarLocalVisitante">
+
+    <option value="">
+      Seleccionar
+    </option>
+
+    <option value="Local">
+      Local
+    </option>
+
+    <option value="Visitante">
+      Visitante
+    </option>
+
+  </select>
+
+  <label>📂 Categoría</label>
+
+  <select id="editarCategoria">
+
+    <option value="">
+      Seleccionar categoría
+    </option>
+
+    <option value="Primera Serie">
+      Primera Serie
+    </option>
+
+    <option value="Segunda Serie">
+      Segunda Serie
+    </option>
+
+    <option value="Serie Senior">
+      Serie Senior
+    </option>
+
+    <option value="Serie Super Senior">
+      Serie Super Senior
+    </option>
+
+    <option value="Infantil U8">
+      Infantil U8
+    </option>
+
+    <option value="Infantil U10">
+      Infantil U10
+    </option>
+
+    <option value="Infantil U13">
+      Infantil U13
+    </option>
+
+    <option value="Infantil U15">
+      Infantil U15
+    </option>
+
+  </select>
+
+  <label>🏆 Jornada</label>
+
+  <input
+  type="number"
+  id="editarJornada"
+  placeholder="Ej: 1">
+
+  <label>📌 Estado</label>
+
+  <select id="editarEstado">
+
+    <option value="Pendiente">
+      Pendiente
+    </option>
+
+    <option value="Jugado">
+      Jugado
+    </option>
+
+    <option value="Suspendido">
+      Suspendido
+    </option>
+
+  </select>
+
+  <label>🔵 Goles Feria Osorno</label>
+
+  <input
+  type="number"
+  id="editarGolesFavor"
+  min="0"
+  placeholder="Ej: 2">
+
+  <label>🔴 Goles rival</label>
+
+  <input
+  type="number"
+  id="editarGolesContra"
+  min="0"
+  placeholder="Ej: 1">
+
+  <p
+  id="mensajeEditarPartido"
+  style="margin-top:15px;">
+  </p>
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarEdicionPartido()">
+
+    💾 Guardar cambios
+
+  </button>
+
+</section>
+
+    
     
 <section
 id="agregarPartido"
@@ -1917,6 +2078,77 @@ async function seleccionarCategoriaEditar(categoria){
 
 }
 
+
+
+async function abrirFormularioEditarPartido(id){
+
+  const { data: partido, error } =
+    await supabaseClient
+      .from("Partidos")
+      .select(`
+        id,
+        campeonato,
+        rival,
+        fecha,
+        local_visitante,
+        goles_favor,
+        goles_contra,
+        estado,
+        jornada,
+        category_id,
+        categories(name)
+      `)
+      .eq("id", id)
+      .single();
+
+  if(error){
+
+    console.error(error);
+
+    alert("❌ No se pudo cargar el partido.");
+
+    return;
+  }
+
+  document.getElementById("editarPartidoId").value =
+    partido.id;
+
+  document.getElementById("editarCampeonato").value =
+    partido.campeonato || "";
+
+  document.getElementById("editarRival").value =
+    partido.rival || "";
+
+  document.getElementById("editarFecha").value =
+    partido.fecha || "";
+
+  document.getElementById("editarLocalVisitante").value =
+    partido.local_visitante || "";
+
+  document.getElementById("editarCategoria").value =
+    partido.categories
+      ? partido.categories.name
+      : "";
+
+  document.getElementById("editarJornada").value =
+    partido.jornada ?? "";
+
+  document.getElementById("editarEstado").value =
+    partido.estado || "Pendiente";
+
+  document.getElementById("editarGolesFavor").value =
+    partido.goles_favor ?? "";
+
+  document.getElementById("editarGolesContra").value =
+    partido.goles_contra ?? "";
+
+  document.getElementById("mensajeEditarPartido").innerText =
+    "";
+
+  mostrar("formularioEditarPartido");
+
+}
+  
   
 async function guardarPartido(){
 
