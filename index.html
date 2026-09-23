@@ -2255,7 +2255,147 @@ async function abrirFormularioEditarPartido(id){
 
 
 
+async function guardarEdicionPartido(){
 
+  const id =
+    document.getElementById("editarPartidoId").value;
+
+  const campeonato =
+    document.getElementById("editarCampeonato").value.trim();
+
+  const rival =
+    document.getElementById("editarRival").value.trim();
+
+  const fecha =
+    document.getElementById("editarFecha").value;
+
+  const localVisitante =
+    document.getElementById("editarLocalVisitante").value;
+
+  const categoria =
+    document.getElementById("editarCategoria").value;
+
+  const jornada =
+    document.getElementById("editarJornada").value;
+
+  const estado =
+    document.getElementById("editarEstado").value;
+
+  const golesFavor =
+    document.getElementById("editarGolesFavor").value;
+
+  const golesContra =
+    document.getElementById("editarGolesContra").value;
+
+  const mensaje =
+    document.getElementById("mensajeEditarPartido");
+
+
+  if(
+    !campeonato ||
+    !rival ||
+    !fecha ||
+    !localVisitante ||
+    !categoria
+  ){
+
+    mensaje.innerText =
+      "⚠️ Completa campeonato, rival, fecha, local/visitante y categoría.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+    "⏳ Guardando cambios...";
+
+  mensaje.style.color = "#17479e";
+
+
+  const { data: categoriaData, error: categoriaError } =
+    await supabaseClient
+      .from("categories")
+      .select("id")
+      .eq("name", categoria)
+      .single();
+
+
+  if(categoriaError){
+
+    console.error(categoriaError);
+
+    mensaje.innerText =
+      "❌ No se encontró la categoría.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("Partidos")
+      .update({
+
+        campeonato: campeonato,
+        rival: rival,
+        fecha: fecha,
+        local_visitante: localVisitante,
+
+        goles_favor:
+          golesFavor !== ""
+            ? Number(golesFavor)
+            : null,
+
+        goles_contra:
+          golesContra !== ""
+            ? Number(golesContra)
+            : null,
+
+        estado: estado,
+
+        jornada:
+          jornada !== ""
+            ? Number(jornada)
+            : null,
+
+        category_id:
+          categoriaData.id
+
+      })
+      .eq("id", id);
+
+
+  if(error){
+
+    console.error(error);
+
+    mensaje.innerText =
+      "❌ Error al guardar los cambios.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+    "✅ Cambios guardados correctamente.";
+
+
+  mensaje.style.color = "#16803c";
+
+
+  setTimeout(function(){
+
+    mostrar("administracion");
+
+  }, 1200);
+
+}
 
 
   
