@@ -1419,6 +1419,10 @@ document.getElementById(id).scrollIntoView({
 }
 
 
+
+
+
+  
 function mostrarMenuAdmin(id){
 
   document
@@ -1435,6 +1439,10 @@ function mostrarMenuAdmin(id){
 
 }
 
+
+
+
+  
 function calcularEdad(fechaNacimiento){
 
 const hoy = new Date();
@@ -1454,6 +1462,9 @@ edad--;
 return edad;
 }
 
+
+
+  
 function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, yearJoined){
 mostrar("jugadorDetalle");
 
@@ -1493,6 +1504,8 @@ ${fechaNacimiento ? `
 `;
 }
 
+
+  
 function volver(){
 
 ocultarTodo();
@@ -1505,6 +1518,9 @@ window.scrollTo(0,0);
 
 }
 
+
+
+  
 async function categoria(nombre){
 mostrar("categoria");
 
@@ -1584,6 +1600,9 @@ alt="${jugador.name}"
 
 }
 
+
+
+  
 async function mostrarAgregarJugador(){
 
 const { data } = await supabaseClient.auth.getSession();
@@ -1596,6 +1615,9 @@ return;
 mostrar("agregarJugador");
 }
 
+
+
+  
 async function mostrarAgregarPartido(){
 
 const { data } = await supabaseClient.auth.getSession();
@@ -1608,6 +1630,8 @@ return;
 mostrar("agregarPartido");
 }
 
+
+  
 async function cerrarSesion(){
 
 const { error } =
@@ -1624,6 +1648,8 @@ return;
 mostrar("login");
 
 }
+
+
 
   
 async function iniciarSesion(){
@@ -1654,6 +1680,9 @@ mensaje.innerText = "✅ Sesión iniciada.";
 mostrar("administracion");
 }
 
+
+
+  
 async function guardarJugador(){
 
 const nombre = document.getElementById("nuevoNombre").value.trim();
@@ -1729,7 +1758,161 @@ document.getElementById("nuevoIngreso").value = "";
 
 }
 
+async function seleccionarCategoriaEditar(categoria){
 
+  const lista =
+    document.getElementById("listaEditarPartidos");
+
+  lista.innerHTML =
+    "<p>⏳ Cargando partidos...</p>";
+
+  const { data: categoriaData, error: categoriaError } =
+    await supabaseClient
+      .from("categories")
+      .select("id")
+      .eq("name", categoria)
+      .single();
+
+  if(categoriaError){
+
+    console.error(categoriaError);
+
+    lista.innerHTML =
+      "<p>❌ No se encontró la categoría.</p>";
+
+    return;
+  }
+
+  const { data: partidos, error } =
+    await supabaseClient
+      .from("Partidos")
+      .select(`
+        id,
+        campeonato,
+        rival,
+        fecha,
+        local_visitante,
+        goles_favor,
+        goles_contra,
+        estado,
+        jornada,
+        category_id
+      `)
+      .eq("category_id", categoriaData.id)
+      .order("fecha", { ascending: true });
+
+  if(error){
+
+    console.error(error);
+
+    lista.innerHTML =
+      "<p>❌ Error al cargar los partidos.</p>";
+
+    return;
+  }
+
+  if(!partidos || partidos.length === 0){
+
+    lista.innerHTML = `
+      <button
+      class="boton"
+      onclick="mostrar('editarPartido')">
+
+        ← Volver a categorías
+
+      </button>
+
+      <p>
+        ⚽ No hay partidos registrados en ${categoria}.
+      </p>
+    `;
+
+    return;
+  }
+
+  lista.innerHTML = `
+    
+    <div style="grid-column:1 / -1;">
+
+      <button
+      class="boton"
+      onclick="mostrar('editarPartido')">
+
+        ← Volver a categorías
+
+      </button>
+
+      <h3
+      style="margin:10px 0 15px; color:#071b4a;">
+
+        ${categoria}
+
+      </h3>
+
+    </div>
+
+    ${partidos.map(function(partido){
+
+      return `
+
+        <div
+        class="partido"
+        style="grid-column:1 / -1;">
+
+          <small>
+            ⚽ ${partido.campeonato || "Partido"}
+          </small>
+
+          <div class="equipos">
+
+            Feria Osorno
+
+            <span class="vs">
+              VS
+            </span>
+
+            ${partido.rival}
+
+          </div>
+
+          <p>
+            📅 ${partido.fecha || "Fecha por confirmar"}
+          </p>
+
+          <p>
+            📍 ${partido.local_visitante || ""}
+          </p>
+
+          <p>
+            🏆 Jornada ${partido.jornada || "-"}
+          </p>
+
+          <p>
+            📌 ${partido.estado || "Pendiente"}
+          </p>
+
+          <button
+          class="boton"
+          onclick="abrirFormularioEditarPartido(${partido.id})">
+
+            ✏️ Editar
+
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("")}
+
+  `;
+
+}
+
+
+  
+
+  
 async function guardarPartido(){
 
 const campeonato =
