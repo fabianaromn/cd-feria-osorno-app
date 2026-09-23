@@ -1602,6 +1602,8 @@ alt="${jugador.name}"
 
 
 
+
+  
   
 async function mostrarAgregarJugador(){
 
@@ -1759,14 +1761,21 @@ document.getElementById("nuevoIngreso").value = "";
 }
 
 const categoriasEditarHTML =
-document.getElementById("listaEditarPartidos").innerHTML;
-
-  function restaurarCategoriasEditar(){
+document.getElementById("listaEditarPartidos").innerHTML; 
+  
+  
+  
+  
+  
+function restaurarCategoriasEditar(){
 
   document.getElementById("listaEditarPartidos").innerHTML =
     categoriasEditarHTML;
 
   }
+
+
+  
   
 async function seleccionarCategoriaEditar(categoria){
 
@@ -1824,14 +1833,7 @@ async function seleccionarCategoriaEditar(categoria){
   if(!partidos || partidos.length === 0){
 
     lista.innerHTML = `
-      <button
-      class="boton"
-      onclick="mostrar('editarPartido')">
-
-        ← Volver a categorías
-
-      </button>
-
+    
       <p>
         ⚽ No hay partidos registrados en ${categoria}.
       </p>
@@ -1844,13 +1846,6 @@ async function seleccionarCategoriaEditar(categoria){
     
     <div style="grid-column:1 / -1;">
 
-      <button
-      class="boton"
-      onclick="mostrar('editarPartido')">
-
-        ← Volver a categorías
-
-      </button>
 
       <h3
       style="margin:10px 0 15px; color:#071b4a;">
