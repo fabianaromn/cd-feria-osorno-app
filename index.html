@@ -1761,6 +1761,12 @@ document.getElementById("nuevoIngreso").value = "";
 const categoriasEditarHTML =
 document.getElementById("listaEditarPartidos").innerHTML;
 
+  function restaurarCategoriasEditar(){
+
+  document.getElementById("listaEditarPartidos").innerHTML =
+    categoriasEditarHTML;
+
+  }
   
 async function seleccionarCategoriaEditar(categoria){
 
