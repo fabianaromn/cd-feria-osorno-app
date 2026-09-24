@@ -1358,6 +1358,158 @@ class="seccion oculto">
 
 </section>
 
+
+
+
+
+<section
+id="eliminarPartido"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+
+    ← Volver
+
+  </button>
+
+  <h2>
+    🗑️ Eliminar partido
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Selecciona una categoría para ver sus partidos.
+  </p>
+
+  <div
+  id="listaEliminarPartidos"
+  style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Primera Serie')">
+
+      <div class="icono" style="font-size:24px;">
+        ⚽
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Primera Serie
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Segunda Serie')">
+
+      <div class="icono" style="font-size:24px;">
+        ⚽
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Segunda Serie
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Serie Senior')">
+
+      <div class="icono" style="font-size:24px;">
+        🧓
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Serie Senior
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Serie Super Senior')">
+
+      <div class="icono" style="font-size:24px;">
+        🧓
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Super Senior
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Infantil U8')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U8
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Infantil U10')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U10
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Infantil U13')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U13
+      </h3>
+
+    </div>
+
+    <div
+    class="card"
+    style="padding:10px 5px; margin:0; text-align:center;"
+    onclick="seleccionarCategoriaEliminar('Infantil U15')">
+
+      <div class="icono" style="font-size:24px;">
+        👦
+      </div>
+
+      <h3 style="margin:4px 0; font-size:15px;">
+        Infantil U15
+      </h3>
+
+    </div>
+
+  </div>
+
+</section>
+
     
     
 <section
@@ -1777,6 +1929,8 @@ ${fechaNacimiento ? `
 }
 
 
+
+
   
 function volver(){
 
@@ -1792,6 +1946,8 @@ window.scrollTo(0,0);
 
 
 
+
+  
   
 async function categoria(nombre){
 mostrar("categoria");
@@ -2186,7 +2342,248 @@ async function seleccionarCategoriaEditar(categoria){
 
 }
 
+let categoriaEliminarActual = "";
 
+async function eliminarPartido(){
+
+  const { data } =
+    await supabaseClient.auth.getSession();
+
+  if(!data.session){
+    mostrar("login");
+    return;
+  }
+
+  mostrar("eliminarPartido");
+}
+
+
+async function seleccionarCategoriaEliminar(categoria){
+
+  categoriaEliminarActual = categoria;
+
+  const lista =
+    document.getElementById("listaEliminarPartidos");
+
+  lista.innerHTML =
+    "<p>⏳ Cargando partidos...</p>";
+
+
+  const { data: categoriaData, error: categoriaError } =
+    await supabaseClient
+      .from("categories")
+      .select("id")
+      .eq("name", categoria)
+      .single();
+
+
+  if(categoriaError){
+
+    console.error(categoriaError);
+
+    lista.innerHTML =
+      "<p>❌ No se encontró la categoría.</p>";
+
+    return;
+  }
+
+
+  const { data: partidos, error } =
+    await supabaseClient
+      .from("Partidos")
+      .select(`
+        id,
+        campeonato,
+        rival,
+        fecha,
+        local_visitante,
+        goles_favor,
+        goles_contra,
+        estado,
+        jornada,
+        category_id
+      `)
+      .eq("category_id", categoriaData.id)
+      .order("fecha", { ascending: true });
+
+
+  if(error){
+
+    console.error(error);
+
+    lista.innerHTML =
+      "<p>❌ Error al cargar los partidos.</p>";
+
+    return;
+  }
+
+
+  if(!partidos || partidos.length === 0){
+
+    lista.innerHTML = `
+      <div style="grid-column:1 / -1;">
+
+        <p>
+          ⚽ No hay partidos registrados en ${categoria}.
+        </p>
+
+        <button
+          class="boton"
+          onclick="mostrar('administracion')">
+
+          ← Volver
+
+        </button>
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  lista.innerHTML = `
+
+    <div style="grid-column:1 / -1;">
+
+      <button
+        class="boton"
+        onclick="mostrar('eliminarPartido')">
+
+        ← Categorías
+
+      </button>
+
+      <h3
+        style="margin:10px 0 15px; color:#071b4a;">
+
+        🗑️ ${categoria}
+
+      </h3>
+
+    </div>
+
+
+    ${partidos.map(function(partido){
+
+      return `
+
+        <div
+          class="partido"
+          style="grid-column:1 / -1;">
+
+          <small>
+            🏆 ${partido.campeonato || "Partido"}
+          </small>
+
+          <div class="equipos">
+
+            Feria Osorno
+
+            <span class="vs">
+              VS
+            </span>
+
+            ${partido.rival || "Rival"}
+
+          </div>
+
+          <p>
+            📅 ${partido.fecha || "Fecha por confirmar"}
+          </p>
+
+          <p>
+            📍 ${partido.local_visitante || ""}
+          </p>
+
+          <p>
+            🏆 Jornada ${partido.jornada || "-"}
+          </p>
+
+          <p>
+            📌 ${partido.estado || "Pendiente"}
+          </p>
+
+          ${
+            partido.estado === "Terminado"
+            ? `
+              <p>
+                ⚽ Resultado:
+                ${partido.goles_favor ?? 0}
+                -
+                ${partido.goles_contra ?? 0}
+              </p>
+            `
+            : ""
+          }
+
+
+          <button
+            class="boton"
+            style="background:#c82032; margin-top:8px;"
+            onclick="confirmarEliminarPartido(${partido.id})">
+
+            🗑️ Eliminar partido
+
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("")}
+
+  `;
+}
+
+
+async function confirmarEliminarPartido(id){
+
+  const confirmar = confirm(
+    "⚠️ ¿Seguro que quieres eliminar este partido?\\n\\nEsta acción no se puede deshacer."
+  );
+
+  if(!confirmar){
+    return;
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("Partidos")
+      .delete()
+      .eq("id", id);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "❌ No se pudo eliminar el partido."
+    );
+
+    return;
+  }
+
+
+  alert(
+    "✅ Partido eliminado correctamente."
+  );
+
+
+  seleccionarCategoriaEliminar(
+    categoriaEliminarActual
+  );
+}
+
+
+
+
+
+
+
+  
 
 async function abrirFormularioEditarPartido(id){
 
