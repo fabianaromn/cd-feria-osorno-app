@@ -1838,6 +1838,10 @@ function mostrar(id){
     restaurarCategoriasEditar();
   }
 
+  if(id === "eliminarPartido"){
+  restaurarCategoriasEliminar();
+  }
+
   document.getElementById(id).scrollIntoView({
     behavior:"smooth",
     block:"start"
@@ -2343,6 +2347,20 @@ async function seleccionarCategoriaEditar(categoria){
 }
 
 let categoriaEliminarActual = "";
+
+
+
+const categoriasEliminarHTML =
+  document.getElementById("listaEliminarPartidos").innerHTML;
+
+function restaurarCategoriasEliminar(){
+
+  document.getElementById("listaEliminarPartidos").innerHTML =
+    categoriasEliminarHTML;
+
+}
+
+  
 
 async function eliminarPartido(){
 
