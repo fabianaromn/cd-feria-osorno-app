@@ -1295,8 +1295,8 @@ class="seccion oculto">
       Pendiente
     </option>
 
-    <option value="Jugado">
-      Jugado
+    <option value="Terminado">
+  Terminado
     </option>
 
     <option value="Suspendido">
@@ -2259,6 +2259,9 @@ async function abrirFormularioEditarPartido(id){
 
 
 
+
+  
+
 async function guardarEdicionPartido(){
 
   const id =
@@ -2402,6 +2405,9 @@ async function guardarEdicionPartido(){
 }
 
 
+
+
+
   
   
 async function guardarPartido(){
@@ -2529,6 +2535,10 @@ document.getElementById("nuevosGolesContra").value = "";
 }
 
 
+
+
+
+  
 async function editarPartido(){
 
   const { data } = await supabaseClient.auth.getSession();
@@ -2691,6 +2701,11 @@ async function editarPartido(){
   
   let todosLosPartidos = [];
 
+
+
+
+
+  
 async function cargarPartidos(){
 
   const lista = document.getElementById("listaPartidos");
@@ -2880,6 +2895,11 @@ if(!partidos || partidos.length === 0){
 
 }
 
+
+
+
+
+  
 function filtrarPartidos(categoriaSeleccionada){
 
   const lista =
