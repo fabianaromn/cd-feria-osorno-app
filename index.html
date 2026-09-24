@@ -1664,37 +1664,33 @@ seccion.classList.add("oculto");
 
 }
 
+
+
+
 function mostrar(id){
+  ocultarTodo();
 
-ocultarTodo();
+  document.getElementById(id).classList.remove("oculto");
 
-document
-.getElementById(id)
-.classList.remove("oculto");
+  if(id === "administracion"){
+    document.getElementById("pantallaPublica").classList.add("oculto");
+    document.getElementById("menuAdminPartidos").classList.add("oculto");
+    document.getElementById("menuAdminJugadores").classList.add("oculto");
+  }
 
-if(id === "administracion"){
-  document.getElementById("pantallaPublica").classList.add("oculto");
-  document.getElementById("menuAdminPartidos").classList.add("oculto");
-  document.getElementById("menuAdminJugadores").classList.add("oculto");
-}
-
-if(id === "partidos"){
-  cargarPartidos();
-}
-}
-}
+  if(id === "partidos"){
+    cargarPartidos();
+  }
 
   if(id === "editarPartido"){
-  restaurarCategoriasEditar();
+    restaurarCategoriasEditar();
   }
-document.getElementById(id).scrollIntoView({
-  behavior: "smooth",
-  block: "start"
-});
 
+  document.getElementById(id).scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
 }
-
-
 
 
 
