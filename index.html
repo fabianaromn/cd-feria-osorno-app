@@ -5479,10 +5479,10 @@ async function guardarSocio(){
   document.getElementById("mensajeSocio");
 
 
-  if(!nombre || !rut || !fechaIngreso || !montoCuota){
+  if(!nombre || !fechaIngreso || !montoCuota){
 
-    mensaje.innerText =
-    "⚠️ Completa nombre, RUT, fecha de ingreso y cuota mensual.";
+  mensaje.innerText =
+  "⚠️ Completa nombre, fecha de ingreso y cuota mensual.";
 
     mensaje.style.color = "#c82032";
 
@@ -5504,7 +5504,7 @@ async function guardarSocio(){
     .insert([{
 
       nombre: nombre,
-      rut: rut,
+      rut: rut || null,
       fecha_ingreso: fechaIngreso,
       estado: estado,
       monto_cuota: Number(montoCuota),
