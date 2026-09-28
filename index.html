@@ -1163,6 +1163,201 @@ class="seccion oculto">
 </section>
   
 
+<section
+id="agregarGasto"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2>
+    💸 Registrar gasto
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Registra un nuevo gasto del club.
+  </p>
+
+
+  <label>Fecha</label>
+
+  <input
+  id="gastoFecha"
+  type="date"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Monto</label>
+
+  <input
+  id="gastoMonto"
+  type="number"
+  min="0"
+  placeholder="Ej: 50000"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Tipo de gasto</label>
+
+  <select
+  id="gastoTipo"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      Selecciona tipo
+    </option>
+
+    <option value="Implementos deportivos">
+      Implementos deportivos
+    </option>
+
+    <option value="Arbitrajes">
+      Arbitrajes
+    </option>
+
+    <option value="Inscripciones y campeonatos">
+      Inscripciones y campeonatos
+    </option>
+
+    <option value="Transporte">
+      Transporte
+    </option>
+
+    <option value="Servicios basicos">
+      Servicios básicos
+    </option>
+
+    <option value="Mantencion">
+      Mantención
+    </option>
+
+    <option value="Actividades del club">
+      Actividades del club
+    </option>
+
+    <option value="Compras">
+      Compras
+    </option>
+
+    <option value="Otros">
+      Otros
+    </option>
+
+  </select>
+
+
+  <label>Destino / Proveedor</label>
+
+  <input
+  id="gastoDestino"
+  type="text"
+  placeholder="Ej: Tienda deportiva, proveedor, persona..."
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Descripción</label>
+
+  <textarea
+  id="gastoDescripcion"
+  placeholder="Descripción del gasto"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px; min-height:90px;">
+  </textarea>
+
+
+  <label>Método de pago</label>
+
+  <select
+  id="gastoMetodoPago"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      Selecciona método
+    </option>
+
+    <option value="Efectivo">
+      Efectivo
+    </option>
+
+    <option value="Transferencia">
+      Transferencia
+    </option>
+
+    <option value="Deposito">
+      Depósito
+    </option>
+
+    <option value="Tarjeta">
+      Tarjeta
+    </option>
+
+    <option value="Otro">
+      Otro
+    </option>
+
+  </select>
+
+
+  <label>Número de documento / comprobante</label>
+
+  <input
+  id="gastoNumeroDocumento"
+  type="text"
+  placeholder="Opcional"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Responsable</label>
+
+  <input
+  id="gastoResponsable"
+  type="text"
+  placeholder="Persona que registra o realiza el gasto"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>📷 Fotografía / comprobante</label>
+
+  <input
+  id="gastoComprobante"
+  type="file"
+  accept="image/*"
+  style="width:100%; padding:12px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="gastoObservaciones"
+  placeholder="Observaciones adicionales (opcional)"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px; min-height:80px;">
+  </textarea>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarGasto()">
+
+    💾 Guardar gasto
+
+  </button>
+
+
+  <p
+  id="mensajeGasto"
+  style="margin-top:15px; text-align:center;">
+  </p>
+
+</section>
+
+
+
+
+
+
 <section    
 id="agregarJugador"    
 class="seccion oculto"> 
@@ -3083,6 +3278,157 @@ async function guardarIngreso(){
   document.getElementById("ingresoObservaciones").value = "";
 
 }   
+
+
+async function guardarGasto(){
+
+  const fecha =
+  document.getElementById("gastoFecha").value;
+
+  const monto =
+  document.getElementById("gastoMonto").value;
+
+  const tipo =
+  document.getElementById("gastoTipo").value;
+
+  const destino =
+  document.getElementById("gastoDestino").value.trim();
+
+  const descripcion =
+  document.getElementById("gastoDescripcion").value.trim();
+
+  const metodoPago =
+  document.getElementById("gastoMetodoPago").value;
+
+  const numeroDocumento =
+  document.getElementById("gastoNumeroDocumento").value.trim();
+
+  const responsable =
+  document.getElementById("gastoResponsable").value.trim();
+
+  const observaciones =
+  document.getElementById("gastoObservaciones").value.trim();
+
+  const archivo =
+  document.getElementById("gastoComprobante").files[0];
+
+  const mensaje =
+  document.getElementById("mensajeGasto");
+
+
+  if(!fecha || !monto || !tipo){
+
+    mensaje.innerText =
+    "⚠️ Completa fecha, monto y tipo de gasto.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando gasto...";
+
+  mensaje.style.color = "#17479e";
+
+
+  let comprobanteUrl = null;
+
+
+  // SUBIR COMPROBANTE SI EXISTE
+
+  if(archivo){
+
+    mensaje.innerText =
+    "⏳ Subiendo comprobante...";
+
+    const extension =
+    archivo.name.split(".").pop();
+
+    const nombreArchivo =
+    `gasto_${Date.now()}.${extension}`;
+
+
+    const { error: uploadError } =
+    await supabaseClient
+      .storage
+      .from("comprobantes-finanzas")
+      .upload(nombreArchivo, archivo);
+
+
+    if(uploadError){
+
+      console.error(uploadError);
+
+      mensaje.innerText =
+      "❌ Error al subir el comprobante.";
+
+      mensaje.style.color = "#c82032";
+
+      return;
+    }
+
+
+    comprobanteUrl = nombreArchivo;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Registrando gasto...";
+
+
+  const { error: gastoError } =
+  await supabaseClient
+    .from("gastos")
+    .insert([
+      {
+        fecha: fecha,
+        monto: Number(monto),
+        tipo: tipo,
+        descripcion: descripcion || null,
+        destino: destino || null,
+        metodo_pago: metodoPago || null,
+        numero_documento: numeroDocumento || null,
+        responsable: responsable || null,
+        comprobante_url: comprobanteUrl,
+        observaciones: observaciones || null
+      }
+    ]);
+
+
+  if(gastoError){
+
+    console.error(gastoError);
+
+    mensaje.innerText =
+    "❌ Error al guardar el gasto.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "✅ Gasto guardado correctamente.";
+
+  mensaje.style.color = "#16803c";
+
+
+  document.getElementById("gastoFecha").value = "";
+  document.getElementById("gastoMonto").value = "";
+  document.getElementById("gastoTipo").value = "";
+  document.getElementById("gastoDestino").value = "";
+  document.getElementById("gastoDescripcion").value = "";
+  document.getElementById("gastoMetodoPago").value = "";
+  document.getElementById("gastoNumeroDocumento").value = "";
+  document.getElementById("gastoResponsable").value = "";
+  document.getElementById("gastoComprobante").value = "";
+  document.getElementById("gastoObservaciones").value = "";
+
+}
 
 
 
