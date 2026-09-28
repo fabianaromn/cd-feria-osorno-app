@@ -3013,10 +3013,6 @@ class="seccion oculto">
   id="contenedorEstadoCuotas"
   style="margin-top:20px;">
 
-    <p style="color:#667085;">
-      Selecciona un socio para consultar sus cuotas.
-    </p>
-
   </div>
 
 </section>
@@ -6797,6 +6793,10 @@ function cargarMontoCuotaSocio(){
 }
 
 async function prepararEstadoCuotas(){
+
+  document.getElementById(
+  "contenedorEstadoCuotas"
+).innerHTML = "";
 
   const selector =
   document.getElementById("estadoCuotasSocioId");
