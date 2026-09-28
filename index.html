@@ -713,6 +713,12 @@ font-size: 16px;
   text-align:left;
 }
 
+/* ===== HERO ADMINISTRACIÓN ===== */
+
+.hero-admin{
+  margin-top:0;
+}
+
 /* detalle rojo */
 
 .hero-feria::before{
@@ -1097,6 +1103,143 @@ font-size: 16px;
 
   box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
+
+/* ===== BANNER PARTIDO ADMIN ===== */
+
+.partido-admin-home{
+  margin:18px 14px;
+  background:white;
+  border:1px solid #e8ebf0;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(7,27,74,.12);
+}
+
+.partido-admin-cabecera{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:15px 17px;
+  background:#071b4a;
+  color:white;
+}
+
+.partido-admin-cabecera span{
+  display:block;
+  margin-bottom:3px;
+  color:#aebbd4;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.4px;
+}
+
+.partido-admin-cabecera h2{
+  margin:0;
+  font-size:16px;
+  font-weight:900;
+}
+
+.editar-banner-partido{
+  flex-shrink:0;
+  padding:8px 12px;
+  border:0;
+  border-radius:20px;
+  background:#d71920;
+  color:white;
+  font-size:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.editar-banner-partido:active{
+  transform:scale(.96);
+}
+
+.partido-admin-info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 12px;
+}
+
+.partido-admin-equipo{
+  width:38%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.partido-admin-escudo,
+.partido-admin-rival{
+  width:62px;
+  height:62px;
+  margin-bottom:9px;
+}
+
+.partido-admin-escudo{
+  object-fit:contain;
+}
+
+.partido-admin-rival{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #d9dde5;
+  border-radius:50%;
+  background:#f0f2f5;
+  color:#98a2b3;
+  font-size:24px;
+  font-weight:900;
+}
+
+.partido-admin-equipo strong{
+  color:#071b4a;
+  font-size:12px;
+  font-weight:900;
+}
+
+.partido-admin-vs{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+}
+
+.partido-admin-vs span{
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#d71920;
+  color:white;
+  font-size:13px;
+  font-weight:900;
+}
+
+.partido-admin-vs small{
+  color:#98a2b3;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.partido-admin-detalles{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  padding:11px 15px;
+  background:#f6f7f9;
+  border-top:1px solid #eaecf0;
+  color:#475467;
+  font-size:11px;
+  font-weight:700;
+}
+
+
 </style>  
 
   
@@ -1451,92 +1594,168 @@ class="seccion oculto">
 
 </header>
 
-<section class="partido">
-
-  <small>
-    ⚽ PRÓXIMO PARTIDO
-  </small>
-
-  <div class="equipos">
-    Feria Osorno
-    <span class="vs">
-      VS
-    </span>
-    Deportivo Austral
-  </div>
-
-  <p>
-    📅 Fecha por confirmar
-  </p>
-
-  <p>
-    📍 Cancha por confirmar
-  </p>
-
-</section>
   
   <!-- PARTIDOS -->
 
   <!-- PARTIDOS Y JUGADORES -->
 
-<section class="menu" style="padding:0;">
+<section class="menu-publico">
 
   <div
-  class="card"
+  class="acceso-publico"
   onclick="mostrarMenuAdmin('menuAdminPartidos')">
 
-    <div class="icono">
-      ⚽
-    </div>
+    <div class="icono-publico">⚽</div>
 
-    <h3>
-      Partidos
-    </h3>
+    <h3>PARTIDOS</h3>
 
   </div>
 
+
   <div
-  class="card"
+  class="acceso-publico"
   onclick="mostrarMenuAdmin('menuAdminJugadores')">
 
-    <div class="icono">
-      👥
-    </div>
+    <div class="icono-publico">👥</div>
 
-    <h3>
-      Jugadores
-    </h3>
+    <h3>JUGADORES</h3>
 
   </div>
 
-
-    <div
-  class="card"
-  onclick="mostrarMenuAdmin('menuAdminFinanzas')">
-
-    <div class="icono">
-      💰
-    </div>
-
-    <h3>
-      Finanzas
-    </h3>
-
-  </div>
 
   <div
-class="card"
-onclick="mostrarMenuAdmin('menuAdminSocios')">
+  class="acceso-publico"
+  onclick="mostrarMenuAdmin('menuAdminFinanzas')">
 
-  <div class="icono">👤</div>
+    <div class="icono-publico">💰</div>
 
-  <h3>
-    Socios
-  </h3>
+    <h3>FINANZAS</h3>
 
-</div>
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrarMenuAdmin('menuAdminSocios')">
+
+    <div class="icono-publico">👤</div>
+
+    <h3>SOCIOS</h3>
+
+  </div>
 
 </section>
+
+
+<section class="hero-feria hero-admin">
+
+  <div class="hero-contenido">
+
+    <div class="hero-etiqueta">
+      CLUB DEPORTIVO FERIA OSORNO
+    </div>
+
+    <h1>
+      ACCESO
+      <span>DIRECTIVA</span>
+    </h1>
+
+    <div class="hero-linea"></div>
+
+    <p>
+      PASIÓN · HISTORIA · FAMILIA
+    </p>
+
+  </div>
+
+  <img
+    src="img/toro-feria.png"
+    class="hero-toro"
+    alt="Mascota CD Feria Osorno">
+
+</section>
+
+<section class="partido-admin-home">
+
+  <div class="partido-admin-cabecera">
+
+    <div>
+      <span>PRÓXIMO PARTIDO</span>
+
+      <h2>
+        BANNER DEL PARTIDO
+      </h2>
+    </div>
+
+    <button
+    class="editar-banner-partido"
+    onclick="mostrar('editarBannerPartido')"></button>
+      ✏️ EDITAR
+    </button>
+
+  </div>
+
+
+  <div class="partido-admin-info">
+
+    <div class="partido-admin-equipo">
+
+      <img
+      src="img/logo-feria.png"
+      class="partido-admin-escudo"
+      alt="Feria Osorno">
+
+      <strong>
+        FERIA OSORNO
+      </strong>
+
+    </div>
+
+
+    <div class="partido-admin-vs">
+
+      <span>VS</span>
+
+      <small>
+        LOCAL
+      </small>
+
+    </div>
+
+
+    <div class="partido-admin-equipo">
+
+      <div class="partido-admin-rival">
+        ?
+      </div>
+
+      <strong>
+        RIVAL
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="partido-admin-detalles">
+
+    <span>
+      📅 Fecha por confirmar
+    </span>
+
+    <span>
+      🕐 Hora por confirmar
+    </span>
+
+    <span>
+      📍 Cancha por confirmar
+    </span>
+
+  </div>
+
+</section>
+
 
   <div
   id="menuAdminPartidos"
@@ -4280,6 +4499,128 @@ class="seccion oculto">
 
 </section>
 
+
+<section
+id="editarBannerPartido"
+class="seccion oculto">
+
+  <button
+  class="volver"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2>
+    ⚽ Editar próximo partido
+  </h2>
+
+  <p>
+    Configura el partido destacado que aparecerá en la portada del club.
+  </p>
+
+
+  <label>
+    Campeonato
+  </label>
+
+  <input
+  type="text"
+  id="bannerCampeonato"
+  placeholder="Ej: Clausura 2026">
+
+
+  <label>
+    Jornada
+  </label>
+
+  <input
+  type="number"
+  id="bannerJornada"
+  min="1"
+  placeholder="Ej: 5">
+
+
+  <label>
+    Rival
+  </label>
+
+  <input
+  type="text"
+  id="bannerRival"
+  placeholder="Nombre del equipo rival">
+
+
+  <label>
+    Fecha
+  </label>
+
+  <input
+  type="date"
+  id="bannerFecha">
+
+
+  <label>
+    Hora
+  </label>
+
+  <input
+  type="time"
+  id="bannerHora">
+
+
+  <label>
+    Local / Visitante
+  </label>
+
+  <select id="bannerLocalVisitante">
+
+    <option value="Local">
+      Local
+    </option>
+
+    <option value="Visitante">
+      Visitante
+    </option>
+
+  </select>
+
+
+  <label>
+    Cancha
+  </label>
+
+  <input
+  type="text"
+  id="bannerCancha"
+  placeholder="Ej: Cancha Feria Osorno">
+
+
+  <label>
+    Escudo del rival
+  </label>
+
+  <input
+  type="file"
+  id="bannerEscudoRival"
+  accept="image/*">
+
+
+  <p
+  id="mensajeBannerPartido"
+  style="margin-top:15px;">
+  </p>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarBannerPartido()">
+
+    💾 Guardar banner
+
+  </button>
+
+</section>
     
     
 <section
