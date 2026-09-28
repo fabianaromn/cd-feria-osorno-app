@@ -6461,8 +6461,8 @@ String(hoy.getDate()).padStart(2, "0");
     opcion.value =
     socio.id;
 
-    opcion.textContent =
-    `${socio.nombre} - ${socio.rut}`;
+   opcion.textContent =
+   socio.nombre;
 
     opcion.dataset.monto =
     socio.monto_cuota || 0;
@@ -6554,7 +6554,7 @@ async function prepararEstadoCuotas(){
     socio.id;
 
     opcion.textContent =
-    `${socio.nombre} - ${socio.rut}`;
+socio.nombre;
 
     selector.appendChild(opcion);
 
