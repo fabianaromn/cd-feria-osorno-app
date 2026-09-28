@@ -1065,6 +1065,38 @@ font-size: 16px;
 .cerrar-admin:active{
   transform:scale(.96);
 }
+
+/* ===== ADMINISTRACIÓN PANTALLA COMPLETA ===== */
+
+#administracion{
+  margin:0;
+  padding:0;
+  width:100%;
+  max-width:none;
+
+  background:#f3f5f9;
+
+  border-radius:0;
+  box-shadow:none;
+}
+
+.header-admin{
+  width:100%;
+
+  background:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:12px 14px;
+
+  border-radius:0;
+
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
 </style>  
 
   
@@ -4874,22 +4906,29 @@ mostrar("agregarPartido");
   
 async function cerrarSesion(){
 
-const { error } =
-await supabaseClient.auth.signOut();
+  const { error } =
+  await supabaseClient.auth.signOut();
 
-if(error){
+  if(error){
 
-console.error(error);
+    console.error(error);
 
-return;
+    return;
+
+  }
+
+  ocultarTodo();
+
+  document
+  .getElementById("pantallaPublica")
+  .classList.remove("oculto");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
-
-mostrar("login");
-
-}
-
-
 
   
 async function iniciarSesion(){
