@@ -1971,6 +1971,180 @@ font-size: 16px;
   font-weight:900;
 }
 
+.pantalla-jugadores-publica{
+  padding:0 14px 30px;
+}
+
+/* ========================================
+   PLANTEL PÚBLICO
+======================================== */
+
+.grupo-plantel{
+  margin:22px 0 30px;
+}
+
+
+.grupo-plantel-titulo{
+  margin-bottom:10px;
+
+  color:#7b8495;
+
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+
+/* DOS JUGADORES POR FILA */
+
+.grid-jugadores-publico{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:14px;
+}
+
+
+/* TARJETA */
+
+.jugador-card-publico{
+  min-width:0;
+
+  background:white;
+
+  border-radius:16px;
+  overflow:hidden;
+
+  border:1px solid #e2e5eb;
+
+  box-shadow:
+  0 5px 14px rgba(7,27,74,.12);
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+
+.jugador-card-publico:active{
+  transform:scale(.97);
+}
+
+
+/* ZONA FOTO */
+
+.jugador-card-foto{
+  position:relative;
+
+  width:100%;
+  height:205px;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+    145deg,
+    #071b4a,
+    #101b3f
+  );
+}
+
+
+.jugador-card-foto::before{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-55px;
+  top:-45px;
+
+  background:#d71920;
+
+  transform:rotate(35deg);
+
+  z-index:0;
+}
+
+
+.jugador-card-foto img{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+  object-position:center top;
+
+  z-index:1;
+}
+
+
+/* DORSAL */
+
+.jugador-card-numero{
+  position:absolute;
+
+  top:10px;
+  right:11px;
+
+  z-index:3;
+
+  color:white;
+
+  font-size:29px;
+  font-weight:900;
+
+  line-height:1;
+
+  text-shadow:
+  0 2px 5px rgba(0,0,0,.35);
+}
+
+
+/* INFORMACIÓN */
+
+.jugador-card-datos{
+  min-height:67px;
+
+  padding:11px 12px 13px;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+
+.jugador-card-datos span{
+  display:block;
+
+  margin-bottom:3px;
+
+  color:#8b93a1;
+
+  font-size:9px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+
+.jugador-card-datos strong{
+  display:block;
+
+  color:#071b4a;
+
+  font-size:13px;
+  font-weight:900;
+
+  line-height:1.15;
+
+  text-transform:uppercase;
+}
+
 </style>  
 
   
@@ -2244,69 +2418,156 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
   
 
   </div>
-    
-  <section    
-id="jugadores"    
-class="seccion oculto">  <button    
-class="boton"    
-onclick="volver()">  ← Volver
+ <section
+id="jugadores"
+class="seccion oculto pantalla-jugadores-publica">
 
-</button> 
-  
-<h2> 👥 Plantel del Club </h2>   
+  <div class="cabecera-seccion-publica">
+
+    <button
+    class="volver-publico"
+    onclick="volver()">
+      ← VOLVER
+    </button>
+
+    <span>CLUB DEPORTIVO FERIA OSORNO</span>
+
+    <h2>JUGADORES</h2>
+
+    <p>
+      Conoce a los jugadores de todas nuestras categorías
+    </p>
+
+  </div>
 
 
-  
-<button    
-class="categoria"    
-onclick="categoria('Primera Serie')">
+  <div class="titulo-categorias-partidos">
 
-⚽ Primera Serie
+    <span>CATEGORÍAS</span>
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Segunda Serie')">
+    <strong>
+      Selecciona una serie
+    </strong>
 
-⚽ Segunda Serie
+  </div>
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Senior')">
 
-👴 Senior
+  <div class="categorias-partidos">
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Super Senior')">
+    <button
+    class="categoria-partido"
+    onclick="categoria('Primera Serie')">
 
-👴 Super Senior
+      <div class="categoria-partido-icono">⚽</div>
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Infantil U8')">
+      <div>
+        <strong>Primera Serie</strong>
+        <span>Adultos</span>
+      </div>
 
-🧒 Infantil U8
+    </button>
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Infantil U10')">
 
-🧒 Infantil U10
+    <button
+    class="categoria-partido"
+    onclick="categoria('Segunda Serie')">
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Infantil U13')">
+      <div class="categoria-partido-icono">⚽</div>
 
-🧒 Infantil U13
+      <div>
+        <strong>Segunda Serie</strong>
+        <span>Adultos</span>
+      </div>
 
-</button>  <button    
-class="categoria"    
-onclick="categoria('Infantil U15')">
+    </button>
 
-🧒 Infantil U15
 
-</button>  </section>
+    <button
+    class="categoria-partido"
+    onclick="categoria('Senior')">
 
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Senior</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="categoria('Super Senior')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Super Senior</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="categoria('Infantil U8')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U8</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="categoria('Infantil U10')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U10</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="categoria('Infantil U13')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U13</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="categoria('Infantil U15')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U15</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+  </div>
+
+</section>
 <section
 id="administracion"
 class="seccion oculto">
@@ -6185,27 +6446,119 @@ document.getElementById("listaJugadores").innerHTML =
 return;
 }
 
-document.getElementById("listaJugadores").innerHTML =
-jugadores.map(function(jugador){
-return `
-<div class="jugador-card" onclick="verJugador(${jugador.number}, '${jugador.name}', '${jugador.position}', '${jugador.photo_url || ''}', '${jugador.birth_date || ''}', '${nombreBD}', '${jugador.year_joined || ''}')">
-<img
-class="jugador-foto"
-src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
-alt="${jugador.name}"
+const grupos = [
+  {
+    titulo: "ARQUEROS",
+    posiciones: ["arquero", "portero"]
+  },
+  {
+    titulo: "DEFENSAS",
+    posiciones: ["defensa", "defensor"]
+  },
+  {
+    titulo: "MEDIOCAMPISTAS",
+    posiciones: ["medio", "mediocampista", "volante"]
+  },
+  {
+    titulo: "DELANTEROS",
+    posiciones: ["delantero", "atacante"]
+  }
+];
 
->    
 
-      <div class="jugador-numero">${jugador.number}</div>    
+let plantelHTML = "";
 
-      <div class="jugador-info">    
-        <h3>${jugador.name}</h3>    
-        <p>⚽ ${jugador.position}</p>    
-      </div>    
 
-    </div>    
-  `;    
-}).join("");
+grupos.forEach(function(grupo){
+
+  const jugadoresGrupo =
+  jugadores.filter(function(jugador){
+
+    const posicion =
+    (jugador.position || "")
+    .toLowerCase()
+    .trim();
+
+    return grupo.posiciones.includes(posicion);
+
+  });
+
+
+  if(jugadoresGrupo.length === 0){
+    return;
+  }
+
+
+  plantelHTML += `
+
+    <div class="grupo-plantel">
+
+      <div class="grupo-plantel-titulo">
+        ${grupo.titulo}
+      </div>
+
+      <div class="grid-jugadores-publico">
+
+        ${jugadoresGrupo.map(function(jugador){
+
+          return `
+
+            <div
+            class="jugador-card-publico"
+            onclick="verJugador(
+              ${jugador.number},
+              '${jugador.name}',
+              '${jugador.position}',
+              '${jugador.photo_url || ''}',
+              '${jugador.birth_date || ''}',
+              '${nombreBD}',
+              '${jugador.year_joined || ''}'
+            )">
+
+
+              <div class="jugador-card-foto">
+
+                <div class="jugador-card-numero">
+                  ${jugador.number}
+                </div>
+
+                <img
+                src="${jugador.photo_url || 'https://via.placeholder.com/300x400'}"
+                alt="${jugador.name}">
+
+              </div>
+
+
+              <div class="jugador-card-datos">
+
+                <span>
+                  ${jugador.position || "Jugador"}
+                </span>
+
+                <strong>
+                  ${jugador.name}
+                </strong>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("")}
+
+      </div>
+
+    </div>
+
+  `;
+
+});
+
+
+document.getElementById(
+  "listaJugadores"
+).innerHTML = plantelHTML;
 
 }
 
