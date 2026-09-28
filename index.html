@@ -690,19 +690,17 @@ font-size: 16px;
   margin-top:125px;
 }
 
-/* ===== HERO FERIA ===== */
-
 .hero-feria{
   position:relative;
   overflow:hidden;
 
-  min-height:310px;
+  min-height:220px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:35px 20px;
+  padding:30px 20px;
 
   background:
     linear-gradient(
@@ -716,126 +714,51 @@ font-size: 16px;
   text-align:center;
 }
 
-
-/* detalle rojo */
-
-.hero-feria::before{
-  content:"";
-
-  position:absolute;
-
-  width:220px;
-  height:220px;
-
-  top:-150px;
-  right:-80px;
-
-  border-radius:50%;
-
-  background:#d71920;
-
-  opacity:.9;
-}
-
-
-/* detalle inferior */
-
-.hero-feria::after{
-  content:"";
-
-  position:absolute;
-
-  width:260px;
-  height:260px;
-
-  bottom:-210px;
-  left:-100px;
-
-  border:35px solid rgba(255,255,255,.05);
-
-  border-radius:50%;
-}
-
-
-.hero-contenido{
-  position:relative;
-  z-index:2;
-
-  width:100%;
-  max-width:420px;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-
 .hero-logo{
-  width:82px;
-  height:82px;
-
-  object-fit:contain;
-
-  margin-bottom:12px;
-
-  filter:
-  drop-shadow(0 7px 10px rgba(0,0,0,.35));
+  display:none;
 }
-
 
 .hero-etiqueta{
   font-size:10px;
   font-weight:800;
-
-  letter-spacing:2px;
-
-  color:#d8e2f5;
-
-  margin-bottom:13px;
+  letter-spacing:1.8px;
+  color:#cbd7ed;
+  margin-bottom:12px;
 }
-
 
 .hero-feria h1{
   margin:0;
 
-  font-size:32px;
+  font-size:27px;
   font-weight:900;
+  line-height:1.08;
 
-  line-height:1.05;
-
-  letter-spacing:-.5px;
+  letter-spacing:.3px;
 }
-
 
 .hero-feria h1 span{
   display:block;
-
-  margin-top:4px;
-
+  margin-top:5px;
   color:#ff3340;
 }
 
-
 .hero-linea{
-  width:45px;
+  width:42px;
   height:4px;
 
-  margin:16px auto;
+  margin:15px auto;
 
-  background:#d71920;
-
+  background:#e7192d;
   border-radius:20px;
 }
-
 
 .hero-feria p{
   margin:0;
 
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
 
-  letter-spacing:2px;
-
+  letter-spacing:1.7px;
   color:#e4e9f2;
 }
 
