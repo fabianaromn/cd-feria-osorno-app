@@ -3381,7 +3381,7 @@ async function guardarGasto(){
 
   const { error: gastoError } =
   await supabaseClient
-    .from("gastos")
+    .from("Gastos")
     .insert([
       {
         fecha: fecha,
