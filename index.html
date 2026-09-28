@@ -910,39 +910,37 @@ onclick="abrirEliminarJugador()">
   </div>
 
 
-  <div
+<div
 id="menuAdminFinanzas"
 class="oculto"
 style="margin-top:10px;">
 
   <div
   class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('agregarIngreso')">
+  style="
+  margin-top:10px;
+  text-align:center;
+  padding:20px;
+  ">
 
-    <div class="icono">
-      💵
-    </div>
+    <p
+    style="
+    margin:0;
+    color:#667085;
+    font-size:14px;
+    ">
+      Saldo actual del club
+    </p>
 
-    <h3>
-      Ingresos
-    </h3>
-
-  </div>
-
-
-  <div
-  class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('agregarGasto')">
-
-    <div class="icono">
-      💸
-    </div>
-
-    <h3>
-      Gastos
-    </h3>
+    <h2
+    id="saldoActualClub"
+    style="
+    margin:8px 0 0;
+    color:#071b4a;
+    font-size:30px;
+    ">
+      $0
+    </h2>
 
   </div>
 
@@ -952,13 +950,8 @@ style="margin-top:10px;">
   style="margin-top:10px;"
   onclick="mostrar('resumenFinanciero')">
 
-    <div class="icono">
-      📊
-    </div>
-
-    <h3>
-      Resumen financiero
-    </h3>
+    <div class="icono">📊</div>
+    <h3>Resumen financiero</h3>
 
   </div>
 
@@ -968,13 +961,30 @@ style="margin-top:10px;">
   style="margin-top:10px;"
   onclick="mostrar('movimientosFinancieros')">
 
-    <div class="icono">
-      📋
-    </div>
+    <div class="icono">📋</div>
+    <h3>Movimientos</h3>
 
-    <h3>
-      Movimientos
-    </h3>
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('agregarIngreso')">
+
+    <div class="icono">💵</div>
+    <h3>Ingresos</h3>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('agregarGasto')">
+
+    <div class="icono">💸</div>
+    <h3>Gastos</h3>
 
   </div>
 
@@ -2995,11 +3005,25 @@ function mostrar(id){
 
   document.getElementById(id).classList.remove("oculto");
 
-  if(id === "administracion"){
-    document.getElementById("pantallaPublica").classList.add("oculto");
-    document.getElementById("menuAdminPartidos").classList.add("oculto");
-    document.getElementById("menuAdminJugadores").classList.add("oculto");
-  }
+ if(id === "administracion"){
+
+  document
+  .getElementById("pantallaPublica")
+  .classList.add("oculto");
+
+  document
+  .getElementById("menuAdminPartidos")
+  .classList.add("oculto");
+
+  document
+  .getElementById("menuAdminJugadores")
+  .classList.add("oculto");
+
+  document
+  .getElementById("menuAdminFinanzas")
+  .classList.add("oculto");
+
+}
 
   if(id === "partidos"){
     cargarPartidos();
@@ -3046,7 +3070,7 @@ if(id === "editarJugador"){
 
 
 
-  
+
 function mostrarMenuAdmin(id){
 
   document
@@ -3058,11 +3082,18 @@ function mostrarMenuAdmin(id){
   .classList.add("oculto");
 
   document
+  .getElementById("menuAdminFinanzas")
+  .classList.add("oculto");
+
+  document
   .getElementById(id)
   .classList.remove("oculto");
 
-}
+  if(id === "menuAdminFinanzas"){
+    cargarSaldoActualClub();
+  }
 
+}
 
 
 
@@ -3848,6 +3879,67 @@ async function cargarResumenFinanciero(){
 
 
 
+async function cargarSaldoActualClub(){
+
+  const saldoElemento =
+  document.getElementById("saldoActualClub");
+
+  saldoElemento.innerText = "Calculando...";
+
+  const { data: ingresos, error: errorIngresos } =
+  await supabaseClient
+    .from("Ingresos")
+    .select("monto");
+
+  if(errorIngresos){
+    console.error(errorIngresos);
+    saldoElemento.innerText = "Error";
+    return;
+  }
+
+  const { data: gastos, error: errorGastos } =
+  await supabaseClient
+    .from("Gastos")
+    .select("monto");
+
+  if(errorGastos){
+    console.error(errorGastos);
+    saldoElemento.innerText = "Error";
+    return;
+  }
+
+  const totalIngresos =
+  (ingresos || []).reduce(
+    (total, ingreso) =>
+    total + Number(ingreso.monto || 0),
+    0
+  );
+
+  const totalGastos =
+  (gastos || []).reduce(
+    (total, gasto) =>
+    total + Number(gasto.monto || 0),
+    0
+  );
+
+  const saldo =
+  totalIngresos - totalGastos;
+
+  const formatoPesos =
+  new Intl.NumberFormat(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    }
+  );
+
+  saldoElemento.innerText =
+  formatoPesos.format(saldo);
+
+}
+
   async function cargarMovimientosFinancieros(){
 
   const tipoFiltro =
@@ -4165,6 +4257,42 @@ async function cargarResumenFinanciero(){
 
         ` : ""}
 
+
+        <div
+style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+">
+
+  <button
+  class="boton"
+  onclick="editarMovimientoFinanciero(
+    '${movimiento.clase}',
+    ${movimiento.id}
+  )">
+
+    ✏️ Editar
+
+  </button>
+
+  <button
+  class="boton"
+  onclick="eliminarMovimientoFinanciero(
+    '${movimiento.clase}',
+    ${movimiento.id}
+  )">
+
+    🗑️ Eliminar
+
+  </button>
+
+</div>
+
+
+
+
       </div>
 
     `;
@@ -4174,63 +4302,101 @@ async function cargarResumenFinanciero(){
 }
 
 
-async function verComprobanteFinanciero(ruta){
 
-  const { data, error } =
+async function eliminarMovimientoFinanciero(clase, id){
+
+  const confirmar = confirm(
+    "¿Seguro que quieres eliminar este movimiento?\n\nEsta acción no se puede deshacer."
+  );
+
+  if(!confirmar){
+    return;
+  }
+
+  const tabla =
+  clase === "ingreso"
+  ? "Ingresos"
+  : "Gastos";
+
+
+  // BUSCAR EL MOVIMIENTO ANTES DE ELIMINARLO
+
+  const { data: movimiento, error: errorBuscar } =
   await supabaseClient
-    .storage
-    .from("comprobantes-finanzas")
-    .createSignedUrl(ruta, 300);
+    .from(tabla)
+    .select("comprobante_url")
+    .eq("id", id)
+    .single();
 
-  if(error){
 
-    console.error(error);
+  if(errorBuscar){
 
-    alert("❌ No se pudo abrir el comprobante.");
+    console.error(errorBuscar);
+
+    alert(
+      "❌ No se pudo encontrar el movimiento."
+    );
 
     return;
   }
 
-  window.open(
-    data.signedUrl,
-    "_blank"
-  );
 
-}
+  // ELIMINAR EL MOVIMIENTO
 
-function restaurarCategoriasEditarJugador(){
-
-  document.getElementById("listaEditarJugadores").innerHTML =
-    categoriasEditarJugadoresHTML;
-
-}
+  const { error: errorEliminar } =
+  await supabaseClient
+    .from(tabla)
+    .delete()
+    .eq("id", id);
 
 
-const categoriasEliminarJugadoresHTML =
-document.getElementById("listaEliminarJugadores").innerHTML;
+  if(errorEliminar){
+
+    console.error(errorEliminar);
+
+    alert(
+      "❌ No se pudo eliminar el movimiento."
+    );
+
+    return;
+  }
 
 
-function restaurarCategoriasEliminarJugador(){
+  // ELIMINAR COMPROBANTE SI EXISTE
 
-  document.getElementById("listaEliminarJugadores").innerHTML =
-    categoriasEliminarJugadoresHTML;
+  if(movimiento.comprobante_url){
 
-}
+    const { error: errorComprobante } =
+    await supabaseClient
+      .storage
+      .from("comprobantes-finanzas")
+      .remove([
+        movimiento.comprobante_url
+      ]);
 
-const categoriasEditarHTML =
-document.getElementById("listaEditarPartidos").innerHTML; 
-  
-  
-  
-  
-  
-function restaurarCategoriasEditar(){
 
-  document.getElementById("listaEditarPartidos").innerHTML =
-    categoriasEditarHTML;
+    if(errorComprobante){
+
+      console.error(
+        "Error al eliminar comprobante:",
+        errorComprobante
+      );
+
+    }
 
   }
 
+
+  alert(
+    "✅ Movimiento eliminado correctamente."
+  );
+
+
+  cargarMovimientosFinancieros();
+
+  cargarSaldoActualClub();
+
+}
 
   
   
