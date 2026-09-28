@@ -696,137 +696,147 @@ font-size: 16px;
   position:relative;
   overflow:hidden;
 
-  min-height:300px;
+  min-height:310px;
 
-  padding:38px 22px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:35px 20px;
 
   background:
     linear-gradient(
-      135deg,
+      145deg,
       #061538 0%,
       #09255d 55%,
       #123c8c 100%
     );
 
   color:white;
+  text-align:center;
 }
+
 
 /* detalle rojo */
 
 .hero-feria::before{
   content:"";
+
   position:absolute;
 
-  width:170px;
-  height:170px;
+  width:220px;
+  height:220px;
 
+  top:-150px;
   right:-80px;
-  top:-40px;
+
+  border-radius:50%;
 
   background:#d71920;
 
-  transform:rotate(35deg);
-
-  opacity:.95;
+  opacity:.9;
 }
 
-/* brillo azul */
+
+/* detalle inferior */
 
 .hero-feria::after{
   content:"";
+
   position:absolute;
 
-  width:240px;
-  height:240px;
+  width:260px;
+  height:260px;
 
-  right:-100px;
-  bottom:-150px;
+  bottom:-210px;
+  left:-100px;
 
   border:35px solid rgba(255,255,255,.05);
+
   border-radius:50%;
 }
+
 
 .hero-contenido{
   position:relative;
   z-index:2;
-  max-width:75%;
+
+  width:100%;
+  max-width:420px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
+
+
+.hero-logo{
+  width:82px;
+  height:82px;
+
+  object-fit:contain;
+
+  margin-bottom:12px;
+
+  filter:
+  drop-shadow(0 7px 10px rgba(0,0,0,.35));
+}
+
 
 .hero-etiqueta{
-  display:inline-block;
-
-  margin-bottom:14px;
-
   font-size:10px;
-  font-weight:900;
-  letter-spacing:1.5px;
+  font-weight:800;
 
-  color:#d9e5ff;
+  letter-spacing:2px;
+
+  color:#d8e2f5;
+
+  margin-bottom:13px;
 }
+
 
 .hero-feria h1{
   margin:0;
 
-  font-size:36px;
-  line-height:.95;
+  font-size:32px;
   font-weight:900;
 
-  letter-spacing:-1px;
+  line-height:1.05;
+
+  letter-spacing:-.5px;
 }
 
+
 .hero-feria h1 span{
+  display:block;
+
+  margin-top:4px;
+
   color:#ff3340;
 }
 
-.hero-feria p{
-  margin-top:18px;
-
-  font-size:14px;
-  line-height:1.5;
-
-  color:#e7ecf7;
-}
 
 .hero-linea{
-  width:42px;
+  width:45px;
   height:4px;
 
-  margin:18px 0 12px;
-
-  border-radius:10px;
+  margin:16px auto;
 
   background:#d71920;
+
+  border-radius:20px;
 }
 
-.hero-contenido strong{
-  font-size:12px;
-  letter-spacing:.5px;
-}
 
-.hero-escudo{
-  position:absolute;
+.hero-feria p{
+  margin:0;
 
-  right:15px;
-  bottom:18px;
+  font-size:11px;
+  font-weight:800;
 
-  z-index:2;
+  letter-spacing:2px;
 
-  width:105px;
-  height:105px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.hero-escudo img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-
-  filter:drop-shadow(
-    0 8px 12px rgba(0,0,0,.35)
-  );
+  color:#e4e9f2;
 }
 
 </style>  
@@ -978,32 +988,26 @@ onclick="iniciarSesion()"
 
   <div class="hero-contenido">
 
+    <img
+    src="img/logo-feria.png"
+    class="hero-logo"
+    alt="CD Feria Osorno">
+
     <span class="hero-etiqueta">
       CLUB DEPORTIVO FERIA OSORNO
     </span>
 
     <h1>
-      EL MÁS GRANDE<br>
-      <span>DEL BARRIO.</span>
+      EL MÁS GRANDE
+      <span>DEL BARRIO</span>
     </h1>
-
-    <p>
-      Pasión, historia y familia.<br>
-      Todo el club en un solo lugar.
-    </p>
 
     <div class="hero-linea"></div>
 
-    <strong>
-      🔵🔴 FERIA SOMOS TODOS
-    </strong>
+    <p>
+      PASIÓN · HISTORIA · FAMILIA
+    </p>
 
-  </div>
-
-  <div class="hero-escudo">
-    <img
-    src="img/logo-feria.png"
-    alt="CD Feria Osorno">
   </div>
 
 </section>
