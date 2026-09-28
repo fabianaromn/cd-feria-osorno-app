@@ -1523,6 +1523,454 @@ font-size: 16px;
   font-weight:900;
 }
 
+/* ========================================
+   PARTIDOS - VERSIÓN PÚBLICA
+======================================== */
+
+.pantalla-partidos-publica{
+  padding:0 14px 30px;
+}
+
+
+/* CABECERA */
+
+.cabecera-seccion-publica{
+  padding:18px 0 17px;
+}
+
+.volver-publico{
+  margin-bottom:20px;
+  padding:8px 14px;
+
+  background:white;
+  color:#071b4a;
+
+  border:1px solid #dfe3ea;
+  border-radius:20px;
+
+  font-size:10px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+.volver-publico:active{
+  transform:scale(.96);
+}
+
+
+.cabecera-seccion-publica > span{
+  display:block;
+
+  margin-bottom:4px;
+
+  color:#d71920;
+
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.4px;
+}
+
+
+.cabecera-seccion-publica h2{
+  margin:0;
+
+  color:#071b4a;
+
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+
+.cabecera-seccion-publica p{
+  margin:5px 0 0;
+
+  color:#7b8495;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+
+/* TITULO CATEGORÍAS */
+
+.titulo-categorias-partidos{
+  margin:5px 0 11px;
+}
+
+.titulo-categorias-partidos span{
+  display:block;
+
+  color:#98a2b3;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.3px;
+}
+
+.titulo-categorias-partidos strong{
+  display:block;
+
+  margin-top:3px;
+
+  color:#071b4a;
+
+  font-size:14px;
+  font-weight:900;
+}
+
+
+/* GRID CATEGORÍAS */
+
+.categorias-partidos{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+
+  gap:9px;
+
+  margin-bottom:24px;
+}
+
+
+.categoria-partido{
+  min-height:68px;
+
+  display:flex;
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px;
+
+  background:white;
+
+  border:1px solid #e3e7ee;
+  border-radius:14px;
+
+  text-align:left;
+
+  box-shadow:
+  0 3px 10px rgba(7,27,74,.06);
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+
+.categoria-partido:active{
+  transform:scale(.97);
+}
+
+
+.categoria-partido-icono{
+  flex:0 0 38px;
+
+  width:38px;
+  height:38px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#edf3ff;
+
+  border-radius:11px;
+
+  font-size:18px;
+}
+
+
+.categoria-partido > div:last-child{
+  min-width:0;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:2px;
+}
+
+
+.categoria-partido strong{
+  color:#071b4a;
+
+  font-size:11px;
+  font-weight:900;
+
+  line-height:1.15;
+}
+
+
+.categoria-partido span{
+  color:#98a2b3;
+
+  font-size:9px;
+  font-weight:700;
+}
+
+
+/* PARTIDOS REGISTRADOS */
+
+.partidos-registrados{
+  margin-top:5px;
+}
+
+
+.titulo-partidos-registrados{
+  margin-bottom:12px;
+}
+
+
+.titulo-partidos-registrados span{
+  display:block;
+
+  color:#d71920;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.3px;
+}
+
+
+.titulo-partidos-registrados strong{
+  display:block;
+
+  margin-top:3px;
+
+  color:#071b4a;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+/* ========================================
+   TARJETAS PARTIDOS PÚBLICOS
+======================================== */
+
+.partido-card-publico{
+  margin-bottom:12px;
+  background:white;
+  border:1px solid #e5e9f0;
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(7,27,74,.08);
+}
+
+
+/* CABECERA */
+
+.partido-card-superior{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  padding:13px 15px;
+
+  background:#071b4a;
+  color:white;
+}
+
+.partido-card-superior > div:first-child{
+  min-width:0;
+}
+
+.partido-card-tipo{
+  display:block;
+  margin-bottom:3px;
+
+  color:#aebbd4;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.partido-card-superior strong{
+  display:block;
+
+  font-size:14px;
+  font-weight:900;
+}
+
+.partido-card-jornada{
+  flex:0 0 auto;
+
+  padding:6px 9px;
+
+  background:#d71920;
+  border-radius:20px;
+
+  color:white;
+
+  font-size:9px;
+  font-weight:900;
+}
+
+
+/* CATEGORÍA Y ESTADO */
+
+.partido-card-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:10px 14px 5px;
+}
+
+.partido-card-meta > span:first-child{
+  color:#071b4a;
+
+  font-size:10px;
+  font-weight:900;
+}
+
+.partido-card-estado{
+  padding:5px 8px;
+
+  border-radius:15px;
+
+  background:#f2f4f7;
+
+  color:#667085;
+
+  font-size:8px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+
+/* FECHA */
+
+.partido-card-fecha{
+  padding:2px 14px 8px;
+
+  color:#7b8495;
+
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* ENFRENTAMIENTO */
+
+.partido-card-enfrentamiento{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:13px 12px 18px;
+}
+
+.partido-card-equipo{
+  width:38%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  text-align:center;
+}
+
+.partido-card-escudo,
+.partido-card-escudo-rival{
+  width:54px;
+  height:54px;
+
+  margin-bottom:8px;
+}
+
+.partido-card-escudo{
+  object-fit:contain;
+}
+
+.partido-card-escudo-rival{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#f1f3f6;
+
+  border:2px solid #dce1e8;
+  border-radius:50%;
+
+  color:#a0a8b5;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+.partido-card-equipo strong{
+  min-height:28px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#071b4a;
+
+  font-size:11px;
+  font-weight:900;
+  line-height:1.2;
+}
+
+
+/* CENTRO VS */
+
+.partido-card-centro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:6px;
+}
+
+.partido-card-centro > span{
+  width:43px;
+  height:43px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#d71920;
+  border-radius:50%;
+
+  color:white;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+.partido-card-centro small{
+  color:#98a2b3;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+
+/* MARCADOR */
+
+.partido-card-goles{
+  margin-top:7px;
+
+  min-width:35px;
+
+  padding:4px 9px;
+
+  background:#071b4a;
+  border-radius:8px;
+
+  color:white;
+
+  font-size:18px;
+  font-weight:900;
+}
+
 </style>  
 
   
@@ -5203,59 +5651,172 @@ class="seccion oculto">  <div
 id="detalleJugador">    
 </div>  </section> 
   
-<section    
-id="partidos"    
-class="seccion oculto">  <button    
-class="boton"    
-onclick="volver()">  ← Volver
+<section
+id="partidos"
+class="seccion oculto pantalla-partidos-publica">
 
-</button> 
-  
-<h2>
-⚽ Partidos
-</h2>
+  <div class="cabecera-seccion-publica">
 
-<div class="categorias-partidos">
+    <button
+    class="volver-publico"
+    onclick="volver()">
+      ← VOLVER
+    </button>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Primera Serie')">
-    ⭐ Primera Serie
-  </button>
+    <span>CLUB DEPORTIVO FERIA OSORNO</span>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Segunda Serie')">
-    ⭐ Segunda Serie
-  </button>
+    <h2>PARTIDOS</h2>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Serie Senior')">
-    ⭐ Senior
-  </button>
+    <p>
+      Revisa los encuentros de todas nuestras categorías
+    </p>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Serie Super Senior')">
-    ⭐ Super Senior
-  </button>
+  </div>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U8')">
-    ⭐ Infantil U8
-  </button>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U10')">
-    ⭐ Infantil U10
-  </button>
+  <div class="titulo-categorias-partidos">
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U13')">
-    ⭐ Infantil U13
-  </button>
+    <span>CATEGORÍAS</span>
 
-  <button class="categoria-partido" onclick="filtrarPartidos('Infantil U15')">
-    ⭐ Infantil U15
-  </button>
+    <strong>
+      Selecciona una serie
+    </strong>
 
-</div>
+  </div>
 
-<div id="listaPartidos">
-  <p>Cargando partidos...</p>
-</div>
-  
-</section>   
+
+  <div class="categorias-partidos">
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Primera Serie')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Primera Serie</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Segunda Serie')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Segunda Serie</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Serie Senior')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Senior</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Serie Super Senior')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Super Senior</strong>
+        <span>Adultos</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Infantil U8')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U8</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Infantil U10')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U10</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Infantil U13')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U13</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+
+    <button
+    class="categoria-partido"
+    onclick="filtrarPartidos('Infantil U15')">
+
+      <div class="categoria-partido-icono">⚽</div>
+
+      <div>
+        <strong>Infantil U15</strong>
+        <span>Formativo</span>
+      </div>
+
+    </button>
+
+  </div>
+
+
+  <div class="partidos-registrados">
+
+    <div class="titulo-partidos-registrados">
+      <span>CALENDARIO</span>
+      <strong>Partidos registrados</strong>
+    </div>
+
+    <div id="listaPartidos">
+      <p>Cargando partidos...</p>
+    </div>
+
+  </div>
+
+</section>
+
+
   <section    
 id="tabla"    
 class="seccion oculto">  <button    
@@ -10068,47 +10629,131 @@ if(!partidos || partidos.length === 0){
     }
 
     return `
-      <div class="partido-card">
+  <div class="partido-card-publico">
 
-        <div class="partido-cabecera">
+    <div class="partido-card-superior">
 
-          <strong>
-            🏆 ${partido.campeonato || "Campeonato"}
-          </strong>
+      <div>
+        <span class="partido-card-tipo">
+          ${partido.tipo_partido || "PARTIDO"}
+        </span>
 
-          <small>
-            ${categoria} · Jornada ${partido.jornada || "-"}
-          </small>
+        <strong>
+          ${partido.campeonato || "Campeonato"}
+        </strong>
+      </div>
 
-        </div>
+      <div class="partido-card-jornada">
+        FECHA ${partido.jornada || "-"}
+      </div>
 
-        <div class="partido-fecha">
+    </div>
 
-          📅 ${fecha}
 
-        </div>
+    <div class="partido-card-meta">
 
-        <div class="partido-equipos">
+      <span>
+        ${categoria}
+      </span>
 
-          ${equiposHTML}
+      <span class="partido-card-estado ${claseEstado}">
+        ${partido.estado || "Pendiente"}
+      </span>
 
-        </div>
+    </div>
 
-        <div class="partido-info">
 
-          <span class="partido-etiqueta">
-            ${localEsFeria ? "🏠 Local" : "✈️ Visitante"}
-          </span>
+    <div class="partido-card-fecha">
+      📅 ${fecha}
+    </div>
 
-          <span class="partido-etiqueta ${claseEstado}">
-            ${partido.estado || "Pendiente"}
-          </span>
 
-        </div>
+    <div class="partido-card-enfrentamiento">
+
+      <div class="partido-card-equipo">
+
+        ${
+          equipoLocal === "Feria Osorno"
+          ? `<img
+               src="img/logo-feria.png"
+               class="partido-card-escudo"
+               alt="Feria Osorno">`
+          : `<div class="partido-card-escudo-rival">?</div>`
+        }
+
+        <strong>
+          ${equipoLocal}
+        </strong>
+
+        ${
+          partidoTerminado &&
+          partido.goles_favor !== null &&
+          partido.goles_contra !== null
+          ? `<div class="partido-card-goles">
+               ${localEsFeria
+                 ? partido.goles_favor
+                 : partido.goles_contra}
+             </div>`
+          : ""
+        }
 
       </div>
-    `;
 
+
+      <div class="partido-card-centro">
+
+        <span>
+          ${
+            partidoTerminado
+            ? "FINAL"
+            : "VS"
+          }
+        </span>
+
+        <small>
+          ${
+            localEsFeria
+            ? "LOCAL"
+            : "VISITANTE"
+          }
+        </small>
+
+      </div>
+
+
+      <div class="partido-card-equipo">
+
+        ${
+          equipoVisitante === "Feria Osorno"
+          ? `<img
+               src="img/logo-feria.png"
+               class="partido-card-escudo"
+               alt="Feria Osorno">`
+          : `<div class="partido-card-escudo-rival">?</div>`
+        }
+
+        <strong>
+          ${equipoVisitante}
+        </strong>
+
+        ${
+          partidoTerminado &&
+          partido.goles_favor !== null &&
+          partido.goles_contra !== null
+          ? `<div class="partido-card-goles">
+               ${localEsFeria
+                 ? partido.goles_contra
+                 : partido.goles_favor}
+             </div>`
+          : ""
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+`;
   }).join("");
 
 }
