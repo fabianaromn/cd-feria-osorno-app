@@ -788,6 +788,21 @@ onclick="cerrarSesion()">
 
   </div>
 
+
+    <div
+  class="card"
+  onclick="mostrarMenuAdmin('menuAdminFinanzas')">
+
+    <div class="icono">
+      💰
+    </div>
+
+    <h3>
+      Finanzas
+    </h3>
+
+  </div>
+
 </section>
 
   <div
@@ -893,6 +908,257 @@ onclick="abrirEliminarJugador()">
 
 </div>
   </div>
+
+
+  <div
+id="menuAdminFinanzas"
+class="oculto"
+style="margin-top:10px;">
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('agregarIngreso')">
+
+    <div class="icono">
+      💵
+    </div>
+
+    <h3>
+      Ingresos
+    </h3>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('agregarGasto')">
+
+    <div class="icono">
+      💸
+    </div>
+
+    <h3>
+      Gastos
+    </h3>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('resumenFinanciero')">
+
+    <div class="icono">
+      📊
+    </div>
+
+    <h3>
+      Resumen financiero
+    </h3>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('movimientosFinancieros')">
+
+    <div class="icono">
+      📋
+    </div>
+
+    <h3>
+      Movimientos
+    </h3>
+
+  </div>
+
+</div>
+
+</section>
+
+
+
+<section
+id="agregarIngreso"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2>
+    💵 Registrar ingreso
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Registra un nuevo ingreso del club.
+  </p>
+
+
+  <label>Fecha</label>
+
+  <input
+  id="ingresoFecha"
+  type="date"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Monto</label>
+
+  <input
+  id="ingresoMonto"
+  type="number"
+  min="0"
+  placeholder="Ej: 50000"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Tipo de ingreso</label>
+
+  <select
+  id="ingresoTipo"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      Selecciona tipo
+    </option>
+
+    <option value="Cuotas de socios">
+      Cuotas de socios
+    </option>
+
+    <option value="Sponsors">
+      Sponsors
+    </option>
+
+    <option value="Ventas y beneficios">
+      Ventas y beneficios
+    </option>
+
+    <option value="Rifas">
+      Rifas
+    </option>
+
+    <option value="Proyectos y subvenciones">
+      Proyectos y subvenciones
+    </option>
+
+    <option value="Donaciones">
+      Donaciones
+    </option>
+
+    <option value="Otros">
+      Otros
+    </option>
+
+  </select>
+
+
+  <label>Origen</label>
+
+  <input
+  id="ingresoOrigen"
+  type="text"
+  placeholder="Ej: Empresa sponsor, socio, actividad..."
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Descripción</label>
+
+  <textarea
+  id="ingresoDescripcion"
+  placeholder="Descripción del ingreso"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px; min-height:90px;">
+  </textarea>
+
+
+  <label>Método de pago</label>
+
+  <select
+  id="ingresoMetodoPago"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">
+      Selecciona método
+    </option>
+
+    <option value="Efectivo">
+      Efectivo
+    </option>
+
+    <option value="Transferencia">
+      Transferencia
+    </option>
+
+    <option value="Deposito">
+      Depósito
+    </option>
+
+    <option value="Otro">
+      Otro
+    </option>
+
+  </select>
+
+
+  <label>Número de documento / comprobante</label>
+
+  <input
+  id="ingresoNumeroDocumento"
+  type="text"
+  placeholder="Opcional"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Responsable</label>
+
+  <input
+  id="ingresoResponsable"
+  type="text"
+  placeholder="Persona que registra o recibe el ingreso"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>📷 Fotografía / comprobante</label>
+
+  <input
+  id="ingresoComprobante"
+  type="file"
+  accept="image/*"
+  style="width:100%; padding:12px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="ingresoObservaciones"
+  placeholder="Observaciones adicionales (opcional)"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px; min-height:80px;">
+  </textarea>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarIngreso()">
+
+    💾 Guardar ingreso
+
+  </button>
+
+
+  <p
+  id="mensajeIngreso"
+  style="margin-top:15px; text-align:center;">
+  </p>
 
 </section>
   
