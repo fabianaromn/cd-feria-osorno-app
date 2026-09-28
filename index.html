@@ -4538,102 +4538,229 @@ class="seccion oculto">
 
 </section>
 
+<section
+id="agregarJugador"
+class="seccion oculto">
 
-<section    
-id="agregarJugador"    
-class="seccion oculto"> 
-  
-<button    
-class="boton"    
-onclick="mostrar('jugadores')">  ← Volver
+  <button
+  class="boton"
+  onclick="mostrar('jugadores')">
+    ← Volver
+  </button>
 
-</button>  <h2>
-➕ Agregar jugador
+  <h2 style="margin-top:15px;">
+    ➕ Agregar jugador
+  </h2>
 
-</h2>  <p style="color:#667085; margin-bottom:18px;">    
-Ingresa los datos del nuevo jugador.    
-</p>  <input  
-id="nuevoNombre"  
-type="text"  
-placeholder="Nombre completo"  
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"  > 
+  <p style="color:#667085; margin-bottom:18px;">
+    Ingresa los datos del nuevo jugador.
+  </p>
 
-<input
-id="nuevoNumero"
-type="number"
-placeholder="Número de camiseta"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
 
-> 
+  <label>Nombre completo</label>
 
-<select    
-id="nuevaPosicion"    
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
+  <input
+  id="nuevoNombre"
+  type="text"
+  placeholder="Ej: Fabian Aguilar"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
 
-<option value="">    
-Selecciona posición    
-</option>  <option value="Arquero">    
-Arquero    
-</option>  <option value="Defensa">    
-Defensa    
-</option>  <option value="Mediocampista">    
-Mediocampista    
-</option>  <option value="Delantero">    
-Delantero    
-</option>  </select>  <select    
-id="nuevaCategoria"    
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">  <option value="">    
-Selecciona categoría    
-</option>  <option value="Primera Serie">    
-Primera Serie    
-</option>  <option value="Segunda Serie">    
-Segunda Serie    
-</option>  <option value="Serie Senior">    
-Serie Senior    
-</option>  <option value="Serie Super Senior">    
-Serie Super Senior    
-</option>  <option value="Infantil U8">    
-Infantil U8    
-</option>  <option value="Infantil U10">    
-Infantil U10    
-</option>  <option value="Infantil U13">    
-Infantil U13    
-</option>  <option value="Infantil U15">    
-Infantil U15    
-</option>  </select>  <input  
-id="nuevoNacimiento"  
-type="date"  
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"  > 
 
-<input
-id="nuevoIngreso"
-type="number"
-placeholder="Año de ingreso"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
+  <label>Número de camiseta</label>
 
-> 
+  <input
+  id="nuevoNumero"
+  type="number"
+  min="0"
+  placeholder="Ej: 13"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
 
-<button    
-class="boton"    
-style="width:100%; margin-top:15px;"    
-onclick="guardarJugador()">
 
-💾 Guardar jugador
+  <label>Posición</label>
 
-</button>  <p    
-id="mensajeJugador"    
-style="margin-top:15px; text-align:center;">
+  <select
+  id="nuevaPosicion"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
 
-</p>     
+    <option value="">
+      Selecciona posición
+    </option>
 
-<button
-class="boton"
-style="width:100%; margin-top:15px; background:#071b4a;"
-onclick="cerrarSesion()">
+    <option value="Arquero">
+      Arquero
+    </option>
 
-  🚪 Cerrar sesión
+    <option value="Defensa">
+      Defensa
+    </option>
 
-</button>
+    <option value="Mediocampista">
+      Mediocampista
+    </option>
+
+    <option value="Delantero">
+      Delantero
+    </option>
+
+  </select>
+
+
+  <label>Categoría</label>
+
+  <select
+  id="nuevaCategoria"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="">
+      Selecciona categoría
+    </option>
+
+    <option value="Primera Serie">
+      Primera Serie
+    </option>
+
+    <option value="Segunda Serie">
+      Segunda Serie
+    </option>
+
+    <option value="Serie Senior">
+      Serie Senior
+    </option>
+
+    <option value="Serie Super Senior">
+      Serie Super Senior
+    </option>
+
+    <option value="Infantil U8">
+      Infantil U8
+    </option>
+
+    <option value="Infantil U10">
+      Infantil U10
+    </option>
+
+    <option value="Infantil U13">
+      Infantil U13
+    </option>
+
+    <option value="Infantil U15">
+      Infantil U15
+    </option>
+
+  </select>
+
+
+  <label>Fecha de nacimiento</label>
+
+  <input
+  id="nuevoNacimiento"
+  type="date"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Año de ingreso al club</label>
+
+  <input
+  id="nuevoIngreso"
+  type="number"
+  min="1900"
+  max="2100"
+  placeholder="Ej: 2020"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Foto del jugador</label>
+
+  <input
+  id="nuevaFotoJugador"
+  type="file"
+  accept="image/*"
+  style="
+  width:100%;
+  padding:12px;
+  margin:7px 0 5px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:white;
+  ">
+
+  <p style="
+  margin:0 0 14px;
+  color:#98a2b3;
+  font-size:11px;
+  ">
+    Selecciona una fotografía del jugador desde tu dispositivo.
+  </p>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarJugador()">
+
+    💾 Guardar jugador
+
+  </button>
+
+
+  <p
+  id="mensajeJugador"
+  style="
+  margin-top:15px;
+  text-align:center;
+  ">
+  </p>
+
+
+  <button
+  class="boton"
+  style="
+  width:100%;
+  margin-top:15px;
+  background:#071b4a;
+  "
+  onclick="cerrarSesion()">
+
+    🚪 Cerrar sesión
+
+  </button>
+
 </section>
 
 <section
@@ -6652,83 +6779,301 @@ mostrar("administracion");
 }
 
 
-
-  
 async function guardarJugador(){
 
-const nombre = document.getElementById("nuevoNombre").value.trim();
-const numero = document.getElementById("nuevoNumero").value;
-const posicion = document.getElementById("nuevaPosicion").value;
-const categoria = document.getElementById("nuevaCategoria").value;
-const nacimiento = document.getElementById("nuevoNacimiento").value;
-const ingreso = document.getElementById("nuevoIngreso").value;
+  const nombre =
+  document.getElementById("nuevoNombre").value.trim();
 
-const mensaje = document.getElementById("mensajeJugador");
+  const numero =
+  document.getElementById("nuevoNumero").value;
 
-if (!nombre || !numero || !posicion || !categoria) {
-mensaje.innerText = "⚠️ Completa nombre, número, posición y categoría.";
-mensaje.style.color = "#c82032";
-return;
+  const posicion =
+  document.getElementById("nuevaPosicion").value;
+
+  const categoria =
+  document.getElementById("nuevaCategoria").value;
+
+  const nacimiento =
+  document.getElementById("nuevoNacimiento").value;
+
+  const ingreso =
+  document.getElementById("nuevoIngreso").value;
+
+  const archivoFoto =
+  document.getElementById("nuevaFotoJugador").files[0];
+
+  const mensaje =
+  document.getElementById("mensajeJugador");
+
+
+  // VALIDAR DATOS OBLIGATORIOS
+
+  if(
+    !nombre ||
+    !numero ||
+    !posicion ||
+    !categoria
+  ){
+
+    mensaje.innerText =
+    "⚠️ Completa nombre, número, posición y categoría.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // VALIDAR TAMAÑO DE FOTO
+
+  if(
+    archivoFoto &&
+    archivoFoto.size > 5 * 1024 * 1024
+  ){
+
+    mensaje.innerText =
+    "⚠️ La fotografía no puede superar los 5 MB.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando jugador...";
+
+  mensaje.style.color =
+  "#17479e";
+
+
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoria)
+    .single();
+
+
+  if(categoriaError){
+
+    console.error(
+      "Error buscando categoría:",
+      categoriaError
+    );
+
+    mensaje.innerText =
+    "❌ No se encontró la categoría.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // =========================================
+  // SUBIR FOTO
+  // =========================================
+
+  let fotoJugadorUrl = null;
+  let rutaFoto = null;
+
+
+  if(archivoFoto){
+
+    mensaje.innerText =
+    "⏳ Subiendo fotografía...";
+
+
+    const extension =
+    archivoFoto.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+    rutaFoto =
+    `jugadores/${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2,8)}.${extension}`;
+
+
+    const {
+      error: errorFoto
+    } =
+    await supabaseClient
+      .storage
+      .from("fotos-jugadores")
+      .upload(
+        rutaFoto,
+        archivoFoto,
+        {
+          cacheControl: "3600",
+          upsert: false
+        }
+      );
+
+
+    if(errorFoto){
+
+      console.error(
+        "Error subiendo foto:",
+        errorFoto
+      );
+
+      mensaje.innerText =
+      "❌ No se pudo subir la fotografía.";
+
+      mensaje.style.color =
+      "#c82032";
+
+      return;
+    }
+
+
+    // OBTENER URL PÚBLICA
+
+    const {
+      data: urlData
+    } =
+    supabaseClient
+      .storage
+      .from("fotos-jugadores")
+      .getPublicUrl(rutaFoto);
+
+
+    fotoJugadorUrl =
+    urlData.publicUrl;
+
+  }
+
+
+  // =========================================
+  // GUARDAR JUGADOR
+  // =========================================
+
+  mensaje.innerText =
+  "⏳ Guardando datos del jugador...";
+
+
+  const {
+    error: jugadorError
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .insert([
+      {
+
+        name:
+        nombre,
+
+        number:
+        Number(numero),
+
+        position:
+        posicion,
+
+        category_id:
+        categoriaData.id,
+
+        birth_date:
+        nacimiento || null,
+
+        year_joined:
+        ingreso
+          ? Number(ingreso)
+          : null,
+
+        photo_url:
+        fotoJugadorUrl
+
+      }
+    ]);
+
+
+  if(jugadorError){
+
+    console.error(
+      "Error guardando jugador:",
+      jugadorError
+    );
+
+
+    // SI FALLA EL REGISTRO,
+    // BORRAMOS LA FOTO SUBIDA
+
+    if(rutaFoto){
+
+      await supabaseClient
+        .storage
+        .from("fotos-jugadores")
+        .remove([
+          rutaFoto
+        ]);
+
+    }
+
+
+    mensaje.innerText =
+    "❌ Error al guardar el jugador.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // =========================================
+  // TODO CORRECTO
+  // =========================================
+
+  mensaje.innerText =
+  "✅ Jugador guardado correctamente.";
+
+  mensaje.style.color =
+  "#16803c";
+
+
+  // LIMPIAR FORMULARIO
+
+  document.getElementById(
+    "nuevoNombre"
+  ).value = "";
+
+  document.getElementById(
+    "nuevoNumero"
+  ).value = "";
+
+  document.getElementById(
+    "nuevaPosicion"
+  ).value = "";
+
+  document.getElementById(
+    "nuevaCategoria"
+  ).value = "";
+
+  document.getElementById(
+    "nuevoNacimiento"
+  ).value = "";
+
+  document.getElementById(
+    "nuevoIngreso"
+  ).value = "";
+
+  document.getElementById(
+    "nuevaFotoJugador"
+  ).value = "";
+
 }
-
-mensaje.innerText = "⏳ Guardando jugador...";
-mensaje.style.color = "#17479e";
-
-const { data: categoriaData, error: categoriaError } =
-await supabaseClient
-.from("categories")
-.select("id")
-.eq("name", categoria)
-.single();
-
-if (categoriaError) {
-
-console.error(categoriaError);    
-
-mensaje.innerText = "❌ No se encontró la categoría.";    
-mensaje.style.color = "#c82032";    
-
-return;
-
-}
-
-const { error: jugadorError } =
-await supabaseClient
-.from("Jugadores")
-.insert([
-{
-name: nombre,
-number: Number(numero),
-position: posicion,
-category_id: categoriaData.id,
-birth_date: nacimiento || null,
-year_joined: ingreso ? Number(ingreso) : null
-}
-]);
-
-if (jugadorError) {
-
-console.error(jugadorError);    
-
-mensaje.innerText = "❌ Error al guardar el jugador.";    
-mensaje.style.color = "#c82032";    
-
-return;
-
-}
-
-mensaje.innerText = "✅ Jugador guardado correctamente.";
-mensaje.style.color = "#16803c";
-
-document.getElementById("nuevoNombre").value = "";
-document.getElementById("nuevoNumero").value = "";
-document.getElementById("nuevaPosicion").value = "";
-document.getElementById("nuevaCategoria").value = "";
-document.getElementById("nuevoNacimiento").value = "";
-document.getElementById("nuevoIngreso").value = "";
-
-}
-
 
 const categoriasEditarJugadoresHTML =
 document.getElementById("listaEditarJugadores").innerHTML;
