@@ -803,6 +803,18 @@ onclick="cerrarSesion()">
 
   </div>
 
+  <div
+class="card"
+onclick="mostrarMenuAdmin('menuAdminSocios')">
+
+  <div class="icono">👤</div>
+
+  <h3>
+    Socios
+  </h3>
+
+</div>
+
 </section>
 
   <div
@@ -945,6 +957,8 @@ style="margin-top:10px;">
   </div>
 
 
+  
+
   <div
   class="card"
   style="margin-top:10px;"
@@ -985,6 +999,35 @@ style="margin-top:10px;">
 
     <div class="icono">💸</div>
     <h3>Gastos</h3>
+
+  </div>
+
+</div>
+
+<div
+id="menuAdminSocios"
+class="oculto"
+style="margin-top:10px;">
+
+  <div
+  class="card"
+  style="margin-top:10px;">
+
+    <div class="icono">
+      👥
+    </div>
+
+    <h3>
+      Administración de socios
+    </h3>
+
+    <p
+    style="
+    margin-top:8px;
+    color:#667085;
+    ">
+      Próximamente
+    </p>
 
   </div>
 
@@ -1496,8 +1539,202 @@ class="seccion oculto">
   </div>
 
 
+  <div
+style="
+margin-top:20px;
+">
+
+  <h3 style="margin-bottom:10px;">
+    💵 Ingresos por categoría
+  </h3>
+
+  <div id="desgloseIngresos">
+    <p style="color:#667085;">
+      Sin información.
+    </p>
+  </div>
+
+
+  <h3
+  style="
+  margin-top:20px;
+  margin-bottom:10px;
+  ">
+    💸 Gastos por categoría
+  </h3>
+
+  <div id="desgloseGastos">
+    <p style="color:#667085;">
+      Sin información.
+    </p>
+  </div>
+
+</div> 
+
   <p
   id="mensajeResumenFinanciero"
+  style="margin-top:15px; text-align:center;">
+  </p>
+
+</section>
+
+<section
+id="editarMovimientoFinanciero"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('movimientosFinancieros')">
+    ← Volver
+  </button>
+
+  <h2>
+    ✏️ Editar movimiento
+  </h2>
+
+  <p
+  id="editarMovimientoTipoTexto"
+  style="color:#667085; margin-bottom:18px;">
+    Editando movimiento financiero
+  </p>
+
+
+  <input
+  type="hidden"
+  id="editarMovimientoId">
+
+  <input
+  type="hidden"
+  id="editarMovimientoClase">
+
+
+  <label>Fecha</label>
+
+  <input
+  type="date"
+  id="editarMovimientoFecha"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Monto</label>
+
+  <input
+  type="number"
+  id="editarMovimientoMonto"
+  min="0"
+  placeholder="Ej: 25000"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Tipo</label>
+
+  <input
+  type="text"
+  id="editarMovimientoTipo"
+  placeholder="Tipo de movimiento"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label id="editarMovimientoOrigenDestinoLabel">
+    Origen / Destino
+  </label>
+
+  <input
+  type="text"
+  id="editarMovimientoOrigenDestino"
+  placeholder="Origen o destino"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Descripción</label>
+
+  <textarea
+  id="editarMovimientoDescripcion"
+  rows="3"
+  placeholder="Descripción"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;"></textarea>
+
+
+  <label>Método de pago</label>
+
+  <select
+  id="editarMovimientoMetodoPago"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="">Seleccionar</option>
+    <option value="Efectivo">Efectivo</option>
+    <option value="Transferencia">Transferencia</option>
+    <option value="Deposito">Depósito</option>
+    <option value="Tarjeta">Tarjeta</option>
+    <option value="Otro">Otro</option>
+
+  </select>
+
+
+  <label>Número de documento</label>
+
+  <input
+  type="text"
+  id="editarMovimientoNumeroDocumento"
+  placeholder="Boleta, factura, transferencia, etc."
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Responsable</label>
+
+  <input
+  type="text"
+  id="editarMovimientoResponsable"
+  placeholder="Responsable"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="editarMovimientoObservaciones"
+  rows="3"
+  placeholder="Observaciones"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;"></textarea>
+
+  <label>
+  Reemplazar comprobante
+</label>
+
+<input
+type="file"
+id="editarMovimientoComprobante"
+accept="image/*"
+style="
+width:100%;
+padding:14px;
+margin:7px 0 8px;
+border:1px solid #ddd;
+border-radius:10px;
+">
+
+<p
+id="editarMovimientoComprobanteActual"
+style="
+color:#667085;
+font-size:14px;
+margin-bottom:14px;
+">
+</p>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarEdicionMovimientoFinanciero()">
+
+    💾 Guardar cambios
+
+  </button>
+
+
+  <p
+  id="mensajeEditarMovimientoFinanciero"
   style="margin-top:15px; text-align:center;">
   </p>
 
@@ -3086,6 +3323,10 @@ function mostrarMenuAdmin(id){
   .classList.add("oculto");
 
   document
+.getElementById("menuAdminSocios")
+.classList.add("oculto");
+
+  document
   .getElementById(id)
   .classList.remove("oculto");
 
@@ -3747,8 +3988,7 @@ async function cargarResumenFinanciero(){
   const { data: ingresos, error: errorIngresos } =
   await supabaseClient
     .from("Ingresos")
-    .select("fecha,monto");
-
+    .select("fecha,monto,tipo");
 
   if(errorIngresos){
 
@@ -3766,7 +4006,7 @@ async function cargarResumenFinanciero(){
   const { data: gastos, error: errorGastos } =
   await supabaseClient
     .from("Gastos")
-    .select("fecha,monto");
+    .select("fecha,monto,tipo");
 
 
   if(errorGastos){
@@ -3846,6 +4086,39 @@ async function cargarResumenFinanciero(){
   const saldo =
   totalIngresos - totalGastos;
 
+  const ingresosPorTipo = {};
+
+ingresosFiltrados.forEach(ingreso => {
+
+  const tipo =
+  ingreso.tipo || "Sin categoría";
+
+  if(!ingresosPorTipo[tipo]){
+    ingresosPorTipo[tipo] = 0;
+  }
+
+  ingresosPorTipo[tipo] +=
+  Number(ingreso.monto || 0);
+
+});
+
+
+const gastosPorTipo = {};
+
+gastosFiltrados.forEach(gasto => {
+
+  const tipo =
+  gasto.tipo || "Sin categoría";
+
+  if(!gastosPorTipo[tipo]){
+    gastosPorTipo[tipo] = 0;
+  }
+
+  gastosPorTipo[tipo] +=
+  Number(gasto.monto || 0);
+
+});
+
 
   const formatoPesos =
   new Intl.NumberFormat(
@@ -3857,6 +4130,86 @@ async function cargarResumenFinanciero(){
     }
   );
 
+
+  const desgloseIngresos =
+document.getElementById("desgloseIngresos");
+
+const desgloseGastos =
+document.getElementById("desgloseGastos");
+
+
+if(Object.keys(ingresosPorTipo).length === 0){
+
+  desgloseIngresos.innerHTML =
+  `<p style="color:#667085;">
+    Sin ingresos en este período.
+  </p>`;
+
+}else{
+
+  desgloseIngresos.innerHTML =
+  Object.entries(ingresosPorTipo)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tipo, monto]) => `
+      <div
+      style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 0;
+      border-bottom:1px solid #eee;
+      ">
+
+        <span>
+          ${tipo}
+        </span>
+
+        <strong>
+          ${formatoPesos.format(monto)}
+        </strong>
+
+      </div>
+    `)
+    .join("");
+
+}
+
+
+if(Object.keys(gastosPorTipo).length === 0){
+
+  desgloseGastos.innerHTML =
+  `<p style="color:#667085;">
+    Sin gastos en este período.
+  </p>`;
+
+}else{
+
+  desgloseGastos.innerHTML =
+  Object.entries(gastosPorTipo)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tipo, monto]) => `
+      <div
+      style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 0;
+      border-bottom:1px solid #eee;
+      ">
+
+        <span>
+          ${tipo}
+        </span>
+
+        <strong>
+          ${formatoPesos.format(monto)}
+        </strong>
+
+      </div>
+    `)
+    .join("");
+
+}
 
   document.getElementById("totalIngresos").innerText =
   formatoPesos.format(totalIngresos);
@@ -4302,6 +4655,40 @@ margin-top:10px;
 }
 
 
+async function verComprobanteFinanciero(ruta){
+
+  if(!ruta){
+    alert("❌ Este movimiento no tiene comprobante.");
+    return;
+  }
+
+  const { data, error } =
+  await supabaseClient
+    .storage
+    .from("comprobantes-finanzas")
+    .createSignedUrl(ruta, 300);
+
+  if(error){
+
+    console.error(
+      "Error al abrir comprobante:",
+      error
+    );
+
+    alert(
+      "❌ No se pudo abrir el comprobante."
+    );
+
+    return;
+  }
+
+  window.open(
+    data.signedUrl,
+    "_blank"
+  );
+
+}
+
 
 async function eliminarMovimientoFinanciero(clase, id){
 
@@ -4398,7 +4785,318 @@ async function eliminarMovimientoFinanciero(clase, id){
 
 }
 
-  
+
+
+async function editarMovimientoFinanciero(clase, id){
+
+  const tabla =
+  clase === "ingreso"
+  ? "Ingresos"
+  : "Gastos";
+
+
+  const { data: movimiento, error } =
+  await supabaseClient
+    .from(tabla)
+    .select("*")
+    .eq("id", id)
+    .single();
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "❌ No se pudo cargar el movimiento."
+    );
+
+    return;
+  }
+
+
+  mostrar("editarMovimientoFinanciero");
+
+
+  document.getElementById("editarMovimientoId").value =
+  movimiento.id;
+
+  document.getElementById("editarMovimientoClase").value =
+  clase;
+
+  document.getElementById("editarMovimientoFecha").value =
+  movimiento.fecha || "";
+
+  document.getElementById("editarMovimientoMonto").value =
+  movimiento.monto || "";
+
+  document.getElementById("editarMovimientoTipo").value =
+  movimiento.tipo || "";
+
+  document.getElementById("editarMovimientoDescripcion").value =
+  movimiento.descripcion || "";
+
+  document.getElementById("editarMovimientoMetodoPago").value =
+  movimiento.metodo_pago || "";
+
+  document.getElementById("editarMovimientoNumeroDocumento").value =
+  movimiento.numero_documento || "";
+
+  document.getElementById("editarMovimientoResponsable").value =
+  movimiento.responsable || "";
+
+  document.getElementById("editarMovimientoObservaciones").value =
+  movimiento.observaciones || "";
+
+
+  if(clase === "ingreso"){
+
+    document.getElementById(
+      "editarMovimientoTipoTexto"
+    ).innerText =
+    "💵 Editando ingreso";
+
+    document.getElementById(
+      "editarMovimientoOrigenDestinoLabel"
+    ).innerText =
+    "Origen";
+
+    document.getElementById(
+      "editarMovimientoOrigenDestino"
+    ).value =
+    movimiento.origen || "";
+
+  }else{
+
+    document.getElementById(
+      "editarMovimientoTipoTexto"
+    ).innerText =
+    "💸 Editando gasto";
+
+    document.getElementById(
+      "editarMovimientoOrigenDestinoLabel"
+    ).innerText =
+    "Destino";
+
+    document.getElementById(
+      "editarMovimientoOrigenDestino"
+    ).value =
+    movimiento.destino || "";
+
+  }
+
+
+document.getElementById(
+  "editarMovimientoComprobante"
+).value = "";
+
+const textoComprobante =
+document.getElementById(
+  "editarMovimientoComprobanteActual"
+);
+
+if(movimiento.comprobante_url){
+
+  textoComprobante.innerText =
+  "📷 Este movimiento tiene un comprobante guardado.";
+
+}else{
+
+  textoComprobante.innerText =
+  "Sin comprobante guardado.";
+
+}
+
+  document.getElementById(
+    "mensajeEditarMovimientoFinanciero"
+  ).innerText = "";
+
+}
+ 
+
+
+async function guardarEdicionMovimientoFinanciero(){
+
+  const id =
+  document.getElementById("editarMovimientoId").value;
+
+  const clase =
+  document.getElementById("editarMovimientoClase").value;
+
+  const fecha =
+  document.getElementById("editarMovimientoFecha").value;
+
+  const monto =
+  document.getElementById("editarMovimientoMonto").value;
+
+  const tipo =
+  document.getElementById("editarMovimientoTipo").value.trim();
+
+  const origenDestino =
+  document.getElementById("editarMovimientoOrigenDestino").value.trim();
+
+  const descripcion =
+  document.getElementById("editarMovimientoDescripcion").value.trim();
+
+  const metodoPago =
+  document.getElementById("editarMovimientoMetodoPago").value;
+
+  const numeroDocumento =
+  document.getElementById("editarMovimientoNumeroDocumento").value.trim();
+
+  const responsable =
+  document.getElementById("editarMovimientoResponsable").value.trim();
+
+  const observaciones =
+  document.getElementById("editarMovimientoObservaciones").value.trim();
+
+  const archivo =
+  document.getElementById("editarMovimientoComprobante").files[0];
+
+  const mensaje =
+  document.getElementById("mensajeEditarMovimientoFinanciero");
+
+
+  if(!id || !fecha || !monto || !tipo){
+
+    mensaje.innerText =
+    "⚠️ Completa fecha, monto y tipo.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando cambios...";
+
+  mensaje.style.color = "#17479e";
+
+
+  const tabla =
+  clase === "ingreso"
+  ? "Ingresos"
+  : "Gastos";
+
+
+let nuevoComprobante = null;
+
+if(archivo){
+
+  mensaje.innerText =
+  "⏳ Subiendo nuevo comprobante...";
+
+  const extension =
+  archivo.name.split(".").pop();
+
+  const nombreArchivo =
+  `${clase}_${Date.now()}.${extension}`;
+
+  const { error: uploadError } =
+  await supabaseClient
+    .storage
+    .from("comprobantes-finanzas")
+    .upload(nombreArchivo, archivo);
+
+  if(uploadError){
+
+    console.error(uploadError);
+
+    mensaje.innerText =
+    "❌ No se pudo subir el nuevo comprobante.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+  nuevoComprobante =
+  nombreArchivo;
+
+}
+
+  let datosActualizados;
+
+
+  if(clase === "ingreso"){
+
+    datosActualizados = {
+
+      fecha: fecha,
+      monto: Number(monto),
+      tipo: tipo,
+      origen: origenDestino || null,
+      descripcion: descripcion || null,
+      metodo_pago: metodoPago || null,
+      numero_documento: numeroDocumento || null,
+      responsable: responsable || null,
+      observaciones: observaciones || null
+
+    };
+
+  }else{
+
+    datosActualizados = {
+
+      fecha: fecha,
+      monto: Number(monto),
+      tipo: tipo,
+      destino: origenDestino || null,
+      descripcion: descripcion || null,
+      metodo_pago: metodoPago || null,
+      numero_documento: numeroDocumento || null,
+      responsable: responsable || null,
+      observaciones: observaciones || null
+
+    };
+
+  }
+
+
+  if(nuevoComprobante){
+
+  datosActualizados.comprobante_url =
+  nuevoComprobante;
+
+}
+
+  const { error } =
+  await supabaseClient
+    .from(tabla)
+    .update(datosActualizados)
+    .eq("id", id);
+
+
+  if(error){
+
+    console.error(error);
+
+    mensaje.innerText =
+    "❌ No se pudieron guardar los cambios.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "✅ Movimiento actualizado correctamente.";
+
+  mensaje.style.color = "#16803c";
+
+
+  cargarSaldoActualClub();
+
+
+  setTimeout(() => {
+
+    mostrar("movimientosFinancieros");
+
+  }, 700);
+
+}
   
 async function seleccionarCategoriaEditar(categoria){
 
