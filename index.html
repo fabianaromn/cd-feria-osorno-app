@@ -1427,6 +1427,102 @@ font-size: 16px;
   color:#c82032;
 }
 
+
+/* ===== SELECCIÓN MÚLTIPLE DE CUOTAS ===== */
+
+.selector-meses-pago{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+  margin:8px 0 14px;
+}
+
+.mes-pago{
+  min-height:62px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+
+  background:white;
+  color:#071b4a;
+
+  border:1px solid #dfe4ec;
+  border-radius:12px;
+
+  cursor:pointer;
+  transition:.15s;
+}
+
+.mes-pago strong{
+  font-size:13px;
+  font-weight:900;
+}
+
+.mes-pago span{
+  font-size:9px;
+  color:#7b8495;
+  font-weight:600;
+}
+
+.mes-pago.seleccionado{
+  background:#071b4a;
+  border-color:#071b4a;
+  color:white;
+}
+
+.mes-pago.seleccionado span{
+  color:#dce5f7;
+}
+
+.mes-pago.pagado{
+  background:#edf8f0;
+  border-color:#b8dfc2;
+  color:#23813c;
+  cursor:not-allowed;
+}
+
+.mes-pago.pagado span{
+  color:#579668;
+}
+
+
+/* RESUMEN */
+
+.resumen-pago-meses{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+
+  margin-bottom:16px;
+}
+
+.resumen-pago-meses > div{
+  padding:12px;
+
+  background:#f5f7fa;
+  border:1px solid #e5e9f0;
+  border-radius:12px;
+}
+
+.resumen-pago-meses span{
+  display:block;
+  margin-bottom:5px;
+
+  color:#7b8495;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+.resumen-pago-meses strong{
+  color:#071b4a;
+  font-size:17px;
+  font-weight:900;
+}
+
 </style>  
 
   
@@ -2626,7 +2722,7 @@ class="seccion oculto">
 
   <select
   id="pagoSocioId"
-  onchange="cargarMontoCuotaSocio()"
+  onchange="cargarMontoCuotaSocio(); cargarMesesPagadosSocio();"
   style="
   width:100%;
   padding:14px;
@@ -2642,33 +2738,87 @@ class="seccion oculto">
   </select>
 
 
-  <label>Mes</label>
+  <label>Meses a pagar</label>
 
-  <select
-  id="pagoSocioMes"
-  style="
-  width:100%;
-  padding:14px;
-  margin:7px 0 14px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  ">
+<div
+id="pagoSocioMeses"
+class="selector-meses-pago">
 
-    <option value="">Selecciona mes</option>
-    <option value="1">Enero</option>
-    <option value="2">Febrero</option>
-    <option value="3">Marzo</option>
-    <option value="4">Abril</option>
-    <option value="5">Mayo</option>
-    <option value="6">Junio</option>
-    <option value="7">Julio</option>
-    <option value="8">Agosto</option>
-    <option value="9">Septiembre</option>
-    <option value="10">Octubre</option>
-    <option value="11">Noviembre</option>
-    <option value="12">Diciembre</option>
+  <button type="button" class="mes-pago" data-mes="1" onclick="seleccionarMesPago(this)">
+    <strong>ENE</strong>
+    <span>Enero</span>
+  </button>
 
-  </select>
+  <button type="button" class="mes-pago" data-mes="2" onclick="seleccionarMesPago(this)">
+    <strong>FEB</strong>
+    <span>Febrero</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="3" onclick="seleccionarMesPago(this)">
+    <strong>MAR</strong>
+    <span>Marzo</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="4" onclick="seleccionarMesPago(this)">
+    <strong>ABR</strong>
+    <span>Abril</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="5" onclick="seleccionarMesPago(this)">
+    <strong>MAY</strong>
+    <span>Mayo</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="6" onclick="seleccionarMesPago(this)">
+    <strong>JUN</strong>
+    <span>Junio</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="7" onclick="seleccionarMesPago(this)">
+    <strong>JUL</strong>
+    <span>Julio</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="8" onclick="seleccionarMesPago(this)">
+    <strong>AGO</strong>
+    <span>Agosto</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="9" onclick="seleccionarMesPago(this)">
+    <strong>SEP</strong>
+    <span>Septiembre</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="10" onclick="seleccionarMesPago(this)">
+    <strong>OCT</strong>
+    <span>Octubre</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="11" onclick="seleccionarMesPago(this)">
+    <strong>NOV</strong>
+    <span>Noviembre</span>
+  </button>
+
+  <button type="button" class="mes-pago" data-mes="12" onclick="seleccionarMesPago(this)">
+    <strong>DIC</strong>
+    <span>Diciembre</span>
+  </button>
+
+</div>
+
+<div class="resumen-pago-meses">
+
+  <div>
+    <span>MESES SELECCIONADOS</span>
+    <strong id="cantidadMesesPago">0</strong>
+  </div>
+
+  <div>
+    <span>TOTAL A PAGAR</span>
+    <strong id="totalMesesPago">$0</strong>
+  </div>
+
+</div>
 
 
   <label>Año</label>
@@ -2678,6 +2828,7 @@ class="seccion oculto">
   id="pagoSocioAnio"
   min="2020"
   max="2100"
+  onchange="cargarMesesPagadosSocio()"
   placeholder="Ej: 2026"
   style="
   width:100%;
@@ -2688,13 +2839,14 @@ class="seccion oculto">
   ">
 
 
-  <label>Monto</label>
+ <label>Cuota mensual</label>
 
   <input
   type="number"
   id="pagoSocioMonto"
   min="0"
   placeholder="Ej: 5000"
+  oninput="actualizarResumenMesesPago()"
   style="
   width:100%;
   padding:14px;
@@ -6050,6 +6202,157 @@ async function cargarBannerPartido(){
 
 }
 
+
+function seleccionarMesPago(boton){
+
+  if(boton.classList.contains("pagado")){
+    return;
+  }
+
+  boton.classList.toggle("seleccionado");
+
+  actualizarResumenMesesPago();
+
+}
+
+
+function actualizarResumenMesesPago(){
+
+  const seleccionados =
+  document.querySelectorAll(
+    "#pagoSocioMeses .mes-pago.seleccionado"
+  );
+
+  const monto =
+  Number(
+    document.getElementById("pagoSocioMonto").value
+  ) || 0;
+
+  const cantidad =
+  seleccionados.length;
+
+  const total =
+  cantidad * monto;
+
+
+  document
+  .getElementById("cantidadMesesPago")
+  .innerText =
+  cantidad;
+
+
+  document
+  .getElementById("totalMesesPago")
+  .innerText =
+  "$" + total.toLocaleString("es-CL");
+
+}
+
+
+async function cargarMesesPagadosSocio(){
+
+  const socioId =
+  document.getElementById("pagoSocioId").value;
+
+  const anio =
+  document.getElementById("pagoSocioAnio").value;
+
+  const botones =
+  document.querySelectorAll(
+    "#pagoSocioMeses .mes-pago"
+  );
+
+
+  /* REINICIAR MESES */
+
+  botones.forEach(boton => {
+
+    boton.classList.remove(
+      "seleccionado",
+      "pagado"
+    );
+
+    const nombreMes =
+    boton.querySelector("span");
+
+    nombreMes.innerText =
+    obtenerNombreMes(
+      Number(boton.dataset.mes)
+    );
+
+  });
+
+
+  actualizarResumenMesesPago();
+
+
+  if(!socioId || !anio){
+    return;
+  }
+
+
+  const { data: pagos, error } =
+  await supabaseClient
+  .from("PagoSocios")
+  .select("mes")
+  .eq("socios_id", socioId)
+  .eq("anio", Number(anio));
+
+
+  if(error){
+
+    console.error(
+      "Error consultando cuotas pagadas:",
+      error
+    );
+
+    return;
+  }
+
+
+  pagos.forEach(pago => {
+
+    const boton =
+    document.querySelector(
+      `#pagoSocioMeses .mes-pago[data-mes="${pago.mes}"]`
+    );
+
+    if(boton){
+
+      boton.classList.add("pagado");
+
+      boton.querySelector("span")
+      .innerText = "Pagado";
+
+    }
+
+  });
+
+}
+
+
+function obtenerNombreMes(mes){
+
+  const meses = [
+    "",
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+  ];
+
+  return meses[mes] || "";
+
+}
+
 async function cargarSocios(){
 
   const contenedor =
@@ -6755,14 +7058,10 @@ async function cargarEstadoCuotas(){
 
 }
 
-
 async function guardarPagoSocio(){
 
   const sociosId =
   document.getElementById("pagoSocioId").value;
-
-  const mes =
-  document.getElementById("pagoSocioMes").value;
 
   const anio =
   document.getElementById("pagoSocioAnio").value;
@@ -6783,9 +7082,23 @@ async function guardarPagoSocio(){
   document.getElementById("mensajePagoSocio");
 
 
+  // OBTENER MESES SELECCIONADOS
+
+  const botonesSeleccionados =
+  document.querySelectorAll(
+    "#pagoSocioMeses .mes-pago.seleccionado"
+  );
+
+  const meses =
+  Array.from(botonesSeleccionados)
+  .map(boton => Number(boton.dataset.mes));
+
+
+  // VALIDAR
+
   if(
     !sociosId ||
-    !mes ||
+    meses.length === 0 ||
     !anio ||
     !monto ||
     !fechaPago ||
@@ -6793,64 +7106,20 @@ async function guardarPagoSocio(){
   ){
 
     mensaje.innerText =
-    "⚠️ Completa socio, mes, año, monto, fecha y método de pago.";
+    "⚠️ Selecciona socio, uno o más meses, año, cuota, fecha y método de pago.";
 
     mensaje.style.color =
     "#c82032";
 
     return;
-
   }
 
 
   mensaje.innerText =
-  "⏳ Registrando pago...";
+  "⏳ Registrando pagos...";
 
   mensaje.style.color =
   "#667085";
-
-
-  // COMPROBAR SI ESA CUOTA YA FUE REGISTRADA
-
-  const { data: pagoExistente, error: errorBuscarPago } =
-  await supabaseClient
-    .from("PagoSocios")
-    .select("id")
-    .eq("socios_id", sociosId)
-    .eq("mes", Number(mes))
-    .eq("anio", Number(anio))
-    .maybeSingle();
-
-
-  if(errorBuscarPago){
-
-    console.error(
-      "Error al comprobar cuota:",
-      errorBuscarPago
-    );
-
-    mensaje.innerText =
-    "❌ No se pudo comprobar el estado de la cuota.";
-
-    mensaje.style.color =
-    "#c82032";
-
-    return;
-
-  }
-
-
-  if(pagoExistente){
-
-    mensaje.innerText =
-    "⚠️ Este socio ya tiene registrada la cuota de ese mes y año.";
-
-    mensaje.style.color =
-    "#c82032";
-
-    return;
-
-  }
 
 
   // BUSCAR DATOS DEL SOCIO
@@ -6858,7 +7127,7 @@ async function guardarPagoSocio(){
   const { data: socio, error: errorSocio } =
   await supabaseClient
     .from("Socios")
-    .select("nombre,rut")
+    .select("nombre")
     .eq("id", sociosId)
     .single();
 
@@ -6877,7 +7146,6 @@ async function guardarPagoSocio(){
     "#c82032";
 
     return;
-
   }
 
 
@@ -6897,138 +7165,206 @@ async function guardarPagoSocio(){
     "Diciembre"
   ];
 
-  const nombreMes =
-  nombresMeses[Number(mes)];
 
+  // COMPROBAR NUEVAMENTE QUE NINGÚN MES
+  // SE ENCUENTRE REGISTRADO
 
-  // CREAR EL INGRESO EN FINANZAS
-
-  const { data: ingreso, error: errorIngreso } =
-  await supabaseClient
-    .from("Ingresos")
-    .insert([{
-
-      fecha: fechaPago,
-      monto: Number(monto),
-
-      tipo:
-      "Cuotas de socios",
-
-      descripcion:
-      `Cuota ${nombreMes} ${anio} - ${socio.nombre}`,
-
-      origen:
-      socio.nombre,
-
-      metodo_pago:
-      metodoPago,
-
-      observaciones:
-      observaciones
-
-    }])
-    .select("id")
-    .single();
-
-
-  if(errorIngreso){
-
-    console.error(
-      "Error al crear ingreso:",
-      errorIngreso
-    );
-
-    mensaje.innerText =
-    "❌ No se pudo registrar el ingreso en Finanzas.";
-
-    mensaje.style.color =
-    "#c82032";
-
-    return;
-
-  }
-
-
-  // REGISTRAR EL PAGO DEL SOCIO
-
-  const { error: errorPago } =
+  const { data: pagosExistentes, error: errorBuscarPagos } =
   await supabaseClient
     .from("PagoSocios")
-    .insert([{
-
-      socios_id:
-      Number(sociosId),
-
-      mes:
-      Number(mes),
-
-      anio:
-      Number(anio),
-
-      monto:
-      Number(monto),
-
-      fecha_pago:
-      fechaPago,
-
-      metodo_pago:
-      metodoPago,
-
-      observaciones:
-      observaciones,
-
-      ingreso_id:
-      ingreso.id
-
-    }]);
+    .select("mes")
+    .eq("socios_id", sociosId)
+    .eq("anio", Number(anio))
+    .in("mes", meses);
 
 
-  if(errorPago){
+  if(errorBuscarPagos){
 
     console.error(
-      "Error al registrar pago:",
-      errorPago
+      "Error al comprobar cuotas:",
+      errorBuscarPagos
     );
 
-
-    // Si falla PagoSocios, eliminamos el ingreso
-    // que acabamos de crear para no descuadrar Finanzas.
-
-    await supabaseClient
-      .from("Ingresos")
-      .delete()
-      .eq("id", ingreso.id);
-
-
     mensaje.innerText =
-    "❌ No se pudo registrar la cuota.";
+    "❌ No se pudo comprobar el estado de las cuotas.";
 
     mensaje.style.color =
     "#c82032";
 
     return;
+  }
+
+
+  if(pagosExistentes && pagosExistentes.length > 0){
+
+    const mesesYaPagados =
+    pagosExistentes
+    .map(pago => nombresMeses[pago.mes])
+    .join(", ");
+
+    mensaje.innerText =
+    `⚠️ Ya están registradas estas cuotas: ${mesesYaPagados}.`;
+
+    mensaje.style.color =
+    "#c82032";
+
+    await cargarMesesPagadosSocio();
+
+    return;
+  }
+
+
+  // REGISTRAR CADA MES SELECCIONADO
+
+  let pagosRegistrados = 0;
+
+
+  for(const mes of meses){
+
+    const nombreMes =
+    nombresMeses[mes];
+
+
+    // CREAR INGRESO EN FINANZAS
+
+    const { data: ingreso, error: errorIngreso } =
+    await supabaseClient
+      .from("Ingresos")
+      .insert([{
+
+        fecha:
+        fechaPago,
+
+        monto:
+        Number(monto),
+
+        tipo:
+        "Cuotas de socios",
+
+        descripcion:
+        `Cuota ${nombreMes} ${anio} - ${socio.nombre}`,
+
+        origen:
+        socio.nombre,
+
+        metodo_pago:
+        metodoPago,
+
+        observaciones:
+        observaciones
+
+      }])
+      .select("id")
+      .single();
+
+
+    if(errorIngreso){
+
+      console.error(
+        `Error creando ingreso de ${nombreMes}:`,
+        errorIngreso
+      );
+
+      mensaje.innerText =
+      `❌ Error al registrar la cuota de ${nombreMes}. Se registraron ${pagosRegistrados} de ${meses.length} cuotas.`;
+
+      mensaje.style.color =
+      "#c82032";
+
+      await cargarMesesPagadosSocio();
+      cargarSaldoActualClub();
+
+      return;
+    }
+
+
+    // REGISTRAR CUOTA EN PAGOSOCIOS
+
+    const { error: errorPago } =
+    await supabaseClient
+      .from("PagoSocios")
+      .insert([{
+
+        socios_id:
+        Number(sociosId),
+
+        mes:
+        mes,
+
+        anio:
+        Number(anio),
+
+        monto:
+        Number(monto),
+
+        fecha_pago:
+        fechaPago,
+
+        metodo_pago:
+        metodoPago,
+
+        observaciones:
+        observaciones,
+
+        ingreso_id:
+        ingreso.id
+
+      }]);
+
+
+    if(errorPago){
+
+      console.error(
+        `Error registrando cuota de ${nombreMes}:`,
+        errorPago
+      );
+
+
+      // EVITAR QUE FINANZAS QUEDE DESCUADRADO
+
+      await supabaseClient
+        .from("Ingresos")
+        .delete()
+        .eq("id", ingreso.id);
+
+
+      mensaje.innerText =
+      `❌ Error al registrar ${nombreMes}. Se registraron ${pagosRegistrados} de ${meses.length} cuotas.`;
+
+      mensaje.style.color =
+      "#c82032";
+
+      await cargarMesesPagadosSocio();
+      cargarSaldoActualClub();
+
+      return;
+    }
+
+
+    pagosRegistrados++;
 
   }
+
+
+  // TODO SALIÓ CORRECTAMENTE
+
+  const totalPagado =
+  Number(monto) * meses.length;
 
 
   mensaje.innerText =
-  "✅ Pago registrado y agregado a Finanzas.";
+  `✅ ${pagosRegistrados} cuota${pagosRegistrados === 1 ? "" : "s"} registrada${pagosRegistrados === 1 ? "" : "s"} correctamente. Total: $${totalPagado.toLocaleString("es-CL")}.`;
 
   mensaje.style.color =
   "green";
 
 
-  document.getElementById(
-    "pagoSocioId"
-  ).value = "";
+  // ACTUALIZAR MESES DEL SOCIO
 
-  document.getElementById(
-    "pagoSocioMes"
-  ).value = "";
+  await cargarMesesPagadosSocio();
 
-  document.getElementById(
-    "pagoSocioMonto"
-  ).value = "";
+
+  // LIMPIAR MÉTODO Y OBSERVACIONES
 
   document.getElementById(
     "pagoSocioMetodo"
@@ -7039,9 +7375,14 @@ async function guardarPagoSocio(){
   ).value = "";
 
 
+  // ACTUALIZAR FINANZAS
+
   cargarSaldoActualClub();
 
 }
+
+
+
 
 async function guardarIngreso(){
 
