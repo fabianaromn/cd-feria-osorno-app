@@ -1873,7 +1873,9 @@ class="seccion oculto">
 
 </section>
 
-<section class="partido-admin-home">
+<section
+id="bannerPartidoAdmin"
+class="partido-admin-home">
 
   <div class="partido-admin-cabecera">
 
@@ -5206,6 +5208,10 @@ function mostrar(id){
 
  if(id === "administracion"){
 
+  document
+.getElementById("bannerPartidoAdmin")
+.classList.remove("oculto");
+
 
   document
   .getElementById("pantallaPublica")
@@ -5290,6 +5296,12 @@ if(id === "editarJugador"){
 
 function mostrarMenuAdmin(id){
 
+  const bannerPartidoAdmin =
+document.getElementById("bannerPartidoAdmin");
+
+if(bannerPartidoAdmin){
+  bannerPartidoAdmin.classList.add("oculto");
+}
   document
   .getElementById("menuAdminPartidos")
   .classList.add("oculto");
