@@ -686,19 +686,20 @@ font-size: 16px;
   background:white;
 }
 
-.hero-feria{
-  margin-top:125px;
-}
-
 /* ===== HERO FERIA ===== */
 
 .hero-feria{
   position:relative;
   overflow:hidden;
 
-  min-height:300px;
+  height:245px;
+  min-height:0;
 
-  padding:38px 22px 30px;
+  margin-top:125px;
+  padding:26px 20px;
+
+  display:flex;
+  align-items:center;
 
   background:
     linear-gradient(
@@ -709,6 +710,7 @@ font-size: 16px;
     );
 
   color:white;
+  text-align:left;
 }
 
 /* detalle rojo */
@@ -748,8 +750,13 @@ font-size: 16px;
 
 .hero-contenido{
   position:relative;
-  z-index:2;
-  max-width:75%;
+  z-index:3;
+
+  width:68%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
 }
 
 .hero-etiqueta{
@@ -829,6 +836,23 @@ font-size: 16px;
   );
 }
 
+.hero-toro{
+  position:absolute;
+
+  right:-10px;
+  bottom:-12px;
+
+  height:235px;
+  width:auto;
+
+  object-fit:contain;
+
+  z-index:2;
+
+  filter:drop-shadow(
+    -6px 6px 10px rgba(0,0,0,.30)
+  );
+}
 </style>  
 
   
@@ -994,6 +1018,11 @@ onclick="iniciarSesion()"
     </p>
 
   </div>
+
+  <img
+    src="img/toro-feria.png"
+    class="hero-toro"
+    alt="Mascota CD Feria Osorno">
 
 </section>
 
