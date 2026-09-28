@@ -839,8 +839,194 @@ font-size: 16px;
   );
 }
 
+/* ===== PRÓXIMO PARTIDO HOME ===== */
+
+.proximo-partido-home{
+  margin:18px 14px;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+
+  box-shadow:
+    0 5px 18px rgba(7,27,74,.12);
+
+  border:1px solid #e8ebf0;
+}
 
 
+.proximo-titulo{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:16px 18px;
+
+  background:#071b4a;
+  color:white;
+}
+
+
+.proximo-titulo span{
+  display:block;
+
+  margin-bottom:3px;
+
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.5px;
+
+  color:#aebbd4;
+}
+
+
+.proximo-titulo h2{
+  margin:0;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+
+.proximo-jornada{
+  padding:7px 11px;
+
+  background:#d71920;
+  color:white;
+
+  border-radius:20px;
+
+  font-size:10px;
+  font-weight:900;
+
+  white-space:nowrap;
+}
+
+
+.proximo-fecha{
+  padding:13px 10px 0;
+
+  text-align:center;
+
+  color:#667085;
+
+  font-size:12px;
+  font-weight:700;
+}
+
+
+.proximo-equipos{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:18px 12px 20px;
+}
+
+
+.proximo-equipo{
+  width:38%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  text-align:center;
+}
+
+
+.proximo-escudo,
+.escudo-rival{
+  width:65px;
+  height:65px;
+
+  margin-bottom:9px;
+}
+
+
+.proximo-escudo{
+  object-fit:contain;
+}
+
+
+.escudo-rival{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#f0f2f5;
+
+  border:2px solid #d9dde5;
+
+  color:#98a2b3;
+
+  font-size:25px;
+  font-weight:900;
+}
+
+
+.proximo-equipo strong{
+  color:#071b4a;
+
+  font-size:12px;
+  font-weight:900;
+
+  line-height:1.2;
+}
+
+
+.proximo-centro{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:7px;
+}
+
+
+.proximo-centro > span{
+  width:46px;
+  height:46px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#d71920;
+  color:white;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+
+.proximo-centro small{
+  color:#98a2b3;
+
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.proximo-pie{
+  padding:11px 15px;
+
+  background:#f6f7f9;
+
+  border-top:1px solid #eaecf0;
+
+  text-align:center;
+
+  color:#475467;
+
+  font-size:11px;
+  font-weight:700;
+}
 
 </style>  
 
@@ -1015,6 +1201,81 @@ onclick="iniciarSesion()"
 
 </section>
 
+
+<section class="proximo-partido-home">
+
+  <div class="proximo-titulo">
+    <div>
+      <span>PRÓXIMO PARTIDO</span>
+      <h2 id="proximoCampeonato">
+        CLAUSURA 2026
+      </h2>
+    </div>
+
+    <div
+    class="proximo-jornada"
+    id="proximoJornada">
+      FECHA 1
+    </div>
+  </div>
+
+
+  <div class="proximo-fecha" id="proximoFecha">
+    Fecha por confirmar
+  </div>
+
+
+  <div class="proximo-equipos">
+
+    <div class="proximo-equipo">
+
+      <img
+      src="img/logo-feria.png"
+      class="proximo-escudo"
+      alt="Feria Osorno">
+
+      <strong>
+        FERIA OSORNO
+      </strong>
+
+    </div>
+
+
+    <div class="proximo-centro">
+
+      <span>VS</span>
+
+      <small id="proximoLocalVisitante">
+        LOCAL
+      </small>
+
+    </div>
+
+
+    <div class="proximo-equipo">
+
+      <div class="escudo-rival">
+        ?
+      </div>
+
+      <strong id="proximoRival">
+        RIVAL
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="proximo-pie">
+
+    <span>
+      📍 <span id="proximoCancha">Cancha por confirmar</span>
+    </span>
+
+  </div>
+
+</section>
 
   
 <section    
