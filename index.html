@@ -4762,153 +4762,174 @@ class="seccion oculto">
   </button>
 
 </section>
-
 <section
 id="editarJugador"
-class="seccion oculto">
+class="seccion oculto pantalla-editar-jugador">
 
-  <button
-  class="boton"
-  onclick="mostrar('administracion')">
-    ← Volver
-  </button>
+  <div class="cabecera-seccion-publica">
 
-  <h2>
-    ✏️ Editar jugador
-  </h2>
+    <button
+    class="volver-publico"
+    onclick="mostrar('administracion')">
+      ← VOLVER
+    </button>
 
-  <p style="color:#667085; margin-bottom:18px;">
-    Selecciona una categoría para ver sus jugadores.
-  </p>
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>EDITAR JUGADOR</h2>
+
+    <p>
+      Selecciona una categoría para buscar al jugador
+    </p>
+
+  </div>
+
 
   <div
-  id="listaEditarJugadores"
-  style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+  id="listaEditarJugadores">
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Primera Serie')">
 
-      <div class="icono" style="font-size:24px;">
-        ⚽
-      </div>
+    <div class="titulo-categorias-partidos">
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Primera Serie
-      </h3>
+      <span>CATEGORÍAS</span>
+
+      <strong>
+        Selecciona una serie
+      </strong>
 
     </div>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Segunda Serie')">
-
-      <div class="icono" style="font-size:24px;">
-        ⚽
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Segunda Serie
-      </h3>
-
-    </div>
+    <div class="categorias-partidos">
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Serie Senior')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Primera Serie')">
 
-      <div class="icono" style="font-size:24px;">
-        🧓
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Serie Senior
-      </h3>
+        <div>
+          <strong>Primera Serie</strong>
+          <span>Adultos</span>
+        </div>
 
-    </div>
-
-
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Serie Super Senior')">
-
-      <div class="icono" style="font-size:24px;">
-        🧓
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Super Senior
-      </h3>
-
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Infantil U8')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Segunda Serie')">
 
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U8
-      </h3>
+        <div>
+          <strong>Segunda Serie</strong>
+          <span>Adultos</span>
+        </div>
 
-    </div>
-
-
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Infantil U10')">
-
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U10
-      </h3>
-
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Infantil U13')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Serie Senior')">
 
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U13
-      </h3>
+        <div>
+          <strong>Senior</strong>
+          <span>Adultos</span>
+        </div>
 
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEditarJugador('Infantil U15')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Serie Super Senior')">
 
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U15
-      </h3>
+        <div>
+          <strong>Super Senior</strong>
+          <span>Adultos</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Infantil U8')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U8</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Infantil U10')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U10</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Infantil U13')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U13</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEditarJugador('Infantil U15')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U15</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
 
     </div>
 
