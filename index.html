@@ -2869,16 +2869,13 @@ class="oculto gestion-admin">
   </div>
 
 </div>
-
 <div
 id="menuAdminJugadores"
 class="oculto gestion-admin">
 
   <div class="gestion-admin-titulo">
 
-    <span>
-      ADMINISTRACIÓN
-    </span>
+    <span>ADMINISTRACIÓN</span>
 
     <h2>
       Gestión de jugadores
@@ -2891,24 +2888,22 @@ class="oculto gestion-admin">
   </div>
 
 
-  <!-- AGREGAR JUGADOR -->
-
   <div
   class="accion-admin"
   onclick="mostrar('agregarJugador')">
 
     <div class="accion-admin-icono">
-      ➕
+      ＋
     </div>
 
     <div class="accion-admin-texto">
 
       <strong>
-        Agregar jugador
+        Nuevo jugador
       </strong>
 
       <span>
-        Registra un nuevo jugador en el plantel
+        Agregar un jugador al plantel
       </span>
 
     </div>
@@ -2920,14 +2915,12 @@ class="oculto gestion-admin">
   </div>
 
 
-  <!-- EDITAR JUGADOR -->
-
   <div
   class="accion-admin"
   onclick="mostrar('editarJugador')">
 
     <div class="accion-admin-icono">
-      ✏️
+      ✎
     </div>
 
     <div class="accion-admin-texto">
@@ -2937,7 +2930,7 @@ class="oculto gestion-admin">
       </strong>
 
       <span>
-        Modifica los datos de un jugador registrado
+        Modificar información de un jugador
       </span>
 
     </div>
@@ -2949,14 +2942,12 @@ class="oculto gestion-admin">
   </div>
 
 
-  <!-- ELIMINAR JUGADOR -->
-
   <div
   class="accion-admin accion-admin-eliminar"
   onclick="abrirEliminarJugador()">
 
     <div class="accion-admin-icono">
-      🗑️
+      ×
     </div>
 
     <div class="accion-admin-texto">
@@ -2966,7 +2957,176 @@ class="oculto gestion-admin">
       </strong>
 
       <span>
-        Elimina un jugador del plantel
+        Quitar un jugador del plantel
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
+  </div>
+
+</div>
+<div
+id="menuAdminFinanzas"
+class="oculto gestion-admin">
+
+  <div class="gestion-admin-titulo">
+
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>
+      Gestión financiera
+    </h2>
+
+    <p>
+      Administra los ingresos y gastos del club
+    </p>
+
+  </div>
+
+
+  <!-- SALDO ACTUAL -->
+
+  <div
+  class="card"
+  style="
+  margin:0 0 16px;
+  text-align:center;
+  padding:20px;
+  ">
+
+    <p
+    style="
+    margin:0;
+    color:#667085;
+    font-size:12px;
+    font-weight:800;
+    ">
+      SALDO ACTUAL DEL CLUB
+    </p>
+
+    <h2
+    id="saldoActualClub"
+    style="
+    margin:8px 0 0;
+    color:#071b4a;
+    font-size:30px;
+    font-weight:900;
+    ">
+      $0
+    </h2>
+
+  </div>
+
+
+  <!-- RESUMEN FINANCIERO -->
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('resumenFinanciero')">
+
+    <div class="accion-admin-icono">
+      ▣
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Resumen financiero
+      </strong>
+
+      <span>
+        Revisa el estado general de las finanzas
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
+  </div>
+
+
+  <!-- MOVIMIENTOS -->
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('movimientosFinancieros')">
+
+    <div class="accion-admin-icono">
+      ≡
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Movimientos
+      </strong>
+
+      <span>
+        Consulta los ingresos y gastos registrados
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
+  </div>
+
+
+  <!-- INGRESOS -->
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('agregarIngreso')">
+
+    <div class="accion-admin-icono">
+      ＋
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Registrar ingreso
+      </strong>
+
+      <span>
+        Agrega un nuevo ingreso al club
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
+  </div>
+
+
+  <!-- GASTOS -->
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('agregarGasto')">
+
+    <div class="accion-admin-icono">
+      −
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Registrar gasto
+      </strong>
+
+      <span>
+        Agrega un nuevo gasto del club
       </span>
 
     </div>
@@ -2980,157 +3140,140 @@ class="oculto gestion-admin">
 </div>
 
 <div
-id="menuAdminFinanzas"
-class="oculto"
-style="margin-top:10px;">
+id="menuAdminSocios"
+class="oculto gestion-admin">
 
-  <div
-  class="card"
-  style="
-  margin-top:10px;
-  text-align:center;
-  padding:20px;
-  ">
+  <div class="gestion-admin-titulo">
 
-    <p
-    style="
-    margin:0;
-    color:#667085;
-    font-size:14px;
-    ">
-      Saldo actual del club
-    </p>
+    <span>ADMINISTRACIÓN</span>
 
-    <h2
-    id="saldoActualClub"
-    style="
-    margin:8px 0 0;
-    color:#071b4a;
-    font-size:30px;
-    ">
-      $0
+    <h2>
+      Gestión de socios
     </h2>
 
-  </div>
-
-
-  
-
-  <div
-  class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('resumenFinanciero')">
-
-    <div class="icono">📊</div>
-    <h3>Resumen financiero</h3>
+    <p>
+      Administra los socios y sus cuotas
+    </p>
 
   </div>
 
 
-  <div
-  class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('movimientosFinancieros')">
-
-    <div class="icono">📋</div>
-    <h3>Movimientos</h3>
-
-  </div>
-
+  <!-- REGISTRAR SOCIO -->
 
   <div
-  class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('agregarIngreso')">
-
-    <div class="icono">💵</div>
-    <h3>Ingresos</h3>
-
-  </div>
-
-
-  <div
-  class="card"
-  style="margin-top:10px;"
-  onclick="mostrar('agregarGasto')">
-
-    <div class="icono">💸</div>
-    <h3>Gastos</h3>
-
-  </div>
-
-</div>
-
-<div
-id="menuAdminSocios"
-class="oculto"
-style="margin-top:10px;">
-
-  <div
-  class="card"
-  style="margin-top:10px;"
+  class="accion-admin"
   onclick="mostrar('agregarSocio')">
 
-    <div class="icono">
-      ➕
+    <div class="accion-admin-icono">
+      ＋
     </div>
 
-    <h3>
-      Registrar socio
-    </h3>
+    <div class="accion-admin-texto">
+
+      <strong>
+        Registrar socio
+      </strong>
+
+      <span>
+        Agrega un nuevo socio al club
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
 
   </div>
 
+
+  <!-- LISTA DE SOCIOS -->
 
   <div
-  class="card"
-  style="margin-top:10px;"
+  class="accion-admin"
   onclick="mostrar('listaSocios')">
 
-    <div class="icono">
-      👥
+    <div class="accion-admin-icono">
+      ≡
     </div>
 
-    <h3>
-      Lista de socios
-    </h3>
+    <div class="accion-admin-texto">
+
+      <strong>
+        Lista de socios
+      </strong>
+
+      <span>
+        Consulta los socios registrados
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
 
   </div>
 
 
-<div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('registrarPagoSocio')">
+  <!-- REGISTRAR PAGO -->
 
-  <div class="icono">
-    💳
+  <div
+  class="accion-admin"
+  onclick="mostrar('registrarPagoSocio')">
+
+    <div class="accion-admin-icono">
+      ＋
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Registrar pago
+      </strong>
+
+      <span>
+        Registra el pago de una o más cuotas
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
   </div>
 
-  <h3>
-    Registrar pago
-  </h3>
 
-</div>
+  <!-- ESTADO DE CUOTAS -->
 
+  <div
+  class="accion-admin"
+  onclick="mostrar('estadoCuotasSocios')">
 
-<div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('estadoCuotasSocios')">
+    <div class="accion-admin-icono">
+      ▣
+    </div>
 
-  <div class="icono">
-    📅
+    <div class="accion-admin-texto">
+
+      <strong>
+        Estado de cuotas
+      </strong>
+
+      <span>
+        Revisa las cuotas pagadas y pendientes
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
   </div>
 
-  <h3>
-    Estado de cuotas
-  </h3>
-
 </div>
-
-</div>
-
 </section>
 
 
