@@ -520,6 +520,49 @@ color: #555;
 font-size: 16px;
 }
 
+/* ===== INICIO PÚBLICO ===== */
+
+.menu-publico{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:18px;
+}
+
+.acceso-publico{
+  background:white;
+  border-radius:16px;
+  padding:14px 5px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
+  transition:.2s;
+}
+
+.acceso-publico:active{
+  transform:scale(.96);
+}
+
+.icono-publico{
+  width:48px;
+  height:48px;
+  margin:0 auto 8px;
+  border-radius:14px;
+  background:#071b4a;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.acceso-publico h3{
+  font-size:12px;
+  line-height:1.2;
+  margin:0;
+  color:#111827;
+}
+
 </style>  
 
   
@@ -588,51 +631,136 @@ Todo el club en un solo lugar.
 ⚽ PRÓXIMO PARTIDO    
 </small>  <div class="equipos">  Feria Osorno  <span class="vs">    
 VS    
-</span>  Deportivo Austral  </div>  <p>    
+</span>  San Lorenzo  </div>  <p>    
 📅 Fecha por confirmar    
 </p> 
   
 <p>    
 📍 Cancha por confirmar    
-</p>  </section>  <section class="menu">  <div class="card"    
-onclick="mostrar('partidos')">  <div class="icono">    
-⚽    
-</div>  <h3>    
-Partidos    
-</h3>  </div>  <div class="card"    
-onclick="mostrar('tabla')">  <div class="icono">    
-📊    
-</div>  <h3>    
-Tabla de posiciones    
-</h3>  </div>  <div class="card"    
-onclick="mostrar('jugadores')">  <div class="icono">    
-👥    
-</div>  <h3>    
-Jugadores    
-</h3>  </div>   <div class="card"    
-onclick="mostrar('estadisticas')">  <div class="icono">    
-📈    
-</div>  <h3>    
-Estadísticas    
-</h3>  </div>    
-  
+</p>  </section>  
 
-  
-<div class="card" onclick="mostrar('socios')">  
-  <div class="icono">  
-    👤  
-  </div>  
-  <h3>  
-    Socios  
-  </h3>  
-</div>  <div class="card" onclick="mostrar('store')">  
-  <div class="icono">  
-    🛒  
-  </div>  
-  <h3>  
-    Store  
-  </h3>  
-</div>  </section>  
+
+
+<section class="menu-publico">
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('partidos')">
+
+    <div class="icono-publico">
+      ⚽
+    </div>
+
+    <h3>
+      Partidos
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('tabla')">
+
+    <div class="icono-publico">
+      📊
+    </div>
+
+    <h3>
+      Tabla
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('jugadores')">
+
+    <div class="icono-publico">
+      👥
+    </div>
+
+    <h3>
+      Jugadores
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('estadisticas')">
+
+    <div class="icono-publico">
+      📈
+    </div>
+
+    <h3>
+      Estadísticas
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('socios')">
+
+    <div class="icono-publico">
+      👤
+    </div>
+
+    <h3>
+      Socios
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico"
+  onclick="mostrar('store')">
+
+    <div class="icono-publico">
+      🛒
+    </div>
+
+    <h3>
+      Store
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico">
+
+    <div class="icono-publico">
+      🎥
+    </div>
+
+    <h3>
+      Videos
+    </h3>
+
+  </div>
+
+
+  <div
+  class="acceso-publico">
+
+    <div class="icono-publico">
+      📰
+    </div>
+
+    <h3>
+      Noticias
+    </h3>
+
+  </div>
+
+</section>
   
 <section    
 id="inicio"    
