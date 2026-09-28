@@ -6068,10 +6068,10 @@ async function guardarEdicionSocio(){
   document.getElementById("mensajeEditarSocio");
 
 
-  if(!id || !nombre || !rut || !fechaIngreso || !montoCuota){
+ if(!id || !nombre || !fechaIngreso || !montoCuota){
 
-    mensaje.innerText =
-    "⚠️ Completa nombre, RUT, fecha de ingreso y cuota mensual.";
+  mensaje.innerText =
+  "⚠️ Completa nombre, fecha de ingreso y cuota mensual.";
 
     mensaje.style.color = "#c82032";
 
@@ -6093,7 +6093,7 @@ async function guardarEdicionSocio(){
     .update({
 
       nombre: nombre,
-      rut: rut,
+      rut: rut || null,
       fecha_ingreso: fechaIngreso,
       estado: estado,
       monto_cuota: Number(montoCuota),
