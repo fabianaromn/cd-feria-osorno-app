@@ -1277,6 +1277,156 @@ font-size: 16px;
   flex-wrap:wrap;
 }
 
+/* ===== GESTIÓN ADMIN PARTIDOS ===== */
+
+.gestion-admin{
+  margin:18px 14px 25px;
+}
+
+.gestion-admin-titulo{
+  margin-bottom:14px;
+}
+
+.gestion-admin-titulo > span{
+  display:block;
+  margin-bottom:4px;
+
+  color:#d71920;
+
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+.gestion-admin-titulo h2{
+  margin:0;
+
+  color:#071b4a;
+
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:-.3px;
+}
+
+.gestion-admin-titulo p{
+  margin:4px 0 0;
+
+  color:#7b8495;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+
+/* TARJETAS */
+
+.accion-admin{
+  width:100%;
+  min-height:76px;
+
+  margin-bottom:10px;
+  padding:13px 14px;
+
+  display:flex;
+  align-items:center;
+  gap:13px;
+
+  background:white;
+
+  border:1px solid #e5e9f0;
+  border-radius:16px;
+
+  box-shadow:0 4px 14px rgba(7,27,74,.07);
+
+  cursor:pointer;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+}
+
+.accion-admin:active{
+  transform:scale(.98);
+}
+
+
+/* ICONO */
+
+.accion-admin-icono{
+  flex:0 0 48px;
+
+  width:48px;
+  height:48px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#edf3ff;
+  color:#123c8c;
+
+  border-radius:14px;
+
+  font-size:27px;
+  font-weight:500;
+}
+
+
+/* TEXTO */
+
+.accion-admin-texto{
+  flex:1;
+  min-width:0;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:3px;
+}
+
+.accion-admin-texto strong{
+  color:#071b4a;
+
+  font-size:14px;
+  font-weight:900;
+}
+
+.accion-admin-texto span{
+  color:#7b8495;
+
+  font-size:11px;
+  font-weight:600;
+  line-height:1.3;
+}
+
+
+/* FLECHA */
+
+.accion-admin-flecha{
+  color:#a8b0bf;
+
+  font-size:28px;
+  font-weight:300;
+
+  line-height:1;
+}
+
+
+/* ELIMINAR */
+
+.accion-admin-eliminar{
+  border-color:#f3d9dc;
+}
+
+.accion-admin-eliminar .accion-admin-icono{
+  background:#fff0f1;
+  color:#c82032;
+}
+
+.accion-admin-eliminar .accion-admin-texto strong{
+  color:#c82032;
+}
+
 </style>  
 
   
@@ -1813,56 +1963,105 @@ class="partido-admin-rival">
 
 
   <div
-  id="menuAdminPartidos"
-  class="oculto"
-  style="margin-top:12px;">
+id="menuAdminPartidos"
+class="oculto gestion-admin">
 
-    <div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('agregarPartido')">
+  <div class="gestion-admin-titulo">
 
-  <div class="icono">
-    ➕
-  </div>
+    <span>ADMINISTRACIÓN</span>
 
-  <h3>
-    Agregar partido
-  </h3>
+    <h2>
+      Gestión de partidos
+    </h2>
+
+    <p>
+      Administra los encuentros del club
+    </p>
 
   </div>
 
-<div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('editarPartido')">
-
-  <div class="icono">
-    ✏️
-  </div>
-
-  <h3>
-    Editar partido
-  </h3>
-
-</div>
 
   <div
-class="card"
-style="margin-top:10px;"
-onclick="eliminarPartido()">
+  class="accion-admin"
+  onclick="mostrar('agregarPartido')">
 
-  <div class="icono">
-    🗑️
+    <div class="accion-admin-icono">
+      ＋
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Nuevo partido
+      </strong>
+
+      <span>
+        Agregar un encuentro al calendario
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
   </div>
 
-  <h3>
-    Eliminar partido
-  </h3>
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('editarPartido')">
+
+    <div class="accion-admin-icono">
+      ✎
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Editar partido
+      </strong>
+
+      <span>
+        Modificar información de un encuentro
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
 
   </div>
 
+
+  <div
+  class="accion-admin accion-admin-eliminar"
+  onclick="eliminarPartido()">
+
+    <div class="accion-admin-icono">
+      ×
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Eliminar partido
+      </strong>
+
+      <span>
+        Quitar un encuentro registrado
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
   </div>
+
+</div>
 
 
   <div
