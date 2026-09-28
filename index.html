@@ -1355,7 +1355,250 @@ class="seccion oculto">
 
 
 
+<section
+id="resumenFinanciero"
+class="seccion oculto">
 
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2>
+    📊 Resumen financiero
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Estado financiero del Club Deportivo Feria Osorno.
+  </p>
+
+
+  <label>Mes</label>
+
+  <select
+  id="resumenMes"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="todos">Todos los meses</option>
+    <option value="01">Enero</option>
+    <option value="02">Febrero</option>
+    <option value="03">Marzo</option>
+    <option value="04">Abril</option>
+    <option value="05">Mayo</option>
+    <option value="06">Junio</option>
+    <option value="07">Julio</option>
+    <option value="08">Agosto</option>
+    <option value="09">Septiembre</option>
+    <option value="10">Octubre</option>
+    <option value="11">Noviembre</option>
+    <option value="12">Diciembre</option>
+
+  </select>
+
+
+  <label>Año</label>
+
+  <select
+  id="resumenAnio"
+  style="width:100%; padding:14px; margin:7px 0 18px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="todos">Todos los años</option>
+    <option value="2026">2026</option>
+    <option value="2027">2027</option>
+    <option value="2028">2028</option>
+    <option value="2029">2029</option>
+    <option value="2030">2030</option>
+
+  </select>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-bottom:20px;"
+  onclick="cargarResumenFinanciero()">
+
+    🔎 Ver resumen
+
+  </button>
+
+
+  <div
+  class="card"
+  style="margin-top:10px; text-align:center;">
+
+    <div style="font-size:30px;">
+      💵
+    </div>
+
+    <p style="margin-top:8px;">
+      Total ingresos
+    </p>
+
+    <h2
+    id="totalIngresos"
+    style="margin-top:5px;">
+      $0
+    </h2>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px; text-align:center;">
+
+    <div style="font-size:30px;">
+      💸
+    </div>
+
+    <p style="margin-top:8px;">
+      Total gastos
+    </p>
+
+    <h2
+    id="totalGastos"
+    style="margin-top:5px;">
+      $0
+    </h2>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px; text-align:center;">
+
+    <div style="font-size:30px;">
+      💰
+    </div>
+
+    <p style="margin-top:8px;">
+      Saldo
+    </p>
+
+    <h2
+    id="saldoFinanciero"
+    style="margin-top:5px;">
+      $0
+    </h2>
+
+  </div>
+
+
+  <p
+  id="mensajeResumenFinanciero"
+  style="margin-top:15px; text-align:center;">
+  </p>
+
+</section>
+
+
+<section
+id="movimientosFinancieros"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2>
+    📋 Movimientos financieros
+  </h2>
+
+  <p style="color:#667085; margin-bottom:18px;">
+    Historial de ingresos y gastos del club.
+  </p>
+
+
+  <label>Tipo de movimiento</label>
+
+  <select
+  id="movimientoTipo"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="todos">
+      Todos los movimientos
+    </option>
+
+    <option value="ingreso">
+      💵 Ingresos
+    </option>
+
+    <option value="gasto">
+      💸 Gastos
+    </option>
+
+  </select>
+
+
+  <label>Mes</label>
+
+  <select
+  id="movimientoMes"
+  style="width:100%; padding:14px; margin:7px 0 14px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="todos">Todos los meses</option>
+    <option value="01">Enero</option>
+    <option value="02">Febrero</option>
+    <option value="03">Marzo</option>
+    <option value="04">Abril</option>
+    <option value="05">Mayo</option>
+    <option value="06">Junio</option>
+    <option value="07">Julio</option>
+    <option value="08">Agosto</option>
+    <option value="09">Septiembre</option>
+    <option value="10">Octubre</option>
+    <option value="11">Noviembre</option>
+    <option value="12">Diciembre</option>
+
+  </select>
+
+
+  <label>Año</label>
+
+  <select
+  id="movimientoAnio"
+  style="width:100%; padding:14px; margin:7px 0 18px; border:1px solid #ddd; border-radius:10px;">
+
+    <option value="todos">Todos los años</option>
+    <option value="2026">2026</option>
+    <option value="2027">2027</option>
+    <option value="2028">2028</option>
+    <option value="2029">2029</option>
+    <option value="2030">2030</option>
+
+  </select>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-bottom:18px;"
+  onclick="cargarMovimientosFinancieros()">
+
+    🔎 Filtrar movimientos
+
+  </button>
+
+
+  <div
+  id="listaMovimientosFinancieros">
+
+    <p style="text-align:center; color:#667085;">
+      Cargando movimientos...
+    </p>
+
+  </div>
+
+
+  <p
+  id="mensajeMovimientosFinancieros"
+  style="margin-top:15px; text-align:center;">
+  </p>
+
+</section>
 
 
 <section    
@@ -2746,6 +2989,7 @@ function abrirEliminarJugador(){
 }
 
 
+
 function mostrar(id){
   ocultarTodo();
 
@@ -2760,6 +3004,16 @@ function mostrar(id){
   if(id === "partidos"){
     cargarPartidos();
   }
+
+
+  if(id === "resumenFinanciero"){
+
+  document.getElementById("resumenMes").value = "todos";
+  document.getElementById("resumenAnio").value = "todos";
+
+  cargarResumenFinanciero();
+
+}
 
 if(id === "editarJugador"){
   restaurarCategoriasEditarJugador();
@@ -3431,6 +3685,508 @@ async function guardarGasto(){
 }
 
 
+async function cargarResumenFinanciero(){
+
+  const mes =
+  document.getElementById("resumenMes").value;
+
+  const anio =
+  document.getElementById("resumenAnio").value;
+
+  const mensaje =
+  document.getElementById("mensajeResumenFinanciero");
+
+
+  mensaje.innerText =
+  "⏳ Calculando resumen...";
+
+  mensaje.style.color = "#17479e";
+
+
+  const { data: ingresos, error: errorIngresos } =
+  await supabaseClient
+    .from("Ingresos")
+    .select("fecha,monto");
+
+
+  if(errorIngresos){
+
+    console.error(errorIngresos);
+
+    mensaje.innerText =
+    "❌ Error al cargar los ingresos.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  const { data: gastos, error: errorGastos } =
+  await supabaseClient
+    .from("Gastos")
+    .select("fecha,monto");
+
+
+  if(errorGastos){
+
+    console.error(errorGastos);
+
+    mensaje.innerText =
+    "❌ Error al cargar los gastos.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+
+
+
+  function filtrarMovimientos(lista){
+
+    return lista.filter(movimiento => {
+
+      if(!movimiento.fecha){
+        return false;
+      }
+
+      const partes =
+      movimiento.fecha.split("-");
+
+      const anioMovimiento =
+      partes[0];
+
+      const mesMovimiento =
+      partes[1];
+
+
+      const coincideMes =
+      mes === "todos" ||
+      mesMovimiento === mes;
+
+
+      const coincideAnio =
+      anio === "todos" ||
+      anioMovimiento === anio;
+
+
+      return coincideMes && coincideAnio;
+
+    });
+
+  }
+
+
+  const ingresosFiltrados =
+  filtrarMovimientos(ingresos || []);
+
+  const gastosFiltrados =
+  filtrarMovimientos(gastos || []);
+
+
+  const totalIngresos =
+  ingresosFiltrados.reduce(
+    (total, ingreso) =>
+    total + Number(ingreso.monto || 0),
+    0
+  );
+
+
+  const totalGastos =
+  gastosFiltrados.reduce(
+    (total, gasto) =>
+    total + Number(gasto.monto || 0),
+    0
+  );
+
+
+  const saldo =
+  totalIngresos - totalGastos;
+
+
+  const formatoPesos =
+  new Intl.NumberFormat(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    }
+  );
+
+
+  document.getElementById("totalIngresos").innerText =
+  formatoPesos.format(totalIngresos);
+
+
+  document.getElementById("totalGastos").innerText =
+  formatoPesos.format(totalGastos);
+
+
+  document.getElementById("saldoFinanciero").innerText =
+  formatoPesos.format(saldo);
+
+
+  mensaje.innerText =
+  "✅ Resumen actualizado.";
+
+  mensaje.style.color = "#16803c";
+
+}
+
+
+
+  async function cargarMovimientosFinancieros(){
+
+  const tipoFiltro =
+  document.getElementById("movimientoTipo").value;
+
+  const mesFiltro =
+  document.getElementById("movimientoMes").value;
+
+  const anioFiltro =
+  document.getElementById("movimientoAnio").value;
+
+  const lista =
+  document.getElementById("listaMovimientosFinancieros");
+
+  const mensaje =
+  document.getElementById("mensajeMovimientosFinancieros");
+
+
+  lista.innerHTML =
+  "<p style='text-align:center;'>⏳ Cargando movimientos...</p>";
+
+  mensaje.innerText = "";
+
+
+  const { data: ingresos, error: errorIngresos } =
+  await supabaseClient
+    .from("Ingresos")
+    .select("*");
+
+
+  if(errorIngresos){
+
+    console.error(errorIngresos);
+
+    lista.innerHTML = "";
+
+    mensaje.innerText =
+    "❌ Error al cargar los ingresos.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  const { data: gastos, error: errorGastos } =
+  await supabaseClient
+    .from("Gastos")
+    .select("*");
+
+
+  if(errorGastos){
+
+    console.error(errorGastos);
+
+    lista.innerHTML = "";
+
+    mensaje.innerText =
+    "❌ Error al cargar los gastos.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  const movimientos = [];
+
+
+  (ingresos || []).forEach(ingreso => {
+
+    movimientos.push({
+
+      id: ingreso.id,
+
+      clase: "ingreso",
+
+      fecha: ingreso.fecha,
+
+      monto: Number(ingreso.monto || 0),
+
+      tipo: ingreso.tipo,
+
+      descripcion: ingreso.descripcion,
+
+      origenDestino: ingreso.origen,
+
+      metodoPago: ingreso.metodo_pago,
+
+      numeroDocumento: ingreso.numero_documento,
+
+      responsable: ingreso.responsable,
+
+      comprobante: ingreso.comprobante_url,
+
+      observaciones: ingreso.observaciones
+
+    });
+
+  });
+
+
+  (gastos || []).forEach(gasto => {
+
+    movimientos.push({
+
+      id: gasto.id,
+
+      clase: "gasto",
+
+      fecha: gasto.fecha,
+
+      monto: Number(gasto.monto || 0),
+
+      tipo: gasto.tipo,
+
+      descripcion: gasto.descripcion,
+
+      origenDestino: gasto.destino,
+
+      metodoPago: gasto.metodo_pago,
+
+      numeroDocumento: gasto.numero_documento,
+
+      responsable: gasto.responsable,
+
+      comprobante: gasto.comprobante_url,
+
+      observaciones: gasto.observaciones
+
+    });
+
+  });
+
+
+  const movimientosFiltrados =
+  movimientos.filter(movimiento => {
+
+    if(!movimiento.fecha){
+      return false;
+    }
+
+    const partes =
+    movimiento.fecha.split("-");
+
+    const anioMovimiento =
+    partes[0];
+
+    const mesMovimiento =
+    partes[1];
+
+
+    const coincideTipo =
+    tipoFiltro === "todos" ||
+    movimiento.clase === tipoFiltro;
+
+
+    const coincideMes =
+    mesFiltro === "todos" ||
+    mesMovimiento === mesFiltro;
+
+
+    const coincideAnio =
+    anioFiltro === "todos" ||
+    anioMovimiento === anioFiltro;
+
+
+    return (
+      coincideTipo &&
+      coincideMes &&
+      coincideAnio
+    );
+
+  });
+
+
+  movimientosFiltrados.sort((a, b) => {
+
+    return new Date(b.fecha + "T00:00:00") -
+           new Date(a.fecha + "T00:00:00");
+
+  });
+
+
+  if(movimientosFiltrados.length === 0){
+
+    lista.innerHTML =
+    "<p style='text-align:center; color:#667085;'>No hay movimientos para mostrar.</p>";
+
+    return;
+  }
+
+
+  const formatoPesos =
+  new Intl.NumberFormat(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    }
+  );
+
+
+  lista.innerHTML =
+  movimientosFiltrados.map(movimiento => {
+
+    const esIngreso =
+    movimiento.clase === "ingreso";
+
+    const icono =
+    esIngreso ? "💵" : "💸";
+
+    const titulo =
+    esIngreso ? "INGRESO" : "GASTO";
+
+    const signo =
+    esIngreso ? "+" : "-";
+
+
+    const fechaFormateada =
+    new Date(
+      movimiento.fecha + "T00:00:00"
+    ).toLocaleDateString("es-CL");
+
+
+    return `
+
+      <div
+      class="card"
+      style="margin-top:12px;">
+
+        <div
+        style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+        ">
+
+          <strong>
+            ${icono} ${titulo}
+          </strong>
+
+          <strong>
+            ${signo}${formatoPesos.format(movimiento.monto)}
+          </strong>
+
+        </div>
+
+
+        <p style="margin-top:10px;">
+          📅 ${fechaFormateada}
+        </p>
+
+
+        <p style="margin-top:6px;">
+          <strong>Tipo:</strong>
+          ${movimiento.tipo || "Sin especificar"}
+        </p>
+
+
+        ${movimiento.origenDestino ? `
+
+          <p style="margin-top:6px;">
+            <strong>
+              ${esIngreso ? "Origen:" : "Destino:"}
+            </strong>
+
+            ${movimiento.origenDestino}
+          </p>
+
+        ` : ""}
+
+
+        ${movimiento.descripcion ? `
+
+          <p style="margin-top:6px;">
+            ${movimiento.descripcion}
+          </p>
+
+        ` : ""}
+
+
+        ${movimiento.metodoPago ? `
+
+          <p style="margin-top:6px;">
+            <strong>Método:</strong>
+            ${movimiento.metodoPago}
+          </p>
+
+        ` : ""}
+
+
+        ${movimiento.responsable ? `
+
+          <p style="margin-top:6px;">
+            <strong>Responsable:</strong>
+            ${movimiento.responsable}
+          </p>
+
+        ` : ""}
+
+
+        ${movimiento.comprobante ? `
+
+          <button
+          class="boton"
+          style="width:100%; margin-top:12px;"
+          onclick="verComprobanteFinanciero('${movimiento.comprobante}')">
+
+            📷 Ver comprobante
+
+          </button>
+
+        ` : ""}
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+async function verComprobanteFinanciero(ruta){
+
+  const { data, error } =
+  await supabaseClient
+    .storage
+    .from("comprobantes-finanzas")
+    .createSignedUrl(ruta, 300);
+
+  if(error){
+
+    console.error(error);
+
+    alert("❌ No se pudo abrir el comprobante.");
+
+    return;
+  }
+
+  window.open(
+    data.signedUrl,
+    "_blank"
+  );
+
+}
 
 function restaurarCategoriasEditarJugador(){
 
