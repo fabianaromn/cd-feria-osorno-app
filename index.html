@@ -690,6 +690,144 @@ font-size: 16px;
   margin-top:125px;
 }
 
+/* ===== HERO FERIA ===== */
+
+.hero-feria{
+  position:relative;
+  overflow:hidden;
+
+  min-height:300px;
+
+  padding:38px 22px 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #061538 0%,
+      #09255d 55%,
+      #123c8c 100%
+    );
+
+  color:white;
+}
+
+/* detalle rojo */
+
+.hero-feria::before{
+  content:"";
+  position:absolute;
+
+  width:170px;
+  height:170px;
+
+  right:-80px;
+  top:-40px;
+
+  background:#d71920;
+
+  transform:rotate(35deg);
+
+  opacity:.95;
+}
+
+/* brillo azul */
+
+.hero-feria::after{
+  content:"";
+  position:absolute;
+
+  width:240px;
+  height:240px;
+
+  right:-100px;
+  bottom:-150px;
+
+  border:35px solid rgba(255,255,255,.05);
+  border-radius:50%;
+}
+
+.hero-contenido{
+  position:relative;
+  z-index:2;
+  max-width:75%;
+}
+
+.hero-etiqueta{
+  display:inline-block;
+
+  margin-bottom:14px;
+
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+
+  color:#d9e5ff;
+}
+
+.hero-feria h1{
+  margin:0;
+
+  font-size:36px;
+  line-height:.95;
+  font-weight:900;
+
+  letter-spacing:-1px;
+}
+
+.hero-feria h1 span{
+  color:#ff3340;
+}
+
+.hero-feria p{
+  margin-top:18px;
+
+  font-size:14px;
+  line-height:1.5;
+
+  color:#e7ecf7;
+}
+
+.hero-linea{
+  width:42px;
+  height:4px;
+
+  margin:18px 0 12px;
+
+  border-radius:10px;
+
+  background:#d71920;
+}
+
+.hero-contenido strong{
+  font-size:12px;
+  letter-spacing:.5px;
+}
+
+.hero-escudo{
+  position:absolute;
+
+  right:15px;
+  bottom:18px;
+
+  z-index:2;
+
+  width:105px;
+  height:105px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-escudo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+
+  filter:drop-shadow(
+    0 8px 12px rgba(0,0,0,.35)
+  );
+}
 
 </style>  
 
@@ -836,21 +974,39 @@ onclick="iniciarSesion()"
 
 </div>
 
-<section class="bienvenida">  <h2>    
-¡Bienvenidos Ferianos !  
-</h2>  <p>    
-Todo el club en un solo lugar.    
-</p>  </section>  <section class="partido">  <small>    
-⚽ PRÓXIMO PARTIDO    
-</small>  <div class="equipos">  Feria Osorno  <span class="vs">    
-VS    
-</span>  San Lorenzo  </div>  <p>    
-📅 Fecha por confirmar    
-</p> 
-  
-<p>    
-📍 Cancha por confirmar    
-</p>  </section>  
+<section class="hero-feria">
+
+  <div class="hero-contenido">
+
+    <span class="hero-etiqueta">
+      CLUB DEPORTIVO FERIA OSORNO
+    </span>
+
+    <h1>
+      EL MÁS GRANDE<br>
+      <span>DEL BARRIO.</span>
+    </h1>
+
+    <p>
+      Pasión, historia y familia.<br>
+      Todo el club en un solo lugar.
+    </p>
+
+    <div class="hero-linea"></div>
+
+    <strong>
+      🔵🔴 FERIA SOMOS TODOS
+    </strong>
+
+  </div>
+
+  <div class="hero-escudo">
+    <img
+    src="img/logo-feria.png"
+    alt="CD Feria Osorno">
+  </div>
+
+</section>
 
 
   
