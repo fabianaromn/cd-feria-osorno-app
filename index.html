@@ -2934,6 +2934,158 @@ const categoriasEditarJugadoresHTML =
 document.getElementById("listaEditarJugadores").innerHTML;
 
 
+async function guardarIngreso(){
+
+  const fecha =
+  document.getElementById("ingresoFecha").value;
+
+  const monto =
+  document.getElementById("ingresoMonto").value;
+
+  const tipo =
+  document.getElementById("ingresoTipo").value;
+
+  const origen =
+  document.getElementById("ingresoOrigen").value.trim();
+
+  const descripcion =
+  document.getElementById("ingresoDescripcion").value.trim();
+
+  const metodoPago =
+  document.getElementById("ingresoMetodoPago").value;
+
+  const numeroDocumento =
+  document.getElementById("ingresoNumeroDocumento").value.trim();
+
+  const responsable =
+  document.getElementById("ingresoResponsable").value.trim();
+
+  const observaciones =
+  document.getElementById("ingresoObservaciones").value.trim();
+
+  const archivo =
+  document.getElementById("ingresoComprobante").files[0];
+
+  const mensaje =
+  document.getElementById("mensajeIngreso");
+
+
+  if(!fecha || !monto || !tipo){
+
+    mensaje.innerText =
+    "⚠️ Completa fecha, monto y tipo de ingreso.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando ingreso...";
+
+  mensaje.style.color = "#17479e";
+
+
+  let comprobanteUrl = null;
+
+
+  // SUBIR COMPROBANTE SI EXISTE
+
+  if(archivo){
+
+    mensaje.innerText =
+    "⏳ Subiendo comprobante...";
+
+    const extension =
+    archivo.name.split(".").pop();
+
+    const nombreArchivo =
+    `ingreso_${Date.now()}.${extension}`;
+
+
+    const { error: uploadError } =
+    await supabaseClient
+      .storage
+      .from("comprobantes-finanzas")
+      .upload(nombreArchivo, archivo);
+
+
+    if(uploadError){
+
+      console.error(uploadError);
+
+      mensaje.innerText =
+      "❌ Error al subir el comprobante.";
+
+      mensaje.style.color = "#c82032";
+
+      return;
+    }
+
+
+    comprobanteUrl = nombreArchivo;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Registrando ingreso...";
+
+
+  const { error: ingresoError } =
+  await supabaseClient
+    .from("Ingresos")
+    .insert([
+      {
+        fecha: fecha,
+        monto: Number(monto),
+        tipo: tipo,
+        descripcion: descripcion || null,
+        origen: origen || null,
+        metodo_pago: metodoPago || null,
+        numero_documento: numeroDocumento || null,
+        responsable: responsable || null,
+        comprobante_url: comprobanteUrl,
+        observaciones: observaciones || null
+      }
+    ]);
+
+
+  if(ingresoError){
+
+    console.error(ingresoError);
+
+    mensaje.innerText =
+    "❌ Error al guardar el ingreso.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "✅ Ingreso guardado correctamente.";
+
+  mensaje.style.color = "#16803c";
+
+
+  document.getElementById("ingresoFecha").value = "";
+  document.getElementById("ingresoMonto").value = "";
+  document.getElementById("ingresoTipo").value = "";
+  document.getElementById("ingresoOrigen").value = "";
+  document.getElementById("ingresoDescripcion").value = "";
+  document.getElementById("ingresoMetodoPago").value = "";
+  document.getElementById("ingresoNumeroDocumento").value = "";
+  document.getElementById("ingresoResponsable").value = "";
+  document.getElementById("ingresoComprobante").value = "";
+  document.getElementById("ingresoObservaciones").value = "";
+
+}   
+
+
+
 function restaurarCategoriasEditarJugador(){
 
   document.getElementById("listaEditarJugadores").innerHTML =
