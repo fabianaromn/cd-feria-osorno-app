@@ -1028,6 +1028,43 @@ font-size: 16px;
   font-weight:700;
 }
 
+
+/* ===== HEADER ADMINISTRACIÓN ===== */
+
+.header-admin{
+  background:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:12px 14px;
+
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.cerrar-admin{
+  background:white;
+  color:#c82032;
+
+  border:2px solid #e1e3e8;
+  border-radius:25px;
+
+  padding:10px 13px;
+
+  font-size:11px;
+  font-weight:900;
+
+  white-space:nowrap;
+
+  cursor:pointer;
+}
+
+.cerrar-admin:active{
+  transform:scale(.96);
+}
 </style>  
 
   
@@ -1357,22 +1394,30 @@ onclick="categoria('Infantil U15')">
 id="administracion"
 class="seccion oculto">
 
+ <header class="header-admin">
+
+  <div class="marca-publica">
+
+    <img
+    src="img/logo-feria.png"
+    class="logo-header"
+    alt="CD Feria Osorno">
+
+    <div class="lema-header">
+      FERIA SOMOS TODOS
+    </div>
+
+  </div>
+
   <button
-  class="boton"
-  
-onclick="cerrarSesion()">
-    
-    🚪 Cerrar sesión
+  class="cerrar-admin"
+  onclick="cerrarSesion()">
+
+    CERRAR SESIÓN
 
   </button>
 
-  <h2>
-    ⚙️ Administración
-  </h2>
-
-  <p style="color:#667085; margin-bottom:18px;">
-    Panel de administración del Club Deportivo Feria Osorno.
-  </p>
+</header>
 
 <section class="partido">
 
