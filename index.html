@@ -2870,58 +2870,114 @@ class="oculto gestion-admin">
 
 </div>
 
+<div
+id="menuAdminJugadores"
+class="oculto gestion-admin">
+
+  <div class="gestion-admin-titulo">
+
+    <span>
+      ADMINISTRACIÓN
+    </span>
+
+    <h2>
+      Gestión de jugadores
+    </h2>
+
+    <p>
+      Administra los jugadores del club
+    </p>
+
+  </div>
+
+
+  <!-- AGREGAR JUGADOR -->
 
   <div
-  id="menuAdminJugadores"
-  class="oculto"
-  style="margin-top:10px;">
+  class="accion-admin"
+  onclick="mostrar('agregarJugador')">
 
-    <div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('agregarJugador')">
+    <div class="accion-admin-icono">
+      ➕
+    </div>
 
-  <div class="icono">
-    ➕
-  </div>
+    <div class="accion-admin-texto">
 
-  <h3>
-    Agregar jugador
-  </h3>
+      <strong>
+        Agregar jugador
+      </strong>
+
+      <span>
+        Registra un nuevo jugador en el plantel
+      </span>
 
     </div>
 
-    <div
-class="card"
-style="margin-top:10px;"
-onclick="mostrar('editarJugador')">
+    <div class="accion-admin-flecha">
+      ›
+    </div>
 
-  <div class="icono">
-    ✏️
   </div>
 
-  <h3>
-    Editar jugador
-  </h3>
+
+  <!-- EDITAR JUGADOR -->
+
+  <div
+  class="accion-admin"
+  onclick="mostrar('editarJugador')">
+
+    <div class="accion-admin-icono">
+      ✏️
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Editar jugador
+      </strong>
+
+      <span>
+        Modifica los datos de un jugador registrado
+      </span>
 
     </div>
 
-<div
-class="card"
-style="margin-top:10px;"
-onclick="abrirEliminarJugador()">
+    <div class="accion-admin-flecha">
+      ›
+    </div>
 
-  <div class="icono">
-    🗑️
   </div>
 
-  <h3>
-    Eliminar jugador
-  </h3>
+
+  <!-- ELIMINAR JUGADOR -->
+
+  <div
+  class="accion-admin accion-admin-eliminar"
+  onclick="abrirEliminarJugador()">
+
+    <div class="accion-admin-icono">
+      🗑️
+    </div>
+
+    <div class="accion-admin-texto">
+
+      <strong>
+        Eliminar jugador
+      </strong>
+
+      <span>
+        Elimina un jugador del plantel
+      </span>
+
+    </div>
+
+    <div class="accion-admin-flecha">
+      ›
+    </div>
+
+  </div>
 
 </div>
-  </div>
-
 
 <div
 id="menuAdminFinanzas"
