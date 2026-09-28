@@ -677,6 +677,15 @@ font-size: 16px;
   transform:scale(.96);
 }
 
+
+/* ===== NAVEGACIÓN PÚBLICA FIJA ===== */
+
+.navegacion-publica-fija{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:white;
+}
 </style>  
 
   
@@ -727,6 +736,8 @@ onclick="iniciarSesion()"
       </section>
 
   <div id="pantallaPublica">
+
+<div class="navegacion-publica-fija"></div>
 
 <header class="header-publico">
 
@@ -818,6 +829,7 @@ onclick="iniciarSesion()"
 
 </section>
 
+</div>
 
 <section class="bienvenida">  <h2>    
 ¡Bienvenidos Ferianos !  
