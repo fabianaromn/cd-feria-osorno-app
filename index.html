@@ -3015,6 +3015,16 @@ function mostrar(id){
 
 }
 
+if(id === "movimientosFinancieros"){
+
+  document.getElementById("movimientoTipo").value = "todos";
+  document.getElementById("movimientoMes").value = "todos";
+  document.getElementById("movimientoAnio").value = "todos";
+
+  cargarMovimientosFinancieros();
+
+}
+
 if(id === "editarJugador"){
   restaurarCategoriasEditarJugador();
 }
