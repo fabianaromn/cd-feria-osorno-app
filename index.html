@@ -1120,7 +1120,12 @@ font-size: 16px;
   align-items:center;
   justify-content:space-between;
   gap:12px;
+
+  width:100%;
+  box-sizing:border-box;
+
   padding:15px 17px;
+
   background:#071b4a;
   color:white;
 }
@@ -1141,15 +1146,31 @@ font-size: 16px;
 }
 
 .editar-banner-partido{
-  flex-shrink:0;
+  flex:0 0 auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+
   padding:8px 12px;
+
   border:0;
   border-radius:20px;
+
   background:#d71920;
   color:white;
+
   font-size:10px;
   font-weight:900;
+
+  white-space:nowrap;
   cursor:pointer;
+}
+
+.partido-admin-cabecera > div{
+  min-width:0;
+  flex:1;
 }
 
 .editar-banner-partido:active{
@@ -1239,6 +1260,22 @@ font-size: 16px;
   font-weight:700;
 }
 
+.partido-admin-rival.oculto{
+  display:none !important;
+}
+
+
+#proximoSinEscudo.oculto{
+  display:none !important;
+}
+
+.proximo-pie{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
 
 </style>  
 
@@ -1464,28 +1501,39 @@ onclick="iniciarSesion()"
     </div>
 
 
-    <div class="proximo-equipo">
+<div class="proximo-equipo">
 
-      <div class="escudo-rival">
-        ?
-      </div>
+  <img
+  id="proximoEscudoRival"
+  class="proximo-escudo oculto"
+  alt="Escudo rival">
 
-      <strong id="proximoRival">
-        RIVAL
-      </strong>
+  <div
+  id="proximoSinEscudo"
+  class="escudo-rival">
+    ?
+  </div>
 
-    </div>
+  <strong id="proximoRival">
+    RIVAL
+  </strong>
+
+</div>
 
   </div>
 
 
   <div class="proximo-pie">
 
-    <span>
-      📍 <span id="proximoCancha">Cancha por confirmar</span>
-    </span>
+  <span>
+    🕐 <span id="proximoHora">Hora por confirmar</span>
+  </span>
 
-  </div>
+  <span>
+    📍 <span id="proximoCancha">Cancha por confirmar</span>
+  </span>
+
+</div>
 
 </section>
 
@@ -1682,14 +1730,14 @@ class="seccion oculto">
     <div>
       <span>PRÓXIMO PARTIDO</span>
 
-      <h2>
-        BANNER DEL PARTIDO
-      </h2>
+      <h2 id="adminBannerCampeonato">
+  BANNER DEL PARTIDO
+</h2>
     </div>
 
     <button
     class="editar-banner-partido"
-    onclick="mostrar('editarBannerPartido')"></button>
+    onclick="mostrar('editarBannerPartido')">
       ✏️ EDITAR
     </button>
 
@@ -1716,43 +1764,50 @@ class="seccion oculto">
 
       <span>VS</span>
 
-      <small>
-        LOCAL
-      </small>
+      <small id="adminBannerLocalVisitante">
+  LOCAL
+</small>
 
     </div>
 
 
     <div class="partido-admin-equipo">
 
-      <div class="partido-admin-rival">
-        ?
-      </div>
+     <img
+id="adminBannerEscudoRival"
+class="partido-admin-escudo oculto"
+alt="Escudo rival">
 
-      <strong>
-        RIVAL
-      </strong>
+<div
+id="adminBannerSinEscudo"
+class="partido-admin-rival">
+  ?
+</div>
+
+<strong id="adminBannerRival">
+  RIVAL
+</strong>
 
     </div>
 
   </div>
 
 
-  <div class="partido-admin-detalles">
+ <div class="partido-admin-detalles">
 
-    <span>
-      📅 Fecha por confirmar
-    </span>
+  <span>
+    📅 <span id="adminBannerFecha">Fecha por confirmar</span>
+  </span>
 
-    <span>
-      🕐 Hora por confirmar
-    </span>
+  <span>
+    🕐 <span id="adminBannerHora">Hora por confirmar</span>
+  </span>
 
-    <span>
-      📍 Cancha por confirmar
-    </span>
+  <span>
+    📍 <span id="adminBannerCancha">Cancha por confirmar</span>
+  </span>
 
-  </div>
+</div>
 
 </section>
 
@@ -4952,6 +5007,7 @@ function mostrar(id){
 
  if(id === "administracion"){
 
+
   document
   .getElementById("pantallaPublica")
   .classList.add("oculto");
@@ -4967,6 +5023,12 @@ function mostrar(id){
   document
   .getElementById("menuAdminFinanzas")
   .classList.add("oculto");
+
+  document
+.getElementById("menuAdminSocios")
+.classList.add("oculto");
+
+cargarBannerPartido();
 
 }
 
@@ -5485,7 +5547,297 @@ async function guardarSocio(){
 
 }
 
+async function cargarBannerPublico(){
 
+  const { data, error } =
+  await supabaseClient
+  .from("BannerPartido")
+  .select("*")
+  .order("id", { ascending:true })
+  .limit(1)
+  .maybeSingle();
+
+
+  if(error){
+
+    console.error(
+      "Error cargando banner público:",
+      error
+    );
+
+    return;
+  }
+
+
+  if(!data){
+    return;
+  }
+
+
+  /* CAMPEONATO */
+
+  document
+  .getElementById("proximoCampeonato")
+  .innerText =
+  data.campeonato || "PRÓXIMO PARTIDO";
+
+
+  /* JORNADA */
+
+  document
+  .getElementById("proximoJornada")
+  .innerText =
+  data.jornada
+  ? `FECHA ${data.jornada}`
+  : "FECHA POR CONFIRMAR";
+
+
+  /* RIVAL */
+
+  document
+  .getElementById("proximoRival")
+  .innerText =
+  data.rival || "RIVAL";
+
+
+  /* LOCAL / VISITANTE */
+
+  document
+  .getElementById("proximoLocalVisitante")
+  .innerText =
+  (data.local_visitante || "LOCAL")
+  .toUpperCase();
+
+
+  /* FECHA */
+
+  if(data.fecha){
+
+    const fecha =
+    new Date(data.fecha + "T00:00:00");
+
+    document
+    .getElementById("proximoFecha")
+    .innerText =
+    fecha.toLocaleDateString(
+      "es-CL",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+  }else{
+
+    document
+    .getElementById("proximoFecha")
+    .innerText =
+    "Fecha por confirmar";
+
+  }
+
+
+  /* HORA */
+
+  document
+  .getElementById("proximoHora")
+  .innerText =
+  data.hora
+  ? data.hora.slice(0,5) + " hrs"
+  : "Hora por confirmar";
+
+
+  /* CANCHA */
+
+  document
+  .getElementById("proximoCancha")
+  .innerText =
+  data.cancha || "Cancha por confirmar";
+
+
+  /* ESCUDO RIVAL */
+
+  const imagen =
+  document.getElementById(
+    "proximoEscudoRival"
+  );
+
+  const sinEscudo =
+  document.getElementById(
+    "proximoSinEscudo"
+  );
+
+
+  if(data.escudo_rival_url){
+
+    const { data: urlData, error: urlError } =
+    await supabaseClient
+    .storage
+    .from("escudos-rivales")
+    .createSignedUrl(
+      data.escudo_rival_url,
+      3600
+    );
+
+
+    if(!urlError && urlData){
+
+      imagen.src =
+      urlData.signedUrl;
+
+      imagen.classList.remove("oculto");
+
+      sinEscudo.classList.add("oculto");
+
+    }
+
+  }else{
+
+    imagen.classList.add("oculto");
+
+    sinEscudo.classList.remove("oculto");
+
+  }
+
+}
+
+async function cargarBannerPartido(){
+
+  const { data, error } =
+  await supabaseClient
+  .from("BannerPartido")
+  .select("*")
+  .order("id", { ascending:true })
+  .limit(1)
+  .maybeSingle();
+
+
+  if(error){
+
+    console.error(
+      "Error cargando BannerPartido:",
+      error
+    );
+
+    return;
+  }
+
+
+  if(!data){
+    return;
+  }
+
+
+  /* CAMPEONATO + JORNADA */
+
+  let titulo =
+  data.campeonato || "PRÓXIMO PARTIDO";
+
+  if(data.jornada){
+
+    titulo +=
+    ` · FECHA ${data.jornada}`;
+
+  }
+
+  document
+  .getElementById("adminBannerCampeonato")
+  .innerText = titulo;
+
+
+  /* RIVAL */
+
+  document
+  .getElementById("adminBannerRival")
+  .innerText =
+  data.rival || "RIVAL";
+
+
+  /* LOCAL / VISITANTE */
+
+  document
+  .getElementById("adminBannerLocalVisitante")
+  .innerText =
+  (data.local_visitante || "LOCAL").toUpperCase();
+
+
+  /* FECHA */
+
+  if(data.fecha){
+
+    const fecha =
+    new Date(data.fecha + "T00:00:00");
+
+    document
+    .getElementById("adminBannerFecha")
+    .innerText =
+    fecha.toLocaleDateString(
+      "es-CL",
+      {
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+  }
+
+
+  /* HORA */
+
+  document
+  .getElementById("adminBannerHora")
+  .innerText =
+  data.hora
+  ? data.hora.slice(0,5) + " hrs"
+  : "Hora por confirmar";
+
+
+  /* CANCHA */
+
+  document
+  .getElementById("adminBannerCancha")
+  .innerText =
+  data.cancha || "Cancha por confirmar";
+
+
+  /* ESCUDO RIVAL */
+
+  if(data.escudo_rival_url){
+
+    const { data: urlData, error: urlError } =
+    await supabaseClient
+    .storage
+    .from("escudos-rivales")
+    .createSignedUrl(
+      data.escudo_rival_url,
+      3600
+    );
+
+
+    if(!urlError && urlData){
+
+      const imagen =
+      document.getElementById(
+        "adminBannerEscudoRival"
+      );
+
+      imagen.src =
+      urlData.signedUrl;
+
+      imagen.classList.remove("oculto");
+
+      document
+      .getElementById("adminBannerSinEscudo")
+      .classList.add("oculto");
+
+    }
+
+  }
+
+}
 
 async function cargarSocios(){
 
@@ -8526,7 +8878,202 @@ async function guardarEdicionPartido(){
 
 
 
+async function guardarBannerPartido(){
 
+  const campeonato =
+  document.getElementById("bannerCampeonato").value.trim();
+
+  const jornada =
+  document.getElementById("bannerJornada").value;
+
+  const rival =
+  document.getElementById("bannerRival").value.trim();
+
+  const fecha =
+  document.getElementById("bannerFecha").value;
+
+  const hora =
+  document.getElementById("bannerHora").value;
+
+  const localVisitante =
+  document.getElementById("bannerLocalVisitante").value;
+
+  const cancha =
+  document.getElementById("bannerCancha").value.trim();
+
+  const archivo =
+  document.getElementById("bannerEscudoRival").files[0];
+
+  const mensaje =
+  document.getElementById("mensajeBannerPartido");
+
+
+  if(!campeonato || !rival || !fecha || !localVisitante){
+
+    mensaje.innerText =
+    "⚠️ Completa campeonato, rival, fecha y local/visitante.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando banner...";
+
+  mensaje.style.color = "#475467";
+
+
+  let escudoRivalUrl = null;
+
+
+  /* SUBIR ESCUDO DEL RIVAL */
+
+  if(archivo){
+
+    const extension =
+    archivo.name.split(".").pop();
+
+    const nombreArchivo =
+    `rival-${Date.now()}.${extension}`;
+
+
+    const { error: errorUpload } =
+    await supabaseClient
+    .storage
+    .from("escudos-rivales")
+    .upload(nombreArchivo, archivo);
+
+
+    if(errorUpload){
+
+      console.error(errorUpload);
+
+      mensaje.innerText =
+      "❌ Error al subir el escudo del rival.";
+
+      mensaje.style.color = "#c82032";
+
+      return;
+    }
+
+
+    escudoRivalUrl = nombreArchivo;
+
+  }
+
+
+  /* BUSCAR SI YA EXISTE UN BANNER */
+
+  const { data: bannerExistente, error: errorBuscar } =
+  await supabaseClient
+  .from("BannerPartido")
+  .select("id, escudo_rival_url")
+  .order("id", { ascending:true })
+  .limit(1)
+  .maybeSingle();
+
+
+  if(errorBuscar){
+
+    console.error(errorBuscar);
+
+    mensaje.innerText =
+    "❌ Error al consultar el banner.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  const datosBanner = {
+
+    campeonato: campeonato,
+
+    jornada:
+    jornada ? parseInt(jornada) : null,
+
+    rival: rival,
+
+    fecha: fecha,
+
+    hora:
+    hora || null,
+
+    local_visitante:
+    localVisitante,
+
+    cancha:
+    cancha || null
+
+  };
+
+
+  /* CONSERVAR ESCUDO ANTERIOR SI NO SE SUBE UNO NUEVO */
+
+  if(escudoRivalUrl){
+
+    datosBanner.escudo_rival_url =
+    escudoRivalUrl;
+
+  }
+
+
+  let errorGuardar;
+
+
+  /* ACTUALIZAR O CREAR */
+
+  if(bannerExistente){
+
+    const { error } =
+    await supabaseClient
+    .from("BannerPartido")
+    .update(datosBanner)
+    .eq("id", bannerExistente.id);
+
+    errorGuardar = error;
+
+  }else{
+
+    if(escudoRivalUrl){
+
+      datosBanner.escudo_rival_url =
+      escudoRivalUrl;
+
+    }
+
+    const { error } =
+    await supabaseClient
+    .from("BannerPartido")
+    .insert([datosBanner]);
+
+    errorGuardar = error;
+
+  }
+
+
+  if(errorGuardar){
+
+    console.error(errorGuardar);
+
+    mensaje.innerText =
+    "❌ Error al guardar el banner.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "✅ Banner actualizado correctamente.";
+
+  mensaje.style.color = "green";
+
+}
   
   
 async function guardarPartido(){
@@ -9689,6 +10236,7 @@ async function confirmarEliminarJugador(id, nombre, categoria){
 
 }
 
+cargarBannerPublico();
 window.addEventListener("load", function(){
 
   setTimeout(function(){
