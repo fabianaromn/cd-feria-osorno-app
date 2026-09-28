@@ -1011,27 +1011,665 @@ style="margin-top:10px;">
 
   <div
   class="card"
-  style="margin-top:10px;">
+  style="margin-top:10px;"
+  onclick="mostrar('agregarSocio')">
+
+    <div class="icono">
+      ➕
+    </div>
+
+    <h3>
+      Registrar socio
+    </h3>
+
+  </div>
+
+
+  <div
+  class="card"
+  style="margin-top:10px;"
+  onclick="mostrar('listaSocios')">
 
     <div class="icono">
       👥
     </div>
 
     <h3>
-      Administración de socios
+      Lista de socios
     </h3>
 
-    <p
-    style="
-    margin-top:8px;
-    color:#667085;
-    ">
-      Próximamente
+  </div>
+
+
+<div
+class="card"
+style="margin-top:10px;"
+onclick="mostrar('registrarPagoSocio')">
+
+  <div class="icono">
+    💳
+  </div>
+
+  <h3>
+    Registrar pago
+  </h3>
+
+</div>
+
+
+<div
+class="card"
+style="margin-top:10px;"
+onclick="mostrar('estadoCuotasSocios')">
+
+  <div class="icono">
+    📅
+  </div>
+
+  <h3>
+    Estado de cuotas
+  </h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section
+id="agregarSocio"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2 style="margin-top:15px;">
+    ➕ Registrar socio
+  </h2>
+
+  <p
+  style="
+  color:#667085;
+  margin-bottom:18px;
+  ">
+    Nuevo socio del Club Deportivo Feria Osorno
+  </p>
+
+
+  <label>Nombre completo</label>
+
+  <input
+  type="text"
+  id="socioNombre"
+  placeholder="Ej: Juan Pérez"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>RUT</label>
+
+  <input
+  type="text"
+  id="socioRut"
+  placeholder="Ej: 12.345.678-9"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Fecha de ingreso</label>
+
+  <input
+  type="date"
+  id="socioFechaIngreso"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Estado</label>
+
+  <select
+  id="socioEstado"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="Activo">
+      Activo
+    </option>
+
+    <option value="Inactivo">
+      Inactivo
+    </option>
+
+  </select>
+
+
+  <label>Cuota mensual</label>
+
+  <input
+  type="number"
+  id="socioMontoCuota"
+  min="0"
+  placeholder="Ej: 5000"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="socioObservaciones"
+  rows="3"
+  placeholder="Información adicional del socio"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  "></textarea>
+
+
+  <button
+  class="boton"
+  style="
+  width:100%;
+  margin-top:10px;
+  "
+  onclick="guardarSocio()">
+
+    💾 Guardar socio
+
+  </button>
+
+
+  <p
+  id="mensajeSocio"
+  style="
+  margin-top:15px;
+  text-align:center;
+  ">
+  </p>
+
+</section>
+
+
+<section
+id="listaSocios"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2 style="margin-top:15px;">
+    👥 Lista de socios
+  </h2>
+
+  <p
+  style="
+  color:#667085;
+  margin-bottom:18px;
+  ">
+    Socios registrados en el Club Deportivo Feria Osorno
+  </p>
+
+
+  <div id="contenedorSocios">
+
+    <p style="color:#667085;">
+      Cargando socios...
     </p>
 
   </div>
 
-</div>
+</section>
+
+
+<section
+id="editarSocio"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('listaSocios')">
+    ← Volver
+  </button>
+
+  <h2 style="margin-top:15px;">
+    ✏️ Editar socio
+  </h2>
+
+  <p
+  style="
+  color:#667085;
+  margin-bottom:18px;
+  ">
+    Modifica los datos del socio
+  </p>
+
+
+  <input
+  type="hidden"
+  id="editarSocioId">
+
+
+  <label>Nombre completo</label>
+
+  <input
+  type="text"
+  id="editarSocioNombre"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>RUT</label>
+
+  <input
+  type="text"
+  id="editarSocioRut"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Fecha de ingreso</label>
+
+  <input
+  type="date"
+  id="editarSocioFechaIngreso"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Estado</label>
+
+  <select
+  id="editarSocioEstado"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="Activo">
+      Activo
+    </option>
+
+    <option value="Inactivo">
+      Inactivo
+    </option>
+
+  </select>
+
+
+  <label>Cuota mensual</label>
+
+  <input
+  type="number"
+  id="editarSocioMontoCuota"
+  min="0"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="editarSocioObservaciones"
+  rows="3"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  "></textarea>
+
+
+  <button
+  class="boton"
+  style="
+  width:100%;
+  margin-top:10px;
+  "
+  onclick="guardarEdicionSocio()">
+
+    💾 Guardar cambios
+
+  </button>
+
+
+  <p
+  id="mensajeEditarSocio"
+  style="
+  margin-top:15px;
+  text-align:center;
+  ">
+  </p>
+
+</section>
+
+
+
+<section
+id="registrarPagoSocio"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2 style="margin-top:15px;">
+    💳 Registrar pago
+  </h2>
+
+  <p
+  style="
+  color:#667085;
+  margin-bottom:18px;
+  ">
+    Registra el pago mensual de un socio.
+  </p>
+
+
+  <label>Socio</label>
+
+  <select
+  id="pagoSocioId"
+  onchange="cargarMontoCuotaSocio()"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="">
+      Selecciona un socio
+    </option>
+
+  </select>
+
+
+  <label>Mes</label>
+
+  <select
+  id="pagoSocioMes"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="">Selecciona mes</option>
+    <option value="1">Enero</option>
+    <option value="2">Febrero</option>
+    <option value="3">Marzo</option>
+    <option value="4">Abril</option>
+    <option value="5">Mayo</option>
+    <option value="6">Junio</option>
+    <option value="7">Julio</option>
+    <option value="8">Agosto</option>
+    <option value="9">Septiembre</option>
+    <option value="10">Octubre</option>
+    <option value="11">Noviembre</option>
+    <option value="12">Diciembre</option>
+
+  </select>
+
+
+  <label>Año</label>
+
+  <input
+  type="number"
+  id="pagoSocioAnio"
+  min="2020"
+  max="2100"
+  placeholder="Ej: 2026"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Monto</label>
+
+  <input
+  type="number"
+  id="pagoSocioMonto"
+  min="0"
+  placeholder="Ej: 5000"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Fecha de pago</label>
+
+  <input
+  type="date"
+  id="pagoSocioFecha"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <label>Método de pago</label>
+
+  <select
+  id="pagoSocioMetodo"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="">
+      Selecciona método
+    </option>
+
+    <option value="Efectivo">
+      Efectivo
+    </option>
+
+    <option value="Transferencia">
+      Transferencia
+    </option>
+
+    <option value="Deposito">
+      Depósito
+    </option>
+
+    <option value="Otro">
+      Otro
+    </option>
+
+  </select>
+
+
+  <label>Observaciones</label>
+
+  <textarea
+  id="pagoSocioObservaciones"
+  rows="3"
+  placeholder="Opcional"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  "></textarea>
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:10px;"
+  onclick="guardarPagoSocio()">
+
+    💾 Registrar pago
+
+  </button>
+
+
+  <p
+  id="mensajePagoSocio"
+  style="
+  margin-top:15px;
+  text-align:center;
+  ">
+  </p>
+
+</section>
+
+
+<section
+id="estadoCuotasSocios"
+class="seccion oculto">
+
+  <button
+  class="boton"
+  onclick="mostrar('administracion')">
+    ← Volver
+  </button>
+
+  <h2 style="margin-top:15px;">
+    📅 Estado de cuotas
+  </h2>
+
+  <p
+  style="
+  color:#667085;
+  margin-bottom:18px;
+  ">
+    Revisa las cuotas pagadas y pendientes de cada socio.
+  </p>
+
+
+  <label>Socio</label>
+
+  <select
+  id="estadoCuotasSocioId"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+    <option value="">
+      Selecciona un socio
+    </option>
+
+  </select>
+
+
+  <label>Año</label>
+
+  <input
+  type="number"
+  id="estadoCuotasAnio"
+  min="2020"
+  max="2100"
+  style="
+  width:100%;
+  padding:14px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  ">
+
+
+  <button
+  class="boton"
+  style="width:100%; margin-top:5px;"
+  onclick="cargarEstadoCuotas()">
+
+    🔍 Ver estado de cuotas
+
+  </button>
+
+
+  <div
+  id="contenedorEstadoCuotas"
+  style="margin-top:20px;">
+
+    <p style="color:#667085;">
+      Selecciona un socio para consultar sus cuotas.
+    </p>
+
+  </div>
 
 </section>
 
@@ -3266,6 +3904,17 @@ function mostrar(id){
     cargarPartidos();
   }
 
+  if(id === "listaSocios"){
+  cargarSocios();
+}
+
+if(id === "registrarPagoSocio"){
+  cargarSociosParaPago();
+}
+
+if(id === "estadoCuotasSocios"){
+  prepararEstadoCuotas();
+}
 
   if(id === "resumenFinanciero"){
 
@@ -3664,6 +4313,1095 @@ document.getElementById("nuevoIngreso").value = "";
 const categoriasEditarJugadoresHTML =
 document.getElementById("listaEditarJugadores").innerHTML;
 
+
+
+
+async function guardarSocio(){
+
+  const nombre =
+  document.getElementById("socioNombre").value.trim();
+
+  const rut =
+  document.getElementById("socioRut").value.trim();
+
+  const fechaIngreso =
+  document.getElementById("socioFechaIngreso").value;
+
+  const estado =
+  document.getElementById("socioEstado").value;
+
+  const montoCuota =
+  document.getElementById("socioMontoCuota").value;
+
+  const observaciones =
+  document.getElementById("socioObservaciones").value.trim();
+
+  const mensaje =
+  document.getElementById("mensajeSocio");
+
+
+  if(!nombre || !rut || !fechaIngreso || !montoCuota){
+
+    mensaje.innerText =
+    "⚠️ Completa nombre, RUT, fecha de ingreso y cuota mensual.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando socio...";
+
+  mensaje.style.color =
+  "#667085";
+
+
+  const { error } =
+  await supabaseClient
+    .from("Socios")
+    .insert([{
+
+      nombre: nombre,
+      rut: rut,
+      fecha_ingreso: fechaIngreso,
+      estado: estado,
+      monto_cuota: Number(montoCuota),
+      observaciones: observaciones
+
+    }]);
+
+
+  if(error){
+
+    console.error(
+      "Error al guardar socio:",
+      error
+    );
+
+    mensaje.innerText =
+    "❌ No se pudo guardar el socio.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "✅ Socio registrado correctamente.";
+
+  mensaje.style.color =
+  "green";
+
+
+  document.getElementById("socioNombre").value = "";
+  document.getElementById("socioRut").value = "";
+  document.getElementById("socioFechaIngreso").value = "";
+  document.getElementById("socioEstado").value = "Activo";
+  document.getElementById("socioMontoCuota").value = "";
+  document.getElementById("socioObservaciones").value = "";
+
+}
+
+
+
+async function cargarSocios(){
+
+  const contenedor =
+  document.getElementById("contenedorSocios");
+
+  contenedor.innerHTML =
+  `<p style="color:#667085;">
+    Cargando socios...
+  </p>`;
+
+
+  const { data: socios, error } =
+  await supabaseClient
+    .from("Socios")
+    .select("*")
+    .order("nombre", {
+      ascending: true
+    });
+
+
+  if(error){
+
+    console.error(
+      "Error al cargar socios:",
+      error
+    );
+
+    contenedor.innerHTML =
+    `<p style="color:#c82032;">
+      ❌ No se pudieron cargar los socios.
+    </p>`;
+
+    return;
+
+  }
+
+
+  if(!socios || socios.length === 0){
+
+    contenedor.innerHTML =
+    `<p style="color:#667085;">
+      No hay socios registrados.
+    </p>`;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+  socios.map(socio => {
+
+    const monto =
+    new Intl.NumberFormat(
+      "es-CL",
+      {
+        style: "currency",
+        currency: "CLP",
+        maximumFractionDigits: 0
+      }
+    ).format(
+      Number(socio.monto_cuota || 0)
+    );
+
+
+    const fechaIngreso =
+    socio.fecha_ingreso
+    ? new Date(
+        socio.fecha_ingreso + "T00:00:00"
+      ).toLocaleDateString("es-CL")
+    : "No registrada";
+
+
+    return `
+      <div
+      class="card"
+      style="
+      margin-bottom:12px;
+      text-align:left;
+      ">
+
+        <h3>
+          👤 ${socio.nombre}
+        </h3>
+
+        <p style="margin-top:8px;">
+          <strong>RUT:</strong>
+          ${socio.rut || "No registrado"}
+        </p>
+
+        <p style="margin-top:5px;">
+          <strong>Estado:</strong>
+          ${socio.estado || "Sin estado"}
+        </p>
+
+        <p style="margin-top:5px;">
+          <strong>Cuota mensual:</strong>
+          ${monto}
+        </p>
+
+        <p style="margin-top:5px;">
+          <strong>Ingreso al club:</strong>
+          ${fechaIngreso}
+        </p>
+
+
+        <div
+style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px;
+">
+
+  <button
+  class="boton"
+  onclick="editarSocio(${socio.id})">
+    ✏️ Editar
+  </button>
+
+  <button
+  class="boton"
+  onclick="eliminarSocio(${socio.id})">
+    🗑️ Eliminar
+  </button>
+
+</div>
+
+      </div>
+    `;
+
+  }).join("");
+
+}
+
+
+async function editarSocio(id){
+
+  const { data: socio, error } =
+  await supabaseClient
+    .from("Socios")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+
+  if(error){
+
+    console.error(
+      "Error al cargar socio:",
+      error
+    );
+
+    alert(
+      "❌ No se pudieron cargar los datos del socio."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "editarSocioId"
+  ).value = socio.id;
+
+  document.getElementById(
+    "editarSocioNombre"
+  ).value = socio.nombre || "";
+
+  document.getElementById(
+    "editarSocioRut"
+  ).value = socio.rut || "";
+
+  document.getElementById(
+    "editarSocioFechaIngreso"
+  ).value = socio.fecha_ingreso || "";
+
+  document.getElementById(
+    "editarSocioEstado"
+  ).value = socio.estado || "Activo";
+
+  document.getElementById(
+    "editarSocioMontoCuota"
+  ).value = socio.monto_cuota || "";
+
+  document.getElementById(
+    "editarSocioObservaciones"
+  ).value = socio.observaciones || "";
+
+
+  document.getElementById(
+    "mensajeEditarSocio"
+  ).innerText = "";
+
+
+  mostrar("editarSocio");
+
+}
+
+
+
+async function guardarEdicionSocio(){
+
+  const id =
+  document.getElementById("editarSocioId").value;
+
+  const nombre =
+  document.getElementById("editarSocioNombre").value.trim();
+
+  const rut =
+  document.getElementById("editarSocioRut").value.trim();
+
+  const fechaIngreso =
+  document.getElementById("editarSocioFechaIngreso").value;
+
+  const estado =
+  document.getElementById("editarSocioEstado").value;
+
+  const montoCuota =
+  document.getElementById("editarSocioMontoCuota").value;
+
+  const observaciones =
+  document.getElementById("editarSocioObservaciones").value.trim();
+
+  const mensaje =
+  document.getElementById("mensajeEditarSocio");
+
+
+  if(!id || !nombre || !rut || !fechaIngreso || !montoCuota){
+
+    mensaje.innerText =
+    "⚠️ Completa nombre, RUT, fecha de ingreso y cuota mensual.";
+
+    mensaje.style.color = "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando cambios...";
+
+  mensaje.style.color =
+  "#667085";
+
+
+  const { error } =
+  await supabaseClient
+    .from("Socios")
+    .update({
+
+      nombre: nombre,
+      rut: rut,
+      fecha_ingreso: fechaIngreso,
+      estado: estado,
+      monto_cuota: Number(montoCuota),
+      observaciones: observaciones
+
+    })
+    .eq("id", id);
+
+
+  if(error){
+
+    console.error(
+      "Error al actualizar socio:",
+      error
+    );
+
+    mensaje.innerText =
+    "❌ No se pudieron guardar los cambios.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "✅ Socio actualizado correctamente.";
+
+  mensaje.style.color =
+  "green";
+
+
+  setTimeout(() => {
+
+    mostrar("listaSocios");
+
+  }, 800);
+
+}
+
+
+
+async function eliminarSocio(id){
+
+  const confirmar =
+  confirm(
+    "¿Seguro que quieres eliminar este socio?\n\nEsta acción no se puede deshacer."
+  );
+
+
+  if(!confirmar){
+    return;
+  }
+
+
+  const { error } =
+  await supabaseClient
+    .from("Socios")
+    .delete()
+    .eq("id", id);
+
+
+  if(error){
+
+    console.error(
+      "Error al eliminar socio:",
+      error
+    );
+
+    alert(
+      "❌ No se pudo eliminar el socio."
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    "✅ Socio eliminado correctamente."
+  );
+
+
+  cargarSocios();
+
+}
+
+
+
+async function cargarSociosParaPago(){
+
+  const hoy = new Date();
+
+document.getElementById(
+  "pagoSocioAnio"
+).value = hoy.getFullYear();
+
+document.getElementById(
+  "pagoSocioFecha"
+).value =
+hoy.getFullYear() + "-" +
+String(hoy.getMonth() + 1).padStart(2, "0") + "-" +
+String(hoy.getDate()).padStart(2, "0");
+
+  const selector =
+  document.getElementById("pagoSocioId");
+
+  selector.innerHTML =
+  `<option value="">
+    Cargando socios...
+  </option>`;
+
+
+  const { data: socios, error } =
+  await supabaseClient
+    .from("Socios")
+    .select("id,nombre,rut,monto_cuota")
+    .eq("estado", "Activo")
+    .order("nombre", {
+      ascending: true
+    });
+
+
+  if(error){
+
+    console.error(
+      "Error al cargar socios para pago:",
+      error
+    );
+
+    selector.innerHTML =
+    `<option value="">
+      Error al cargar socios
+    </option>`;
+
+    return;
+
+  }
+
+
+  selector.innerHTML =
+  `<option value="">
+    Selecciona un socio
+  </option>`;
+
+
+  socios.forEach(socio => {
+
+    const opcion =
+    document.createElement("option");
+
+    opcion.value =
+    socio.id;
+
+    opcion.textContent =
+    `${socio.nombre} - ${socio.rut}`;
+
+    opcion.dataset.monto =
+    socio.monto_cuota || 0;
+
+    selector.appendChild(opcion);
+
+  });
+
+}
+
+
+function cargarMontoCuotaSocio(){
+
+  const selector =
+  document.getElementById("pagoSocioId");
+
+  const opcion =
+  selector.options[
+    selector.selectedIndex
+  ];
+
+  const monto =
+  opcion.dataset.monto || "";
+
+  document.getElementById(
+    "pagoSocioMonto"
+  ).value = monto;
+
+}
+
+async function prepararEstadoCuotas(){
+
+  const selector =
+  document.getElementById("estadoCuotasSocioId");
+
+  const anio =
+  document.getElementById("estadoCuotasAnio");
+
+  const hoy = new Date();
+
+  anio.value =
+  hoy.getFullYear();
+
+
+  selector.innerHTML =
+  `<option value="">
+    Cargando socios...
+  </option>`;
+
+
+  const { data: socios, error } =
+  await supabaseClient
+    .from("Socios")
+    .select("id,nombre,rut")
+    .order("nombre", {
+      ascending: true
+    });
+
+
+  if(error){
+
+    console.error(
+      "Error al cargar socios:",
+      error
+    );
+
+    selector.innerHTML =
+    `<option value="">
+      Error al cargar socios
+    </option>`;
+
+    return;
+
+  }
+
+
+  selector.innerHTML =
+  `<option value="">
+    Selecciona un socio
+  </option>`;
+
+
+  socios.forEach(socio => {
+
+    const opcion =
+    document.createElement("option");
+
+    opcion.value =
+    socio.id;
+
+    opcion.textContent =
+    `${socio.nombre} - ${socio.rut}`;
+
+    selector.appendChild(opcion);
+
+  });
+
+}
+
+
+async function cargarEstadoCuotas(){
+
+  const sociosId =
+  document.getElementById("estadoCuotasSocioId").value;
+
+  const anio =
+  document.getElementById("estadoCuotasAnio").value;
+
+  const contenedor =
+  document.getElementById("contenedorEstadoCuotas");
+
+
+  if(!sociosId || !anio){
+
+    contenedor.innerHTML =
+    `<p style="color:#c82032;">
+      ⚠️ Selecciona un socio y un año.
+    </p>`;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+  `<p style="color:#667085;">
+    Cargando estado de cuotas...
+  </p>`;
+
+
+  const { data: pagos, error } =
+  await supabaseClient
+    .from("PagoSocios")
+    .select("id,mes,anio,monto,fecha_pago,metodo_pago,ingreso_id")
+    .eq("socios_id", sociosId)
+    .eq("anio", Number(anio))
+    .order("mes", {
+      ascending: true
+    });
+
+
+  if(error){
+
+    console.error(
+      "Error al cargar estado de cuotas:",
+      error
+    );
+
+    contenedor.innerHTML =
+    `<p style="color:#c82032;">
+      ❌ No se pudo cargar el estado de cuotas.
+    </p>`;
+
+    return;
+
+  }
+
+
+  const nombresMeses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+  ];
+
+
+  const formatoPesos =
+  new Intl.NumberFormat(
+    "es-CL",
+    {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    }
+  );
+
+
+  let html = "";
+
+
+  for(let mes = 1; mes <= 12; mes++){
+
+    const pago =
+    pagos.find(
+      item => Number(item.mes) === mes
+    );
+
+
+    if(pago){
+
+      const fecha =
+      pago.fecha_pago
+      ? new Date(
+          pago.fecha_pago + "T00:00:00"
+        ).toLocaleDateString("es-CL")
+      : "Sin fecha";
+
+
+      html += `
+        <div
+        class="card"
+        style="
+        margin-bottom:10px;
+        text-align:left;
+        ">
+
+          <div
+          style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+          ">
+
+            <strong>
+              ${nombresMeses[mes - 1]}
+            </strong>
+
+            <strong style="color:green;">
+              ✅ Pagado
+            </strong>
+
+          </div>
+
+          <p style="margin-top:8px;">
+            <strong>Monto:</strong>
+            ${formatoPesos.format(
+              Number(pago.monto || 0)
+            )}
+          </p>
+
+          <p style="margin-top:5px;">
+            <strong>Fecha:</strong>
+            ${fecha}
+          </p>
+
+          <p style="margin-top:5px;">
+            <strong>Método:</strong>
+            ${pago.metodo_pago || "No registrado"}
+          </p>
+
+        </div>
+      `;
+
+    }else{
+
+      html += `
+        <div
+        class="card"
+        style="
+        margin-bottom:10px;
+        text-align:left;
+        ">
+
+          <div
+          style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+          ">
+
+            <strong>
+              ${nombresMeses[mes - 1]}
+            </strong>
+
+            <strong style="color:#c82032;">
+              ⏳ Pendiente
+            </strong>
+
+          </div>
+
+        </div>
+      `;
+
+    }
+
+  }
+
+
+  contenedor.innerHTML = html;
+
+}
+
+
+async function guardarPagoSocio(){
+
+  const sociosId =
+  document.getElementById("pagoSocioId").value;
+
+  const mes =
+  document.getElementById("pagoSocioMes").value;
+
+  const anio =
+  document.getElementById("pagoSocioAnio").value;
+
+  const monto =
+  document.getElementById("pagoSocioMonto").value;
+
+  const fechaPago =
+  document.getElementById("pagoSocioFecha").value;
+
+  const metodoPago =
+  document.getElementById("pagoSocioMetodo").value;
+
+  const observaciones =
+  document.getElementById("pagoSocioObservaciones").value.trim();
+
+  const mensaje =
+  document.getElementById("mensajePagoSocio");
+
+
+  if(
+    !sociosId ||
+    !mes ||
+    !anio ||
+    !monto ||
+    !fechaPago ||
+    !metodoPago
+  ){
+
+    mensaje.innerText =
+    "⚠️ Completa socio, mes, año, monto, fecha y método de pago.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Registrando pago...";
+
+  mensaje.style.color =
+  "#667085";
+
+
+  // COMPROBAR SI ESA CUOTA YA FUE REGISTRADA
+
+  const { data: pagoExistente, error: errorBuscarPago } =
+  await supabaseClient
+    .from("PagoSocios")
+    .select("id")
+    .eq("socios_id", sociosId)
+    .eq("mes", Number(mes))
+    .eq("anio", Number(anio))
+    .maybeSingle();
+
+
+  if(errorBuscarPago){
+
+    console.error(
+      "Error al comprobar cuota:",
+      errorBuscarPago
+    );
+
+    mensaje.innerText =
+    "❌ No se pudo comprobar el estado de la cuota.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  if(pagoExistente){
+
+    mensaje.innerText =
+    "⚠️ Este socio ya tiene registrada la cuota de ese mes y año.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  // BUSCAR DATOS DEL SOCIO
+
+  const { data: socio, error: errorSocio } =
+  await supabaseClient
+    .from("Socios")
+    .select("nombre,rut")
+    .eq("id", sociosId)
+    .single();
+
+
+  if(errorSocio){
+
+    console.error(
+      "Error al buscar socio:",
+      errorSocio
+    );
+
+    mensaje.innerText =
+    "❌ No se pudieron obtener los datos del socio.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  const nombresMeses = [
+    "",
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+  ];
+
+  const nombreMes =
+  nombresMeses[Number(mes)];
+
+
+  // CREAR EL INGRESO EN FINANZAS
+
+  const { data: ingreso, error: errorIngreso } =
+  await supabaseClient
+    .from("Ingresos")
+    .insert([{
+
+      fecha: fechaPago,
+      monto: Number(monto),
+
+      tipo:
+      "Cuotas de socios",
+
+      descripcion:
+      `Cuota ${nombreMes} ${anio} - ${socio.nombre}`,
+
+      origen:
+      socio.nombre,
+
+      metodo_pago:
+      metodoPago,
+
+      observaciones:
+      observaciones
+
+    }])
+    .select("id")
+    .single();
+
+
+  if(errorIngreso){
+
+    console.error(
+      "Error al crear ingreso:",
+      errorIngreso
+    );
+
+    mensaje.innerText =
+    "❌ No se pudo registrar el ingreso en Finanzas.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  // REGISTRAR EL PAGO DEL SOCIO
+
+  const { error: errorPago } =
+  await supabaseClient
+    .from("PagoSocios")
+    .insert([{
+
+      socios_id:
+      Number(sociosId),
+
+      mes:
+      Number(mes),
+
+      anio:
+      Number(anio),
+
+      monto:
+      Number(monto),
+
+      fecha_pago:
+      fechaPago,
+
+      metodo_pago:
+      metodoPago,
+
+      observaciones:
+      observaciones,
+
+      ingreso_id:
+      ingreso.id
+
+    }]);
+
+
+  if(errorPago){
+
+    console.error(
+      "Error al registrar pago:",
+      errorPago
+    );
+
+
+    // Si falla PagoSocios, eliminamos el ingreso
+    // que acabamos de crear para no descuadrar Finanzas.
+
+    await supabaseClient
+      .from("Ingresos")
+      .delete()
+      .eq("id", ingreso.id);
+
+
+    mensaje.innerText =
+    "❌ No se pudo registrar la cuota.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "✅ Pago registrado y agregado a Finanzas.";
+
+  mensaje.style.color =
+  "green";
+
+
+  document.getElementById(
+    "pagoSocioId"
+  ).value = "";
+
+  document.getElementById(
+    "pagoSocioMes"
+  ).value = "";
+
+  document.getElementById(
+    "pagoSocioMonto"
+  ).value = "";
+
+  document.getElementById(
+    "pagoSocioMetodo"
+  ).value = "";
+
+  document.getElementById(
+    "pagoSocioObservaciones"
+  ).value = "";
+
+
+  cargarSaldoActualClub();
+
+}
 
 async function guardarIngreso(){
 
