@@ -10946,6 +10946,29 @@ function filtrarPartidos(categoriaSeleccionada){
 
     }).join("");
 
+
+    setTimeout(function(){
+
+  const destino =
+  document.querySelector(".partidos-registrados");
+
+  if(destino){
+
+    const alturaMenu = 135;
+
+    const posicion =
+    destino.getBoundingClientRect().top +
+    window.pageYOffset -
+    alturaMenu;
+
+    window.scrollTo({
+      top: posicion,
+      behavior: "smooth"
+    });
+
+  }
+
+}, 100);
 }
 
 async function seleccionarCategoriaEditarJugador(categoria){
