@@ -563,12 +563,51 @@ font-size: 16px;
   color:#111827;
 }
 
+/* ===== SPLASH SCREEN ===== */
+
+#splashScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#071b4a;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:1;
+  transition:opacity .6s ease;
+}
+
+#splashScreen img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+#splashScreen.ocultar-splash{
+  opacity:0;
+  pointer-events:none;
+}
+
+
 </style>  
 
   
 </head>  
   
-  <body>  
+  <body>
+    
+    <div id="splashScreen">
+
+  <img
+  src="img/splash-feria.jpg"
+  alt="CD Feria Osorno">
+
+</div>
   
   <section id="login" class="seccion oculto">    <h2>🔐 Acceso administrador</h2>    <p style="color:#667085; margin-bottom:18px;">  
     Ingresa tus datos para administrar el plantel.  
@@ -8739,5 +8778,22 @@ async function confirmarEliminarJugador(id, nombre, categoria){
   seleccionarCategoriaEliminarJugador(categoria);
 
 }
+
+window.addEventListener("load", function(){
+
+  setTimeout(function(){
+
+    const splash =
+    document.getElementById("splashScreen");
+
+    splash.classList.add("ocultar-splash");
+
+    setTimeout(function(){
+      splash.style.display = "none";
+    }, 600);
+
+  }, 5000);
+
+});
   
 </script>  </body>  </html>
