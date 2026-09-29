@@ -2632,6 +2632,296 @@ font-size: 16px;
   background:#a71928;
 }
 
+/* ========================================
+   FORMULARIO EDITAR JUGADOR
+======================================== */
+
+.formulario-jugador-moderno{
+  background:#f3f5f9;
+}
+
+
+.editar-foto-jugador{
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  margin:16px 0;
+
+  padding:16px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 4px 15px rgba(7,27,74,.06);
+}
+
+
+.editar-foto-contenedor{
+  position:relative;
+
+  width:105px;
+  height:125px;
+
+  flex:0 0 105px;
+
+  border-radius:15px;
+
+  overflow:hidden;
+
+  background:#e9edf3;
+}
+
+
+.editar-foto-contenedor img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:none;
+}
+
+
+.editar-jugador-sin-foto{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:38px;
+
+  background:#edf0f5;
+}
+
+
+.editar-foto-dorsal{
+  position:absolute;
+
+  top:7px;
+  right:7px;
+
+  min-width:30px;
+  height:30px;
+
+  padding:0 6px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#071b4a;
+
+  border:2px solid white;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+
+.editar-foto-info{
+  min-width:0;
+  flex:1;
+}
+
+
+.editar-foto-info > span{
+  display:block;
+
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.editar-foto-info > strong{
+  display:block;
+
+  margin:4px 0 11px;
+
+  color:#071b4a;
+
+  font-size:16px;
+  font-weight:900;
+}
+
+
+.boton-cambiar-foto{
+  display:inline-block;
+
+  padding:9px 11px;
+
+  background:#071b4a;
+
+  border-radius:20px;
+
+  color:white;
+
+  font-size:8px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+
+.editar-foto-info small{
+  display:block;
+
+  margin-top:7px;
+
+  color:#98a2b3;
+
+  font-size:7px;
+}
+
+
+.editar-jugador-bloque{
+  padding:17px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 4px 15px rgba(7,27,74,.06);
+}
+
+
+.editar-jugador-titulo{
+  margin-bottom:17px;
+}
+
+
+.editar-jugador-titulo span{
+  display:block;
+
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.editar-jugador-titulo strong{
+  display:block;
+
+  margin-top:3px;
+
+  color:#071b4a;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+
+.editar-jugador-bloque label{
+  display:block;
+
+  margin:12px 0 6px;
+
+  color:#344054;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+
+.editar-jugador-bloque input,
+.editar-jugador-bloque select{
+  width:100%;
+
+  padding:12px;
+
+  background:#f9fafb;
+
+  border:1px solid #dfe3e8;
+
+  border-radius:10px;
+
+  color:#111827;
+
+  font-size:13px;
+
+  outline:none;
+}
+
+
+.editar-jugador-bloque input:focus,
+.editar-jugador-bloque select:focus{
+  border-color:#071b4a;
+
+  background:white;
+}
+
+
+.editar-jugador-dos-columnas{
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,minmax(0,1fr));
+
+  gap:10px;
+}
+
+
+.mensaje-editar-jugador{
+  margin:14px 0 0;
+
+  text-align:center;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+
+.guardar-jugador-moderno{
+  width:100%;
+
+  margin-top:13px;
+
+  padding:14px;
+
+  background:#071b4a;
+
+  border:0;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:11px;
+  font-weight:900;
+
+  letter-spacing:.6px;
+
+  cursor:pointer;
+
+  box-shadow:
+  0 4px 12px rgba(7,27,74,.16);
+}
+
+
+.guardar-jugador-moderno:active{
+  transform:scale(.98);
+}
+
 
 </style>  
 
@@ -6157,155 +6447,265 @@ class="seccion oculto">
 
 </section>
 
-
 <section
 id="formularioEditarJugador"
-class="seccion oculto">
+class="seccion oculto formulario-jugador-moderno">
 
-  <button
-  class="boton"
-  onclick="mostrar('editarJugador')">
-    ← Volver
-  </button>
+  <div class="cabecera-seccion-publica">
 
+    <button
+    class="volver-publico"
+    onclick="mostrar('editarJugador')">
+      ← VOLVER
+    </button>
 
-  <h2>
-    ✏️ Editar jugador
-  </h2>
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>EDITAR JUGADOR</h2>
+
+    <p>
+      Actualiza la información del jugador
+    </p>
+
+  </div>
+
 
   <input
   type="hidden"
   id="editarJugadorId">
 
-
-  <label>
-    Nombre
-  </label>
-
   <input
-  type="text"
-  id="editarJugadorNombre"
-  placeholder="Nombre del jugador">
+  type="hidden"
+  id="editarJugadorFotoActual">
 
 
-  <label>
-    Número
-  </label>
+  <!-- FOTO DEL JUGADOR -->
 
-  <input
-  type="number"
-  id="editarJugadorNumero"
-  min="0"
-  placeholder="Número">
+  <div class="editar-foto-jugador">
 
+    <div class="editar-foto-contenedor">
 
-  <label>
-    Posición
-  </label>
+      <img
+      id="editarJugadorFotoPreview"
+      src=""
+      alt="Fotografía del jugador">
 
-  <select id="editarJugadorPosicion">
+      <div
+      id="editarJugadorSinFoto"
+      class="editar-jugador-sin-foto">
+        👤
+      </div>
 
-    <option value="">
-      Seleccionar posición
-    </option>
+      <div
+      id="editarJugadorNumeroPreview"
+      class="editar-foto-dorsal">
+        -
+      </div>
 
-    <option value="Arquero">
-      Arquero
-    </option>
-
-    <option value="Defensa">
-      Defensa
-    </option>
-
-    <option value="Mediocampista">
-      Mediocampista
-    </option>
-
-    <option value="Delantero">
-      Delantero
-    </option>
-
-  </select>
+    </div>
 
 
-  <label>
-    Categoría
-  </label>
+    <div class="editar-foto-info">
 
-  <select id="editarJugadorCategoria">
+      <span>FOTOGRAFÍA</span>
 
-    <option value="">
-      Seleccionar categoría
-    </option>
+      <strong id="editarJugadorNombrePreview">
+        Jugador
+      </strong>
 
-    <option value="Primera Serie">
-      Primera Serie
-    </option>
+      <label
+      for="editarJugadorFotoNueva"
+      class="boton-cambiar-foto">
 
-    <option value="Segunda Serie">
-      Segunda Serie
-    </option>
+        📷 CAMBIAR FOTOGRAFÍA
 
-    <option value="Serie Senior">
-      Serie Senior
-    </option>
+      </label>
 
-    <option value="Serie Super Senior">
-      Serie Super Senior
-    </option>
+      <input
+      type="file"
+      id="editarJugadorFotoNueva"
+      accept="image/*"
+      style="display:none;"
+      onchange="previsualizarFotoEditarJugador()">
 
-    <option value="Infantil U8">
-      Infantil U8
-    </option>
+      <small>
+        JPG, PNG o WEBP · Máximo 5 MB
+      </small>
 
-    <option value="Infantil U10">
-      Infantil U10
-    </option>
+    </div>
 
-    <option value="Infantil U13">
-      Infantil U13
-    </option>
-
-    <option value="Infantil U15">
-      Infantil U15
-    </option>
-
-  </select>
+  </div>
 
 
-  <label>
-    Fecha de nacimiento
-  </label>
+  <!-- DATOS -->
 
-  <input
-  type="date"
-  id="editarJugadorNacimiento">
+  <div class="editar-jugador-bloque">
+
+    <div class="editar-jugador-titulo">
+      <span>DATOS DEL JUGADOR</span>
+      <strong>Información personal</strong>
+    </div>
 
 
-  <label>
-    Año de ingreso al club
-  </label>
+    <label>
+      Nombre completo
+    </label>
 
-  <input
-  type="number"
-  id="editarJugadorIngreso"
-  min="1900"
-  max="2100"
-  placeholder="Ej: 2020">
+    <input
+    type="text"
+    id="editarJugadorNombre"
+    placeholder="Nombre del jugador"
+    oninput="actualizarPreviewEditarJugador()">
+
+
+    <div class="editar-jugador-dos-columnas">
+
+      <div>
+
+        <label>
+          Número
+        </label>
+
+        <input
+        type="number"
+        id="editarJugadorNumero"
+        min="0"
+        placeholder="Número"
+        oninput="actualizarPreviewEditarJugador()">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Posición
+        </label>
+
+        <select id="editarJugadorPosicion">
+
+          <option value="">
+            Seleccionar
+          </option>
+
+          <option value="Arquero">
+            Arquero
+          </option>
+
+          <option value="Defensa">
+            Defensa
+          </option>
+
+          <option value="Medio">
+            Medio
+          </option>
+
+          <option value="Mediocampista">
+            Mediocampista
+          </option>
+
+          <option value="Delantero">
+            Delantero
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <label>
+      Categoría
+    </label>
+
+    <select id="editarJugadorCategoria">
+
+      <option value="">
+        Seleccionar categoría
+      </option>
+
+      <option value="Primera Serie">
+        Primera Serie
+      </option>
+
+      <option value="Segunda Serie">
+        Segunda Serie
+      </option>
+
+      <option value="Serie Senior">
+        Serie Senior
+      </option>
+
+      <option value="Serie Super Senior">
+        Serie Super Senior
+      </option>
+
+      <option value="Infantil U8">
+        Infantil U8
+      </option>
+
+      <option value="Infantil U10">
+        Infantil U10
+      </option>
+
+      <option value="Infantil U13">
+        Infantil U13
+      </option>
+
+      <option value="Infantil U15">
+        Infantil U15
+      </option>
+
+    </select>
+
+
+    <div class="editar-jugador-dos-columnas">
+
+      <div>
+
+        <label>
+          Fecha de nacimiento
+        </label>
+
+        <input
+        type="date"
+        id="editarJugadorNacimiento">
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Año de ingreso
+        </label>
+
+        <input
+        type="number"
+        id="editarJugadorIngreso"
+        min="1900"
+        max="2100"
+        placeholder="Ej: 2020">
+
+      </div>
+
+    </div>
+
+  </div>
 
 
   <p
   id="mensajeEditarJugador"
-  style="margin-top:15px;">
+  class="mensaje-editar-jugador">
   </p>
 
 
   <button
-  class="boton"
-  style="width:100%; margin-top:10px;"
+  class="guardar-jugador-moderno"
   onclick="guardarEdicionJugador()">
 
-    💾 Guardar cambios
+    GUARDAR CAMBIOS
 
   </button>
 
@@ -13079,24 +13479,25 @@ async function seleccionarCategoriaEliminarJugador(categoria){
 
 }
 
+
 async function abrirFormularioEditarJugador(id){
 
   const { data: jugador, error } =
-    await supabaseClient
-      .from("Jugadores")
-      .select(`
-        id,
-        name,
-        number,
-        position,
-        photo_url,
-        birth_date,
-        year_joined,
-        category_id,
-        categories(name)
-      `)
-      .eq("id", id)
-      .single();
+  await supabaseClient
+    .from("Jugadores")
+    .select(`
+      id,
+      name,
+      number,
+      position,
+      photo_url,
+      birth_date,
+      year_joined,
+      category_id,
+      categories(name)
+    `)
+    .eq("id", id)
+    .single();
 
 
   if(error){
@@ -13110,89 +13511,257 @@ async function abrirFormularioEditarJugador(id){
 
 
   document.getElementById("editarJugadorId").value =
-    jugador.id;
+  jugador.id;
+
 
   document.getElementById("editarJugadorNombre").value =
-    jugador.name || "";
+  jugador.name || "";
+
 
   document.getElementById("editarJugadorNumero").value =
-    jugador.number ?? "";
+  jugador.number ?? "";
+
 
   document.getElementById("editarJugadorPosicion").value =
-    jugador.position || "";
+  jugador.position || "";
+
 
   document.getElementById("editarJugadorCategoria").value =
-    jugador.categories
-      ? jugador.categories.name
-      : "";
+  jugador.categories
+  ? jugador.categories.name
+  : "";
+
 
   document.getElementById("editarJugadorNacimiento").value =
-    jugador.birth_date || "";
+  jugador.birth_date || "";
+
 
   document.getElementById("editarJugadorIngreso").value =
-    jugador.year_joined ?? "";
+  jugador.year_joined ?? "";
+
+
+  // GUARDAR FOTO ACTUAL
+
+  document.getElementById("editarJugadorFotoActual").value =
+  jugador.photo_url || "";
+
+
+  // LIMPIAR ARCHIVO NUEVO
+
+  document.getElementById("editarJugadorFotoNueva").value =
+  "";
+
+
+  // FOTO PREVIEW
+
+  const foto =
+  document.getElementById("editarJugadorFotoPreview");
+
+  const sinFoto =
+  document.getElementById("editarJugadorSinFoto");
+
+
+  if(jugador.photo_url){
+
+    foto.src =
+    jugador.photo_url;
+
+    foto.style.display =
+    "block";
+
+    sinFoto.style.display =
+    "none";
+
+  }else{
+
+    foto.src =
+    "";
+
+    foto.style.display =
+    "none";
+
+    sinFoto.style.display =
+    "flex";
+
+  }
+
+
+  // NOMBRE PREVIEW
+
+  document.getElementById("editarJugadorNombrePreview").innerText =
+  jugador.name || "Jugador";
+
+
+  // DORSAL PREVIEW
+
+  document.getElementById("editarJugadorNumeroPreview").innerText =
+  jugador.number ?? "-";
+
 
   document.getElementById("mensajeEditarJugador").innerText =
-    "";
+  "";
 
 
   mostrar("formularioEditarJugador");
 
+}
+
+function actualizarPreviewEditarJugador(){
+
+  const nombre =
+  document.getElementById("editarJugadorNombre").value.trim();
+
+  const numero =
+  document.getElementById("editarJugadorNumero").value;
+
+
+  document.getElementById("editarJugadorNombrePreview").innerText =
+  nombre || "Jugador";
+
+
+  document.getElementById("editarJugadorNumeroPreview").innerText =
+  numero || "-";
 
 }
 
 
+
+function previsualizarFotoEditarJugador(){
+
+  const input =
+  document.getElementById("editarJugadorFotoNueva");
+
+  const archivo =
+  input.files[0];
+
+
+  if(!archivo){
+    return;
+  }
+
+
+  if(archivo.size > 5 * 1024 * 1024){
+
+    alert("⚠️ La fotografía no puede superar los 5 MB.");
+
+    input.value = "";
+
+    return;
+  }
+
+
+  if(!archivo.type.startsWith("image/")){
+
+    alert("⚠️ Selecciona un archivo de imagen.");
+
+    input.value = "";
+
+    return;
+  }
+
+
+  const urlTemporal =
+  URL.createObjectURL(archivo);
+
+
+  const foto =
+  document.getElementById("editarJugadorFotoPreview");
+
+  const sinFoto =
+  document.getElementById("editarJugadorSinFoto");
+
+
+  foto.src =
+  urlTemporal;
+
+  foto.style.display =
+  "block";
+
+  sinFoto.style.display =
+  "none";
+
+}
 async function guardarEdicionJugador(){
 
   const id =
-    document.getElementById("editarJugadorId").value;
+  document.getElementById("editarJugadorId").value;
 
   const nombre =
-    document.getElementById("editarJugadorNombre").value.trim();
+  document.getElementById("editarJugadorNombre").value.trim();
 
   const numero =
-    document.getElementById("editarJugadorNumero").value;
+  document.getElementById("editarJugadorNumero").value;
 
   const posicion =
-    document.getElementById("editarJugadorPosicion").value;
+  document.getElementById("editarJugadorPosicion").value;
 
   const categoria =
-    document.getElementById("editarJugadorCategoria").value;
+  document.getElementById("editarJugadorCategoria").value;
 
   const nacimiento =
-    document.getElementById("editarJugadorNacimiento").value;
+  document.getElementById("editarJugadorNacimiento").value;
 
   const ingreso =
-    document.getElementById("editarJugadorIngreso").value;
+  document.getElementById("editarJugadorIngreso").value;
+
+  const fotoActual =
+  document.getElementById("editarJugadorFotoActual").value;
+
+  const inputFoto =
+  document.getElementById("editarJugadorFotoNueva");
+
+  const nuevaFoto =
+  inputFoto.files[0];
 
   const mensaje =
-    document.getElementById("mensajeEditarJugador");
+  document.getElementById("mensajeEditarJugador");
 
 
   if(!nombre || !numero || !posicion || !categoria){
 
     mensaje.innerText =
-      "⚠️ Completa nombre, número, posición y categoría.";
+    "⚠️ Completa nombre, número, posición y categoría.";
 
-    mensaje.style.color = "#c82032";
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  if(
+    nuevaFoto &&
+    nuevaFoto.size > 5 * 1024 * 1024
+  ){
+
+    mensaje.innerText =
+    "⚠️ La fotografía no puede superar los 5 MB.";
+
+    mensaje.style.color =
+    "#c82032";
 
     return;
   }
 
 
   mensaje.innerText =
-    "⏳ Guardando cambios...";
+  "⏳ Guardando cambios...";
 
   mensaje.style.color =
-    "#17479e";
+  "#17479e";
 
 
-  const { data: categoriaData, error: categoriaError } =
-    await supabaseClient
-      .from("categories")
-      .select("id")
-      .eq("name", categoria)
-      .single();
+  // BUSCAR ID DE CATEGORÍA
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoria)
+    .single();
 
 
   if(categoriaError){
@@ -13200,60 +13769,195 @@ async function guardarEdicionJugador(){
     console.error(categoriaError);
 
     mensaje.innerText =
-      "❌ No se encontró la categoría.";
+    "❌ No se encontró la categoría.";
 
     mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // POR DEFECTO CONSERVAMOS LA FOTO ACTUAL
+
+  let fotoJugadorUrl =
+  fotoActual || null;
+
+  let rutaFotoNueva =
+  null;
+
+
+  // SI EL USUARIO SELECCIONÓ OTRA FOTO
+
+  if(nuevaFoto){
+
+    mensaje.innerText =
+    "⏳ Subiendo nueva fotografía...";
+
+
+    const extension =
+    nuevaFoto.name.includes(".")
+    ? nuevaFoto.name.split(".").pop().toLowerCase()
+    : "jpg";
+
+
+    const nombreArchivo =
+    `${Date.now()}-${Math.random().toString(36).substring(2,10)}.${extension}`;
+
+
+    rutaFotoNueva =
+    `jugadores/${nombreArchivo}`;
+
+
+    const {
+      error: errorFoto
+    } =
+    await supabaseClient
+      .storage
+      .from("fotos-jugadores")
+      .upload(
+        rutaFotoNueva,
+        nuevaFoto,
+        {
+          cacheControl:"3600",
+          upsert:false
+        }
+      );
+
+
+    if(errorFoto){
+
+      console.error(errorFoto);
+
+      mensaje.innerText =
+      "❌ No se pudo subir la nueva fotografía.";
+
+      mensaje.style.color =
       "#c82032";
 
-    return;
-  }
+      return;
+    }
 
 
-   const { data: jugadorActualizado, error } =
-    await supabaseClient
-      .from("Jugadores")
-      .update({
-        name: nombre,
-        number: Number(numero),
-        position: posicion,
-        category_id: categoriaData.id,
-        birth_date: nacimiento || null,
-        year_joined: ingreso !== "" ? Number(ingreso) : null
-      })
-      .eq("id", id)
-      .select("id")
-      .maybeSingle();
+    const {
+      data: fotoPublica
+    } =
+    supabaseClient
+      .storage
+      .from("fotos-jugadores")
+      .getPublicUrl(rutaFotoNueva);
 
-  if (error) {
-    console.error(error);
 
-    mensaje.innerText =
-      "❌ Error al guardar los cambios.";
-    mensaje.style.color = "#c82032";
-    return;
-  }
+    fotoJugadorUrl =
+    fotoPublica.publicUrl;
 
-  if (!jugadorActualizado) {
-    mensaje.innerText =
-      "❌ No se actualizó el jugador. Revisa tu sesión y los permisos de edición.";
-    mensaje.style.color = "#c82032";
-    return;
-  
   }
 
 
   mensaje.innerText =
-    "✅ Jugador actualizado correctamente.";
+  "⏳ Actualizando jugador...";
+
+
+  // ACTUALIZAR BASE DE DATOS
+
+  const {
+    data: jugadorActualizado,
+    error
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .update({
+
+      name: nombre,
+
+      number:
+      Number(numero),
+
+      position:
+      posicion,
+
+      category_id:
+      categoriaData.id,
+
+      birth_date:
+      nacimiento || null,
+
+      year_joined:
+      ingreso !== ""
+      ? Number(ingreso)
+      : null,
+
+      photo_url:
+      fotoJugadorUrl
+
+    })
+    .eq("id", id)
+    .select("id")
+    .maybeSingle();
+
+
+  if(error){
+
+    console.error(error);
+
+
+    // SI SUBIMOS FOTO PERO FALLÓ LA BD,
+    // ELIMINAMOS LA FOTO NUEVA
+
+    if(rutaFotoNueva){
+
+      await supabaseClient
+        .storage
+        .from("fotos-jugadores")
+        .remove([rutaFotoNueva]);
+
+    }
+
+
+    mensaje.innerText =
+    "❌ Error al guardar los cambios.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  if(!jugadorActualizado){
+
+    if(rutaFotoNueva){
+
+      await supabaseClient
+        .storage
+        .from("fotos-jugadores")
+        .remove([rutaFotoNueva]);
+
+    }
+
+
+    mensaje.innerText =
+    "❌ No se actualizó el jugador. Revisa tu sesión y los permisos.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "✅ Jugador actualizado correctamente.";
 
   mensaje.style.color =
-    "#16803c";
+  "#16803c";
 
 
   setTimeout(function(){
 
     mostrar("editarJugador");
 
-  }, 1200);
+  },1200);
 
 }
 
