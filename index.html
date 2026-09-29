@@ -2923,6 +2923,366 @@ font-size: 16px;
 }
 
 
+/* ========================================
+   PARTIDOS PUBLICOS - VER MAS
+======================================== */
+
+.partido-info{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+
+.partido-info-estados{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+
+.boton-ver-partido{
+  flex:0 0 auto;
+
+  padding:8px 11px;
+
+  background:#071b4a;
+
+  border:0;
+
+  border-radius:18px;
+
+  color:white;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  cursor:pointer;
+}
+
+
+.boton-ver-partido:active{
+  transform:scale(.96);
+}
+
+
+.goleadores-partido{
+  padding:0 14px;
+}
+
+
+.goleadores-partido:empty{
+  display:none;
+}
+
+/* ========================================
+   EDITAR PARTIDO MODERNO
+======================================== */
+
+.formulario-partido-moderno{
+  background:#f3f5f9;
+}
+
+
+.editar-partido-bloque{
+  margin-top:15px;
+  padding:17px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+  border-radius:18px;
+
+  box-shadow:
+  0 4px 15px rgba(7,27,74,.06);
+}
+
+
+.editar-partido-titulo{
+  margin-bottom:15px;
+}
+
+
+.editar-partido-titulo span{
+  display:block;
+
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.editar-partido-titulo strong{
+  display:block;
+
+  margin-top:3px;
+
+  color:#071b4a;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+
+.editar-partido-bloque label{
+  display:block;
+
+  margin:12px 0 6px;
+
+  color:#344054;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+
+.editar-partido-bloque input,
+.editar-partido-bloque select{
+  width:100%;
+
+  padding:12px;
+
+  background:#f9fafb;
+
+  border:1px solid #dfe3e8;
+  border-radius:10px;
+
+  color:#111827;
+
+  font-size:13px;
+
+  outline:none;
+}
+
+
+.editar-partido-bloque input:focus,
+.editar-partido-bloque select:focus{
+  border-color:#071b4a;
+
+  background:white;
+}
+
+
+.editar-partido-dos-columnas{
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,minmax(0,1fr));
+
+  gap:10px;
+}
+
+
+/* MARCADOR */
+
+.marcador-edicion-moderno{
+  margin-top:5px;
+
+  padding:15px 5px;
+
+  background:#f8f9fb;
+
+  border-radius:14px;
+}
+
+
+.circulo-equipo{
+  width:42px;
+  height:42px;
+
+  margin:0 auto 7px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+
+.circulo-equipo.feria{
+  background:#071b4a;
+}
+
+
+.circulo-equipo.rival{
+  background:#c82032;
+}
+
+
+.mensaje-editar-partido{
+  margin:14px 0 0;
+
+  text-align:center;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+
+.guardar-partido-moderno{
+  width:100%;
+
+  margin-top:13px;
+
+  padding:14px;
+
+  background:#071b4a;
+
+  border:0;
+  border-radius:12px;
+
+  color:white;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.6px;
+
+  cursor:pointer;
+}
+
+
+.guardar-partido-moderno:active{
+  transform:scale(.98);
+}
+
+
+/* ========================================
+   DETALLES DEPORTIVOS
+======================================== */
+
+.detalle-deportivo-admin{
+  margin-top:22px;
+  margin-bottom:20px;
+}
+
+
+.detalle-deportivo-cabecera{
+  margin-bottom:12px;
+}
+
+
+.detalle-deportivo-cabecera > span{
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.detalle-deportivo-cabecera h3{
+  margin:3px 0;
+
+  color:#071b4a;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+
+.detalle-deportivo-cabecera p{
+  margin:0;
+
+  color:#667085;
+
+  font-size:11px;
+}
+
+
+.detalle-partido-opcion{
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  margin-top:9px;
+
+  padding:13px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+  border-radius:14px;
+
+  box-shadow:
+  0 3px 10px rgba(7,27,74,.05);
+
+  cursor:pointer;
+}
+
+
+.detalle-partido-opcion:active{
+  transform:scale(.98);
+}
+
+
+.detalle-partido-icono{
+  width:42px;
+  height:42px;
+
+  flex:0 0 42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#eef2f8;
+
+  border-radius:12px;
+
+  font-size:18px;
+}
+
+
+.detalle-partido-texto{
+  flex:1;
+  min-width:0;
+}
+
+
+.detalle-partido-texto strong{
+  display:block;
+
+  color:#071b4a;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+
+.detalle-partido-texto span{
+  display:block;
+
+  margin-top:2px;
+
+  color:#667085;
+
+  font-size:9px;
+}
+
+
+.detalle-partido-flecha{
+  color:#c82032;
+
+  font-size:25px;
+  font-weight:700;
+}
+
 </style>  
 
   
@@ -3014,15 +3374,6 @@ onclick="iniciarSesion()"
 
   </div>
 
-
-  <div
-  class="acceso-publico"
-  onclick="mostrar('tabla')">
-
-    <div class="icono-publico">📊</div>
-    <h3>TABLA</h3>
-
-  </div>
 
 
   <div
@@ -6267,185 +6618,364 @@ class="seccion oculto pantalla-editar-partido">
 
 <section
 id="formularioEditarPartido"
-class="seccion oculto">
+class="seccion oculto formulario-partido-moderno">
 
-  <button
-  class="boton"
-  onclick="mostrar('editarPartido')">
+  <div class="cabecera-seccion-publica">
 
-    ← Volver
+    <button
+    class="volver-publico"
+    onclick="mostrar('editarPartido')">
+      ← VOLVER
+    </button>
 
-  </button>
+    <span>ADMINISTRACIÓN</span>
 
-  <h2>
-    ✏️ Editar partido
-  </h2>
+    <h2>EDITAR PARTIDO</h2>
 
-  <p style="color:#667085; margin-bottom:18px;">
-    Modifica los datos del partido seleccionado.
-  </p>
+    <p>
+      Información, resultado y detalles del encuentro
+    </p>
+
+  </div>
+
 
   <input
   type="hidden"
   id="editarPartidoId">
 
-  <label>🏆 Campeonato</label>
 
-  <input
-  type="text"
-  id="editarCampeonato"
-  placeholder="Ej: Clausura 2026">
+  <!-- DATOS DEL PARTIDO -->
 
-  <label>⚽ Rival</label>
+  <div class="editar-partido-bloque">
 
-  <input
-  type="text"
-  id="editarRival"
-  placeholder="Nombre del rival">
+    <div class="editar-partido-titulo">
+      <span>PARTIDO</span>
+      <strong>Información del encuentro</strong>
+    </div>
 
-  <label>📅 Fecha</label>
 
-  <input
-  type="date"
-  id="editarFecha">
-
-  <label>📍 Local / Visitante</label>
-
-  <select id="editarLocalVisitante">
-
-    <option value="">
-      Seleccionar
-    </option>
-
-    <option value="Local">
-      Local
-    </option>
-
-    <option value="Visitante">
-      Visitante
-    </option>
-
-  </select>
-
-  <label>📂 Categoría</label>
-
-  <select id="editarCategoria">
-
-    <option value="">
-      Seleccionar categoría
-    </option>
-
-    <option value="Primera Serie">
-      Primera Serie
-    </option>
-
-    <option value="Segunda Serie">
-      Segunda Serie
-    </option>
-
-    <option value="Serie Senior">
-      Serie Senior
-    </option>
-
-    <option value="Serie Super Senior">
-      Serie Super Senior
-    </option>
-
-    <option value="Infantil U8">
-      Infantil U8
-    </option>
-
-    <option value="Infantil U10">
-      Infantil U10
-    </option>
-
-    <option value="Infantil U13">
-      Infantil U13
-    </option>
-
-    <option value="Infantil U15">
-      Infantil U15
-    </option>
-
-  </select>
-
-  <label>🏆 Jornada</label>
-
-  <input
-  type="number"
-  id="editarJornada"
-  placeholder="Ej: 1">
-
-  <label>📌 Estado</label>
-
-  <select id="editarEstado">
-
-    <option value="Pendiente">
-      Pendiente
-    </option>
-
-    <option value="Terminado">
-  Terminado
-    </option>
-
-    <option value="Suspendido">
-      Suspendido
-    </option>
-
-  </select>
-
- <div class="marcador-edicion">
-
-  <div class="equipo-edicion">
-
-    <span>🔵</span>
-
-    <strong>Feria Osorno</strong>
+    <label>Campeonato</label>
 
     <input
-    type="number"
-    id="editarGolesFavor"
-    min="0"
-    placeholder="0">
+    type="text"
+    id="editarCampeonato"
+    placeholder="Ej: Clausura 2026">
 
-  </div>
 
-  <div class="separador-marcador">
-    —
-  </div>
-
-  <div class="equipo-edicion">
-
-    <span>🔴</span>
-
-    <strong>Rival</strong>
+    <label>Rival</label>
 
     <input
-    type="number"
-    id="editarGolesContra"
-    min="0"
-    placeholder="0">
+    type="text"
+    id="editarRival"
+    placeholder="Nombre del rival">
+
+
+    <div class="editar-partido-dos-columnas">
+
+      <div>
+
+        <label>Fecha</label>
+
+        <input
+        type="date"
+        id="editarFecha">
+
+      </div>
+
+
+      <div>
+
+        <label>Jornada</label>
+
+        <input
+        type="number"
+        id="editarJornada"
+        min="1"
+        placeholder="Ej: 1">
+
+      </div>
+
+    </div>
+
+
+    <div class="editar-partido-dos-columnas">
+
+      <div>
+
+        <label>Local / Visitante</label>
+
+        <select id="editarLocalVisitante">
+
+          <option value="">
+            Seleccionar
+          </option>
+
+          <option value="Local">
+            Local
+          </option>
+
+          <option value="Visitante">
+            Visitante
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div>
+
+        <label>Estado</label>
+
+        <select id="editarEstado">
+
+          <option value="Pendiente">
+            Pendiente
+          </option>
+
+          <option value="Terminado">
+            Terminado
+          </option>
+
+          <option value="Suspendido">
+            Suspendido
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <label>Categoría</label>
+
+    <select id="editarCategoria">
+
+      <option value="">
+        Seleccionar categoría
+      </option>
+
+      <option value="Primera Serie">
+        Primera Serie
+      </option>
+
+      <option value="Segunda Serie">
+        Segunda Serie
+      </option>
+
+      <option value="Serie Senior">
+        Serie Senior
+      </option>
+
+      <option value="Serie Super Senior">
+        Serie Super Senior
+      </option>
+
+      <option value="Infantil U8">
+        Infantil U8
+      </option>
+
+      <option value="Infantil U10">
+        Infantil U10
+      </option>
+
+      <option value="Infantil U13">
+        Infantil U13
+      </option>
+
+      <option value="Infantil U15">
+        Infantil U15
+      </option>
+
+    </select>
 
   </div>
 
- </div>
+
+  <!-- MARCADOR -->
+
+  <div class="editar-partido-bloque">
+
+    <div class="editar-partido-titulo">
+      <span>RESULTADO</span>
+      <strong>Marcador del partido</strong>
+    </div>
+
+
+    <div class="marcador-edicion marcador-edicion-moderno">
+
+      <div class="equipo-edicion">
+
+        <span class="circulo-equipo feria">
+          FO
+        </span>
+
+        <strong>
+          Feria Osorno
+        </strong>
+
+        <input
+        type="number"
+        id="editarGolesFavor"
+        min="0"
+        placeholder="0">
+
+      </div>
+
+
+      <div class="separador-marcador">
+        —
+      </div>
+
+
+      <div class="equipo-edicion">
+
+        <span class="circulo-equipo rival">
+          R
+        </span>
+
+        <strong>
+          Rival
+        </strong>
+
+        <input
+        type="number"
+        id="editarGolesContra"
+        min="0"
+        placeholder="0">
+
+      </div>
+
+    </div>
+
+  </div>
 
 
   <p
   id="mensajeEditarPartido"
-  style="margin-top:15px;">
+  class="mensaje-editar-partido">
   </p>
 
+
   <button
-  class="boton"
-  style="width:100%; margin-top:10px;"
+  class="guardar-partido-moderno"
   onclick="guardarEdicionPartido()">
 
-    💾 Guardar cambios
+    GUARDAR DATOS DEL PARTIDO
 
   </button>
 
+
+  <!-- DETALLES DEPORTIVOS -->
+
+  <div class="detalle-deportivo-admin">
+
+    <div class="detalle-deportivo-cabecera">
+
+      <span>DETALLES DEL PARTIDO</span>
+
+      <h3>
+        Formación y goles
+      </h3>
+
+      <p>
+        Administra la convocatoria y los goleadores del encuentro.
+      </p>
+
+    </div>
+
+
+    <!-- TITULARES -->
+
+    <div
+    class="detalle-partido-opcion"
+    onclick="abrirAdministrarTitulares()">
+
+      <div class="detalle-partido-icono">
+        ⚽
+      </div>
+
+      <div class="detalle-partido-texto">
+
+        <strong>
+          Once titular
+        </strong>
+
+        <span>
+          Seleccionar los 11 jugadores iniciales
+        </span>
+
+      </div>
+
+      <div class="detalle-partido-flecha">
+        ›
+      </div>
+
+    </div>
+
+
+    <!-- SUPLENTES -->
+
+    <div
+    class="detalle-partido-opcion"
+    onclick="abrirAdministrarSuplentes()">
+
+      <div class="detalle-partido-icono">
+        👥
+      </div>
+
+      <div class="detalle-partido-texto">
+
+        <strong>
+          Suplentes
+        </strong>
+
+        <span>
+          Agregar jugadores al banco
+        </span>
+
+      </div>
+
+      <div class="detalle-partido-flecha">
+        ›
+      </div>
+
+    </div>
+
+
+    <!-- GOLES -->
+
+    <div
+    class="detalle-partido-opcion"
+    onclick="abrirAdministrarGoles()">
+
+      <div class="detalle-partido-icono">
+        ⚽
+      </div>
+
+      <div class="detalle-partido-texto">
+
+        <strong>
+          Goleadores
+        </strong>
+
+        <span>
+          Registrar jugador y minuto de cada gol
+        </span>
+
+      </div>
+
+      <div class="detalle-partido-flecha">
+        ›
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+
 
 <section
 id="formularioEditarJugador"
@@ -11978,7 +12508,48 @@ async function guardarEdicionPartido(){
 
 }
 
+function abrirAdministrarTitulares(){
 
+  const partidoId =
+  document.getElementById("editarPartidoId").value;
+
+  if(!partidoId){
+    alert("⚠️ No se encontró el partido.");
+    return;
+  }
+
+  alert("⚽ Ahora configuraremos el once titular.");
+}
+
+
+
+function abrirAdministrarSuplentes(){
+
+  const partidoId =
+  document.getElementById("editarPartidoId").value;
+
+  if(!partidoId){
+    alert("⚠️ No se encontró el partido.");
+    return;
+  }
+
+  alert("👥 Ahora configuraremos los suplentes.");
+}
+
+
+
+function abrirAdministrarGoles(){
+
+  const partidoId =
+  document.getElementById("editarPartidoId").value;
+
+  if(!partidoId){
+    alert("⚠️ No se encontró el partido.");
+    return;
+  }
+
+  alert("⚽ Ahora configuraremos los goleadores.");
+}
 
 
 async function guardarBannerPartido(){
@@ -12765,204 +13336,291 @@ return;
 }
 
 
-
-
-
-  
 function filtrarPartidos(categoriaSeleccionada){
 
   const lista =
-    document.getElementById("listaPartidos");
+  document.getElementById("listaPartidos");
 
   const partidosFiltrados =
-    todosLosPartidos.filter(function(partido){
+  todosLosPartidos.filter(function(partido){
 
-      return partido.categories &&
-             partido.categories.name === categoriaSeleccionada;
+    return partido.categories &&
+           partido.categories.name === categoriaSeleccionada;
 
-    });
+  });
+
 
   if(partidosFiltrados.length === 0){
 
     lista.innerHTML =
-      "<p>⚽ No hay partidos registrados para esta categoría.</p>";
+    "<p>⚽ No hay partidos registrados para esta categoría.</p>";
 
     return;
   }
 
+
   lista.innerHTML =
-    partidosFiltrados.map(function(partido){
+  partidosFiltrados.map(function(partido){
 
-      const categoria =
-        partido.categories
-          ? partido.categories.name
-          : "Categoría no registrada";
+    const categoria =
+    partido.categories
+    ? partido.categories.name
+    : "Categoría no registrada";
 
-      const fecha =
-        partido.fecha
-          ? new Date(partido.fecha + "T00:00:00")
-              .toLocaleDateString("es-CL", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-              })
-          : "Fecha por confirmar";
 
-      const localEsFeria =
-        partido.local_visitante === "Local";
+    const fecha =
+    partido.fecha
+    ? new Date(partido.fecha + "T00:00:00")
+        .toLocaleDateString("es-CL", {
+          weekday:"long",
+          day:"numeric",
+          month:"long",
+          year:"numeric"
+        })
+    : "Fecha por confirmar";
 
-      const equipoLocal =
-        localEsFeria
-          ? "Feria Osorno"
-          : partido.rival;
 
-      const equipoVisitante =
-        localEsFeria
-          ? partido.rival
-          : "Feria Osorno";
+    const localEsFeria =
+    partido.local_visitante === "Local";
 
-      const partidoTerminado =
-        partido.estado &&
-        partido.estado.toLowerCase() === "terminado";
 
-      let equiposHTML = "";
+    const equipoLocal =
+    localEsFeria
+    ? "Feria Osorno"
+    : partido.rival;
 
-      if(
-        partidoTerminado &&
-        partido.goles_favor !== null &&
-        partido.goles_contra !== null
-      ){
 
-        const golesLocal =
-          localEsFeria
-            ? partido.goles_favor
-            : partido.goles_contra;
+    const equipoVisitante =
+    localEsFeria
+    ? partido.rival
+    : "Feria Osorno";
 
-        const golesVisitante =
-          localEsFeria
-            ? partido.goles_contra
-            : partido.goles_favor;
 
-        equiposHTML = `
-          <div class="equipo">
+    const partidoTerminado =
+    partido.estado &&
+    partido.estado.toLowerCase() === "terminado";
+
+
+    let equiposHTML = "";
+
+
+    if(
+      partidoTerminado &&
+      partido.goles_favor !== null &&
+      partido.goles_contra !== null
+    ){
+
+      const golesLocal =
+      localEsFeria
+      ? partido.goles_favor
+      : partido.goles_contra;
+
+
+      const golesVisitante =
+      localEsFeria
+      ? partido.goles_contra
+      : partido.goles_favor;
+
+
+      equiposHTML = `
+
+        <div class="equipo">
+
+          <span class="nombre-equipo-partido">
             ${equipoLocal}
-            <div class="partido-resultado">
-              ${golesLocal}
-            </div>
-          </div>
+          </span>
 
-          <div class="partido-vs">
-            FINAL
-          </div>
-
-          <div class="equipo">
-            ${equipoVisitante}
-            <div class="partido-resultado">
-              ${golesVisitante}
-            </div>
-          </div>
-        `;
-
-      }else{
-
-        equiposHTML = `
-          <div class="equipo">
-            ${equipoLocal}
-          </div>
-
-          <div class="partido-vs">
-            VS
-          </div>
-
-          <div class="equipo">
-            ${equipoVisitante}
-          </div>
-        `;
-
-      }
-
-      let claseEstado = "estado-pendiente";
-
-      if(partido.estado){
-
-        const estadoTexto =
-          partido.estado.toLowerCase();
-
-        if(estadoTexto === "terminado"){
-          claseEstado = "estado-terminado";
-        }
-
-        if(estadoTexto === "suspendido"){
-          claseEstado = "estado-suspendido";
-        }
-
-      }
-
-      return `
-        <div class="partido-card">
-
-          <div class="partido-cabecera">
-
-            <strong>
-              🏆 ${partido.campeonato || "Campeonato"}
-            </strong>
-
-            <small>
-              ${categoria} · Jornada ${partido.jornada || "-"}
-            </small>
-
-          </div>
-
-          <div class="partido-fecha">
-            📅 ${fecha}
-          </div>
-
-          <div class="partido-equipos">
-            ${equiposHTML}
-          </div>
-
-          <div class="partido-info">
-
-            <span class="partido-etiqueta">
-              ${localEsFeria ? "🏠 Local" : "✈️ Visitante"}
-            </span>
-
-            <span class="partido-etiqueta ${claseEstado}">
-              ${partido.estado || "Pendiente"}
-            </span>
-
+          <div class="partido-resultado">
+            ${golesLocal}
           </div>
 
         </div>
+
+
+        <div class="partido-vs">
+          FINAL
+        </div>
+
+
+        <div class="equipo">
+
+          <span class="nombre-equipo-partido">
+            ${equipoVisitante}
+          </span>
+
+          <div class="partido-resultado">
+            ${golesVisitante}
+          </div>
+
+        </div>
+
       `;
 
-    }).join("");
+    }else{
+
+      equiposHTML = `
+
+        <div class="equipo">
+          ${equipoLocal}
+        </div>
+
+        <div class="partido-vs">
+          VS
+        </div>
+
+        <div class="equipo">
+          ${equipoVisitante}
+        </div>
+
+      `;
+
+    }
 
 
-    setTimeout(function(){
+    let claseEstado =
+    "estado-pendiente";
 
-  const destino =
-  document.querySelector(".partidos-registrados");
 
-  if(destino){
+    if(partido.estado){
 
-    const alturaMenu = 135;
+      const estadoTexto =
+      partido.estado.toLowerCase();
 
-    const posicion =
-    destino.getBoundingClientRect().top +
-    window.pageYOffset -
-    alturaMenu;
 
-    window.scrollTo({
-      top: posicion,
-      behavior: "smooth"
-    });
+      if(estadoTexto === "terminado"){
+        claseEstado =
+        "estado-terminado";
+      }
 
-  }
 
-}, 100);
+      if(estadoTexto === "suspendido"){
+        claseEstado =
+        "estado-suspendido";
+      }
+
+    }
+
+
+    return `
+
+      <div class="partido-card">
+
+
+        <div class="partido-cabecera">
+
+          <strong>
+            🏆 ${partido.campeonato || "Campeonato"}
+          </strong>
+
+          <small>
+            ${categoria} · Jornada ${partido.jornada || "-"}
+          </small>
+
+        </div>
+
+
+        <div class="partido-fecha">
+
+          📅 ${fecha}
+
+        </div>
+
+
+        <div class="partido-equipos">
+
+          ${equiposHTML}
+
+        </div>
+
+
+        <!--
+        AQUÍ MOSTRAREMOS LOS GOLEADORES
+        CUANDO CONECTEMOS GOLESPARTIDO
+        -->
+
+        <div
+        class="goleadores-partido"
+        id="goleadoresPartido-${partido.id}">
+        </div>
+
+
+        <div class="partido-info">
+
+
+          <div class="partido-info-estados">
+
+            <span class="partido-etiqueta">
+
+              ${localEsFeria
+                ? "🏠 Local"
+                : "✈️ Visitante"}
+
+            </span>
+
+
+            <span
+            class="partido-etiqueta ${claseEstado}">
+
+              ${partido.estado || "Pendiente"}
+
+            </span>
+
+          </div>
+
+
+          <button
+          class="boton-ver-partido"
+          onclick="verDetallePartido(${partido.id})">
+
+            VER MÁS ›
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+
+  setTimeout(function(){
+
+    const destino =
+    document.querySelector(
+      ".partidos-registrados"
+    );
+
+
+    if(destino){
+
+      const alturaMenu =
+      135;
+
+
+      const posicion =
+      destino.getBoundingClientRect().top +
+      window.pageYOffset -
+      alturaMenu;
+
+
+      window.scrollTo({
+
+        top:posicion,
+
+        behavior:"smooth"
+
+      });
+
+    }
+
+  },100);
+
 }
+
+
 
 async function seleccionarCategoriaEditarJugador(categoria){
 
