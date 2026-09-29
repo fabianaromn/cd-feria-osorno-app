@@ -17295,12 +17295,45 @@ async function verDetallePartido(partidoId){
   : partido.goles_favor;
 
 
-  const titulares =
-  (convocatoria || []).filter(function(item){
+ const ordenPosiciones = {
+  "Arquero": 1,
+  "Defensa": 2,
+  "Medio": 3,
+  "Mediocampista": 3,
+  "Delantero": 4
+};
 
-    return item.tipo === "Titular";
 
-  });
+const titulares =
+(convocatoria || [])
+.filter(function(item){
+
+  return item.tipo === "Titular";
+
+})
+.sort(function(a, b){
+
+  const posicionA =
+  a.Jugadores
+  ? a.Jugadores.position
+  : "";
+
+  const posicionB =
+  b.Jugadores
+  ? b.Jugadores.position
+  : "";
+
+
+  const ordenA =
+  ordenPosiciones[posicionA] || 99;
+
+  const ordenB =
+  ordenPosiciones[posicionB] || 99;
+
+
+  return ordenA - ordenB;
+
+});
 
 
   const suplentes =
