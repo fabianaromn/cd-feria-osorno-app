@@ -11419,6 +11419,17 @@ async function editarPartido(){
 
 }
 
+
+const categoriasEditarHTML =
+document.getElementById("listaEditarPartidos").innerHTML;
+
+
+function restaurarCategoriasEditar(){
+
+  document.getElementById("listaEditarPartidos").innerHTML =
+  categoriasEditarHTML;
+
+}
   
   let todosLosPartidos = [];
 
@@ -12428,5 +12439,7 @@ window.addEventListener("load", function(){
   }, 2600);
 
 });
-  
+
+
+
 </script>  </body>  </html>
