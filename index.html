@@ -2603,6 +2603,36 @@ font-size: 16px;
 
   letter-spacing:.5px;
 }
+
+
+.boton-jugador-eliminar{
+  width:100%;
+
+  padding:10px;
+
+  background:#c82032;
+
+  border:0;
+  border-top:1px solid #b91c2b;
+
+  color:white;
+
+  font-size:9px;
+  font-weight:900;
+
+  text-align:center;
+
+  letter-spacing:.5px;
+
+  cursor:pointer;
+}
+
+
+.boton-jugador-eliminar:active{
+  background:#a71928;
+}
+
+
 </style>  
 
   
@@ -5597,156 +5627,171 @@ class="seccion oculto pantalla-editar-jugador">
 
 </section>
 
+
 <section
 id="eliminarJugador"
-class="seccion oculto">
+class="seccion oculto pantalla-eliminar-jugador">
 
-  <button
-  class="boton"
-  onclick="mostrar('administracion')">
-    ← Volver
-  </button>
+  <div class="cabecera-seccion-publica">
 
-  <h2>
-    🗑️ Eliminar jugador
-  </h2>
+    <button
+    class="volver-publico"
+    onclick="volverGestionJugadores()">
+      ← VOLVER
+    </button>
 
-  <p style="color:#667085; margin-bottom:18px;">
-    Selecciona una categoría para ver sus jugadores.
-  </p>
+    <span>ADMINISTRACIÓN</span>
 
-  <div
-  id="listaEliminarJugadores"
-  style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+    <h2>ELIMINAR JUGADOR</h2>
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Primera Serie')">
+    <p>
+      Selecciona una categoría para buscar al jugador
+    </p>
 
-      <div class="icono" style="font-size:24px;">
-        ⚽
-      </div>
+  </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Primera Serie
-      </h3>
 
+  <div id="listaEliminarJugadores">
+
+    <div class="titulo-categorias-partidos">
+      <span>CATEGORÍAS</span>
+      <strong>Selecciona una serie</strong>
     </div>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Segunda Serie')">
+    <div class="categorias-partidos">
 
-      <div class="icono" style="font-size:24px;">
-        ⚽
-      </div>
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Primera Serie')">
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Segunda Serie
-      </h3>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-    </div>
+        <div>
+          <strong>Primera Serie</strong>
+          <span>Adultos</span>
+        </div>
 
-
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Serie Senior')">
-
-      <div class="icono" style="font-size:24px;">
-        🧓
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Serie Senior
-      </h3>
-
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Serie Super Senior')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Segunda Serie')">
 
-      <div class="icono" style="font-size:24px;">
-        🧓
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Super Senior
-      </h3>
+        <div>
+          <strong>Segunda Serie</strong>
+          <span>Adultos</span>
+        </div>
 
-    </div>
-
-
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Infantil U8')">
-
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U8
-      </h3>
-
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Infantil U10')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Serie Senior')">
 
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U10
-      </h3>
+        <div>
+          <strong>Senior</strong>
+          <span>Adultos</span>
+        </div>
 
-    </div>
-
-
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Infantil U13')">
-
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
-
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U13
-      </h3>
-
-    </div>
+      </button>
 
 
-    <div
-    class="card"
-    style="padding:10px 5px; margin:0; text-align:center;"
-    onclick="seleccionarCategoriaEliminarJugador('Infantil U15')">
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Serie Super Senior')">
 
-      <div class="icono" style="font-size:24px;">
-        👦
-      </div>
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
 
-      <h3 style="margin:4px 0; font-size:15px;">
-        Infantil U15
-      </h3>
+        <div>
+          <strong>Super Senior</strong>
+          <span>Adultos</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Infantil U8')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U8</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Infantil U10')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U10</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Infantil U13')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U13</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
+
+
+      <button
+      class="categoria-partido"
+      onclick="seleccionarCategoriaEliminarJugador('Infantil U15')">
+
+        <div class="categoria-partido-icono">
+          ⚽
+        </div>
+
+        <div>
+          <strong>Infantil U15</strong>
+          <span>Formativo</span>
+        </div>
+
+      </button>
 
     </div>
 
   </div>
+
 
   <p
   id="mensajeEliminarJugador"
@@ -5754,6 +5799,8 @@ class="seccion oculto">
   </p>
 
 </section>
+
+
 <section
 id="editarPartido"
 class="seccion oculto pantalla-editar-partido">
@@ -12775,21 +12822,61 @@ function restaurarCategoriasEditarJugador(){
 
 }
 
+
+function restaurarCategoriasEliminarJugador(){
+
+  const lista =
+  document.getElementById("listaEliminarJugadores");
+
+  if(!lista){
+    return;
+  }
+
+
+  if(window.categoriasEliminarJugadoresGuardadas){
+
+    lista.innerHTML =
+    window.categoriasEliminarJugadoresGuardadas;
+
+  }
+
+}
+
 async function seleccionarCategoriaEliminarJugador(categoria){
 
   const lista =
-    document.getElementById("listaEliminarJugadores");
+  document.getElementById("listaEliminarJugadores");
+
+
+  // GUARDAR LOS 8 BOTONES DE CATEGORÍAS
+  // ANTES DE REEMPLAZAR EL CONTENIDO
+
+  if(
+    !window.categoriasEliminarJugadoresGuardadas &&
+    lista.querySelector(".categorias-partidos")
+  ){
+
+    window.categoriasEliminarJugadoresGuardadas =
+    lista.innerHTML;
+
+  }
+
 
   lista.innerHTML =
-    "<p>⏳ Cargando jugadores...</p>";
+  "<p>⏳ Cargando jugadores...</p>";
 
 
-  const { data: categoriaData, error: categoriaError } =
-    await supabaseClient
-      .from("categories")
-      .select("id")
-      .eq("name", categoria)
-      .single();
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoria)
+    .single();
 
 
   if(categoriaError){
@@ -12797,25 +12884,30 @@ async function seleccionarCategoriaEliminarJugador(categoria){
     console.error(categoriaError);
 
     lista.innerHTML =
-      "<p>❌ No se encontró la categoría.</p>";
+    "<p>❌ No se encontró la categoría.</p>";
 
     return;
   }
 
 
-  const { data: jugadores, error } =
-    await supabaseClient
-      .from("Jugadores")
-      .select(`
-        id,
-        name,
-        number,
-        position,
-        photo_url,
-        category_id
-      `)
-      .eq("category_id", categoriaData.id)
-      .order("number");
+  // BUSCAR JUGADORES
+
+  const {
+    data: jugadores,
+    error
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .select(`
+      id,
+      name,
+      number,
+      position,
+      photo_url,
+      category_id
+    `)
+    .eq("category_id", categoriaData.id)
+    .order("number");
 
 
   if(error){
@@ -12823,95 +12915,165 @@ async function seleccionarCategoriaEliminarJugador(categoria){
     console.error(error);
 
     lista.innerHTML =
-      "<p>❌ Error al cargar los jugadores.</p>";
+    "<p>❌ Error al cargar los jugadores.</p>";
 
     return;
   }
 
 
+  // SI NO HAY JUGADORES
+
   if(!jugadores || jugadores.length === 0){
 
     lista.innerHTML = `
-      <div style="grid-column:1 / -1;">
 
-        <p>
-          👥 No hay jugadores registrados en ${categoria}.
-        </p>
+      <div class="cabecera-listado-editar">
 
         <button
-        class="boton"
+        class="volver-categorias-editar"
         onclick="restaurarCategoriasEliminarJugador()">
-          ← Categorías
+          ← CATEGORÍAS
         </button>
 
+        <span>
+          ${categoria}
+        </span>
+
+        <strong>
+          Jugadores registrados
+        </strong>
+
+        <small>
+          No hay jugadores registrados
+        </small>
+
       </div>
+
+
+      <p style="
+        text-align:center;
+        color:#667085;
+        padding:25px 10px;
+      ">
+        👥 No hay jugadores registrados en esta categoría.
+      </p>
+
     `;
 
     return;
   }
 
 
+  // MOSTRAR JUGADORES
+
   lista.innerHTML = `
 
-    <div style="grid-column:1 / -1;">
+    <div class="cabecera-listado-editar">
 
       <button
-      class="boton"
+      class="volver-categorias-editar"
       onclick="restaurarCategoriasEliminarJugador()">
-        ← Categorías
+        ← CATEGORÍAS
       </button>
 
-      <h3
-      style="margin:10px 0 15px; color:#071b4a;">
+      <span>
         ${categoria}
-      </h3>
+      </span>
+
+      <strong>
+        Jugadores registrados
+      </strong>
+
+      <small>
+        Selecciona el jugador que deseas eliminar
+      </small>
 
     </div>
 
 
-    ${jugadores.map(function(jugador){
+    <div class="grid-jugadores-editar">
 
-      return `
+      ${jugadores.map(function(jugador){
 
-        <div
-        class="jugador-card"
-        style="grid-column:1 / -1;">
+        const nombreSeguro =
+        jugador.name
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
 
-          <img
-          class="jugador-foto"
-          src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
-          alt="${jugador.name}">
 
-          <div class="jugador-numero">
-            ${jugador.number}
+        const categoriaSegura =
+        categoria
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+
+        return `
+
+          <div class="tarjeta-jugador-editar">
+
+
+            <div class="foto-jugador-editar">
+
+              ${
+                jugador.photo_url
+                ? `
+
+                  <img
+                  src="${jugador.photo_url}"
+                  alt="${jugador.name}">
+
+                `
+                : `
+
+                  <div class="sin-foto-jugador">
+                    👤
+                  </div>
+
+                `
+              }
+
+
+              <div class="numero-jugador-editar">
+
+                ${jugador.number ?? "-"}
+
+              </div>
+
+            </div>
+
+
+            <div class="datos-jugador-editar">
+
+              <span>
+                ${jugador.position || "Jugador"}
+              </span>
+
+              <strong>
+                ${jugador.name}
+              </strong>
+
+            </div>
+
+
+            <button
+            class="boton-jugador-eliminar"
+            onclick="confirmarEliminarJugador(
+              ${jugador.id},
+              '${nombreSeguro}',
+              '${categoriaSegura}'
+            )">
+
+              × ELIMINAR
+
+            </button>
+
           </div>
 
-          <div class="jugador-info">
+        `;
 
-            <h3>
-              ${jugador.name}
-            </h3>
+      }).join("")}
 
-            <p>
-              ⚽ ${jugador.position}
-            </p>
-
-          </div>
-
-          <button
-          class="boton"
-          onclick="confirmarEliminarJugador(${jugador.id}, '${jugador.name.replace(/'/g, "\\'")}', '${categoria.replace(/'/g, "\\'")}')"
-          style="background:#c82032;">
-
-            🗑️ Eliminar
-
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("")}
+    </div>
 
   `;
 
