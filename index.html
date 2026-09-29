@@ -3283,6 +3283,926 @@ font-size: 16px;
   font-weight:700;
 }
 
+
+/* ========================================
+   SELECCION ONCE TITULAR
+======================================== */
+
+.contador-titulares{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin:15px 0;
+
+  padding:13px 15px;
+
+  background:#071b4a;
+
+  border-radius:14px;
+
+  color:white;
+}
+
+
+.contador-titulares span{
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:.6px;
+}
+
+
+.contador-titulares strong{
+  font-size:18px;
+  font-weight:900;
+}
+
+
+.grid-seleccion-jugadores{
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,minmax(0,1fr));
+
+  gap:10px;
+}
+
+
+.jugador-seleccion-titular{
+  overflow:hidden;
+
+  background:white;
+
+  border:2px solid transparent;
+
+  border-radius:15px;
+
+  box-shadow:
+  0 3px 12px rgba(7,27,74,.08);
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+
+.jugador-seleccion-titular:active{
+  transform:scale(.98);
+}
+
+
+.jugador-seleccion-titular.seleccionado{
+  border-color:#16803c;
+
+  box-shadow:
+  0 4px 15px rgba(22,128,60,.18);
+}
+
+
+.foto-seleccion-titular{
+  position:relative;
+
+  width:100%;
+  height:145px;
+
+  overflow:hidden;
+
+  background:#e9edf3;
+}
+
+
+.foto-seleccion-titular img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+
+.sin-foto-seleccion{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:38px;
+
+  background:#edf0f5;
+}
+
+
+.dorsal-seleccion{
+  position:absolute;
+
+  top:7px;
+  right:7px;
+
+  min-width:31px;
+  height:31px;
+
+  padding:0 6px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#071b4a;
+
+  border:2px solid white;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+
+.check-seleccion{
+  position:absolute;
+
+  left:8px;
+  top:8px;
+
+  width:28px;
+  height:28px;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:#16803c;
+
+  border:2px solid white;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+
+.jugador-seleccion-titular.seleccionado
+.check-seleccion{
+  display:flex;
+}
+
+
+.datos-seleccion-titular{
+  padding:10px;
+}
+
+
+.datos-seleccion-titular strong{
+  display:block;
+
+  color:#071b4a;
+
+  font-size:12px;
+  font-weight:900;
+
+  line-height:1.15;
+}
+
+
+.datos-seleccion-titular span{
+  display:block;
+
+  margin-top:4px;
+
+  color:#667085;
+
+  font-size:9px;
+  font-weight:700;
+}
+
+
+.mensaje-titulares{
+  margin-top:14px;
+
+  text-align:center;
+
+  font-size:11px;
+  font-weight:800;
+}
+
+
+.guardar-titulares{
+  width:100%;
+
+  margin-top:12px;
+  margin-bottom:25px;
+
+  padding:14px;
+
+  background:#071b4a;
+
+  border:0;
+  border-radius:12px;
+
+  color:white;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  cursor:pointer;
+}
+
+
+.guardar-titulares:active{
+  transform:scale(.98);
+}
+
+.jugador-ya-titular{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+
+.etiqueta-ya-titular{
+  position:absolute;
+
+  left:7px;
+  bottom:7px;
+
+  padding:5px 7px;
+
+  background:#071b4a;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:7px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+}
+
+
+/* ========================================
+   GOLEADORES ADMIN
+======================================== */
+
+.boton-agregar-gol{
+  width:100%;
+
+  margin-top:15px;
+
+  padding:13px;
+
+  background:#071b4a;
+
+  border:0;
+  border-radius:11px;
+
+  color:white;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  cursor:pointer;
+}
+
+
+.lista-goles-admin{
+  margin-top:16px;
+
+  padding:17px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 4px 15px rgba(7,27,74,.06);
+}
+
+
+.sin-goles-admin{
+  padding:18px 5px;
+
+  color:#667085;
+
+  font-size:11px;
+
+  text-align:center;
+}
+
+
+.gol-admin-card{
+  display:flex;
+  align-items:center;
+
+  gap:11px;
+
+  margin-top:9px;
+
+  padding:9px;
+
+  background:#f8f9fb;
+
+  border:1px solid #e8ebef;
+
+  border-radius:13px;
+}
+
+
+.gol-admin-foto{
+  width:48px;
+  height:48px;
+
+  flex:0 0 48px;
+
+  overflow:hidden;
+
+  background:#e9edf3;
+
+  border-radius:50%;
+}
+
+
+.gol-admin-foto img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+
+.gol-sin-foto{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:20px;
+}
+
+
+.gol-admin-datos{
+  flex:1;
+  min-width:0;
+}
+
+
+.gol-admin-datos span{
+  display:block;
+
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:.5px;
+}
+
+
+.gol-admin-datos strong{
+  display:block;
+
+  margin-top:2px;
+
+  color:#071b4a;
+
+  font-size:12px;
+  font-weight:900;
+}
+
+
+.gol-admin-datos small{
+  color:#667085;
+
+  font-size:9px;
+}
+
+
+.eliminar-gol-admin{
+  width:34px;
+  height:34px;
+
+  flex:0 0 34px;
+
+  background:#fff0f1;
+
+  border:0;
+
+  border-radius:50%;
+
+  color:#c82032;
+
+  font-size:20px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+
+/* ========================================
+   DETALLE PUBLICO DEL PARTIDO
+======================================== */
+
+.detalle-partido-publico{
+  background:#f3f5f9;
+}
+
+
+.cargando-detalle-partido{
+  padding:40px 10px;
+
+  text-align:center;
+
+  color:#667085;
+
+  font-size:12px;
+}
+
+
+.partido-detalle-principal{
+  overflow:hidden;
+
+  margin-top:15px;
+
+  background:white;
+
+  border-radius:20px;
+
+  border:1px solid #e4e7ec;
+
+  box-shadow:
+  0 5px 18px rgba(7,27,74,.07);
+}
+
+
+.partido-detalle-competencia{
+  padding:14px 16px;
+
+  background:#071b4a;
+
+  color:white;
+}
+
+
+.partido-detalle-competencia span{
+  display:block;
+
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:.8px;
+}
+
+
+.partido-detalle-competencia strong{
+  display:block;
+
+  margin-top:3px;
+
+  font-size:12px;
+}
+
+
+.partido-detalle-fecha{
+  padding:12px;
+
+  color:#667085;
+
+  font-size:10px;
+  font-weight:700;
+
+  text-align:center;
+
+  text-transform:capitalize;
+}
+
+
+.partido-detalle-marcador{
+  display:grid;
+
+  grid-template-columns:
+  minmax(0,1fr) auto minmax(0,1fr);
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 13px 20px;
+}
+
+
+.partido-detalle-equipo{
+  min-width:0;
+
+  text-align:center;
+}
+
+
+.partido-detalle-equipo strong{
+  display:block;
+
+  margin-top:7px;
+
+  color:#071b4a;
+
+  font-size:11px;
+  font-weight:900;
+
+  line-height:1.15;
+}
+
+
+.escudo-detalle{
+  width:52px;
+  height:52px;
+
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:12px;
+  font-weight:900;
+}
+
+
+.feria-detalle{
+  background:#071b4a;
+}
+
+
+.rival-detalle{
+  background:#c82032;
+}
+
+
+.marcador-detalle-centro{
+  text-align:center;
+}
+
+
+.marcador-detalle-centro > div{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+
+.marcador-detalle-centro strong{
+  color:#071b4a;
+
+  font-size:31px;
+  font-weight:900;
+}
+
+
+.marcador-detalle-centro span{
+  color:#98a2b3;
+
+  font-size:20px;
+}
+
+
+.marcador-detalle-centro small{
+  display:inline-block;
+
+  margin-top:5px;
+
+  padding:4px 8px;
+
+  background:#eef2f8;
+
+  border-radius:10px;
+
+  color:#475467;
+
+  font-size:7px;
+  font-weight:900;
+
+  text-transform:uppercase;
+}
+
+
+/* GOLES */
+
+.goles-publicos{
+  padding:0 16px 15px;
+}
+
+
+.gol-publico{
+  display:flex;
+  align-items:center;
+
+  gap:7px;
+
+  padding:7px 0;
+
+  border-top:1px solid #eef0f3;
+}
+
+
+.gol-publico-icono{
+  font-size:12px;
+}
+
+
+.gol-publico strong{
+  flex:1;
+
+  color:#071b4a;
+
+  font-size:10px;
+}
+
+
+.gol-publico-minuto{
+  color:#c82032;
+
+  font-size:10px;
+  font-weight:900;
+}
+
+
+/* BLOQUES */
+
+.bloque-detalle-publico{
+  margin-top:14px;
+
+  padding:16px;
+
+  background:white;
+
+  border:1px solid #e4e7ec;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 4px 15px rgba(7,27,74,.05);
+}
+
+
+.titulo-detalle-publico{
+  margin-bottom:12px;
+}
+
+
+.titulo-detalle-publico span{
+  display:block;
+
+  color:#c82032;
+
+  font-size:8px;
+  font-weight:900;
+
+  letter-spacing:1px;
+}
+
+
+.titulo-detalle-publico strong{
+  display:block;
+
+  margin-top:2px;
+
+  color:#071b4a;
+
+  font-size:18px;
+  font-weight:900;
+}
+
+
+/* TITULARES */
+
+.grid-titulares-publicos{
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,minmax(0,1fr));
+
+  gap:9px;
+}
+
+
+.jugador-detalle-publico{
+  min-width:0;
+
+  text-align:center;
+}
+
+
+.jugador-detalle-foto{
+  position:relative;
+
+  width:100%;
+  aspect-ratio:1 / 1.1;
+
+  overflow:hidden;
+
+  background:#e9edf3;
+
+  border-radius:12px;
+}
+
+
+.jugador-detalle-foto img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+
+.jugador-detalle-foto > span{
+  position:absolute;
+
+  right:5px;
+  top:5px;
+
+  min-width:25px;
+  height:25px;
+
+  padding:0 5px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#071b4a;
+
+  border:2px solid white;
+
+  border-radius:50%;
+
+  color:white;
+
+  font-size:9px;
+  font-weight:900;
+}
+
+
+.jugador-detalle-sin-foto{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:30px;
+}
+
+
+.jugador-detalle-publico > strong{
+  display:block;
+
+  margin-top:6px;
+
+  overflow:hidden;
+
+  color:#071b4a;
+
+  font-size:9px;
+  font-weight:900;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+}
+
+
+.jugador-detalle-publico > small{
+  display:block;
+
+  margin-top:2px;
+
+  color:#667085;
+
+  font-size:7px;
+}
+
+
+/* SUPLENTES */
+
+.lista-suplentes-publicos{
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,minmax(0,1fr));
+
+  gap:8px;
+}
+
+
+.suplente-publico{
+  display:flex;
+  align-items:center;
+
+  gap:8px;
+
+  min-width:0;
+
+  padding:7px;
+
+  background:#f8f9fb;
+
+  border-radius:11px;
+}
+
+
+.suplente-publico-foto{
+  width:38px;
+  height:38px;
+
+  flex:0 0 38px;
+
+  overflow:hidden;
+
+  background:#e9edf3;
+
+  border-radius:50%;
+}
+
+
+.suplente-publico-foto img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+}
+
+
+.suplente-sin-foto{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+.suplente-publico-info{
+  min-width:0;
+}
+
+
+.suplente-publico-info strong{
+  display:block;
+
+  overflow:hidden;
+
+  color:#071b4a;
+
+  font-size:9px;
+  font-weight:900;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+}
+
+
+.suplente-publico-info span{
+  display:block;
+
+  margin-top:2px;
+
+  color:#667085;
+
+  font-size:7px;
+}
+
+
+.detalle-sin-datos{
+  color:#667085;
+
+  font-size:10px;
+
+  text-align:center;
+}
+
 </style>  
 
   
@@ -6978,6 +7898,227 @@ class="seccion oculto formulario-partido-moderno">
 
 
 <section
+id="administrarTitulares"
+class="seccion oculto">
+
+  <div class="cabecera-seccion-publica">
+
+    <button
+    class="volver-publico"
+    onclick="volverEditarPartidoDesdeTitulares()">
+      ← VOLVER
+    </button>
+
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>ONCE TITULAR</h2>
+
+    <p id="subtituloTitulares">
+      Selecciona los jugadores que iniciarán el partido
+    </p>
+
+  </div>
+
+
+  <div class="contador-titulares">
+
+    <span>JUGADORES SELECCIONADOS</span>
+
+    <strong>
+      <span id="cantidadTitulares">0</span> / 11
+    </strong>
+
+  </div>
+
+
+  <div
+  id="listaSeleccionTitulares"
+  class="grid-seleccion-jugadores">
+
+    <p>
+      Cargando jugadores...
+    </p>
+
+  </div>
+
+
+  <p
+  id="mensajeTitulares"
+  class="mensaje-titulares">
+  </p>
+
+
+  <button
+  class="guardar-titulares"
+  onclick="guardarTitulares()">
+
+    GUARDAR ONCE TITULAR
+
+  </button>
+
+</section>
+
+
+
+<section
+id="administrarSuplentes"
+class="seccion oculto">
+
+  <div class="cabecera-seccion-publica">
+
+    <button
+    class="volver-publico"
+    onclick="volverEditarPartidoDesdeSuplentes()">
+      ← VOLVER
+    </button>
+
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>SUPLENTES</h2>
+
+    <p>
+      Selecciona los jugadores que estarán en el banco
+    </p>
+
+  </div>
+
+
+  <div class="contador-titulares">
+
+    <span>SUPLENTES SELECCIONADOS</span>
+
+    <strong id="cantidadSuplentes">
+      0
+    </strong>
+
+  </div>
+
+
+  <div
+  id="listaSeleccionSuplentes"
+  class="grid-seleccion-jugadores">
+
+    <p>
+      Cargando jugadores...
+    </p>
+
+  </div>
+
+
+  <p
+  id="mensajeSuplentes"
+  class="mensaje-titulares">
+  </p>
+
+
+  <button
+  class="guardar-titulares"
+  onclick="guardarSuplentes()">
+
+    GUARDAR SUPLENTES
+
+  </button>
+
+</section>
+
+
+
+<section
+id="administrarGoles"
+class="seccion oculto">
+
+  <div class="cabecera-seccion-publica">
+
+    <button
+    class="volver-publico"
+    onclick="volverEditarPartidoDesdeGoles()">
+      ← VOLVER
+    </button>
+
+    <span>ADMINISTRACIÓN</span>
+
+    <h2>GOLEADORES</h2>
+
+    <p>
+      Registra los goles de Feria Osorno
+    </p>
+
+  </div>
+
+
+  <div class="editar-partido-bloque">
+
+    <div class="editar-partido-titulo">
+      <span>NUEVO GOL</span>
+      <strong>Agregar goleador</strong>
+    </div>
+
+
+    <label>Jugador</label>
+
+    <select id="golJugador">
+
+      <option value="">
+        Seleccionar jugador
+      </option>
+
+    </select>
+
+
+    <label>Minuto</label>
+
+    <input
+    type="number"
+    id="golMinuto"
+    min="0"
+    max="150"
+    placeholder="Ej: 34">
+
+
+    <button
+    class="boton-agregar-gol"
+    onclick="agregarGolPartido()">
+
+      ＋ AGREGAR GOL
+
+    </button>
+
+  </div>
+
+
+  <div class="lista-goles-admin">
+
+    <div class="editar-partido-titulo">
+
+      <span>GOLES REGISTRADOS</span>
+
+      <strong>
+        Goleadores del partido
+      </strong>
+
+    </div>
+
+
+    <div id="listaGolesPartido">
+
+      <p class="sin-goles-admin">
+        No hay goles registrados.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <p
+  id="mensajeGoles"
+  class="mensaje-titulares">
+  </p>
+
+</section>
+
+
+<section
 id="formularioEditarJugador"
 class="seccion oculto formulario-jugador-moderno">
 
@@ -7713,6 +8854,8 @@ class="seccion oculto">  <div
 id="detalleJugador">    
 </div>  </section> 
   
+
+
 <section
 id="partidos"
 class="seccion oculto pantalla-partidos-publica">
@@ -7873,6 +9016,36 @@ class="seccion oculto pantalla-partidos-publica">
     <div id="listaPartidos">
       <p>Cargando partidos...</p>
     </div>
+
+  </div>
+
+</section>
+
+
+<section
+id="detallePartido"
+class="seccion oculto detalle-partido-publico">
+
+  <div class="cabecera-seccion-publica">
+
+    <button
+    class="volver-publico"
+    onclick="volverDesdeDetallePartido()">
+      ← PARTIDOS
+    </button>
+
+    <span>PARTIDO</span>
+
+    <h2>DETALLE DEL PARTIDO</h2>
+
+  </div>
+
+
+  <div id="contenidoDetallePartido">
+
+    <p style="text-align:center;">
+      Cargando partido...
+    </p>
 
   </div>
 
@@ -12508,47 +13681,1303 @@ async function guardarEdicionPartido(){
 
 }
 
-function abrirAdministrarTitulares(){
+async function abrirAdministrarTitulares(){
 
   const partidoId =
   document.getElementById("editarPartidoId").value;
 
+  const categoriaNombre =
+  document.getElementById("editarCategoria").value;
+
+
   if(!partidoId){
+
     alert("⚠️ No se encontró el partido.");
+
     return;
+
   }
 
-  alert("⚽ Ahora configuraremos el once titular.");
+
+  if(!categoriaNombre){
+
+    alert("⚠️ El partido no tiene categoría.");
+
+    return;
+
+  }
+
+
+  mostrar("administrarTitulares");
+
+
+  const lista =
+  document.getElementById("listaSeleccionTitulares");
+
+  const mensaje =
+  document.getElementById("mensajeTitulares");
+
+
+  lista.innerHTML =
+  "<p>⏳ Cargando jugadores...</p>";
+
+  mensaje.innerText = "";
+
+
+  document.getElementById("cantidadTitulares").innerText =
+  "0";
+
+
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoria,
+    error: errorCategoria
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoriaNombre)
+    .single();
+
+
+  if(errorCategoria){
+
+    console.error(errorCategoria);
+
+    lista.innerHTML =
+    "<p>❌ No se pudo cargar la categoría.</p>";
+
+    return;
+
+  }
+
+
+  // CARGAR JUGADORES DE ESA CATEGORÍA
+
+  const {
+    data: jugadores,
+    error: errorJugadores
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .select(`
+      id,
+      name,
+      number,
+      position,
+      photo_url
+    `)
+    .eq("category_id", categoria.id)
+    .order("number", {
+      ascending:true
+    });
+
+
+  if(errorJugadores){
+
+    console.error(errorJugadores);
+
+    lista.innerHTML =
+    "<p>❌ No se pudieron cargar los jugadores.</p>";
+
+    return;
+
+  }
+
+
+  // CARGAR TITULARES YA GUARDADOS
+
+  const {
+    data: titularesGuardados,
+    error: errorTitulares
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .select("jugador_id")
+    .eq("partido_id", partidoId)
+    .eq("tipo", "Titular");
+
+
+  if(errorTitulares){
+
+    console.error(errorTitulares);
+
+    lista.innerHTML =
+    "<p>❌ No se pudo cargar la alineación.</p>";
+
+    return;
+
+  }
+
+
+  const idsTitulares =
+  (titularesGuardados || []).map(function(item){
+
+    return Number(item.jugador_id);
+
+  });
+
+
+  if(!jugadores || jugadores.length === 0){
+
+    lista.innerHTML =
+    "<p>⚽ No hay jugadores registrados en esta categoría.</p>";
+
+    return;
+
+  }
+
+
+  lista.innerHTML =
+  jugadores.map(function(jugador){
+
+    const seleccionado =
+    idsTitulares.includes(Number(jugador.id));
+
+
+    const fotoHTML =
+    jugador.photo_url
+    ? `
+        <img
+        src="${jugador.photo_url}"
+        alt="${jugador.name}">
+      `
+    : `
+        <div class="sin-foto-seleccion">
+          👤
+        </div>
+      `;
+
+
+    return `
+
+      <div
+      class="jugador-seleccion-titular
+      ${seleccionado ? "seleccionado" : ""}"
+      data-jugador-id="${jugador.id}"
+      onclick="seleccionarTitular(this)">
+
+
+        <div class="foto-seleccion-titular">
+
+          ${fotoHTML}
+
+          <div class="dorsal-seleccion">
+            ${jugador.number ?? "-"}
+          </div>
+
+          <div class="check-seleccion">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="datos-seleccion-titular">
+
+          <strong>
+            ${jugador.name}
+          </strong>
+
+          <span>
+            ${jugador.position || "Sin posición"}
+          </span>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+
+  actualizarContadorTitulares();
+
+}
+
+
+function seleccionarTitular(elemento){
+
+  const seleccionados =
+  document.querySelectorAll(
+    "#listaSeleccionTitulares .jugador-seleccion-titular.seleccionado"
+  );
+
+
+  if(
+    !elemento.classList.contains("seleccionado") &&
+    seleccionados.length >= 11
+  ){
+
+    alert("⚠️ El once titular puede tener un máximo de 11 jugadores.");
+
+    return;
+
+  }
+
+
+  elemento.classList.toggle("seleccionado");
+
+
+  actualizarContadorTitulares();
+
 }
 
 
 
-function abrirAdministrarSuplentes(){
+function actualizarContadorTitulares(){
+
+  const cantidad =
+  document.querySelectorAll(
+    "#listaSeleccionTitulares .jugador-seleccion-titular.seleccionado"
+  ).length;
+
+
+  document.getElementById("cantidadTitulares").innerText =
+  cantidad;
+
+}
+
+
+async function guardarTitulares(){
 
   const partidoId =
-  document.getElementById("editarPartidoId").value;
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
 
-  if(!partidoId){
-    alert("⚠️ No se encontró el partido.");
+  const mensaje =
+  document.getElementById("mensajeTitulares");
+
+  const seleccionados =
+  Array.from(
+    document.querySelectorAll(
+      "#listaSeleccionTitulares .jugador-seleccion-titular.seleccionado"
+    )
+  );
+
+
+  if(seleccionados.length === 0){
+
+    mensaje.innerText =
+    "⚠️ Selecciona al menos un jugador.";
+
+    mensaje.style.color =
+    "#c82032";
+
     return;
   }
 
-  alert("👥 Ahora configuraremos los suplentes.");
+
+  if(seleccionados.length > 11){
+
+    mensaje.innerText =
+    "⚠️ Puedes seleccionar un máximo de 11 titulares.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  "⏳ Guardando titulares...";
+
+  mensaje.style.color =
+  "#17479e";
+
+
+  // BORRAR TITULARES ANTERIORES
+
+  const {
+    error: errorEliminar
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .delete()
+    .eq("partido_id", partidoId)
+    .eq("tipo", "Titular");
+
+
+  if(errorEliminar){
+
+    console.error(errorEliminar);
+
+    mensaje.innerText =
+    "❌ No se pudieron actualizar los titulares.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // PREPARAR JUGADORES
+
+  const nuevosTitulares =
+  seleccionados.map(function(elemento, indice){
+
+    return {
+
+      partido_id:
+      partidoId,
+
+      jugador_id:
+      Number(elemento.dataset.jugadorId),
+
+      tipo:
+      "Titular",
+
+      orden:
+      indice + 1
+
+    };
+
+  });
+
+
+  // GUARDAR EN SUPABASE
+
+  const {
+    error: errorGuardar
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .insert(nuevosTitulares);
+
+
+  if(errorGuardar){
+
+    console.error(errorGuardar);
+
+    mensaje.innerText =
+    "❌ Error al guardar los titulares.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  `✅ ${seleccionados.length} titular${seleccionados.length === 1 ? "" : "es"} guardado${seleccionados.length === 1 ? "" : "s"} correctamente.`;
+
+  mensaje.style.color =
+  "#16803c";
+
+}
+
+function volverEditarPartidoDesdeTitulares(){
+
+  document
+  .getElementById("administrarTitulares")
+  .classList.add("oculto");
+
+
+  document
+  .getElementById("formularioEditarPartido")
+  .classList.remove("oculto");
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+async function abrirAdministrarSuplentes(){
+
+  const partidoId =
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
+
+  const categoriaNombre =
+  document.getElementById("editarCategoria").value;
+
+
+  if(!partidoId){
+
+    alert("⚠️ No se encontró el partido.");
+
+    return;
+  }
+
+
+  if(!categoriaNombre){
+
+    alert("⚠️ El partido no tiene categoría.");
+
+    return;
+  }
+
+
+  mostrar("administrarSuplentes");
+
+
+  const lista =
+  document.getElementById("listaSeleccionSuplentes");
+
+  const mensaje =
+  document.getElementById("mensajeSuplentes");
+
+
+  lista.innerHTML =
+  "<p>⏳ Cargando jugadores...</p>";
+
+  mensaje.innerText = "";
+
+
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoria,
+    error: errorCategoria
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoriaNombre)
+    .single();
+
+
+  if(errorCategoria){
+
+    console.error(errorCategoria);
+
+    lista.innerHTML =
+    "<p>❌ No se pudo cargar la categoría.</p>";
+
+    return;
+  }
+
+
+  // CARGAR JUGADORES
+
+  const {
+    data: jugadores,
+    error: errorJugadores
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .select(`
+      id,
+      name,
+      number,
+      position,
+      photo_url
+    `)
+    .eq("category_id", categoria.id)
+    .order("number", {
+      ascending:true
+    });
+
+
+  if(errorJugadores){
+
+    console.error(errorJugadores);
+
+    lista.innerHTML =
+    "<p>❌ No se pudieron cargar los jugadores.</p>";
+
+    return;
+  }
+
+
+  // CARGAR TITULARES Y SUPLENTES YA GUARDADOS
+
+  const {
+    data: convocatoria,
+    error: errorConvocatoria
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .select(`
+      jugador_id,
+      tipo
+    `)
+    .eq("partido_id", partidoId);
+
+
+  if(errorConvocatoria){
+
+    console.error(errorConvocatoria);
+
+    lista.innerHTML =
+    "<p>❌ No se pudo cargar la convocatoria.</p>";
+
+    return;
+  }
+
+
+  const idsTitulares =
+  (convocatoria || [])
+    .filter(function(item){
+
+      return item.tipo === "Titular";
+
+    })
+    .map(function(item){
+
+      return Number(item.jugador_id);
+
+    });
+
+
+  const idsSuplentes =
+  (convocatoria || [])
+    .filter(function(item){
+
+      return item.tipo === "Suplente";
+
+    })
+    .map(function(item){
+
+      return Number(item.jugador_id);
+
+    });
+
+
+  if(!jugadores || jugadores.length === 0){
+
+    lista.innerHTML =
+    "<p>⚽ No hay jugadores registrados en esta categoría.</p>";
+
+    return;
+  }
+
+
+  lista.innerHTML =
+  jugadores.map(function(jugador){
+
+    const esTitular =
+    idsTitulares.includes(
+      Number(jugador.id)
+    );
+
+
+    const esSuplente =
+    idsSuplentes.includes(
+      Number(jugador.id)
+    );
+
+
+    const fotoHTML =
+    jugador.photo_url
+    ? `
+        <img
+        src="${jugador.photo_url}"
+        alt="${jugador.name}">
+      `
+    : `
+        <div class="sin-foto-seleccion">
+          👤
+        </div>
+      `;
+
+
+    return `
+
+      <div
+      class="jugador-seleccion-titular
+      ${esSuplente ? "seleccionado" : ""}
+      ${esTitular ? "jugador-ya-titular" : ""}"
+
+      data-jugador-id="${jugador.id}"
+
+      ${esTitular
+        ? ""
+        : `onclick="seleccionarSuplente(this)"`}>
+
+
+        <div class="foto-seleccion-titular">
+
+          ${fotoHTML}
+
+
+          <div class="dorsal-seleccion">
+            ${jugador.number ?? "-"}
+          </div>
+
+
+          <div class="check-seleccion">
+            ✓
+          </div>
+
+
+          ${
+            esTitular
+            ? `
+              <div class="etiqueta-ya-titular">
+                TITULAR
+              </div>
+            `
+            : ""
+          }
+
+        </div>
+
+
+        <div class="datos-seleccion-titular">
+
+          <strong>
+            ${jugador.name}
+          </strong>
+
+          <span>
+            ${jugador.position || "Sin posición"}
+          </span>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+
+  actualizarContadorSuplentes();
+
 }
 
 
 
-function abrirAdministrarGoles(){
+function seleccionarSuplente(elemento){
 
-  const partidoId =
-  document.getElementById("editarPartidoId").value;
-
-  if(!partidoId){
-    alert("⚠️ No se encontró el partido.");
+  if(
+    elemento.classList.contains(
+      "jugador-ya-titular"
+    )
+  ){
     return;
   }
 
-  alert("⚽ Ahora configuraremos los goleadores.");
+
+  elemento.classList.toggle(
+    "seleccionado"
+  );
+
+
+  actualizarContadorSuplentes();
+
+}
+
+
+
+function actualizarContadorSuplentes(){
+
+  const cantidad =
+  document.querySelectorAll(
+    "#listaSeleccionSuplentes .jugador-seleccion-titular.seleccionado"
+  ).length;
+
+
+  document.getElementById(
+    "cantidadSuplentes"
+  ).innerText =
+  cantidad;
+
+}
+
+
+
+function volverEditarPartidoDesdeSuplentes(){
+
+  document
+  .getElementById("administrarSuplentes")
+  .classList.add("oculto");
+
+
+  document
+  .getElementById("formularioEditarPartido")
+  .classList.remove("oculto");
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+async function guardarSuplentes(){
+
+  const partidoId =
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
+
+
+  const mensaje =
+  document.getElementById("mensajeSuplentes");
+
+
+  const seleccionados =
+  Array.from(
+    document.querySelectorAll(
+      "#listaSeleccionSuplentes .jugador-seleccion-titular.seleccionado"
+    )
+  );
+
+
+  mensaje.innerText =
+  "⏳ Guardando suplentes...";
+
+  mensaje.style.color =
+  "#17479e";
+
+
+  // BORRAR SUPLENTES ANTERIORES
+
+  const {
+    error: errorEliminar
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .delete()
+    .eq("partido_id", partidoId)
+    .eq("tipo", "Suplente");
+
+
+  if(errorEliminar){
+
+    console.error(errorEliminar);
+
+    mensaje.innerText =
+    "❌ No se pudieron actualizar los suplentes.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  // PERMITIR DEJAR EL BANCO VACÍO
+
+  if(seleccionados.length === 0){
+
+    mensaje.innerText =
+    "✅ Suplentes actualizados correctamente.";
+
+    mensaje.style.color =
+    "#16803c";
+
+    return;
+  }
+
+
+  const nuevosSuplentes =
+  seleccionados.map(function(elemento, indice){
+
+    return {
+
+      partido_id:
+      partidoId,
+
+      jugador_id:
+      Number(
+        elemento.dataset.jugadorId
+      ),
+
+      tipo:
+      "Suplente",
+
+      orden:
+      indice + 1
+
+    };
+
+  });
+
+
+  const {
+    error: errorGuardar
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .insert(nuevosSuplentes);
+
+
+  if(errorGuardar){
+
+    console.error(errorGuardar);
+
+    mensaje.innerText =
+    "❌ Error al guardar los suplentes.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+  }
+
+
+  mensaje.innerText =
+  `✅ ${seleccionados.length} suplente${seleccionados.length === 1 ? "" : "s"} guardado${seleccionados.length === 1 ? "" : "s"} correctamente.`;
+
+  mensaje.style.color =
+  "#16803c";
+
+}
+
+
+async function abrirAdministrarGoles(){
+
+  const partidoId =
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
+
+
+  if(!partidoId){
+
+    alert("⚠️ No se encontró el partido.");
+
+    return;
+
+  }
+
+
+  mostrar("administrarGoles");
+
+
+  document.getElementById("mensajeGoles").innerText =
+  "";
+
+
+  document.getElementById("golMinuto").value =
+  "";
+
+
+  await cargarJugadoresParaGoles(partidoId);
+
+  await cargarGolesPartidoAdmin(partidoId);
+
+}
+
+
+async function cargarJugadoresParaGoles(partidoId){
+
+  const select =
+  document.getElementById("golJugador");
+
+
+  select.innerHTML =
+  `
+    <option value="">
+      Seleccionar jugador
+    </option>
+  `;
+
+
+  const {
+    data: convocatoria,
+    error
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .select(`
+      jugador_id,
+      tipo,
+      Jugadores (
+        id,
+        name,
+        number
+      )
+    `)
+    .eq("partido_id", partidoId)
+    .order("tipo", {
+      ascending:true
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    select.innerHTML =
+    `
+      <option value="">
+        Error al cargar jugadores
+      </option>
+    `;
+
+    return;
+
+  }
+
+
+  if(!convocatoria || convocatoria.length === 0){
+
+    select.innerHTML =
+    `
+      <option value="">
+        Primero agrega titulares o suplentes
+      </option>
+    `;
+
+    return;
+
+  }
+
+
+  convocatoria.forEach(function(item){
+
+    if(!item.Jugadores){
+      return;
+    }
+
+
+    const option =
+    document.createElement("option");
+
+
+    option.value =
+    item.Jugadores.id;
+
+
+    option.textContent =
+    `${item.Jugadores.number ?? "-"} · ${item.Jugadores.name} · ${item.tipo}`;
+
+
+    select.appendChild(option);
+
+  });
+
+}
+
+async function agregarGolPartido(){
+
+  const partidoId =
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
+
+
+  const jugadorId =
+  Number(
+    document.getElementById("golJugador").value
+  );
+
+
+  const minutoValor =
+  document.getElementById("golMinuto").value;
+
+
+  const mensaje =
+  document.getElementById("mensajeGoles");
+
+
+  if(!jugadorId){
+
+    mensaje.innerText =
+    "⚠️ Selecciona al jugador que hizo el gol.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  if(minutoValor === ""){
+
+    mensaje.innerText =
+    "⚠️ Ingresa el minuto del gol.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  const minuto =
+  Number(minutoValor);
+
+
+  if(
+    minuto < 0 ||
+    minuto > 150
+  ){
+
+    mensaje.innerText =
+    "⚠️ Ingresa un minuto válido.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  mensaje.innerText =
+  "⏳ Registrando gol...";
+
+  mensaje.style.color =
+  "#17479e";
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("GolesPartido")
+    .insert({
+
+      partido_id:
+      partidoId,
+
+      jugador_id:
+      jugadorId,
+
+      minuto:
+      minuto
+
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    mensaje.innerText =
+    "❌ No se pudo registrar el gol.";
+
+    mensaje.style.color =
+    "#c82032";
+
+    return;
+
+  }
+
+
+  document.getElementById("golJugador").value =
+  "";
+
+
+  document.getElementById("golMinuto").value =
+  "";
+
+
+  mensaje.innerText =
+  "✅ Gol registrado correctamente.";
+
+  mensaje.style.color =
+  "#16803c";
+
+
+  await cargarGolesPartidoAdmin(partidoId);
+
+}
+
+async function cargarGolesPartidoAdmin(partidoId){
+
+  const lista =
+  document.getElementById("listaGolesPartido");
+
+
+  lista.innerHTML =
+  "<p>⏳ Cargando goles...</p>";
+
+
+  const {
+    data: goles,
+    error
+  } =
+  await supabaseClient
+    .from("GolesPartido")
+    .select(`
+      id,
+      minuto,
+      jugador_id,
+      Jugadores (
+        id,
+        name,
+        number,
+        photo_url
+      )
+    `)
+    .eq("partido_id", partidoId)
+    .order("minuto", {
+      ascending:true
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    lista.innerHTML =
+    "<p>❌ No se pudieron cargar los goles.</p>";
+
+    return;
+
+  }
+
+
+  if(!goles || goles.length === 0){
+
+    lista.innerHTML =
+    `
+      <p class="sin-goles-admin">
+        ⚽ No hay goles registrados.
+      </p>
+    `;
+
+    return;
+
+  }
+
+
+  lista.innerHTML =
+  goles.map(function(gol){
+
+    const jugador =
+    gol.Jugadores;
+
+
+    const foto =
+    jugador && jugador.photo_url
+    ? `
+        <img
+        src="${jugador.photo_url}"
+        alt="${jugador.name}">
+      `
+    : `
+        <div class="gol-sin-foto">
+          👤
+        </div>
+      `;
+
+
+    return `
+
+      <div class="gol-admin-card">
+
+
+        <div class="gol-admin-foto">
+
+          ${foto}
+
+        </div>
+
+
+        <div class="gol-admin-datos">
+
+          <span>
+            GOL · ${gol.minuto}'
+          </span>
+
+          <strong>
+            ${jugador
+              ? jugador.name
+              : "Jugador"}
+          </strong>
+
+          <small>
+            #${jugador && jugador.number !== null
+              ? jugador.number
+              : "-"}
+          </small>
+
+        </div>
+
+
+        <button
+        class="eliminar-gol-admin"
+        onclick="eliminarGolPartido(${gol.id})">
+
+          ×
+
+        </button>
+
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+async function eliminarGolPartido(golId){
+
+  const confirmar =
+  confirm(
+    "¿Eliminar este gol del partido?"
+  );
+
+
+  if(!confirmar){
+    return;
+  }
+
+
+  const partidoId =
+  Number(
+    document.getElementById("editarPartidoId").value
+  );
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("GolesPartido")
+    .delete()
+    .eq("id", golId);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "❌ No se pudo eliminar el gol."
+    );
+
+    return;
+
+  }
+
+
+  await cargarGolesPartidoAdmin(
+    partidoId
+  );
+
+}
+
+function volverEditarPartidoDesdeGoles(){
+
+  document
+  .getElementById("administrarGoles")
+  .classList.add("oculto");
+
+
+  document
+  .getElementById("formularioEditarPartido")
+  .classList.remove("oculto");
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 
@@ -14687,6 +17116,581 @@ function volverGestionJugadores(){
 
 }
 
+async function verDetallePartido(partidoId){
 
+  mostrar("detallePartido");
+
+
+  const contenido =
+  document.getElementById(
+    "contenidoDetallePartido"
+  );
+
+
+  contenido.innerHTML =
+  `
+    <div class="cargando-detalle-partido">
+      ⏳ Cargando partido...
+    </div>
+  `;
+
+
+  // =====================================
+  // PARTIDO
+  // =====================================
+
+  const {
+    data: partido,
+    error: errorPartido
+  } =
+  await supabaseClient
+    .from("Partidos")
+    .select(`
+      id,
+      campeonato,
+      rival,
+      fecha,
+      local_visitante,
+      goles_favor,
+      goles_contra,
+      estado,
+      jornada,
+      categories(name)
+    `)
+    .eq("id", partidoId)
+    .single();
+
+
+  if(errorPartido){
+
+    console.error(errorPartido);
+
+    contenido.innerHTML =
+    "<p>❌ No se pudo cargar el partido.</p>";
+
+    return;
+  }
+
+
+  // =====================================
+  // CONVOCATORIA
+  // =====================================
+
+  const {
+    data: convocatoria,
+    error: errorConvocatoria
+  } =
+  await supabaseClient
+    .from("PartidoJugadores")
+    .select(`
+      jugador_id,
+      tipo,
+      orden,
+      posicion_cancha,
+      Jugadores (
+        id,
+        name,
+        number,
+        position,
+        photo_url
+      )
+    `)
+    .eq("partido_id", partidoId)
+    .order("orden", {
+      ascending:true
+    });
+
+
+  if(errorConvocatoria){
+
+    console.error(errorConvocatoria);
+
+  }
+
+
+  // =====================================
+  // GOLES
+  // =====================================
+
+  const {
+    data: goles,
+    error: errorGoles
+  } =
+  await supabaseClient
+    .from("GolesPartido")
+    .select(`
+      id,
+      minuto,
+      jugador_id,
+      Jugadores (
+        id,
+        name,
+        number
+      )
+    `)
+    .eq("partido_id", partidoId)
+    .order("minuto", {
+      ascending:true
+    });
+
+
+  if(errorGoles){
+
+    console.error(errorGoles);
+
+  }
+
+
+  // =====================================
+  // DATOS GENERALES
+  // =====================================
+
+  const categoria =
+  partido.categories
+  ? partido.categories.name
+  : "Categoría";
+
+
+  const fecha =
+  partido.fecha
+  ? new Date(
+      partido.fecha + "T00:00:00"
+    ).toLocaleDateString(
+      "es-CL",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    )
+  : "Fecha por confirmar";
+
+
+  const localEsFeria =
+  partido.local_visitante === "Local";
+
+
+  const equipoLocal =
+  localEsFeria
+  ? "Feria Osorno"
+  : partido.rival;
+
+
+  const equipoVisitante =
+  localEsFeria
+  ? partido.rival
+  : "Feria Osorno";
+
+
+  const golesLocal =
+  localEsFeria
+  ? partido.goles_favor
+  : partido.goles_contra;
+
+
+  const golesVisitante =
+  localEsFeria
+  ? partido.goles_contra
+  : partido.goles_favor;
+
+
+  const titulares =
+  (convocatoria || []).filter(function(item){
+
+    return item.tipo === "Titular";
+
+  });
+
+
+  const suplentes =
+  (convocatoria || []).filter(function(item){
+
+    return item.tipo === "Suplente";
+
+  });
+
+
+  // =====================================
+  // GOLEADORES
+  // =====================================
+
+  let golesHTML = "";
+
+
+  if(goles && goles.length > 0){
+
+    golesHTML =
+    goles.map(function(gol){
+
+      const jugador =
+      gol.Jugadores;
+
+
+      return `
+
+        <div class="gol-publico">
+
+          <span class="gol-publico-icono">
+            ⚽
+          </span>
+
+          <strong>
+            ${jugador
+              ? jugador.name
+              : "Jugador"}
+          </strong>
+
+          <span class="gol-publico-minuto">
+            ${gol.minuto}'
+          </span>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  }else{
+
+    golesHTML =
+    `
+      <p class="detalle-sin-datos">
+        No hay goleadores registrados.
+      </p>
+    `;
+
+  }
+
+
+  // =====================================
+  // TITULARES
+  // =====================================
+
+  let titularesHTML = "";
+
+
+  if(titulares.length > 0){
+
+    titularesHTML =
+    titulares.map(function(item){
+
+      const jugador =
+      item.Jugadores;
+
+
+      if(!jugador){
+        return "";
+      }
+
+
+      return crearJugadorDetallePublico(
+        jugador
+      );
+
+    }).join("");
+
+  }else{
+
+    titularesHTML =
+    `
+      <p class="detalle-sin-datos">
+        Formación no registrada.
+      </p>
+    `;
+
+  }
+
+
+  // =====================================
+  // SUPLENTES
+  // =====================================
+
+  let suplentesHTML = "";
+
+
+  if(suplentes.length > 0){
+
+    suplentesHTML =
+    suplentes.map(function(item){
+
+      const jugador =
+      item.Jugadores;
+
+
+      if(!jugador){
+        return "";
+      }
+
+
+      return crearSuplenteDetallePublico(
+        jugador
+      );
+
+    }).join("");
+
+  }else{
+
+    suplentesHTML =
+    `
+      <p class="detalle-sin-datos">
+        No hay suplentes registrados.
+      </p>
+    `;
+
+  }
+
+
+  // =====================================
+  // MOSTRAR
+  // =====================================
+
+  contenido.innerHTML =
+  `
+
+    <div class="partido-detalle-principal">
+
+
+      <div class="partido-detalle-competencia">
+
+        <span>
+          ${partido.campeonato || "Campeonato"}
+        </span>
+
+        <strong>
+          ${categoria} · Jornada ${partido.jornada || "-"}
+        </strong>
+
+      </div>
+
+
+      <div class="partido-detalle-fecha">
+
+        ${fecha}
+
+      </div>
+
+
+      <div class="partido-detalle-marcador">
+
+
+        <div class="partido-detalle-equipo">
+
+          <div class="escudo-detalle feria-detalle">
+            FO
+          </div>
+
+          <strong>
+            ${equipoLocal}
+          </strong>
+
+        </div>
+
+
+        <div class="marcador-detalle-centro">
+
+          <div>
+
+            <strong>
+              ${golesLocal ?? "-"}
+            </strong>
+
+            <span>
+              -
+            </span>
+
+            <strong>
+              ${golesVisitante ?? "-"}
+            </strong>
+
+          </div>
+
+          <small>
+            ${partido.estado || "Pendiente"}
+          </small>
+
+        </div>
+
+
+        <div class="partido-detalle-equipo">
+
+          <div class="escudo-detalle rival-detalle">
+            R
+          </div>
+
+          <strong>
+            ${equipoVisitante}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="goles-publicos">
+
+        ${golesHTML}
+
+      </div>
+
+
+    </div>
+
+
+    <!-- TITULARES -->
+
+    <div class="bloque-detalle-publico">
+
+      <div class="titulo-detalle-publico">
+
+        <span>FORMACIÓN</span>
+
+        <strong>
+          Once titular
+        </strong>
+
+      </div>
+
+
+      <div class="grid-titulares-publicos">
+
+        ${titularesHTML}
+
+      </div>
+
+    </div>
+
+
+    <!-- SUPLENTES -->
+
+    <div class="bloque-detalle-publico">
+
+      <div class="titulo-detalle-publico">
+
+        <span>CONVOCATORIA</span>
+
+        <strong>
+          Suplentes
+        </strong>
+
+      </div>
+
+
+      <div class="lista-suplentes-publicos">
+
+        ${suplentesHTML}
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+function crearJugadorDetallePublico(jugador){
+
+  const foto =
+  jugador.photo_url
+  ? `
+      <img
+      src="${jugador.photo_url}"
+      alt="${jugador.name}">
+    `
+  : `
+      <div class="jugador-detalle-sin-foto">
+        👤
+      </div>
+    `;
+
+
+  return `
+
+    <div class="jugador-detalle-publico">
+
+      <div class="jugador-detalle-foto">
+
+        ${foto}
+
+        <span>
+          ${jugador.number ?? "-"}
+        </span>
+
+      </div>
+
+      <strong>
+        ${jugador.name}
+      </strong>
+
+      <small>
+        ${jugador.position || ""}
+      </small>
+
+    </div>
+
+  `;
+
+}
+
+
+
+function crearSuplenteDetallePublico(jugador){
+
+  const foto =
+  jugador.photo_url
+  ? `
+      <img
+      src="${jugador.photo_url}"
+      alt="${jugador.name}">
+    `
+  : `
+      <div class="suplente-sin-foto">
+        👤
+      </div>
+    `;
+
+
+  return `
+
+    <div class="suplente-publico">
+
+      <div class="suplente-publico-foto">
+        ${foto}
+      </div>
+
+      <div class="suplente-publico-info">
+
+        <strong>
+          ${jugador.name}
+        </strong>
+
+        <span>
+          #${jugador.number ?? "-"}
+          ·
+          ${jugador.position || ""}
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+
+function volverDesdeDetallePartido(){
+
+  mostrar("partidos");
+
+}
 
 </script>  </body>  </html>
