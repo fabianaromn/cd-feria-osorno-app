@@ -2145,6 +2145,295 @@ font-size: 16px;
   text-transform:uppercase;
 }
 
+/* ========================================
+   LISTADO PARTIDOS - EDITAR
+======================================== */
+
+.cabecera-listado-editar{
+  margin-bottom:15px;
+}
+
+
+.volver-categorias-editar{
+  display:block;
+
+  margin-bottom:18px;
+
+  padding:8px 13px;
+
+  background:white;
+
+  color:#071b4a;
+
+  border:1px solid #dfe3ea;
+
+  border-radius:20px;
+
+  font-size:9px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+
+.volver-categorias-editar:active{
+  transform:scale(.96);
+}
+
+
+.cabecera-listado-editar > span{
+  display:block;
+
+  color:#d71920;
+
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+}
+
+
+.cabecera-listado-editar > strong{
+  display:block;
+
+  margin-top:3px;
+
+  color:#071b4a;
+
+  font-size:18px;
+  font-weight:900;
+}
+
+
+.cabecera-listado-editar > small{
+  display:block;
+
+  margin-top:4px;
+
+  color:#98a2b3;
+
+  font-size:10px;
+  font-weight:600;
+}
+
+
+/* 2 PARTIDOS POR FILA */
+
+.grid-partidos-editar{
+  display:grid;
+
+  grid-template-columns:
+  repeat(2, minmax(0,1fr));
+
+  gap:11px;
+}
+
+
+/* TARJETA */
+
+.tarjeta-partido-editar{
+  min-width:0;
+
+  background:white;
+
+  border:1px solid #e3e7ee;
+
+  border-radius:15px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 4px 13px rgba(7,27,74,.08);
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+
+.tarjeta-partido-editar:active{
+  transform:scale(.97);
+}
+
+
+/* PARTE AZUL */
+
+.tarjeta-partido-editar-superior{
+  min-height:45px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:5px;
+
+  padding:9px 10px;
+
+  background:#071b4a;
+
+  color:white;
+}
+
+
+.tarjeta-partido-editar-superior span{
+  min-width:0;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+  font-size:8px;
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+}
+
+
+.tarjeta-partido-editar-superior strong{
+  flex:0 0 auto;
+
+  min-width:27px;
+  height:27px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#d71920;
+
+  border-radius:50%;
+
+  font-size:9px;
+  font-weight:900;
+}
+
+
+/* FECHA Y ESTADO */
+
+.tarjeta-partido-editar-fecha{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:5px;
+
+  padding:10px 10px 5px;
+}
+
+
+.tarjeta-partido-editar-fecha strong{
+  color:#071b4a;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+
+.tarjeta-partido-editar-fecha span{
+  max-width:70px;
+
+  padding:4px 6px;
+
+  background:#f1f3f6;
+
+  border-radius:10px;
+
+  color:#667085;
+
+  font-size:7px;
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+}
+
+
+/* EQUIPOS */
+
+.tarjeta-partido-editar-equipos{
+  min-height:88px;
+
+  padding:8px 9px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+}
+
+
+.tarjeta-partido-editar-equipos div{
+  width:100%;
+
+  color:#071b4a;
+
+  font-size:11px;
+  font-weight:900;
+
+  line-height:1.15;
+}
+
+
+.tarjeta-partido-editar-equipos span{
+  margin:5px 0;
+
+  color:#d71920;
+
+  font-size:8px;
+  font-weight:900;
+}
+
+
+/* FECHA COMPLETA */
+
+.tarjeta-partido-editar-info{
+  min-height:29px;
+
+  padding:6px 8px;
+
+  border-top:1px solid #edf0f4;
+
+  color:#8a93a2;
+
+  font-size:8px;
+  font-weight:700;
+
+  text-align:center;
+}
+
+
+/* EDITAR */
+
+.tarjeta-partido-editar-boton{
+  padding:9px;
+
+  background:#f5f7fa;
+
+  border-top:1px solid #e9edf2;
+
+  color:#071b4a;
+
+  font-size:9px;
+  font-weight:900;
+
+  text-align:center;
+
+  letter-spacing:.5px;
+}
+
 </style>  
 
   
@@ -10319,139 +10608,279 @@ if(archivo){
   }, 700);
 
 }
-  
-async function seleccionarCategoriaEditar(categoria){
+ async function seleccionarCategoriaEditar(categoria){
 
   const lista =
-    document.getElementById("listaEditarPartidos");
+  document.getElementById("listaEditarPartidos");
+
 
   lista.innerHTML =
-    "<p>⏳ Cargando partidos...</p>";
+  "<p>⏳ Cargando partidos...</p>";
 
-  const { data: categoriaData, error: categoriaError } =
-    await supabaseClient
-      .from("categories")
-      .select("id")
-      .eq("name", categoria)
-      .single();
+
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoria)
+    .single();
+
 
   if(categoriaError){
 
     console.error(categoriaError);
 
     lista.innerHTML =
-      "<p>❌ No se encontró la categoría.</p>";
+    "<p>❌ No se encontró la categoría.</p>";
 
     return;
   }
 
-  const { data: partidos, error } =
-    await supabaseClient
-      .from("Partidos")
-      .select(`
-        id,
-        campeonato,
-        rival,
-        fecha,
-        local_visitante,
-        goles_favor,
-        goles_contra,
-        estado,
-        jornada,
-        category_id
-      `)
-      .eq("category_id", categoriaData.id)
-      .order("fecha", { ascending: true });
+
+  // BUSCAR PARTIDOS
+
+  const {
+    data: partidos,
+    error
+  } =
+  await supabaseClient
+    .from("Partidos")
+    .select(`
+      id,
+      campeonato,
+      rival,
+      fecha,
+      local_visitante,
+      goles_favor,
+      goles_contra,
+      estado,
+      jornada,
+      category_id
+    `)
+    .eq("category_id", categoriaData.id)
+    .order("fecha", { ascending: true });
+
 
   if(error){
 
     console.error(error);
 
     lista.innerHTML =
-      "<p>❌ Error al cargar los partidos.</p>";
+    "<p>❌ Error al cargar los partidos.</p>";
 
     return;
   }
 
+
+  // SIN PARTIDOS
+
   if(!partidos || partidos.length === 0){
 
     lista.innerHTML = `
-    
+
+      <div class="cabecera-listado-editar">
+
+        <button
+        class="volver-categorias-editar"
+        onclick="restaurarCategoriasEditar()">
+          ← CATEGORÍAS
+        </button>
+
+        <span>
+          ${categoria}
+        </span>
+
+        <strong>
+          Partidos registrados
+        </strong>
+
+      </div>
+
       <p>
-        ⚽ No hay partidos registrados en ${categoria}.
+        ⚽ No hay partidos registrados en esta categoría.
       </p>
+
     `;
 
     return;
   }
 
+
+  // GENERAR TARJETAS
+
   lista.innerHTML = `
-    
-    <div style="grid-column:1 / -1;">
 
+    <div class="cabecera-listado-editar">
 
-      <h3
-      style="margin:10px 0 15px; color:#071b4a;">
+      <button
+      class="volver-categorias-editar"
+      onclick="restaurarCategoriasEditar()">
+        ← CATEGORÍAS
+      </button>
 
+      <span>
         ${categoria}
+      </span>
 
-      </h3>
+      <strong>
+        Partidos registrados
+      </strong>
+
+      <small>
+        Selecciona el encuentro que deseas modificar
+      </small>
 
     </div>
 
-    ${partidos.map(function(partido){
 
-      return `
+    <div class="grid-partidos-editar">
 
-        <div
-        class="partido"
-        style="grid-column:1 / -1;">
+      ${partidos.map(function(partido){
 
-          <small>
-            ⚽ ${partido.campeonato || "Partido"}
-          </small>
 
-          <div class="equipos">
+        // FECHA
 
-            Feria Osorno
+        let fechaCorta =
+        "POR CONFIRMAR";
 
-            <span class="vs">
-              VS
-            </span>
+        let fechaCompleta =
+        "Fecha por confirmar";
 
-            ${partido.rival}
+
+        if(partido.fecha){
+
+          const fecha =
+          new Date(
+            partido.fecha + "T00:00:00"
+          );
+
+
+          fechaCorta =
+          fecha
+          .toLocaleDateString(
+            "es-CL",
+            {
+              day:"2-digit",
+              month:"short"
+            }
+          )
+          .toUpperCase()
+          .replace(".","");
+
+
+          fechaCompleta =
+          fecha.toLocaleDateString(
+            "es-CL",
+            {
+              day:"numeric",
+              month:"long",
+              year:"numeric"
+            }
+          );
+
+        }
+
+
+        // LOCAL / VISITANTE
+
+        const feriaEsLocal =
+        partido.local_visitante === "Local";
+
+
+        const equipoLocal =
+        feriaEsLocal
+        ? "Feria Osorno"
+        : partido.rival;
+
+
+        const equipoVisitante =
+        feriaEsLocal
+        ? partido.rival
+        : "Feria Osorno";
+
+
+        // ESTADO
+
+        const estado =
+        partido.estado ||
+        "Pendiente";
+
+
+        return `
+
+          <div
+          class="tarjeta-partido-editar"
+          onclick="abrirFormularioEditarPartido(${partido.id})">
+
+
+            <div class="tarjeta-partido-editar-superior">
+
+              <span>
+                ${partido.campeonato || "PARTIDO"}
+              </span>
+
+              <strong>
+                F${partido.jornada || "-"}
+              </strong>
+
+            </div>
+
+
+            <div class="tarjeta-partido-editar-fecha">
+
+              <strong>
+                ${fechaCorta}
+              </strong>
+
+              <span>
+                ${estado}
+              </span>
+
+            </div>
+
+
+            <div class="tarjeta-partido-editar-equipos">
+
+              <div>
+                ${equipoLocal}
+              </div>
+
+              <span>
+                VS
+              </span>
+
+              <div>
+                ${equipoVisitante}
+              </div>
+
+            </div>
+
+
+            <div class="tarjeta-partido-editar-info">
+
+              ${fechaCompleta}
+
+            </div>
+
+
+            <div class="tarjeta-partido-editar-boton">
+
+              ✎ EDITAR
+
+            </div>
 
           </div>
 
-          <p>
-            📅 ${partido.fecha || "Fecha por confirmar"}
-          </p>
+        `;
 
-          <p>
-            📍 ${partido.local_visitante || ""}
-          </p>
+      }).join("")}
 
-          <p>
-            🏆 Jornada ${partido.jornada || "-"}
-          </p>
-
-          <p>
-            📌 ${partido.estado || "Pendiente"}
-          </p>
-
-          <button
-          class="boton"
-          onclick="abrirFormularioEditarPartido(${partido.id})">
-
-            ✏️ Editar
-
-          </button>
-
-        </div>
-
-      `;
-
-    }).join("")}
+    </div>
 
   `;
 
