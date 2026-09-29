@@ -2434,6 +2434,175 @@ font-size: 16px;
   letter-spacing:.5px;
 }
 
+
+/* ========================================
+   EDITAR JUGADORES
+======================================== */
+
+.grid-jugadores-editar{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+
+
+.tarjeta-jugador-editar{
+  min-width:0;
+
+  background:white;
+
+  border:1px solid #e3e7ee;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 4px 13px rgba(7,27,74,.08);
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+
+.tarjeta-jugador-editar:active{
+  transform:scale(.97);
+}
+
+
+.foto-jugador-editar{
+  position:relative;
+
+  width:100%;
+  height:150px;
+
+  background:#e9edf3;
+
+  overflow:hidden;
+}
+
+
+.foto-jugador-editar img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+
+.sin-foto-jugador{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#edf0f5;
+
+  font-size:45px;
+}
+
+
+.numero-jugador-editar{
+  position:absolute;
+
+  top:9px;
+  right:9px;
+
+  min-width:34px;
+  height:34px;
+
+  padding:0 7px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#071b4a;
+
+  color:white;
+
+  border:2px solid white;
+
+  border-radius:50%;
+
+  font-size:13px;
+  font-weight:900;
+
+  box-shadow:
+  0 2px 7px rgba(0,0,0,.18);
+}
+
+
+.datos-jugador-editar{
+  min-height:83px;
+
+  padding:11px 10px;
+
+  text-align:center;
+}
+
+
+.datos-jugador-editar span{
+  display:block;
+
+  margin-bottom:4px;
+
+  color:#d71920;
+
+  font-size:8px;
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+
+.datos-jugador-editar strong{
+  display:block;
+
+  color:#071b4a;
+
+  font-size:12px;
+  font-weight:900;
+
+  line-height:1.15;
+}
+
+
+.datos-jugador-editar small{
+  display:block;
+
+  margin-top:6px;
+
+  color:#98a2b3;
+
+  font-size:8px;
+  font-weight:700;
+}
+
+
+.boton-jugador-editar{
+  padding:10px;
+
+  background:#f5f7fa;
+
+  border-top:1px solid #e9edf2;
+
+  color:#071b4a;
+
+  font-size:9px;
+  font-weight:900;
+
+  text-align:center;
+
+  letter-spacing:.5px;
+}
 </style>  
 
   
@@ -5031,10 +5200,10 @@ id="agregarJugador"
 class="seccion oculto">
 
   <button
-  class="boton"
-  onclick="mostrar('jugadores')">
-    ← Volver
-  </button>
+class="boton"
+onclick="volverGestionJugadores()">
+  ← Volver
+</button>
 
   <h2 style="margin-top:15px;">
     ➕ Agregar jugador
@@ -5250,6 +5419,9 @@ class="seccion oculto">
   </button>
 
 </section>
+
+
+
 <section
 id="editarJugador"
 class="seccion oculto pantalla-editar-jugador">
@@ -5258,7 +5430,7 @@ class="seccion oculto pantalla-editar-jugador">
 
     <button
     class="volver-publico"
-    onclick="mostrar('administracion')">
+   onclick="volverGestionJugadores()">
       ← VOLVER
     </button>
 
@@ -12348,18 +12520,38 @@ function filtrarPartidos(categoriaSeleccionada){
 async function seleccionarCategoriaEditarJugador(categoria){
 
   const lista =
-    document.getElementById("listaEditarJugadores");
+  document.getElementById("listaEditarJugadores");
+
+
+  // GUARDAR LOS 8 BOTONES DE CATEGORÍAS
+  // ANTES DE REEMPLAZAR EL CONTENIDO
+
+  if(
+    !window.categoriasEditarJugadoresGuardadas &&
+    lista.querySelector(".categorias-partidos")
+  ){
+
+    window.categoriasEditarJugadoresGuardadas =
+    lista.innerHTML;
+
+  }
+
 
   lista.innerHTML =
-    "<p>⏳ Cargando jugadores...</p>";
+  "<p>⏳ Cargando jugadores...</p>";
 
 
-  const { data: categoriaData, error: categoriaError } =
-    await supabaseClient
-      .from("categories")
-      .select("id")
-      .eq("name", categoria)
-      .single();
+  // BUSCAR CATEGORÍA
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+  await supabaseClient
+    .from("categories")
+    .select("id")
+    .eq("name", categoria)
+    .single();
 
 
   if(categoriaError){
@@ -12367,27 +12559,32 @@ async function seleccionarCategoriaEditarJugador(categoria){
     console.error(categoriaError);
 
     lista.innerHTML =
-      "<p>❌ No se encontró la categoría.</p>";
+    "<p>❌ No se encontró la categoría.</p>";
 
     return;
   }
 
 
-  const { data: jugadores, error } =
-    await supabaseClient
-      .from("Jugadores")
-      .select(`
-        id,
-        name,
-        number,
-        position,
-        photo_url,
-        birth_date,
-        category_id,
-        year_joined
-      `)
-      .eq("category_id", categoriaData.id)
-      .order("number");
+  // BUSCAR JUGADORES
+
+  const {
+    data: jugadores,
+    error
+  } =
+  await supabaseClient
+    .from("Jugadores")
+    .select(`
+      id,
+      name,
+      number,
+      position,
+      photo_url,
+      birth_date,
+      category_id,
+      year_joined
+    `)
+    .eq("category_id", categoriaData.id)
+    .order("number");
 
 
   if(error){
@@ -12395,99 +12592,188 @@ async function seleccionarCategoriaEditarJugador(categoria){
     console.error(error);
 
     lista.innerHTML =
-      "<p>❌ Error al cargar los jugadores.</p>";
+    "<p>❌ Error al cargar los jugadores.</p>";
 
     return;
   }
 
 
+  // SI NO HAY JUGADORES
+
   if(!jugadores || jugadores.length === 0){
 
     lista.innerHTML = `
-      <div style="grid-column:1 / -1;">
 
-        <p>
-          👥 No hay jugadores registrados en ${categoria}.
-        </p>
+      <div class="cabecera-listado-editar">
 
         <button
-        class="boton"
-        onclick="mostrar('editarJugador')">
-          ← Categorías
+        class="volver-categorias-editar"
+        onclick="restaurarCategoriasEditarJugador()">
+          ← CATEGORÍAS
         </button>
 
+        <span>
+          ${categoria}
+        </span>
+
+        <strong>
+          Jugadores registrados
+        </strong>
+
+        <small>
+          No hay jugadores registrados
+        </small>
+
       </div>
+
+      <p style="
+        text-align:center;
+        color:#667085;
+        padding:25px 10px;
+      ">
+        👥 No hay jugadores registrados en esta categoría.
+      </p>
+
     `;
 
     return;
   }
 
 
+  // MOSTRAR JUGADORES
+
   lista.innerHTML = `
 
-    <div style="grid-column:1 / -1;">
+    <div class="cabecera-listado-editar">
 
       <button
-      class="boton"
-      onclick="mostrar('editarJugador')">
-        ← Categorías
+      class="volver-categorias-editar"
+      onclick="restaurarCategoriasEditarJugador()">
+        ← CATEGORÍAS
       </button>
 
-      <h3
-      style="margin:10px 0 15px; color:#071b4a;">
+      <span>
         ${categoria}
-      </h3>
+      </span>
+
+      <strong>
+        Jugadores registrados
+      </strong>
+
+      <small>
+        Selecciona el jugador que deseas modificar
+      </small>
 
     </div>
 
 
-    ${jugadores.map(function(jugador){
+    <div class="grid-jugadores-editar">
 
-      return `
+      ${jugadores.map(function(jugador){
 
-        <div
-        class="jugador-card"
-        style="grid-column:1 / -1;">
+        return `
 
-          <img
-          class="jugador-foto"
-          src="${jugador.photo_url || 'https://via.placeholder.com/65'}"
-          alt="${jugador.name}">
-
-          <div class="jugador-numero">
-            ${jugador.number}
-          </div>
-
-          <div class="jugador-info">
-
-            <h3>
-              ${jugador.name}
-            </h3>
-
-            <p>
-              ⚽ ${jugador.position}
-            </p>
-
-          </div>
-
-          <button
-          class="boton"
+          <div
+          class="tarjeta-jugador-editar"
           onclick="abrirFormularioEditarJugador(${jugador.id})">
 
-            ✏️ Editar
 
-          </button>
+            <div class="foto-jugador-editar">
 
-        </div>
+              ${
+                jugador.photo_url
+                ? `
 
-      `;
+                  <img
+                  src="${jugador.photo_url}"
+                  alt="${jugador.name}">
 
-    }).join("")}
+                `
+                : `
+
+                  <div class="sin-foto-jugador">
+                    👤
+                  </div>
+
+                `
+              }
+
+
+              <div class="numero-jugador-editar">
+
+                ${jugador.number ?? "-"}
+
+              </div>
+
+            </div>
+
+
+            <div class="datos-jugador-editar">
+
+              <span>
+                ${jugador.position || "Jugador"}
+              </span>
+
+              <strong>
+                ${jugador.name}
+              </strong>
+
+              ${
+                jugador.year_joined
+                ? `
+
+                  <small>
+                    Desde ${jugador.year_joined}
+                  </small>
+
+                `
+                : ""
+              }
+
+            </div>
+
+
+            <div class="boton-jugador-editar">
+
+              ✎ EDITAR
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("")}
+
+    </div>
 
   `;
 
 }
 
+
+/* ========================================
+   RESTAURAR CATEGORÍAS EDITAR JUGADOR
+======================================== */
+
+function restaurarCategoriasEditarJugador(){
+
+  const lista =
+  document.getElementById("listaEditarJugadores");
+
+  if(!lista){
+    return;
+  }
+
+
+  if(window.categoriasEditarJugadoresGuardadas){
+
+    lista.innerHTML =
+    window.categoriasEditarJugadoresGuardadas;
+
+  }
+
+}
 
 async function seleccionarCategoriaEliminarJugador(categoria){
 
@@ -12868,6 +13154,14 @@ window.addEventListener("load", function(){
   }, 2600);
 
 });
+
+function volverGestionJugadores(){
+
+  mostrar("administracion");
+
+  mostrarMenuAdmin("menuAdminJugadores");
+
+}
 
 
 
