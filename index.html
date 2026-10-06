@@ -18110,16 +18110,18 @@ document.addEventListener("touchend", function(event){
   const movimientoY = Math.abs(finTouchY - inicioTouchY);
 
 
-  // Debe comenzar cerca del borde izquierdo
-  if(inicioTouchX > 50) return;
+ // Puede comenzar dentro de una zona más amplia
+// desde el borde izquierdo
+if(inicioTouchX > 120) return;
 
 
-  // Debe desplazarse al menos 80px hacia la derecha
-  if(movimientoX < 80) return;
+// Basta con deslizar 60px hacia la derecha
+if(movimientoX < 60) return;
 
 
-  // Evitar confundir scroll vertical con gesto de volver
-  if(movimientoY > Math.abs(movimientoX)) return;
+// Permitimos un poco de movimiento vertical
+// sin confundirlo con scroll
+if(movimientoY > Math.abs(movimientoX) * 1.2) return;
 
 
   // =====================================
