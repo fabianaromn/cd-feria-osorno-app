@@ -18238,6 +18238,65 @@ document.addEventListener("touchend", function(event){
 
   }
 
+  
+  // =====================================
+// SOCIOS
+// =====================================
+
+const pantallasSocios = [
+  "agregarSocio",
+  "listaSocios",
+  "registrarPagoSocio",
+  "estadoCuotasSocios"
+];
+
+const pantallaSociosActiva =
+pantallasSocios.some(function(id){
+
+  const pantalla =
+  document.getElementById(id);
+
+  return pantalla &&
+  !pantalla.classList.contains("oculto");
+
+});
+
+
+if(pantallaSociosActiva){
+
+  ocultarTodo();
+
+  document
+  .getElementById("administracion")
+  .classList.remove("oculto");
+
+  document
+  .getElementById("pantallaPublica")
+  .classList.add("oculto");
+
+  mostrarMenuAdmin("menuAdminSocios");
+
+  return;
+}
+
+
+// =====================================
+// EDITAR SOCIO
+// =====================================
+
+const editarSocio =
+document.getElementById("editarSocio");
+
+if(
+  editarSocio &&
+  !editarSocio.classList.contains("oculto")
+){
+
+  mostrar("listaSocios");
+  return;
+
+}
+
 }, { passive:true });
 
 </script>  </body>  </html>
