@@ -18264,109 +18264,67 @@ document.addEventListener("touchend", function(event){
   }
 
 
+// =====================================
+// PARTIDOS
+// =====================================
 
-  // =====================================
-  // PARTIDOS
-  // =====================================
+const pantallasPartidos = [
+  "agregarPartido",
+  "editarPartido",
+  "eliminarPartido"
+];
 
-  const pantallasPartidos = [
-    "agregarPartido",
-    "editarPartido",
-    "eliminarPartido"
-  ];
+const pantallaPartidosActiva =
+pantallasPartidos.some(function(id){
 
+  const pantalla =
+  document.getElementById(id);
 
-  const pantallaPartidosActiva =
-  pantallasPartidos.some(function(id){
+  return (
+    pantalla &&
+    !pantalla.classList.contains("oculto")
+  );
 
-    const pantalla =
-    document.getElementById(id);
+});
 
-    return (
-      pantalla &&
-      !pantalla.classList.contains("oculto")
-    );
+if(pantallaPartidosActiva){
 
-  });
+  volverGestionPartidos();
 
+  return;
 
-  if(pantallaPartidosActiva){
+}
 
-    ocultarTodo();
+// =====================================
+// JUGADORES
+// =====================================
 
+const pantallasJugadores = [
+  "agregarJugador",
+  "editarJugador",
+  "eliminarJugador"
+];
 
-    document
-    .getElementById("administracion")
-    .classList.remove("oculto");
+const pantallaJugadoresActiva =
+pantallasJugadores.some(function(id){
 
+  const pantalla =
+  document.getElementById(id);
 
-    document
-    .getElementById("pantallaPublica")
-    .classList.add("oculto");
+  return (
+    pantalla &&
+    !pantalla.classList.contains("oculto")
+  );
 
+});
 
-    mostrarMenuAdmin(
-      "menuAdminPartidos"
-    );
+if(pantallaJugadoresActiva){
 
+  volverGestionJugadores();
 
-    return;
+  return;
 
-  }
-
-
-
-  // =====================================
-  // JUGADORES
-  // =====================================
-
-  const pantallasJugadores = [
-    "agregarJugador",
-    "editarJugador",
-    "eliminarJugador"
-  ];
-
-
-  const pantallaJugadoresActiva =
-  pantallasJugadores.some(function(id){
-
-    const pantalla =
-    document.getElementById(id);
-
-    return (
-      pantalla &&
-      !pantalla.classList.contains("oculto")
-    );
-
-  });
-
-
-  if(pantallaJugadoresActiva){
-
-    ocultarTodo();
-
-
-    document
-    .getElementById("administracion")
-    .classList.remove("oculto");
-
-
-    document
-    .getElementById("pantallaPublica")
-    .classList.add("oculto");
-
-
-    mostrarMenuAdmin(
-      "menuAdminJugadores"
-    );
-
-
-    return;
-
-  }
-
-
-
+}
   // =====================================
   // SOCIOS
   // =====================================
@@ -18441,51 +18399,52 @@ document.addEventListener("touchend", function(event){
   }
 
 
+// =====================================
+// MENÚ GESTIÓN DE PARTIDOS
+// =====================================
 
-  // =====================================
-  // MENÚ GESTIÓN DE PARTIDOS
-  // =====================================
+const menuPartidos =
+document.getElementById("menuAdminPartidos");
 
-  const menuPartidos =
-  document.getElementById(
-    "menuAdminPartidos"
-  );
+if(
+  menuPartidos &&
+  !menuPartidos.classList.contains("oculto")
+){
 
+  ocultarTodo();
 
-  if(
-    menuPartidos &&
-    !menuPartidos.classList.contains("oculto")
-  ){
+  document
+  .getElementById("administracion")
+  .classList.remove("oculto");
 
-    mostrar("administracion");
+  mostrarMenuAdminPrincipal();
 
-    return;
-
-  }
-
-
-
-  // =====================================
-  // MENÚ GESTIÓN DE JUGADORES
-  // =====================================
-
-  const menuJugadores =
-  document.getElementById(
-    "menuAdminJugadores"
-  );
+  return;
+}
 
 
-  if(
-    menuJugadores &&
-    !menuJugadores.classList.contains("oculto")
-  ){
+// =====================================
+// MENÚ GESTIÓN DE JUGADORES
+// =====================================
 
-    mostrar("administracion");
+const menuJugadores =
+document.getElementById("menuAdminJugadores");
 
-    return;
+if(
+  menuJugadores &&
+  !menuJugadores.classList.contains("oculto")
+){
 
-  }
+  ocultarTodo();
 
+  document
+  .getElementById("administracion")
+  .classList.remove("oculto");
+
+  mostrarMenuAdminPrincipal();
+
+  return;
+}
 
 
   // =====================================
