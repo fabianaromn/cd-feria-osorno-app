@@ -18145,7 +18145,6 @@ function volverDesdeDetallePartido(){
 
 }
 
-
 // =====================================
 // GESTO GLOBAL DESLIZAR PARA VOLVER
 // =====================================
@@ -18153,22 +18152,32 @@ function volverDesdeDetallePartido(){
 let inicioTouchX = 0;
 let inicioTouchY = 0;
 
+
 document.addEventListener("touchstart", function(event){
 
   if(event.touches.length !== 1) return;
 
-  inicioTouchX = event.touches[0].clientX;
-  inicioTouchY = event.touches[0].clientY;
+  inicioTouchX =
+  event.touches[0].clientX;
+
+  inicioTouchY =
+  event.touches[0].clientY;
 
 }, { passive:true });
+
 
 
 document.addEventListener("touchend", function(event){
 
   if(event.changedTouches.length !== 1) return;
 
-  const finTouchX = event.changedTouches[0].clientX;
-  const finTouchY = event.changedTouches[0].clientY;
+
+  const finTouchX =
+  event.changedTouches[0].clientX;
+
+  const finTouchY =
+  event.changedTouches[0].clientY;
+
 
   const movimientoX =
   finTouchX - inicioTouchX;
@@ -18177,14 +18186,24 @@ document.addEventListener("touchend", function(event){
   Math.abs(finTouchY - inicioTouchY);
 
 
-  // Zona desde donde puede comenzar el gesto
+  // =====================================
+  // VALIDAR GESTO
+  // =====================================
+
+  // Debe comenzar cerca del borde izquierdo
   if(inicioTouchX > 120) return;
 
-  // Distancia mínima hacia la derecha
+  // Debe deslizar al menos 60px a la derecha
   if(movimientoX < 60) return;
 
-  // Evitar confundir con scroll vertical
-  if(movimientoY > Math.abs(movimientoX) * 1.2) return;
+  // Evitar confundirlo con scroll vertical
+  if(
+    movimientoY >
+    Math.abs(movimientoX) * 1.2
+  ){
+    return;
+  }
+
 
 
   // =====================================
@@ -18205,8 +18224,10 @@ document.addEventListener("touchend", function(event){
     const pantalla =
     document.getElementById(id);
 
-    return pantalla &&
-    !pantalla.classList.contains("oculto");
+    return (
+      pantalla &&
+      !pantalla.classList.contains("oculto")
+    );
 
   });
 
@@ -18214,13 +18235,15 @@ document.addEventListener("touchend", function(event){
   if(pantallaFinancieraActiva){
 
     volverGestionFinanciera();
+
     return;
 
   }
 
 
+
   // =====================================
-  // EDITAR MOVIMIENTO
+  // EDITAR MOVIMIENTO FINANCIERO
   // =====================================
 
   const editarMovimiento =
@@ -18228,75 +18251,290 @@ document.addEventListener("touchend", function(event){
     "editarMovimientoFinanciero"
   );
 
+
   if(
     editarMovimiento &&
     !editarMovimiento.classList.contains("oculto")
   ){
 
     mostrar("movimientosFinancieros");
+
     return;
 
   }
 
-  
+
+
   // =====================================
-// SOCIOS
-// =====================================
+  // PARTIDOS
+  // =====================================
 
-const pantallasSocios = [
-  "agregarSocio",
-  "listaSocios",
-  "registrarPagoSocio",
-  "estadoCuotasSocios"
-];
-
-const pantallaSociosActiva =
-pantallasSocios.some(function(id){
-
-  const pantalla =
-  document.getElementById(id);
-
-  return pantalla &&
-  !pantalla.classList.contains("oculto");
-
-});
+  const pantallasPartidos = [
+    "agregarPartido",
+    "editarPartido",
+    "eliminarPartido"
+  ];
 
 
-if(pantallaSociosActiva){
+  const pantallaPartidosActiva =
+  pantallasPartidos.some(function(id){
 
-  ocultarTodo();
+    const pantalla =
+    document.getElementById(id);
 
-  document
-  .getElementById("administracion")
-  .classList.remove("oculto");
+    return (
+      pantalla &&
+      !pantalla.classList.contains("oculto")
+    );
 
-  document
-  .getElementById("pantallaPublica")
-  .classList.add("oculto");
-
-  mostrarMenuAdmin("menuAdminSocios");
-
-  return;
-}
+  });
 
 
-// =====================================
-// EDITAR SOCIO
-// =====================================
+  if(pantallaPartidosActiva){
 
-const editarSocio =
-document.getElementById("editarSocio");
+    ocultarTodo();
 
-if(
-  editarSocio &&
-  !editarSocio.classList.contains("oculto")
-){
 
-  mostrar("listaSocios");
-  return;
+    document
+    .getElementById("administracion")
+    .classList.remove("oculto");
 
-}
+
+    document
+    .getElementById("pantallaPublica")
+    .classList.add("oculto");
+
+
+    mostrarMenuAdmin(
+      "menuAdminPartidos"
+    );
+
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // JUGADORES
+  // =====================================
+
+  const pantallasJugadores = [
+    "agregarJugador",
+    "editarJugador",
+    "eliminarJugador"
+  ];
+
+
+  const pantallaJugadoresActiva =
+  pantallasJugadores.some(function(id){
+
+    const pantalla =
+    document.getElementById(id);
+
+    return (
+      pantalla &&
+      !pantalla.classList.contains("oculto")
+    );
+
+  });
+
+
+  if(pantallaJugadoresActiva){
+
+    ocultarTodo();
+
+
+    document
+    .getElementById("administracion")
+    .classList.remove("oculto");
+
+
+    document
+    .getElementById("pantallaPublica")
+    .classList.add("oculto");
+
+
+    mostrarMenuAdmin(
+      "menuAdminJugadores"
+    );
+
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // SOCIOS
+  // =====================================
+
+  const pantallasSocios = [
+    "agregarSocio",
+    "listaSocios",
+    "registrarPagoSocio",
+    "estadoCuotasSocios"
+  ];
+
+
+  const pantallaSociosActiva =
+  pantallasSocios.some(function(id){
+
+    const pantalla =
+    document.getElementById(id);
+
+    return (
+      pantalla &&
+      !pantalla.classList.contains("oculto")
+    );
+
+  });
+
+
+  if(pantallaSociosActiva){
+
+    ocultarTodo();
+
+
+    document
+    .getElementById("administracion")
+    .classList.remove("oculto");
+
+
+    document
+    .getElementById("pantallaPublica")
+    .classList.add("oculto");
+
+
+    mostrarMenuAdmin(
+      "menuAdminSocios"
+    );
+
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // EDITAR SOCIO
+  // =====================================
+
+  const editarSocio =
+  document.getElementById(
+    "editarSocio"
+  );
+
+
+  if(
+    editarSocio &&
+    !editarSocio.classList.contains("oculto")
+  ){
+
+    mostrar("listaSocios");
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // MENÚ GESTIÓN DE PARTIDOS
+  // =====================================
+
+  const menuPartidos =
+  document.getElementById(
+    "menuAdminPartidos"
+  );
+
+
+  if(
+    menuPartidos &&
+    !menuPartidos.classList.contains("oculto")
+  ){
+
+    mostrar("administracion");
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // MENÚ GESTIÓN DE JUGADORES
+  // =====================================
+
+  const menuJugadores =
+  document.getElementById(
+    "menuAdminJugadores"
+  );
+
+
+  if(
+    menuJugadores &&
+    !menuJugadores.classList.contains("oculto")
+  ){
+
+    mostrar("administracion");
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // MENÚ GESTIÓN DE FINANZAS
+  // =====================================
+
+  const menuFinanzas =
+  document.getElementById(
+    "menuAdminFinanzas"
+  );
+
+
+  if(
+    menuFinanzas &&
+    !menuFinanzas.classList.contains("oculto")
+  ){
+
+    mostrar("administracion");
+
+    return;
+
+  }
+
+
+
+  // =====================================
+  // MENÚ GESTIÓN DE SOCIOS
+  // =====================================
+
+  const menuSocios =
+  document.getElementById(
+    "menuAdminSocios"
+  );
+
+
+  if(
+    menuSocios &&
+    !menuSocios.classList.contains("oculto")
+  ){
+
+    mostrar("administracion");
+
+    return;
+
+  }
+
 
 }, { passive:true });
+
+
 
 </script>  </body>  </html>
