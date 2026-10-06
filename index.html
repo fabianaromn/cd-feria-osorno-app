@@ -6176,11 +6176,23 @@ class="seccion oculto">
 id="agregarIngreso"
 class="seccion oculto">
 
-  <button
-  class="boton"
-  onclick="mostrar('administracion')">
-    ← Volver
-  </button>
+ <button
+type="button"
+onclick="volverGestionFinanciera()"
+style="
+display:block;
+width:auto;
+margin:0 0 20px 0;
+padding:10px 16px;
+background:#071b4a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+">
+  ← Volver
+</button>
 
   <h2>
     💵 Registrar ingreso
@@ -6355,11 +6367,23 @@ class="seccion oculto">
 id="agregarGasto"
 class="seccion oculto">
 
-  <button
-  class="boton"
-  onclick="mostrar('administracion')">
-    ← Volver
-  </button>
+ <button
+type="button"
+onclick="volverGestionFinanciera()"
+style="
+display:block;
+width:auto;
+margin:0 0 20px 0;
+padding:10px 16px;
+background:#071b4a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+">
+  ← Volver
+</button>
 
   <h2>
     💸 Registrar gasto
@@ -6547,11 +6571,23 @@ class="seccion oculto">
 id="resumenFinanciero"
 class="seccion oculto">
 
-  <button
-  class="boton"
-  onclick="volverGestionFinanciera()"
-    ← Volver
-  </button>
+<button
+type="button"
+onclick="volverGestionFinanciera()"
+style="
+display:block;
+width:auto;
+margin:0 0 20px 0;
+padding:10px 16px;
+background:#071b4a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+">
+  ← Volver
+</button>
 
   <h2>
     📊 Resumen financiero
@@ -6881,10 +6917,23 @@ id="movimientosFinancieros"
 class="seccion oculto">
 
   <button
-  class="boton"
-  onclick="mostrar('administracion')">
-    ← Volver
-  </button>
+type="button"
+onclick="volverGestionFinanciera()"
+style="
+display:block;
+width:auto;
+margin:0 0 20px 0;
+padding:10px 16px;
+background:#071b4a;
+color:white;
+border:none;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+">
+  ← Volver
+</button>
+
 
   <h2>
     📋 Movimientos financieros
@@ -9479,7 +9528,15 @@ if(bannerPartidoAdmin){
 
 function volverGestionFinanciera(){
 
-  mostrar("administracion");
+  ocultarTodo();
+
+  document
+  .getElementById("administracion")
+  .classList.remove("oculto");
+
+  document
+  .getElementById("pantallaPublica")
+  .classList.add("oculto");
 
   mostrarMenuAdmin("menuAdminFinanzas");
 
@@ -18023,5 +18080,78 @@ function volverDesdeDetallePartido(){
   mostrar("partidos");
 
 }
+
+
+// =====================================
+// GESTO DESLIZAR PARA VOLVER
+// =====================================
+
+let inicioTouchX = 0;
+let inicioTouchY = 0;
+
+document.addEventListener("touchstart", function(event){
+
+  if(event.touches.length !== 1) return;
+
+  inicioTouchX = event.touches[0].clientX;
+  inicioTouchY = event.touches[0].clientY;
+
+}, { passive:true });
+
+
+document.addEventListener("touchend", function(event){
+
+  if(event.changedTouches.length !== 1) return;
+
+  const finTouchX = event.changedTouches[0].clientX;
+  const finTouchY = event.changedTouches[0].clientY;
+
+  const movimientoX = finTouchX - inicioTouchX;
+  const movimientoY = Math.abs(finTouchY - inicioTouchY);
+
+
+  // Debe comenzar cerca del borde izquierdo
+  if(inicioTouchX > 50) return;
+
+
+  // Debe desplazarse al menos 80px hacia la derecha
+  if(movimientoX < 80) return;
+
+
+  // Evitar confundir scroll vertical con gesto de volver
+  if(movimientoY > Math.abs(movimientoX)) return;
+
+
+  // =====================================
+  // FINANZAS
+  // =====================================
+
+  const pantallasFinanzas = [
+    "resumenFinanciero",
+    "movimientosFinancieros",
+    "agregarIngreso",
+    "agregarGasto"
+  ];
+
+
+  const pantallaFinancieraActiva =
+  pantallasFinanzas.some(function(id){
+
+    const pantalla =
+    document.getElementById(id);
+
+    return pantalla &&
+    !pantalla.classList.contains("oculto");
+
+  });
+
+
+  if(pantallaFinancieraActiva){
+
+    volverGestionFinanciera();
+
+  }
+
+}, { passive:true });
 
 </script>  </body>  </html>
