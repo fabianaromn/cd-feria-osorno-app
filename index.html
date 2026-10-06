@@ -9360,6 +9360,10 @@ const SUPABASE_KEY = 'sb_publishable_ATMrlbOmPaLHm4gki3wGYg_fgj8mAVm';    const 
 SUPABASE_URL,
 SUPABASE_KEY
 );
+
+
+
+
 function ocultarTodo(){
 
 document
@@ -12466,6 +12470,8 @@ async function cargarSaldoActualClub(){
 
       fecha: ingreso.fecha,
 
+      created_at: ingreso.created_at,
+
       monto: Number(ingreso.monto || 0),
 
       tipo: ingreso.tipo,
@@ -12498,6 +12504,8 @@ async function cargarSaldoActualClub(){
       clase: "gasto",
 
       fecha: gasto.fecha,
+
+      created_at: ingreso.created_at,
 
       monto: Number(gasto.monto || 0),
 
@@ -12563,12 +12571,39 @@ async function cargarSaldoActualClub(){
   });
 
 
-  movimientosFiltrados.sort((a, b) => {
+ movimientosFiltrados.sort((a, b) => {
 
-    return new Date(b.fecha + "T00:00:00") -
-           new Date(a.fecha + "T00:00:00");
+  // 1. Ordenar por fecha del movimiento
+  const fechaA =
+  new Date(a.fecha + "T00:00:00");
 
-  });
+  const fechaB =
+  new Date(b.fecha + "T00:00:00");
+
+  const diferenciaFecha =
+  fechaB - fechaA;
+
+
+  if(diferenciaFecha !== 0){
+    return diferenciaFecha;
+  }
+
+
+  // 2. Si tienen la misma fecha,
+  // mostrar primero el registrado más recientemente
+  const creadoA =
+  a.created_at
+  ? new Date(a.created_at)
+  : new Date(0);
+
+  const creadoB =
+  b.created_at
+  ? new Date(b.created_at)
+  : new Date(0);
+
+  return creadoB - creadoA;
+
+});
 
 
   if(movimientosFiltrados.length === 0){
@@ -13155,24 +13190,50 @@ if(archivo){
 
 }
 
-  const { error } =
-  await supabaseClient
-    .from(tabla)
-    .update(datosActualizados)
-    .eq("id", id);
+ const { data, error } =
+await supabaseClient
+  .from(tabla)
+  .update(datosActualizados)
+  .eq("id", id)
+  .select();
 
 
-  if(error){
+if(error){
 
-    console.error(error);
+  console.error(
+    "Error al actualizar movimiento:",
+    error
+  );
 
-    mensaje.innerText =
-    "❌ No se pudieron guardar los cambios.";
+  mensaje.innerText =
+  "❌ No se pudieron guardar los cambios.";
 
-    mensaje.style.color = "#c82032";
+  mensaje.style.color = "#c82032";
 
-    return;
-  }
+  return;
+}
+
+
+// Comprobar que realmente se actualizó una fila
+if(!data || data.length === 0){
+
+  console.error(
+    "Supabase no actualizó ninguna fila."
+  );
+
+  mensaje.innerText =
+  "❌ No se actualizó el movimiento. Revisa permisos UPDATE en Supabase.";
+
+  mensaje.style.color = "#c82032";
+
+  return;
+}
+
+
+console.log(
+  "Movimiento actualizado:",
+  data
+);
 
 
   mensaje.innerText =
@@ -13191,6 +13252,9 @@ if(archivo){
   }, 700);
 
 }
+
+
+
  async function seleccionarCategoriaEditar(categoria){
 
   const lista =
@@ -18082,78 +18146,6 @@ function volverDesdeDetallePartido(){
 }
 
 
-// =====================================
-// GESTO DESLIZAR PARA VOLVER
-// =====================================
 
-let inicioTouchX = 0;
-let inicioTouchY = 0;
-
-document.addEventListener("touchstart", function(event){
-
-  if(event.touches.length !== 1) return;
-
-  inicioTouchX = event.touches[0].clientX;
-  inicioTouchY = event.touches[0].clientY;
-
-}, { passive:true });
-
-
-document.addEventListener("touchend", function(event){
-
-  if(event.changedTouches.length !== 1) return;
-
-  const finTouchX = event.changedTouches[0].clientX;
-  const finTouchY = event.changedTouches[0].clientY;
-
-  const movimientoX = finTouchX - inicioTouchX;
-  const movimientoY = Math.abs(finTouchY - inicioTouchY);
-
-
- // Puede comenzar dentro de una zona más amplia
-// desde el borde izquierdo
-if(inicioTouchX > 120) return;
-
-
-// Basta con deslizar 60px hacia la derecha
-if(movimientoX < 60) return;
-
-
-// Permitimos un poco de movimiento vertical
-// sin confundirlo con scroll
-if(movimientoY > Math.abs(movimientoX) * 1.2) return;
-
-
-  // =====================================
-  // FINANZAS
-  // =====================================
-
-  const pantallasFinanzas = [
-    "resumenFinanciero",
-    "movimientosFinancieros",
-    "agregarIngreso",
-    "agregarGasto"
-  ];
-
-
-  const pantallaFinancieraActiva =
-  pantallasFinanzas.some(function(id){
-
-    const pantalla =
-    document.getElementById(id);
-
-    return pantalla &&
-    !pantalla.classList.contains("oculto");
-
-  });
-
-
-  if(pantallaFinancieraActiva){
-
-    volverGestionFinanciera();
-
-  }
-
-}, { passive:true });
 
 </script>  </body>  </html>
