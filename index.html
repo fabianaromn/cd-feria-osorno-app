@@ -6549,7 +6549,7 @@ class="seccion oculto">
 
   <button
   class="boton"
-  onclick="mostrar('administracion')">
+  onclick="volverGestionFinanciera()"
     ← Volver
   </button>
 
@@ -9476,6 +9476,14 @@ if(bannerPartidoAdmin){
 
 }
 
+
+function volverGestionFinanciera(){
+
+  mostrar("administracion");
+
+  mostrarMenuAdmin("menuAdminFinanzas");
+
+}
 
 
   
