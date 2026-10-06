@@ -18146,6 +18146,98 @@ function volverDesdeDetallePartido(){
 }
 
 
+// =====================================
+// GESTO GLOBAL DESLIZAR PARA VOLVER
+// =====================================
 
+let inicioTouchX = 0;
+let inicioTouchY = 0;
+
+document.addEventListener("touchstart", function(event){
+
+  if(event.touches.length !== 1) return;
+
+  inicioTouchX = event.touches[0].clientX;
+  inicioTouchY = event.touches[0].clientY;
+
+}, { passive:true });
+
+
+document.addEventListener("touchend", function(event){
+
+  if(event.changedTouches.length !== 1) return;
+
+  const finTouchX = event.changedTouches[0].clientX;
+  const finTouchY = event.changedTouches[0].clientY;
+
+  const movimientoX =
+  finTouchX - inicioTouchX;
+
+  const movimientoY =
+  Math.abs(finTouchY - inicioTouchY);
+
+
+  // Zona desde donde puede comenzar el gesto
+  if(inicioTouchX > 120) return;
+
+  // Distancia mínima hacia la derecha
+  if(movimientoX < 60) return;
+
+  // Evitar confundir con scroll vertical
+  if(movimientoY > Math.abs(movimientoX) * 1.2) return;
+
+
+  // =====================================
+  // FINANZAS
+  // =====================================
+
+  const pantallasFinanzas = [
+    "resumenFinanciero",
+    "movimientosFinancieros",
+    "agregarIngreso",
+    "agregarGasto"
+  ];
+
+
+  const pantallaFinancieraActiva =
+  pantallasFinanzas.some(function(id){
+
+    const pantalla =
+    document.getElementById(id);
+
+    return pantalla &&
+    !pantalla.classList.contains("oculto");
+
+  });
+
+
+  if(pantallaFinancieraActiva){
+
+    volverGestionFinanciera();
+    return;
+
+  }
+
+
+  // =====================================
+  // EDITAR MOVIMIENTO
+  // =====================================
+
+  const editarMovimiento =
+  document.getElementById(
+    "editarMovimientoFinanciero"
+  );
+
+  if(
+    editarMovimiento &&
+    !editarMovimiento.classList.contains("oculto")
+  ){
+
+    mostrar("movimientosFinancieros");
+    return;
+
+  }
+
+}, { passive:true });
 
 </script>  </body>  </html>
