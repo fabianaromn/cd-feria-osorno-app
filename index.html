@@ -4399,6 +4399,407 @@ font-size: 16px;
   0 2px 5px rgba(0,0,0,.18);
 }
 
+
+
+/* =====================================
+   PERFIL PÚBLICO DEL JUGADOR
+===================================== */
+
+.perfil-jugador-publico{
+  max-width:600px;
+  margin:0 auto;
+  padding-bottom:40px;
+}
+
+
+/* =====================================
+   PORTADA
+===================================== */
+
+.perfil-jugador-portada{
+  position:relative;
+  width:100%;
+  height:480px;
+  overflow:hidden;
+  background:#071b4a;
+  border-radius:0 0 28px 28px;
+}
+
+
+.perfil-jugador-foto{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
+
+.perfil-jugador-degradado{
+  position:absolute;
+  inset:0;
+
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(7,27,74,0.05) 30%,
+    rgba(7,27,74,0.45) 65%,
+    rgba(7,27,74,0.98) 100%
+  );
+}
+
+
+.perfil-jugador-identidad{
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:25px;
+  color:white;
+}
+
+
+.perfil-jugador-categoria{
+  display:inline-block;
+
+  padding:6px 12px;
+
+  background:#c82032;
+
+  border-radius:20px;
+
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.7px;
+
+  text-transform:uppercase;
+
+  margin-bottom:8px;
+}
+
+
+.perfil-jugador-identidad h1{
+  margin:0;
+
+  font-size:34px;
+  line-height:1;
+
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  letter-spacing:-1px;
+}
+
+
+.perfil-jugador-identidad p{
+  margin:8px 0 0;
+
+  font-size:16px;
+  font-weight:600;
+
+  opacity:.9;
+}
+
+
+
+/* =====================================
+   ANTIGÜEDAD
+===================================== */
+
+.perfil-jugador-antiguedad{
+
+  margin:18px 16px;
+
+  padding:18px;
+
+  display:flex;
+  align-items:center;
+
+  gap:15px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #071b4a,
+    #123c8c
+  );
+
+  color:white;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 8px 25px rgba(7,27,74,.18);
+}
+
+
+.perfil-jugador-antiguedad > span{
+  font-size:28px;
+}
+
+
+.perfil-jugador-antiguedad div{
+  display:flex;
+  flex-direction:column;
+}
+
+
+.perfil-jugador-antiguedad small{
+  font-size:10px;
+
+  letter-spacing:1px;
+
+  opacity:.75;
+
+  font-weight:700;
+}
+
+
+.perfil-jugador-antiguedad strong{
+  font-size:22px;
+  margin-top:3px;
+}
+
+
+
+/* =====================================
+   SECCIONES
+===================================== */
+
+.perfil-jugador-seccion{
+  margin:25px 16px 0;
+}
+
+
+.perfil-jugador-titulo{
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+
+  color:#667085;
+
+  margin-bottom:12px;
+}
+
+
+
+/* =====================================
+   DATOS DEL JUGADOR
+===================================== */
+
+.perfil-jugador-datos{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:10px;
+}
+
+
+.perfil-dato{
+
+  min-height:92px;
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,.06);
+}
+
+
+.perfil-dato span{
+
+  color:#8a94a6;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  letter-spacing:.8px;
+}
+
+
+.perfil-dato strong{
+
+  color:#071b4a;
+
+  font-size:18px;
+
+  line-height:1.1;
+}
+
+
+
+/* =====================================
+   HISTORIA
+===================================== */
+
+.perfil-jugador-historia{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,.06);
+
+  border-left:
+  4px solid #c82032;
+}
+
+
+.perfil-jugador-historia h3{
+
+  margin:0 0 12px;
+
+  color:#071b4a;
+
+  font-size:18px;
+}
+
+
+.perfil-jugador-historia p{
+
+  margin:7px 0;
+
+  color:#667085;
+
+  line-height:1.55;
+
+  font-size:14px;
+}
+
+
+
+/* =====================================
+   INFORMACIÓN
+===================================== */
+
+.perfil-jugador-info{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:17px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,.06);
+}
+
+
+.perfil-jugador-info span{
+
+  color:#667085;
+
+  font-size:13px;
+}
+
+
+.perfil-jugador-info strong{
+
+  color:#071b4a;
+
+  font-size:14px;
+
+  text-align:right;
+}
+
+
+
+/* =====================================
+   PALMARÉS / GALERÍA
+===================================== */
+
+.perfil-jugador-proximamente{
+
+  min-height:120px;
+
+  background:white;
+
+  border-radius:18px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:5px;
+
+  padding:20px;
+
+  box-shadow:
+  0 4px 15px rgba(0,0,0,.06);
+
+  font-size:27px;
+}
+
+
+.perfil-jugador-proximamente strong{
+
+  color:#071b4a;
+
+  font-size:16px;
+}
+
+
+.perfil-jugador-proximamente span{
+
+  color:#98a2b3;
+
+  font-size:12px;
+}
+
+
+
+/* =====================================
+   CELULARES PEQUEÑOS
+===================================== */
+
+@media(max-width:400px){
+
+  .perfil-jugador-portada{
+    height:430px;
+  }
+
+  .perfil-jugador-identidad h1{
+    font-size:29px;
+  }
+
+  .perfil-jugador-antiguedad strong{
+    font-size:19px;
+  }
+
+}
+
 </style>  
 
   
@@ -9568,48 +9969,279 @@ return edad;
 }
 
 
-
-  
 function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, yearJoined){
-mostrar("jugadorDetalle");
 
-document.getElementById("detalleJugador").innerHTML = `
-<div class="ficha-jugador">
+  mostrar("jugadorDetalle");
 
-<img    
-    class="foto-jugador-grande"    
-    src="${foto || 'https://via.placeholder.com/200'}"    
-    alt="${nombre}"    
-  >    
+  const fechaFormateada =
+  fechaNacimiento
+  ? new Date(fechaNacimiento + "T00:00:00")
+      .toLocaleDateString("es-CL", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      })
+  : "No registrada";
 
-  <div class="detalle-numero">${numero}</div>    
 
-  <h2>${nombre}</h2>    
+  const edad =
+  fechaNacimiento
+  ? calcularEdad(fechaNacimiento)
+  : null;
 
-  <p>⚽ ${posicion}</p>    
-  <p>🏆 ${categoria}</p>    
-  <p>🔵🔴 Desde ${yearJoined || 'Año no registrado'}</p>    
 
-  <p>🎂 ${fechaNacimiento ? new Date(fechaNacimiento + 'T00:00:00').toLocaleDateString('es-CL', {
+  document.getElementById("detalleJugador").innerHTML = `
 
-day: 'numeric',
-month: 'long',
-year: 'numeric'
-}) : 'Fecha de nacimiento no registrada'}</p>
+    <div class="perfil-jugador-publico">
 
-${fechaNacimiento ? `
 
-<p>🎈 ${calcularEdad(fechaNacimiento)} años</p>    
-` : ''}    <p>🔵🔴 Club Deportivo Feria Osorno</p>    
+      <!-- FOTO PRINCIPAL -->
 
-  <button class="boton" onclick="volver()">⬅ Volver</button>    
+      <div class="perfil-jugador-portada">
 
-</div>
+        <img
+        src="${foto || 'https://via.placeholder.com/400x500'}"
+        alt="${nombre}"
+        class="perfil-jugador-foto">
 
-`;
+
+        <div class="perfil-jugador-degradado"></div>
+
+
+        <div class="perfil-jugador-identidad">
+
+          <span class="perfil-jugador-categoria">
+            ${categoria}
+          </span>
+
+          <h1>
+            ${nombre}
+          </h1>
+
+          <p>
+            ${posicion || "Jugador"}
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ANTIGÜEDAD -->
+
+      <div class="perfil-jugador-antiguedad">
+
+        <span>
+          🔵 🔴
+        </span>
+
+        <div>
+
+          <small>
+            DEFENDIENDO ESTOS COLORES
+          </small>
+
+          <strong>
+            Desde ${yearJoined || "año no registrado"}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- DATOS -->
+
+      <div class="perfil-jugador-seccion">
+
+        <div class="perfil-jugador-titulo">
+          PERFIL
+        </div>
+
+
+        <div class="perfil-jugador-datos">
+
+
+          <div class="perfil-dato">
+
+            <span>
+              POSICIÓN
+            </span>
+
+            <strong>
+              ${posicion || "-"}
+            </strong>
+
+          </div>
+
+
+          <div class="perfil-dato">
+
+            <span>
+              CATEGORÍA
+            </span>
+
+            <strong>
+              ${categoria || "-"}
+            </strong>
+
+          </div>
+
+
+          <div class="perfil-dato">
+
+            <span>
+              EDAD
+            </span>
+
+            <strong>
+              ${edad !== null ? edad + " años" : "-"}
+            </strong>
+
+          </div>
+
+
+          <div class="perfil-dato">
+
+            <span>
+              EN EL CLUB
+            </span>
+
+            <strong>
+              ${yearJoined || "-"}
+            </strong>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- TRAYECTORIA -->
+
+      <div class="perfil-jugador-seccion">
+
+        <div class="perfil-jugador-titulo">
+          TRAYECTORIA FERIANA
+        </div>
+
+
+        <div class="perfil-jugador-historia">
+
+          <h3>
+            🔵🔴 Parte de nuestra historia
+          </h3>
+
+          <p>
+            ${nombre} forma parte del plantel del
+            Club Deportivo Feria Osorno.
+          </p>
+
+          ${
+            yearJoined
+            ? `
+              <p>
+                Viste nuestros colores desde el año
+                <strong>${yearJoined}</strong>.
+              </p>
+            `
+            : ""
+          }
+
+        </div>
+
+      </div>
+
+
+
+      <!-- INFORMACIÓN -->
+
+      <div class="perfil-jugador-seccion">
+
+        <div class="perfil-jugador-titulo">
+          INFORMACIÓN
+        </div>
+
+
+        <div class="perfil-jugador-info">
+
+          <span>
+            Fecha de nacimiento
+          </span>
+
+          <strong>
+            ${fechaFormateada}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FUTURO PALMARÉS -->
+
+      <div class="perfil-jugador-seccion">
+
+        <div class="perfil-jugador-titulo">
+          PALMARÉS
+        </div>
+
+
+        <div class="perfil-jugador-proximamente">
+
+          🏆
+
+          <strong>
+            Historia y títulos
+          </strong>
+
+          <span>
+            Próximamente
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FUTURA GALERÍA -->
+
+      <div class="perfil-jugador-seccion">
+
+        <div class="perfil-jugador-titulo">
+          MOMENTOS
+        </div>
+
+
+        <div class="perfil-jugador-proximamente">
+
+          📸
+
+          <strong>
+            Galería del jugador
+          </strong>
+
+          <span>
+            Próximamente
+          </span>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  `;
+
 }
-
-
 
 
   
