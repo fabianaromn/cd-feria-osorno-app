@@ -5658,7 +5658,7 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
 
   <button
   class="menu-inferior-item activo"
-  onclick="mostrar('inicio')">
+  onclick="mostrarInicioPublico(this)">
 
     <span class="menu-inferior-icono">⌂</span>
     <span>Inicio</span>
@@ -10432,6 +10432,48 @@ function abrirEliminarJugador(){
 
 }
 
+
+function mostrarInicioPublico(boton){
+
+  // Ocultar las otras pantallas
+  ocultarTodo();
+
+  // Mostrar pantalla pública
+  document
+  .getElementById("pantallaPublica")
+  .classList.remove("oculto");
+
+  // Mostrar Inicio
+  document
+  .getElementById("inicio")
+  .classList.remove("oculto");
+
+  // Mostrar nuevamente el próximo partido
+  const proximoPartido =
+  document.querySelector(".proximo-partido-home");
+
+  if(proximoPartido){
+    proximoPartido.classList.remove("oculto");
+  }
+
+  // Marcar Inicio en el menú inferior
+  document
+  .querySelectorAll(".menu-inferior-item")
+  .forEach(function(item){
+    item.classList.remove("activo");
+  });
+
+  if(boton){
+    boton.classList.add("activo");
+  }
+
+  // Volver arriba
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
 
 
 function mostrar(id){
