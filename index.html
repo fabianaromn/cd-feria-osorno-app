@@ -2133,98 +2133,205 @@ font-size: 16px;
   font-weight:900;
 }
 
-.pantalla-jugadores-publica{
-  padding:0 14px 30px;
-}
 
 /* ========================================
-   PLANTEL PÚBLICO
+   JUGADORES - VERSIÓN PÚBLICA PREMIUM
+======================================== */
+
+.pantalla-jugadores-publica{
+  padding:18px 14px 35px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(33,76,150,.22),
+      transparent 35%
+    ),
+    #06142f;
+
+  color:white;
+
+  min-height:100vh;
+
+  width:100%;
+}
+
+/* Mantener todo el sector público en azul */
+#pantallaPublica{
+  background:#06142f !important;
+  min-height:100vh;
+}
+
+#jugadores{
+  background:#06142f !important;
+}
+
+
+/* ========================================
+   GRUPO / CATEGORÍA
 ======================================== */
 
 .grupo-plantel{
-  margin:22px 0 30px;
+  margin:10px 0 30px;
 }
 
 
 .grupo-plantel-titulo{
-  margin-bottom:10px;
+  position:relative;
 
-  color:#7b8495;
+  margin:0 0 15px;
 
-  font-size:11px;
+  padding-left:12px;
+
+  color:#ffffff;
+
+  font-size:12px;
   font-weight:900;
-  letter-spacing:1px;
+
+  letter-spacing:1.4px;
+
+  text-transform:uppercase;
 }
 
 
-/* DOS JUGADORES POR FILA */
+.grupo-plantel-titulo::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:1px;
+  bottom:1px;
+
+  width:3px;
+
+  border-radius:5px;
+
+  background:#ed1c2e;
+}
+
+
+/* ========================================
+   GRID
+======================================== */
 
 .grid-jugadores-publico{
   display:grid;
-  grid-template-columns:repeat(2, minmax(0,1fr));
-  gap:14px;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
 }
 
 
-/* TARJETA */
+/* ========================================
+   TARJETA JUGADOR
+======================================== */
 
 .jugador-card-publico{
+  position:relative;
+
   min-width:0;
 
-  background:white;
+  background:
+    linear-gradient(
+      180deg,
+      #0a214d,
+      #071936
+    );
 
-  border-radius:16px;
+  border-radius:18px;
+
   overflow:hidden;
 
-  border:1px solid #e2e5eb;
+  border:
+    1px solid rgba(105,153,220,.20);
 
   box-shadow:
-  0 5px 14px rgba(7,27,74,.12);
+    0 10px 24px rgba(0,0,0,.25);
 
   cursor:pointer;
 
-  transition:.15s;
+  transition:
+    transform .18s ease,
+    border-color .18s ease;
 }
 
 
 .jugador-card-publico:active{
   transform:scale(.97);
+
+  border-color:
+    rgba(237,28,46,.65);
 }
 
 
-/* ZONA FOTO */
+/* ========================================
+   FOTO
+======================================== */
 
 .jugador-card-foto{
   position:relative;
 
   width:100%;
-  height:205px;
+  height:220px;
 
   overflow:hidden;
 
   background:
-  linear-gradient(
-    145deg,
-    #071b4a,
-    #101b3f
-  );
+    linear-gradient(
+      145deg,
+      #0a2455,
+      #07152f
+    );
 }
 
+
+/* SOMBRA SOBRE LA PARTE INFERIOR */
+
+.jugador-card-foto::after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:48%;
+
+  z-index:2;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(5,17,40,.15) 25%,
+      rgba(5,17,40,.92) 100%
+    );
+
+  pointer-events:none;
+}
+
+
+/* DETALLE ROJO */
 
 .jugador-card-foto::before{
   content:"";
 
   position:absolute;
 
-  width:100px;
-  height:100px;
+  width:90px;
+  height:170px;
 
-  right:-55px;
-  top:-45px;
+  right:-65px;
+  top:-55px;
 
-  background:#d71920;
+  background:
+    rgba(237,28,46,.75);
 
-  transform:rotate(35deg);
+  transform:rotate(30deg);
 
   z-index:0;
 }
@@ -2240,76 +2347,334 @@ font-size: 16px;
   object-position:center top;
 
   z-index:1;
+
+  transition:
+    transform .3s ease;
 }
 
 
-/* DORSAL */
+.jugador-card-publico:active
+.jugador-card-foto img{
+  transform:scale(1.025);
+}
+
+
+/* ========================================
+   DORSAL
+   OCULTO EN LA VERSIÓN PÚBLICA
+======================================== */
 
 .jugador-card-numero{
-  position:absolute;
-
-  top:10px;
-  right:11px;
-
-  z-index:3;
-
-  color:white;
-
-  font-size:29px;
-  font-weight:900;
-
-  line-height:1;
-
-  text-shadow:
-  0 2px 5px rgba(0,0,0,.35);
+  display:none !important;
 }
 
 
-/* INFORMACIÓN */
+/* ========================================
+   INFORMACIÓN
+======================================== */
 
 .jugador-card-datos{
-  min-height:67px;
+  position:relative;
 
-  padding:11px 12px 13px;
+  min-height:74px;
 
-  display:flex;
-  flex-direction:column;
+  padding:
+    12px
+    13px
+    14px;
 
-  justify-content:center;
+  background:
+    linear-gradient(
+      180deg,
+      #081c41,
+      #07172f
+    );
 }
 
+
+/* POSICIÓN */
 
 .jugador-card-datos span{
   display:block;
 
-  margin-bottom:3px;
+  margin-bottom:5px;
 
-  color:#8b93a1;
+  color:#ed3345;
 
   font-size:9px;
-  font-weight:800;
+  font-weight:900;
 
   text-transform:uppercase;
-  letter-spacing:.6px;
+
+  letter-spacing:1.2px;
 }
 
+
+/* NOMBRE */
 
 .jugador-card-datos strong{
   display:block;
 
-  color:#071b4a;
+  color:#ffffff;
 
-  font-size:13px;
+  font-size:14px;
   font-weight:900;
 
   line-height:1.15;
 
-  text-transform:uppercase;
+  text-transform:none;
+}
+
+
+/* PEQUEÑO DETALLE INFERIOR */
+
+.jugador-card-datos::after{
+  content:"";
+
+  display:block;
+
+  width:26px;
+  height:2px;
+
+  margin-top:9px;
+
+  border-radius:10px;
+
+  background:#ed1c2e;
+}
+
+
+/* ========================================
+   TELÉFONOS PEQUEÑOS
+======================================== */
+
+@media(max-width:380px){
+
+  .pantalla-jugadores-publica{
+    padding-left:11px;
+    padding-right:11px;
+  }
+
+  .grid-jugadores-publico{
+    gap:9px;
+  }
+
+  .jugador-card-foto{
+    height:190px;
+  }
+
+  .jugador-card-datos{
+    min-height:68px;
+    padding:10px 11px 12px;
+  }
+
+  .jugador-card-datos strong{
+    font-size:13px;
+  }
+
+}
+
+/* ========================================
+   CABECERA JUGADORES PREMIUM
+======================================== */
+
+.cabecera-jugadores-premium{
+  padding:
+    20px
+    3px
+    18px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.07);
+}
+
+
+.cabecera-jugadores-club{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#ed3345;
+
+  font-size:9px;
+  font-weight:900;
+
+  letter-spacing:1.7px;
+}
+
+
+.cabecera-jugadores-premium h2{
+  margin:0;
+
+  color:#ffffff;
+
+  font-size:30px;
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:-.5px;
+}
+
+
+.cabecera-jugadores-premium p{
+  margin:7px 0 0;
+
+  color:#8798b6;
+
+  font-size:12px;
+  font-weight:600;
+}
+
+
+/* ========================================
+   CATEGORÍAS HORIZONTALES
+======================================== */
+
+.categorias-jugadores-scroll{
+  display:flex;
+
+  gap:8px;
+
+  margin:
+    0
+    -14px
+    20px;
+
+  padding:
+    16px
+    14px
+    5px;
+
+  overflow-x:auto;
+
+  scrollbar-width:none;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+
+.categorias-jugadores-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+
+.categoria-jugador-chip{
+  flex:0 0 auto;
+
+  min-height:36px;
+
+  padding:
+    0
+    16px;
+
+  border:
+    1px solid rgba(126,155,204,.25);
+
+  border-radius:20px;
+
+  background:#0a2149;
+
+  color:#aebbd1;
+
+  font-size:11px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  white-space:nowrap;
+
+  transition:.18s ease;
+}
+
+
+.categoria-jugador-chip:active{
+  transform:scale(.95);
+}
+
+
+/* PRIMERA APARIENCIA ACTIVA */
+
+.categoria-jugador-chip.activo{
+  background:#ed1c2e;
+
+  border-color:#ed1c2e;
+
+  color:#ffffff;
+
+  box-shadow:
+    0 5px 15px rgba(237,28,46,.22);
+}
+
+
+/* ========================================
+   MENSAJE INICIAL
+======================================== */
+
+.jugadores-inicio-mensaje{
+  min-height:280px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:35px 25px;
+
+  color:white;
+}
+
+
+.jugadores-inicio-mensaje img{
+  width:76px;
+  height:76px;
+
+  object-fit:contain;
+
+  margin-bottom:17px;
+
+  opacity:.9;
+
+  filter:
+    drop-shadow(
+      0 6px 15px rgba(0,0,0,.25)
+    );
+}
+
+
+.jugadores-inicio-mensaje strong{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#ffffff;
+
+  font-size:17px;
+  font-weight:900;
+}
+
+
+.jugadores-inicio-mensaje span{
+  display:block;
+
+  max-width:240px;
+
+  color:#7f91ae;
+
+  font-size:11px;
+  line-height:1.5;
+
+  font-weight:600;
 }
 
 /* ========================================
    LISTADO PARTIDOS - EDITAR
 ======================================== */
+
+
 
 .cabecera-listado-editar{
   margin-bottom:15px;
@@ -5712,164 +6077,107 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
 
 
 
-
- <section
+<section
 id="jugadores"
 class="seccion oculto pantalla-jugadores-publica">
 
-  <div class="cabecera-seccion-publica">
+  <!-- CABECERA -->
 
-    <button
-    class="volver-publico"
-    onclick="volver()">
-      ← VOLVER
-    </button>
+  <div class="cabecera-jugadores-premium">
 
-    <span>CLUB DEPORTIVO FERIA OSORNO</span>
+    <span class="cabecera-jugadores-club">
+      CLUB DEPORTIVO FERIA OSORNO
+    </span>
 
-    <h2>JUGADORES</h2>
+    <h2>Jugadores</h2>
 
     <p>
-      Conoce a los jugadores de todas nuestras categorías
+      Plantel oficial del club
     </p>
 
   </div>
 
 
-  <div class="titulo-categorias-partidos">
+  <!-- CATEGORÍAS -->
 
-    <span>CATEGORÍAS</span>
+  <div class="categorias-jugadores-scroll">
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Primera Serie')">
+      Primera
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Segunda Serie')">
+      Segunda
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Senior')">
+      Senior
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Super Senior')">
+      Super Senior
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Infantil U8')">
+      U8
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Infantil U10')">
+      U10
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Infantil U13')">
+      U13
+    </button>
+
+    <button
+    class="categoria-jugador-chip"
+    onclick="categoria('Infantil U15')">
+      U15
+    </button>
+
+  </div>
+
+
+  <!-- AQUÍ APARECERÁ EL PLANTEL -->
+
+ <div id="plantelJugadoresPublico">
+
+  <div class="jugadores-inicio-mensaje">
+
+    <img
+    src="img/logo-feria.png"
+    alt="CD Feria Osorno">
 
     <strong>
-      Selecciona una serie
+      Nuestro plantel
     </strong>
 
-  </div>
-
-
-  <div class="categorias-partidos">
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Primera Serie')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Primera Serie</strong>
-        <span>Adultos</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Segunda Serie')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Segunda Serie</strong>
-        <span>Adultos</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Senior')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Senior</strong>
-        <span>Adultos</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Super Senior')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Super Senior</strong>
-        <span>Adultos</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Infantil U8')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Infantil U8</strong>
-        <span>Formativo</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Infantil U10')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Infantil U10</strong>
-        <span>Formativo</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Infantil U13')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Infantil U13</strong>
-        <span>Formativo</span>
-      </div>
-
-    </button>
-
-
-    <button
-    class="categoria-partido"
-    onclick="categoria('Infantil U15')">
-
-      <div class="categoria-partido-icono">⚽</div>
-
-      <div>
-        <strong>Infantil U15</strong>
-        <span>Formativo</span>
-      </div>
-
-    </button>
+    <span>
+      Selecciona una categoría para conocer a sus jugadores
+    </span>
 
   </div>
 
-
-
-
-
-
-  
+</div>
 
 </section>
+
+
 <section
 id="administracion"
 class="seccion oculto">
@@ -10949,176 +11257,361 @@ window.scrollTo(0,0);
 
 
 
-  
-  
-async function categoria(nombre){
-mostrar("categoria");
+  async function categoria(nombre){
 
-document.getElementById("nombreCategoria").innerText = "👥 " + nombre;
+  // =====================================
+  // MARCAR CATEGORÍA SELECCIONADA
+  // =====================================
 
-const equivalencias = {
-"Primera Serie": "Primera Serie",
-"Segunda Serie": "Segunda Serie",
-"Senior": "Serie Senior",
-"Super Senior": "Serie Super Senior",
-"Infantil U8": "Infantil U8",
-"Infantil U10": "Infantil U10",
-"Infantil U13": "Infantil U13",
-"Infantil U15": "Infantil U15"
-};
+  document
+  .querySelectorAll(".categoria-jugador-chip")
+  .forEach(function(boton){
 
-const nombreBD = equivalencias[nombre];
+    boton.classList.remove("activo");
 
-document.getElementById("listaJugadores").innerHTML =
-"<p>Cargando jugadores...</p>";
+    const texto =
+    boton.innerText.trim().toLowerCase();
 
-const { data: categoriaData, error: categoriaError } =
-await supabaseClient
-.from("categories")
-.select("id")
-.eq("name", nombreBD)
-.single();
+    const nombresBoton = {
+      "primera":"Primera Serie",
+      "segunda":"Segunda Serie",
+      "senior":"Senior",
+      "super senior":"Super Senior",
+      "u8":"Infantil U8",
+      "u10":"Infantil U10",
+      "u13":"Infantil U13",
+      "u15":"Infantil U15"
+    };
 
-if (categoriaError) {
-document.getElementById("listaJugadores").innerHTML =
-"<p>Error al buscar la categoría.</p>";
-console.error(categoriaError);
-return;
-}
-
-const { data: jugadores, error: jugadoresError } =
-await supabaseClient
-.from("Jugadores")
-.select("name, number, position, photo_url, birth_date, category_id, year_joined ")
-.eq("category_id", categoriaData.id)
-.order("number");
-
-if (jugadoresError) {
-document.getElementById("listaJugadores").innerHTML =
-"<p>Error al cargar los jugadores.</p>";
-console.error(jugadoresError);
-return;
-}
-
-if (!jugadores || jugadores.length === 0) {
-document.getElementById("listaJugadores").innerHTML =
-"<p>Aún no hay jugadores registrados en esta categoría.</p>";
-return;
-}
-
-const grupos = [
-  {
-    titulo: "ARQUEROS",
-    posiciones: ["arquero", "portero"]
-  },
-  {
-    titulo: "DEFENSAS",
-    posiciones: ["defensa", "defensor"]
-  },
-  {
-    titulo: "MEDIOCAMPISTAS",
-    posiciones: ["medio", "mediocampista", "volante"]
-  },
-  {
-    titulo: "DELANTEROS",
-    posiciones: ["delantero", "atacante"]
-  }
-];
-
-
-let plantelHTML = "";
-
-
-grupos.forEach(function(grupo){
-
-  const jugadoresGrupo =
-  jugadores.filter(function(jugador){
-
-    const posicion =
-    (jugador.position || "")
-    .toLowerCase()
-    .trim();
-
-    return grupo.posiciones.includes(posicion);
+    if(nombresBoton[texto] === nombre){
+      boton.classList.add("activo");
+    }
 
   });
 
 
-  if(jugadoresGrupo.length === 0){
-    return;
-  }
+  // =====================================
+  // EQUIVALENCIAS SUPABASE
+  // =====================================
+
+  const equivalencias = {
+    "Primera Serie": "Primera Serie",
+    "Segunda Serie": "Segunda Serie",
+    "Senior": "Serie Senior",
+    "Super Senior": "Serie Super Senior",
+    "Infantil U8": "Infantil U8",
+    "Infantil U10": "Infantil U10",
+    "Infantil U13": "Infantil U13",
+    "Infantil U15": "Infantil U15"
+  };
 
 
-  plantelHTML += `
+  const nombreBD =
+  equivalencias[nombre];
+
+
+  const contenedor =
+  document.getElementById(
+    "plantelJugadoresPublico"
+  );
+
+
+  // =====================================
+  // CARGANDO
+  // =====================================
+
+  contenedor.innerHTML = `
 
     <div class="grupo-plantel">
 
       <div class="grupo-plantel-titulo">
-        ${grupo.titulo}
+        ${nombre}
       </div>
 
-      <div class="grid-jugadores-publico">
-
-        ${jugadoresGrupo.map(function(jugador){
-
-          return `
-
-            <div
-            class="jugador-card-publico"
-            onclick="verJugador(
-              ${jugador.number},
-              '${jugador.name}',
-              '${jugador.position}',
-              '${jugador.photo_url || ''}',
-              '${jugador.birth_date || ''}',
-              '${nombreBD}',
-              '${jugador.year_joined || ''}'
-            )">
-
-
-              <div class="jugador-card-foto">
-
-                <div class="jugador-card-numero">
-                  ${jugador.number}
-                </div>
-
-                <img
-                src="${jugador.photo_url || 'https://via.placeholder.com/300x400'}"
-                alt="${jugador.name}">
-
-              </div>
-
-
-              <div class="jugador-card-datos">
-
-                <span>
-                  ${jugador.position || "Jugador"}
-                </span>
-
-                <strong>
-                  ${jugador.name}
-                </strong>
-
-              </div>
-
-            </div>
-
-          `;
-
-        }).join("")}
-
-      </div>
+      <p style="
+        color:#8394b0;
+        font-size:11px;
+        margin-top:15px;
+      ">
+        Cargando jugadores...
+      </p>
 
     </div>
 
   `;
 
-});
+
+  // =====================================
+  // BUSCAR CATEGORÍA
+  // =====================================
+
+  const {
+    data: categoriaData,
+    error: categoriaError
+  } =
+
+  await supabaseClient
+  .from("categories")
+  .select("id")
+  .eq("name", nombreBD)
+  .single();
 
 
-document.getElementById(
-  "listaJugadores"
-).innerHTML = plantelHTML;
+  if(categoriaError){
+
+    contenedor.innerHTML =
+    "<p>Error al buscar la categoría.</p>";
+
+    console.error(
+      categoriaError
+    );
+
+    return;
+
+  }
+
+
+  // =====================================
+  // BUSCAR JUGADORES
+  // =====================================
+
+  const {
+    data: jugadores,
+    error: jugadoresError
+  } =
+
+  await supabaseClient
+  .from("Jugadores")
+  .select(
+    "name, number, position, photo_url, birth_date, category_id, year_joined"
+  )
+  .eq(
+    "category_id",
+    categoriaData.id
+  )
+  .order("number");
+
+
+  if(jugadoresError){
+
+    contenedor.innerHTML =
+    "<p>Error al cargar los jugadores.</p>";
+
+    console.error(
+      jugadoresError
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !jugadores ||
+    jugadores.length === 0
+  ){
+
+    contenedor.innerHTML = `
+
+      <div class="grupo-plantel">
+
+        <div class="grupo-plantel-titulo">
+          ${nombre}
+        </div>
+
+        <p style="
+          color:#8394b0;
+          font-size:11px;
+          margin-top:15px;
+        ">
+          Aún no hay jugadores registrados
+          en esta categoría.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  // =====================================
+  // POSICIONES
+  // =====================================
+
+  const grupos = [
+
+    {
+      titulo:"ARQUEROS",
+      posiciones:[
+        "arquero",
+        "portero"
+      ]
+    },
+
+    {
+      titulo:"DEFENSAS",
+      posiciones:[
+        "defensa",
+        "defensor"
+      ]
+    },
+
+    {
+      titulo:"MEDIOCAMPISTAS",
+      posiciones:[
+        "medio",
+        "mediocampista",
+        "volante"
+      ]
+    },
+
+    {
+      titulo:"DELANTEROS",
+      posiciones:[
+        "delantero",
+        "atacante"
+      ]
+    }
+
+  ];
+
+
+  let plantelHTML = "";
+
+
+  // =====================================
+  // CREAR GRUPOS
+  // =====================================
+
+  grupos.forEach(
+    function(grupo){
+
+      const jugadoresGrupo =
+      jugadores.filter(
+        function(jugador){
+
+          const posicion =
+          (
+            jugador.position ||
+            ""
+          )
+          .toLowerCase()
+          .trim();
+
+          return grupo
+          .posiciones
+          .includes(posicion);
+
+        }
+      );
+
+
+      if(
+        jugadoresGrupo.length === 0
+      ){
+        return;
+      }
+
+
+      plantelHTML += `
+
+        <div class="grupo-plantel">
+
+          <div
+          class="grupo-plantel-titulo">
+
+            ${grupo.titulo}
+
+          </div>
+
+
+          <div
+          class="grid-jugadores-publico">
+
+
+            ${
+              jugadoresGrupo
+              .map(
+                function(jugador){
+
+                  return `
+
+                    <div
+                    class="jugador-card-publico"
+
+                    onclick="verJugador(
+                      ${jugador.number},
+                      '${jugador.name}',
+                      '${jugador.position}',
+                      '${jugador.photo_url || ''}',
+                      '${jugador.birth_date || ''}',
+                      '${nombreBD}',
+                      '${jugador.year_joined || ''}'
+                    )">
+
+
+                      <div
+                      class="jugador-card-foto">
+
+
+                        <img
+                        src="${
+                          jugador.photo_url ||
+                          'https://via.placeholder.com/300x400'
+                        }"
+                        alt="${jugador.name}">
+
+
+                      </div>
+
+
+                      <div
+                      class="jugador-card-datos">
+
+                        <span>
+                          ${
+                            jugador.position ||
+                            "Jugador"
+                          }
+                        </span>
+
+                        <strong>
+                          ${jugador.name}
+                        </strong>
+
+                      </div>
+
+
+                    </div>
+
+                  `;
+
+                }
+              )
+              .join("")
+            }
+
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  // =====================================
+  // MOSTRAR PLANTEL
+  // =====================================
+
+  contenedor.innerHTML =
+  plantelHTML;
+
 
 }
 
