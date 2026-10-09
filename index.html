@@ -4950,13 +4950,64 @@ font-size: 16px;
 
 
 /* =====================================
-   OCULTAR MENÚ PÚBLICO ANTIGUO
+   OCULTAR NAVEGACIÓN PÚBLICA ANTIGUA
 ===================================== */
 
 #pantallaPublica .navegacion-publica-fija{
-  display:none;
+  display:none !important;
+  position:static !important;
+  height:0 !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
 }
 
+/* El inicio de la nueva app comienza
+   directamente desde el HERO */
+
+#pantallaPublica{
+  padding-top:0 !important;
+  margin-top:0 !important;
+}
+
+#pantallaPublica .hero-feria{
+  margin-top:0 !important;
+}
+
+/* =====================================
+   IDENTIDAD VISUAL APP FERIA OSORNO
+===================================== */
+
+#pantallaPublica{
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(28,67,132,.28) 0%,
+      transparent 35%
+    ),
+    #06142f;
+
+  color:#ffffff;
+
+  min-height:100vh;
+
+  padding-bottom:90px !important;
+}
+
+
+/* SECCIONES PÚBLICAS */
+
+#pantallaPublica .seccion{
+  color:#ffffff;
+}
+
+
+/* HERO INTEGRADO CON LA APP */
+
+#pantallaPublica .hero-feria{
+  box-shadow:none;
+  border-radius:0;
+}
 
 </style>  
 
