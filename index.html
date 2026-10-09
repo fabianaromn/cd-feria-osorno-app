@@ -5009,6 +5009,164 @@ font-size: 16px;
   border-radius:0;
 }
 
+/* =====================================
+   PORTADA OFICIAL APP FERIA OSORNO
+===================================== */
+
+.portada-app-feria{
+  position:relative;
+
+  width:100%;
+  height:330px;
+
+  background-image:url("img/fondo-feria.png");
+  background-size:cover;
+  background-position:center 42%;
+
+  overflow:hidden;
+
+  color:white;
+}
+
+
+/* CAPA AZUL SOBRE LA FOTOGRAFÍA */
+
+.portada-app-overlay{
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,22,58,.68) 0%,
+      rgba(3,24,63,.80) 58%,
+      #06142f 100%
+    ),
+    rgba(5,35,82,.25);
+}
+
+
+/* IDENTIDAD CENTRAL */
+
+.portada-app-identidad{
+  position:relative;
+  z-index:2;
+
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    calc(15px + env(safe-area-inset-top))
+    20px
+    18px;
+}
+
+
+/* ESCUDO */
+
+.portada-app-logo{
+  width:100px;
+  height:100px;
+
+  object-fit:contain;
+
+  margin-bottom:8px;
+
+  filter:
+    drop-shadow(0 5px 12px rgba(0,0,0,.28));
+}
+
+
+/* CLUB DEPORTIVO */
+
+.portada-app-club-pequeno{
+  font-size:11px;
+  font-weight:700;
+
+  letter-spacing:4px;
+
+  color:#b7c4d9;
+}
+
+
+/* FERIA OSORNO */
+
+.portada-app-identidad h1{
+  margin:4px 0 0;
+
+  font-size:32px;
+  line-height:1;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+
+  color:#ffffff;
+}
+
+
+/* PUERTO MONTT */
+
+.portada-app-ciudad{
+  margin-top:7px;
+
+  font-size:11px;
+  font-weight:700;
+
+  letter-spacing:4px;
+
+  color:#b7c4d9;
+}
+
+
+/* PEQUEÑO DETALLE ROJO / AZUL */
+
+.portada-app-linea{
+  display:flex;
+
+  width:76px;
+  height:4px;
+
+  margin-top:13px;
+
+  border-radius:10px;
+
+  overflow:hidden;
+}
+
+
+.portada-app-linea span{
+  width:50%;
+  background:#ed1c2e;
+}
+
+
+.portada-app-linea i{
+  width:50%;
+  background:#124da3;
+}
+
+
+/* LEMA */
+
+.portada-app-lema{
+  margin:9px 0 0;
+
+  font-size:14px;
+  font-weight:600;
+
+  letter-spacing:.3px;
+
+  color:#e0e6f0;
+}
+
+
 </style>  
 
   
@@ -5145,31 +5303,48 @@ onclick="iniciarSesion()"
 
 </div>
 
-<section class="hero-feria">
+<section class="portada-app-feria">
 
-  <div class="hero-contenido">
+  <div class="portada-app-overlay"></div>
 
-    <div class="hero-etiqueta">
-      CLUB DEPORTIVO FERIA OSORNO
-    </div>
-
-    <h1>
-      EL MÁS GRANDE
-      <span>DEL BARRIO</span>
-    </h1>
-
-    <div class="hero-linea"></div>
-
-    <p>
-      PASIÓN · HISTORIA · FAMILIA
-    </p>
-
-  </div>
+ <div class="portada-app-identidad">
 
   <img
-    src="img/toro-feria.png"
-    class="hero-toro"
-    alt="Mascota CD Feria Osorno">
+  src="img/logo-feria.png"
+  class="portada-app-logo"
+  alt="Club Deportivo Feria Osorno">
+
+  <span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+
+  <h1>
+    FERIA OSORNO
+  </h1>
+
+  <span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+
+  <div class="portada-app-linea">
+    <span></span>
+    <i></i>
+  </div>
+
+  <p class="portada-app-lema">
+    El más grande del barrio
+  </p>
+
+</div>
+
+
+  <div class="portada-app-titulo">
+
+    <h1>INICIO</h1>
+
+    <p>El más grande del barrio</p>
+
+  </div>
 
 </section>
 
