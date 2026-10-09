@@ -21,7 +21,10 @@ html{
 html,
 body{
   min-height:100%;
+  width:100%;
+  max-width:100%;
   background-color:#06142f;
+  overflow-x:hidden;
 }
 
 body{
@@ -33,8 +36,13 @@ body{
 
 
 #pantallaPublica{
+  width:100%;
+  max-width:100%;
   min-height:100vh;
+
   background:#06142f !important;
+
+  overflow-x:hidden;
 }
 
 header{
@@ -328,6 +336,26 @@ margin-bottom:12px;
 
 .oculto{
 display:none;
+}
+
+/* =====================================
+   PANTALLAS PÚBLICAS NUEVAS
+===================================== */
+
+#jugadores.seccion{
+  margin:0 !important;
+  padding:18px 14px 95px !important;
+
+  width:100% !important;
+  max-width:100% !important;
+
+  min-height:100vh;
+
+  border-radius:0 !important;
+
+  background:#06142f !important;
+
+  overflow-x:hidden;
 }
 
 footer{
@@ -2158,6 +2186,9 @@ font-size: 16px;
 ======================================== */
 
 .pantalla-jugadores-publica{
+  width:100%;
+max-width:100%;
+overflow-x:hidden;
   padding:18px 14px 35px;
 
   background:
@@ -2551,6 +2582,10 @@ font-size: 16px;
 ======================================== */
 
 .categorias-jugadores-scroll{
+
+  max-width:calc(100% + 28px);
+ overscroll-behavior-x:contain;
+
   display:flex;
 
   gap:8px;
