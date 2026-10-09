@@ -4997,38 +4997,37 @@ overflow-x:hidden;
   background:#17365f;
   min-height:100vh;
 }
-
+/* ========================================
+   PERFIL PÚBLICO DEL JUGADOR - PREMIUM
+======================================== */
 
 .perfil-jugador-publico{
   width:100%;
   max-width:600px;
   min-height:100vh;
-
   margin:0 auto;
-
-  background:#17365f;
-
-  color:white;
-
-  padding-bottom:50px;
+  padding-bottom:105px;
+  background:#06142f;
+  color:#ffffff;
 }
 
 
-/* =====================================
-   PORTADA
-===================================== */
+/* ========================================
+   HERO / FOTO PRINCIPAL
+======================================== */
 
-.perfil-jugador-portada{
+.perfil-jugador-hero{
   position:relative;
   width:100%;
-  height:480px;
+  height:510px;
   overflow:hidden;
   background:#071b4a;
-  border-radius:0 0 28px 28px;
 }
 
 
 .perfil-jugador-foto{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
@@ -5037,347 +5036,518 @@ overflow-x:hidden;
 }
 
 
-.perfil-jugador-degradado{
+.perfil-jugador-overlay{
   position:absolute;
   inset:0;
-
   background:
-  linear-gradient(
-    to bottom,
-    rgba(7,27,74,0.05) 30%,
-    rgba(7,27,74,0.45) 65%,
-    rgba(7,27,74,0.98) 100%
-  );
+    linear-gradient(
+      180deg,
+      rgba(4,16,40,.10) 0%,
+      rgba(4,16,40,.05) 35%,
+      rgba(4,16,40,.48) 65%,
+      #06142f 100%
+    );
 }
 
 
+/* ========================================
+   BOTÓN VOLVER
+======================================== */
+
+.perfil-jugador-volver{
+  position:absolute;
+  top:calc(15px + env(safe-area-inset-top));
+  left:16px;
+  z-index:5;
+
+  width:42px;
+  height:42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:0;
+  border:1px solid rgba(255,255,255,.20);
+  border-radius:50%;
+
+  background:rgba(5,20,47,.55);
+
+  color:#ffffff;
+
+  font-size:32px;
+  font-weight:300;
+  line-height:1;
+
+  cursor:pointer;
+
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+
+.perfil-jugador-volver:active{
+  transform:scale(.93);
+}
+
+
+/* ========================================
+   IDENTIDAD DEL JUGADOR
+======================================== */
+
 .perfil-jugador-identidad{
   position:absolute;
-  left:22px;
-  right:22px;
-  bottom:25px;
-  color:white;
+  z-index:3;
+
+  left:20px;
+  right:20px;
+  bottom:30px;
 }
 
 
 .perfil-jugador-categoria{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
 
-  padding:6px 12px;
+  min-height:27px;
 
-  background:#c82032;
+  padding:0 11px;
+
+  margin-bottom:10px;
 
   border-radius:20px;
 
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.7px;
+  background:#ed1c2e;
+
+  color:#ffffff;
+
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
 
   text-transform:uppercase;
-
-  margin-bottom:8px;
 }
 
 
 .perfil-jugador-identidad h1{
   margin:0;
 
-  font-size:34px;
-  line-height:1;
+  max-width:95%;
 
+  color:#ffffff;
+
+  font-size:36px;
+  line-height:.98;
   font-weight:900;
 
-  text-transform:uppercase;
-
-  letter-spacing:-1px;
+  letter-spacing:-1.2px;
 }
 
 
 .perfil-jugador-identidad p{
-  margin:8px 0 0;
+  margin:9px 0 0;
 
-  font-size:16px;
-  font-weight:600;
+  color:#c6d1e2;
 
-  opacity:.9;
+  font-size:14px;
+  font-weight:700;
+
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
 
+/* ========================================
+   RESUMEN
+======================================== */
 
-/* =====================================
-   ANTIGÜEDAD
-===================================== */
+.perfil-jugador-resumen{
+  position:relative;
 
-.perfil-jugador-antiguedad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
 
-  margin:18px 16px;
+  margin:0 14px 30px;
 
-  padding:18px;
+  background:linear-gradient(
+    135deg,
+    #0a214c,
+    #071a3d
+  );
 
+  border:1px solid rgba(101,151,222,.20);
+  border-radius:18px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.22);
+}
+
+
+.perfil-jugador-resumen > div{
+  position:relative;
+
+  min-height:82px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:12px 7px;
+}
+
+
+.perfil-jugador-resumen > div:not(:last-child)::after{
+  content:"";
+
+  position:absolute;
+
+  top:20px;
+  right:0;
+  bottom:20px;
+
+  width:1px;
+
+  background:rgba(255,255,255,.10);
+}
+
+
+.perfil-jugador-resumen span{
+  margin-bottom:7px;
+
+  color:#7f91af;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.1px;
+}
+
+
+.perfil-jugador-resumen strong{
+  color:#ffffff;
+
+  font-size:15px;
+  line-height:1.1;
+  font-weight:900;
+}
+
+
+/* ========================================
+   BLOQUES
+======================================== */
+
+.perfil-jugador-bloque{
+  margin:0 14px 31px;
+}
+
+
+.perfil-jugador-encabezado{
   display:flex;
   align-items:center;
 
-  gap:15px;
+  gap:9px;
 
-  background:
-  linear-gradient(
-    135deg,
-    #071b4a,
-    #123c8c
-  );
-
-  color:white;
-
-  border-radius:18px;
-
-  box-shadow:
-  0 8px 25px rgba(7,27,74,.18);
+  margin-bottom:13px;
 }
 
 
-.perfil-jugador-antiguedad > span{
-  font-size:28px;
+.perfil-jugador-encabezado > span{
+  width:4px;
+  height:18px;
+
+  flex-shrink:0;
+
+  border-radius:5px;
+
+  background:#ed1c2e;
 }
 
 
-.perfil-jugador-antiguedad div{
-  display:flex;
-  flex-direction:column;
-}
+.perfil-jugador-encabezado h2{
+  margin:0;
 
+  color:#ffffff;
 
-.perfil-jugador-antiguedad small{
-  font-size:10px;
-
-  letter-spacing:1px;
-
-  opacity:.75;
-
-  font-weight:700;
-}
-
-
-.perfil-jugador-antiguedad strong{
-  font-size:22px;
-  margin-top:3px;
-}
-
-
-
-/* =====================================
-   SECCIONES
-===================================== */
-
-.perfil-jugador-seccion{
-  margin:25px 16px 0;
-}
-
-
-.perfil-jugador-titulo{
-
-  font-size:12px;
-
+  font-size:15px;
   font-weight:900;
 
-  letter-spacing:1.4px;
-
-  color:#667085;
-
-  margin-bottom:12px;
+  letter-spacing:.2px;
 }
 
 
-
-/* =====================================
-   DATOS DEL JUGADOR
-===================================== */
-
-.perfil-jugador-datos{
-
-  display:grid;
-
-  grid-template-columns:
-  repeat(2,1fr);
-
-  gap:10px;
-}
-
-
-.perfil-dato{
-
-  min-height:92px;
-
-  background:white;
-
-  border-radius:16px;
-
-  padding:16px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:space-between;
-
-  box-shadow:
-  0 4px 15px rgba(0,0,0,.06);
-}
-
-
-.perfil-dato span{
-
-  color:#8a94a6;
-
-  font-size:10px;
-
-  font-weight:800;
-
-  letter-spacing:.8px;
-}
-
-
-.perfil-dato strong{
-
-  color:#071b4a;
-
-  font-size:18px;
-
-  line-height:1.1;
-}
-
-
-
-/* =====================================
+/* ========================================
    HISTORIA
-===================================== */
+======================================== */
 
 .perfil-jugador-historia{
-
-  background:white;
-
-  border-radius:18px;
+  position:relative;
 
   padding:20px;
 
-  box-shadow:
-  0 4px 15px rgba(0,0,0,.06);
+  overflow:hidden;
 
-  border-left:
-  4px solid #c82032;
+  background:
+    linear-gradient(
+      145deg,
+      #0a214c,
+      #071a3b
+    );
+
+  border:1px solid rgba(99,148,216,.18);
+
+  border-radius:18px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.18);
+}
+
+
+.perfil-jugador-historia::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:180px;
+
+  top:-75px;
+  right:-70px;
+
+  background:rgba(237,28,46,.16);
+
+  transform:rotate(32deg);
+}
+
+
+.perfil-jugador-historia-club{
+  position:relative;
+  z-index:2;
+
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#ed3345;
+
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1.4px;
 }
 
 
 .perfil-jugador-historia h3{
+  position:relative;
+  z-index:2;
 
-  margin:0 0 12px;
+  margin:0 0 10px;
 
-  color:#071b4a;
+  color:#ffffff;
 
   font-size:18px;
+  font-weight:900;
 }
 
 
 .perfil-jugador-historia p{
+  position:relative;
+  z-index:2;
 
-  margin:7px 0;
+  margin:0;
 
-  color:#667085;
+  max-width:95%;
 
-  line-height:1.55;
+  color:#9eacc2;
 
-  font-size:14px;
+  font-size:12px;
+  line-height:1.6;
+  font-weight:500;
 }
 
 
+/* ========================================
+   AÑOS EN EL CLUB
+======================================== */
 
-/* =====================================
-   INFORMACIÓN
-===================================== */
-
-.perfil-jugador-info{
-
-  background:white;
-
-  border-radius:16px;
-
-  padding:17px;
+.perfil-jugador-antiguedad-nueva{
+  position:relative;
+  z-index:2;
 
   display:flex;
+  align-items:flex-end;
 
-  justify-content:space-between;
+  gap:8px;
 
-  align-items:center;
+  margin-top:20px;
+  padding-top:17px;
 
-  gap:15px;
-
-  box-shadow:
-  0 4px 15px rgba(0,0,0,.06);
+  border-top:1px solid rgba(255,255,255,.08);
 }
 
 
-.perfil-jugador-info span{
+.perfil-jugador-antiguedad-nueva strong{
+  color:#ffffff;
 
-  color:#667085;
-
-  font-size:13px;
+  font-size:34px;
+  line-height:.85;
+  font-weight:900;
 }
 
 
-.perfil-jugador-info strong{
+.perfil-jugador-antiguedad-nueva span{
+  padding-bottom:2px;
 
-  color:#071b4a;
+  color:#7f91ae;
 
-  font-size:14px;
-
-  text-align:right;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:1px;
 }
 
 
+/* ========================================
+   PALMARÉS
+======================================== */
 
-/* =====================================
-   PALMARÉS / GALERÍA
-===================================== */
-
-.perfil-jugador-proximamente{
-
-  min-height:120px;
-
-  background:white;
-
-  border-radius:18px;
+.perfil-jugador-palmares-vacio{
+  min-height:145px;
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
 
-  gap:5px;
+  padding:23px;
 
-  padding:20px;
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0a214b,
+      #071a3b
+    );
+
+  border:1px solid rgba(100,150,220,.18);
+  border-radius:18px;
 
   box-shadow:
-  0 4px 15px rgba(0,0,0,.06);
+    0 10px 25px rgba(0,0,0,.16);
+}
+
+
+.perfil-jugador-palmares-vacio > div{
+  margin-bottom:8px;
+
+  font-size:28px;
+}
+
+
+.perfil-jugador-palmares-vacio strong{
+  color:#ffffff;
+
+  font-size:14px;
+  font-weight:900;
+}
+
+
+.perfil-jugador-palmares-vacio p{
+  max-width:260px;
+
+  margin:6px 0 0;
+
+  color:#7f91ae;
+
+  font-size:10px;
+  line-height:1.5;
+}
+
+
+/* ========================================
+   GALERÍA
+======================================== */
+
+.perfil-jugador-galeria-vacia{
+  min-height:145px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  padding:23px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0a214b,
+      #071a3b
+    );
+
+  border:1px solid rgba(100,150,220,.18);
+  border-radius:18px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.16);
+}
+
+
+.perfil-jugador-galeria-vacia > div{
+  margin-bottom:8px;
 
   font-size:27px;
 }
 
 
-.perfil-jugador-proximamente strong{
+.perfil-jugador-galeria-vacia strong{
+  color:#ffffff;
 
-  color:#071b4a;
-
-  font-size:16px;
+  font-size:14px;
+  font-weight:900;
 }
 
 
-.perfil-jugador-proximamente span{
+.perfil-jugador-galeria-vacia p{
+  max-width:260px;
 
-  color:#98a2b3;
+  margin:6px 0 0;
 
-  font-size:12px;
+  color:#7f91ae;
+
+  font-size:10px;
+  line-height:1.5;
+}
+
+
+/* ========================================
+   TELÉFONOS PEQUEÑOS
+======================================== */
+
+@media(max-width:380px){
+
+  .perfil-jugador-hero{
+    height:470px;
+  }
+
+  .perfil-jugador-identidad h1{
+    font-size:31px;
+  }
+
+  .perfil-jugador-resumen{
+    margin-left:11px;
+    margin-right:11px;
+  }
+
+  .perfil-jugador-bloque{
+    margin-left:11px;
+    margin-right:11px;
+  }
+
 }
 
 
@@ -11018,21 +11188,17 @@ edad--;
 
 return edad;
 }
-
-
-function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, yearJoined){
+function verJugador(
+  numero,
+  nombre,
+  posicion,
+  foto,
+  fechaNacimiento,
+  categoria,
+  yearJoined
+){
 
   mostrar("jugadorDetalle");
-
-  const fechaFormateada =
-  fechaNacimiento
-  ? new Date(fechaNacimiento + "T00:00:00")
-      .toLocaleDateString("es-CL", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      })
-  : "No registrada";
 
 
   const edad =
@@ -11041,23 +11207,47 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, 
   : null;
 
 
-  document.getElementById("detalleJugador").innerHTML = `
+  const aniosClub =
+  yearJoined
+  ? new Date().getFullYear() - Number(yearJoined)
+  : null;
+
+
+  document
+  .getElementById("detalleJugador")
+  .innerHTML = `
 
     <div class="perfil-jugador-publico">
 
 
-      <!-- FOTO PRINCIPAL -->
+      <!-- =========================
+           HERO DEL JUGADOR
+      ========================== -->
 
-      <div class="perfil-jugador-portada">
+      <div class="perfil-jugador-hero">
+
 
         <img
-        src="${foto || 'https://via.placeholder.com/400x500'}"
+        src="${foto || 'https://via.placeholder.com/500x700'}"
         alt="${nombre}"
         class="perfil-jugador-foto">
 
 
-        <div class="perfil-jugador-degradado"></div>
+        <div class="perfil-jugador-overlay"></div>
 
+
+        <!-- BOTÓN VOLVER -->
+
+        <button
+        class="perfil-jugador-volver"
+        onclick="volverDesdeJugadorDetalle()">
+
+          ‹
+
+        </button>
+
+
+        <!-- IDENTIDAD -->
 
         <div class="perfil-jugador-identidad">
 
@@ -11065,9 +11255,11 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, 
             ${categoria}
           </span>
 
+
           <h1>
             ${nombre}
           </h1>
+
 
           <p>
             ${posicion || "Jugador"}
@@ -11075,217 +11267,215 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, 
 
         </div>
 
+
       </div>
 
 
 
-      <!-- ANTIGÜEDAD -->
+      <!-- =========================
+           RESUMEN
+      ========================== -->
 
-      <div class="perfil-jugador-antiguedad">
+      <div class="perfil-jugador-resumen">
 
-        <span>
-          🔵 🔴
-        </span>
 
         <div>
 
-          <small>
-            DEFENDIENDO ESTOS COLORES
-          </small>
+          <span>
+            POSICIÓN
+          </span>
 
           <strong>
-            Desde ${yearJoined || "año no registrado"}
+            ${posicion || "-"}
           </strong>
 
         </div>
 
-      </div>
 
+        <div>
 
+          <span>
+            EDAD
+          </span>
 
-      <!-- DATOS -->
-
-      <div class="perfil-jugador-seccion">
-
-        <div class="perfil-jugador-titulo">
-          PERFIL
-        </div>
-
-
-        <div class="perfil-jugador-datos">
-
-
-          <div class="perfil-dato">
-
-            <span>
-              POSICIÓN
-            </span>
-
-            <strong>
-              ${posicion || "-"}
-            </strong>
-
-          </div>
-
-
-          <div class="perfil-dato">
-
-            <span>
-              CATEGORÍA
-            </span>
-
-            <strong>
-              ${categoria || "-"}
-            </strong>
-
-          </div>
-
-
-          <div class="perfil-dato">
-
-            <span>
-              EDAD
-            </span>
-
-            <strong>
-              ${edad !== null ? edad + " años" : "-"}
-            </strong>
-
-          </div>
-
-
-          <div class="perfil-dato">
-
-            <span>
-              EN EL CLUB
-            </span>
-
-            <strong>
-              ${yearJoined || "-"}
-            </strong>
-
-          </div>
-
+          <strong>
+            ${edad !== null ? edad : "-"}
+          </strong>
 
         </div>
+
+
+        <div>
+
+          <span>
+            DESDE
+          </span>
+
+          <strong>
+            ${yearJoined || "-"}
+          </strong>
+
+        </div>
+
 
       </div>
 
 
 
-      <!-- TRAYECTORIA -->
+      <!-- =========================
+           HISTORIA
+      ========================== -->
 
-      <div class="perfil-jugador-seccion">
+      <section class="perfil-jugador-bloque">
 
-        <div class="perfil-jugador-titulo">
-          TRAYECTORIA FERIANA
+
+        <div class="perfil-jugador-encabezado">
+
+          <span></span>
+
+          <h2>
+            Trayectoria Feriana
+          </h2>
+
         </div>
 
 
         <div class="perfil-jugador-historia">
 
+
+          <span class="perfil-jugador-historia-club">
+            CLUB DEPORTIVO FERIA OSORNO
+          </span>
+
+
           <h3>
-            🔵🔴 Parte de nuestra historia
+            Parte de nuestra historia
           </h3>
 
+
           <p>
+
             ${nombre} forma parte del plantel del
-            Club Deportivo Feria Osorno.
+            Club Deportivo Feria Osorno
+
+            ${
+              yearJoined
+              ? ` y defiende nuestros colores desde ${yearJoined}.`
+              : "."
+            }
+
           </p>
 
+
           ${
-            yearJoined
+            aniosClub !== null && aniosClub > 0
             ? `
-              <p>
-                Viste nuestros colores desde el año
-                <strong>${yearJoined}</strong>.
-              </p>
+
+              <div class="perfil-jugador-antiguedad-nueva">
+
+                <strong>
+                  ${aniosClub}
+                </strong>
+
+                <span>
+                  ${
+                    aniosClub === 1
+                    ? "AÑO EN EL CLUB"
+                    : "AÑOS EN EL CLUB"
+                  }
+                </span>
+
+              </div>
+
             `
             : ""
           }
 
-        </div>
-
-      </div>
-
-
-
-      <!-- INFORMACIÓN -->
-
-      <div class="perfil-jugador-seccion">
-
-        <div class="perfil-jugador-titulo">
-          INFORMACIÓN
-        </div>
-
-
-        <div class="perfil-jugador-info">
-
-          <span>
-            Fecha de nacimiento
-          </span>
-
-          <strong>
-            ${fechaFormateada}
-          </strong>
 
         </div>
 
-      </div>
+
+      </section>
 
 
 
-      <!-- FUTURO PALMARÉS -->
+      <!-- =========================
+           PALMARÉS
+      ========================== -->
 
-      <div class="perfil-jugador-seccion">
+      <section class="perfil-jugador-bloque">
 
-        <div class="perfil-jugador-titulo">
-          PALMARÉS
+
+        <div class="perfil-jugador-encabezado">
+
+          <span></span>
+
+          <h2>
+            Palmarés
+          </h2>
+
         </div>
 
 
-        <div class="perfil-jugador-proximamente">
+        <div class="perfil-jugador-palmares-vacio">
 
-          🏆
+          <div>
+            🏆
+          </div>
 
           <strong>
             Historia y títulos
           </strong>
 
-          <span>
-            Próximamente
-          </span>
+          <p>
+            Próximamente podrás conocer
+            los títulos obtenidos por el jugador.
+          </p>
 
         </div>
 
-      </div>
+
+      </section>
 
 
 
-      <!-- FUTURA GALERÍA -->
+      <!-- =========================
+           GALERÍA
+      ========================== -->
 
-      <div class="perfil-jugador-seccion">
+      <section class="perfil-jugador-bloque">
 
-        <div class="perfil-jugador-titulo">
-          MOMENTOS
+
+        <div class="perfil-jugador-encabezado">
+
+          <span></span>
+
+          <h2>
+            Momentos
+          </h2>
+
         </div>
 
 
-        <div class="perfil-jugador-proximamente">
+        <div class="perfil-jugador-galeria-vacia">
 
-          📸
+          <div>
+            📸
+          </div>
 
           <strong>
             Galería del jugador
           </strong>
 
-          <span>
-            Próximamente
-          </span>
+          <p>
+            Fotografías y momentos
+            defendiendo nuestros colores.
+          </p>
 
         </div>
 
-      </div>
+
+      </section>
 
 
     </div>
@@ -11294,6 +11484,22 @@ function verJugador(numero, nombre, posicion, foto, fechaNacimiento, categoria, 
 
 }
 
+
+function volverDesdeJugadorDetalle(){
+
+  ocultarTodo();
+
+  document
+  .getElementById("jugadores")
+  .classList.remove("oculto");
+
+  document
+  .getElementById("pantallaPublica")
+  .classList.remove("oculto");
+
+  window.scrollTo(0,0);
+
+}
 
   
 function volver(){
