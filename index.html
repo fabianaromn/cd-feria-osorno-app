@@ -4821,6 +4821,143 @@ font-size: 16px;
 
 }
 
+
+/* =====================================
+   MENÚ INFERIOR PÚBLICO
+===================================== */
+
+.menu-inferior-publico{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:72px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+
+  background:rgba(5,16,40,.97);
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+  0 -8px 30px rgba(0,0,0,.35);
+
+  z-index:9999;
+
+  padding:
+  6px 6px
+  calc(6px + env(safe-area-inset-bottom));
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+
+/* BOTÓN */
+
+.menu-inferior-item{
+  flex:1;
+
+  height:58px;
+
+  border:0;
+  background:transparent;
+
+  color:#7888a5;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:4px;
+
+  font-size:10px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+
+/* ICONO */
+
+.menu-inferior-icono{
+  height:25px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:21px;
+  line-height:1;
+
+  color:inherit;
+}
+
+
+/* BOTÓN ACTIVO */
+
+.menu-inferior-item.activo{
+  color:#ffffff;
+}
+
+
+/* LÍNEA ROJA DEL ACTIVO */
+
+.menu-inferior-item.activo::before{
+  content:"";
+
+  position:absolute;
+  top:0;
+
+  width:30px;
+  height:3px;
+
+  border-radius:0 0 5px 5px;
+
+  background:#e32636;
+
+  box-shadow:
+  0 0 12px rgba(227,38,54,.6);
+}
+
+
+/* NECESARIO PARA POSICIONAR LA LÍNEA */
+
+.menu-inferior-item{
+  position:relative;
+}
+
+
+/* EFECTO AL TOCAR */
+
+.menu-inferior-item:active{
+  transform:scale(.94);
+}
+
+
+/* ESPACIO PARA QUE EL MENÚ
+   NO TAPE EL CONTENIDO */
+
+#pantallaPublica{
+  padding-bottom:85px;
+}
+
+
+/* =====================================
+   OCULTAR MENÚ PÚBLICO ANTIGUO
+===================================== */
+
+#pantallaPublica .navegacion-publica-fija{
+  display:none;
+}
+
+
 </style>  
 
   
@@ -5081,10 +5218,73 @@ class="seccion">  <h2>
 Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.    
 </p>  <br>  <p>    
 🔵🔴 Estamos construyendo nuestra plataforma deportiva.    
-</p>  </section> 
+</p>  
+</section> 
   
 
+<!-- =====================================
+     MENÚ INFERIOR APP PÚBLICA
+===================================== -->
+
+<nav class="menu-inferior-publico">
+
+  <button
+  class="menu-inferior-item activo"
+  onclick="mostrar('inicio')">
+
+    <span class="menu-inferior-icono">⌂</span>
+    <span>Inicio</span>
+
+  </button>
+
+
+  <button
+  class="menu-inferior-item"
+  onclick="mostrar('partidos')">
+
+    <span class="menu-inferior-icono">⚽</span>
+    <span>Partidos</span>
+
+  </button>
+
+
+  <button
+  class="menu-inferior-item"
+  onclick="mostrar('jugadores')">
+
+    <span class="menu-inferior-icono">♟</span>
+    <span>Jugadores</span>
+
+  </button>
+
+
+  <button
+  class="menu-inferior-item"
+  onclick="mostrar('tabla')">
+
+    <span class="menu-inferior-icono">▦</span>
+    <span>Tabla</span>
+
+  </button>
+
+
+  <button
+  class="menu-inferior-item"
+  onclick="mostrar('estadisticas')">
+
+    <span class="menu-inferior-icono">•••</span>
+    <span>Más</span>
+
+  </button>
+
+</nav>
+
+
   </div>
+
+
+
+
  <section
 id="jugadores"
 class="seccion oculto pantalla-jugadores-publica">
@@ -5233,6 +5433,13 @@ class="seccion oculto pantalla-jugadores-publica">
     </button>
 
   </div>
+
+
+
+
+
+
+  
 
 </section>
 <section
