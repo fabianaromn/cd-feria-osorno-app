@@ -6691,6 +6691,192 @@ overflow-x:hidden;
   box-shadow:0 3px 8px rgba(0,0,0,.3);
 }
 
+.selector-formacion-feria{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  background:#102b59;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+}
+
+.selector-formacion-feria span{
+  color:#a9bad6;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.selector-formacion-feria select{
+  background:#ed1c2e;
+  color:white;
+  border:0;
+  border-radius:9px;
+  padding:10px 12px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+
+/* FORMACIÓN OFICIAL - SOLO LECTURA */
+
+#detallePartido .formacion-oficial-valor{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:10px 15px;
+
+  background:#ed1c2e;
+  color:#fff;
+
+  border-radius:9px;
+
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+
+/* =====================================
+   MARCADOR PREMIUM CD FERIA OSORNO
+===================================== */
+
+#detallePartido .marcador-feria-premium{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  padding:22px 14px 12px;
+}
+
+#detallePartido .marcador-feria-equipo{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  text-align:center;
+}
+
+#detallePartido .marcador-feria-nombre{
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+
+#detallePartido .marcador-feria-resultado{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+}
+
+#detallePartido .marcador-feria-numeros{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+#detallePartido .marcador-feria-numeros strong{
+  color:#fff;
+  font-size:36px;
+  font-weight:900;
+  line-height:1;
+}
+
+#detallePartido .marcador-feria-numeros span{
+  color:#8195ba;
+  font-size:22px;
+}
+
+#detallePartido .marcador-feria-resultado small{
+  padding:6px 10px;
+  border-radius:20px;
+  background:#ed1c2e;
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+/* GOLEADORES POR EQUIPO */
+
+#detallePartido .marcador-feria-goles{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  padding:12px 16px 22px;
+}
+
+#detallePartido .marcador-feria-goles-equipo{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  min-width:0;
+}
+
+#detallePartido .gol-equipo-item{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:9px;
+  border-radius:9px;
+  background:rgba(255,255,255,.045);
+}
+
+#detallePartido .gol-equipo-nombre{
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+
+#detallePartido .gol-equipo-minutos{
+  color:#ed3345;
+  font-size:11px;
+  font-weight:900;
+}
+
+
+
+/* ESCUDOS DEL MARCADOR */
+
+#detallePartido .escudo-detalle{
+  width:60px;
+  height:60px;
+  min-width:60px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+  overflow:hidden;
+}
+
+#detallePartido .escudo-detalle img{
+  width:85%;
+  height:85%;
+  object-fit:contain;
+  display:block;
+}
+
+#detallePartido .feria-detalle{
+  background:#102b59;
+}
+
+#detallePartido .rival-detalle{
+  background:#cf2039;
+  color:white;
+}
 </style>  
 
   
@@ -20616,58 +20802,52 @@ const titulares =
 
   });
 
+// =====================================
+// GOLEADORES - NUEVO MARCADOR
+// =====================================
 
-  // =====================================
-  // GOLEADORES
-  // =====================================
+let golesHTML = "";
 
-  let golesHTML = "";
+if(goles && goles.length > 0){
 
+  const golesAgrupados = {};
 
-  if(goles && goles.length > 0){
+  goles.forEach(function(gol){
 
-    golesHTML =
-    goles.map(function(gol){
+    const jugador = gol.Jugadores;
 
-      const jugador =
-      gol.Jugadores;
+    const nombre = jugador
+      ? jugador.name
+      : "Jugador";
 
+    if(!golesAgrupados[nombre]){
+      golesAgrupados[nombre] = [];
+    }
+
+    golesAgrupados[nombre].push(gol.minuto);
+
+  });
+
+  golesHTML = Object.entries(golesAgrupados)
+    .map(function([nombre, minutos]){
 
       return `
+        <div class="gol-equipo-item">
 
-        <div class="gol-publico">
-
-          <span class="gol-publico-icono">
-            ⚽
+          <span class="gol-equipo-nombre">
+            ⚽ ${nombre}
           </span>
 
-          <strong>
-            ${jugador
-              ? jugador.name
-              : "Jugador"}
-          </strong>
-
-          <span class="gol-publico-minuto">
-            ${gol.minuto}'
+          <span class="gol-equipo-minutos">
+            ${minutos.map(m => m + "'").join(", ")}
           </span>
 
         </div>
-
       `;
 
     }).join("");
 
-  }else{
-
-    golesHTML =
-    `
-      <p class="detalle-sin-datos">
-        No hay goleadores registrados.
-      </p>
-    `;
-
-  }
-
+}
 
   // =====================================
   // TITULARES
@@ -20776,72 +20956,96 @@ const titulares =
 
       </div>
 
+<div class="marcador-feria-premium">
 
-      <div class="partido-detalle-marcador">
+  <!-- EQUIPO LOCAL -->
 
+  <div class="marcador-feria-equipo">
 
-        <div class="partido-detalle-equipo">
+<div class="escudo-detalle ${partido.local_visitante === "Local" ? "feria-detalle" : "rival-detalle"}">
 
-          <div class="escudo-detalle feria-detalle">
-            FO
-          </div>
+  ${
+    partido.local_visitante === "Local"
+    ? '<img src="img/logo-feria.png" alt="Feria Osorno">'
+    : 'R'
+  }
 
-          <strong>
-            ${equipoLocal}
-          </strong>
+</div>
 
-        </div>
+    <strong class="marcador-feria-nombre">
+      ${equipoLocal}
+    </strong>
 
-
-        <div class="marcador-detalle-centro">
-
-          <div>
-
-            <strong>
-              ${golesLocal ?? "-"}
-            </strong>
-
-            <span>
-              -
-            </span>
-
-            <strong>
-              ${golesVisitante ?? "-"}
-            </strong>
-
-          </div>
-
-          <small>
-            ${partido.estado || "Pendiente"}
-          </small>
-
-        </div>
+  </div>
 
 
-        <div class="partido-detalle-equipo">
+  <!-- RESULTADO -->
 
-          <div class="escudo-detalle rival-detalle">
-            R
-          </div>
+  <div class="marcador-feria-resultado">
 
-          <strong>
-            ${equipoVisitante}
-          </strong>
+    <div class="marcador-feria-numeros">
 
-        </div>
-
-
-      </div>
-
-
-      <div class="goles-publicos">
-
-        ${golesHTML}
-
-      </div>
-
+      <strong>${golesLocal ?? "-"}</strong>
+      <span>:</span>
+      <strong>${golesVisitante ?? "-"}</strong>
 
     </div>
+
+    <small>
+      ${partido.estado || "Pendiente"}
+    </small>
+
+  </div>
+
+
+  <!-- EQUIPO VISITANTE -->
+
+  <div class="marcador-feria-equipo">
+
+  <div class="escudo-detalle ${partido.local_visitante === "Visitante" ? "feria-detalle" : "rival-detalle"}">
+
+  ${
+    partido.local_visitante === "Visitante"
+    ? '<img src="img/logo-feria.png" alt="Feria Osorno">'
+    : 'R'
+  }
+
+</div>
+
+    <strong class="marcador-feria-nombre">
+      ${equipoVisitante}
+    </strong>
+
+  </div>
+
+</div>
+
+
+<!-- GOLES DEBAJO DE LOS EQUIPOS -->
+
+<div class="marcador-feria-goles">
+
+  <div class="marcador-feria-goles-equipo">
+
+    ${
+      partido.local_visitante === "Local"
+      ? golesHTML
+      : ""
+    }
+
+  </div>
+
+  <div class="marcador-feria-goles-equipo">
+
+    ${
+      partido.local_visitante === "Visitante"
+      ? golesHTML
+      : ""
+    }
+
+  </div>
+
+</div>
 
 
     <!-- TITULARES -->
@@ -20857,6 +21061,17 @@ const titulares =
         </strong>
 
       </div>
+
+
+<div class="selector-formacion-feria">
+
+  <span>FORMACIÓN OFICIAL</span>
+
+  <strong class="formacion-oficial-valor">
+    Por confirmar
+  </strong>
+
+</div>
 
 
      <div class="cancha-formacion">
