@@ -4784,35 +4784,72 @@ overflow-x:hidden;
   text-align:center;
 }
 
-/* ========================================
-   CANCHA - FORMACION PUBLICA
-======================================== */
+/* CANCHA PREMIUM CD FERIA OSORNO */
 
 .cancha-formacion{
   position:relative;
 
   min-height:500px;
-
-  padding:25px 8px;
+  padding:35px 8px 25px;
 
   display:flex;
   flex-direction:column;
   justify-content:space-between;
 
   overflow:hidden;
+  isolation:isolate;
 
   background:
-    linear-gradient(
-      rgba(20,120,60,.94),
-      rgba(12,105,51,.96)
+    repeating-linear-gradient(
+      to bottom,
+      #187c4b 0px,
+      #187c4b 50px,
+      #126c41 50px,
+      #126c41 100px
     );
 
-  border:3px solid white;
+  border:3px solid #e5f5eb;
   border-radius:18px;
 
   box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,.35),
-    0 5px 18px rgba(7,27,74,.12);
+    inset 0 0 0 3px rgba(255,255,255,.12),
+    0 12px 30px rgba(0,0,0,.25);
+}
+
+/* CÍRCULO CENTRAL */
+
+.cancha-formacion::before{
+  content:"";
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  border:2px solid rgba(255,255,255,.55);
+  border-radius:50%;
+
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
+  pointer-events:none;
+  z-index:0;
+}
+
+/* LÍNEA CENTRAL */
+
+.cancha-formacion::after{
+  content:"";
+  position:absolute;
+
+  left:0;
+  right:0;
+  top:50%;
+
+  border-top:2px solid rgba(255,255,255,.55);
+
+  pointer-events:none;
+  z-index:0;
 }
 
 
@@ -6309,6 +6346,350 @@ overflow-x:hidden;
   font-size:10px;
 }
 
+#pantallaPublica:has(.portada-app-feria.oculto){
+  min-height:0 !important;
+  height:0 !important;
+}
+
+/* Mantener la cabecera de Jugadores arriba */
+#jugadores.pantalla-jugadores-publica{
+  scroll-margin-top:0;
+}
+
+/* Jugadores como pantalla independiente */
+#jugadores.pantalla-jugadores-publica:not(.oculto){
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:72px !important;
+
+  margin:0 !important;
+  width:100% !important;
+  height:auto !important;
+
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-y:contain;
+
+  background:#06142f !important;
+  z-index:100;
+}
+
+/* PARTIDOS COMO PANTALLA INDEPENDIENTE */
+
+#partidos.pantalla-partidos-publica:not(.oculto){
+
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:72px !important;
+
+  margin:0 !important;
+  width:100% !important;
+  height:auto !important;
+
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-y:contain;
+
+  background:#06142f !important;
+  z-index:100;
+
+}
+
+/* DETALLE DEL JUGADOR COMO PANTALLA INDEPENDIENTE */
+
+#jugadorDetalle:not(.oculto){
+
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:72px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+  width:100% !important;
+  height:auto !important;
+
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-y:contain;
+
+  background:#06142f !important;
+  z-index:100;
+
+}   
+
+/* DETALLE DEL PARTIDO - PANTALLA INDEPENDIENTE */
+
+#detallePartido.detalle-partido-publico:not(.oculto){
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:72px !important;
+
+  margin:0 !important;
+  width:100% !important;
+  height:auto !important;
+
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior-y:contain;
+
+  background:#06142f !important;
+  z-index:100;
+}
+
+/* =====================================
+   DETALLE PARTIDO PREMIUM - FERIA OSORNO
+===================================== */
+
+#detallePartido.detalle-partido-publico:not(.oculto){
+  background:#06142f !important;
+  padding:18px 14px 95px !important;
+  color:#fff;
+}
+
+/* CABECERA */
+
+#detallePartido .cabecera-seccion-publica{
+  background:transparent !important;
+  padding:14px 2px 22px;
+}
+
+#detallePartido .cabecera-seccion-publica h2{
+  color:#fff;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+#detallePartido .cabecera-seccion-publica > span{
+  color:#ed3345;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+#detallePartido .volver-publico{
+  background:#102650;
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+  border-radius:22px;
+  padding:10px 16px;
+  margin-bottom:20px;
+}
+
+/* MARCADOR */
+
+#detallePartido .partido-detalle-principal{
+  background:#0b2046;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  overflow:hidden;
+  padding:0 0 18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+#detallePartido .partido-detalle-competencia{
+  background:#102c60;
+  color:#fff;
+  padding:17px;
+}
+
+#detallePartido .partido-detalle-competencia span,
+#detallePartido .partido-detalle-competencia strong{
+  color:#fff;
+}
+
+#detallePartido .partido-detalle-fecha{
+  color:#aab9d4;
+  padding:16px 10px 4px;
+  font-size:12px;
+  text-align:center;
+}
+
+#detallePartido .partido-detalle-marcador{
+  background:transparent;
+  padding:20px 10px;
+}
+
+#detallePartido .partido-detalle-equipo strong{
+  color:#fff;
+  font-size:12px;
+}
+
+#detallePartido .marcador-detalle-centro strong{
+  color:#fff;
+  font-size:36px;
+  font-weight:900;
+}
+
+#detallePartido .marcador-detalle-centro span{
+  color:#8193b4;
+}
+
+#detallePartido .marcador-detalle-centro small{
+  background:#ed1c2e;
+  color:#fff;
+  border-radius:20px;
+  padding:5px 10px;
+}
+
+/* GOLEADORES */
+
+#detallePartido .goles-publicos{
+  background:transparent;
+  color:#c1cee3;
+  padding:10px 16px;
+}
+
+#detallePartido .detalle-sin-datos{
+  color:#8e9fba;
+  font-size:12px;
+}
+
+/* BLOQUES DE FORMACIÓN Y SUPLENTES */
+
+#detallePartido .bloque-detalle-publico{
+  background:#0b2046;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:16px;
+  margin-top:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+#detallePartido .titulo-detalle-publico span{
+  color:#ed3345;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1.5px;
+}
+
+#detallePartido .titulo-detalle-publico strong{
+  color:#fff;
+  font-size:19px;
+  font-weight:900;
+}
+
+/* SUPLENTES */
+
+#detallePartido .lista-suplentes-publicos{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  width:100%;
+  max-height:none !important;
+  height:auto !important;
+  overflow:visible !important;
+}
+
+#detallePartido .suplente-publico{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+  padding:15px 8px;
+  background:#102b59;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  text-align:center;
+}
+
+#detallePartido .suplente-publico-foto{
+  width:58px;
+  height:58px;
+  flex-shrink:0;
+  border-radius:50%;
+  overflow:hidden;
+}
+
+#detallePartido .suplente-publico-foto img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+#detallePartido .suplente-publico-info{
+  width:100%;
+  min-width:0;
+}
+
+#detallePartido .suplente-publico-info strong{
+  display:block;
+  color:#fff;
+  font-size:11px;
+  line-height:1.4;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+#detallePartido .suplente-publico-info span{
+  display:block;
+  margin-top:5px;
+  color:#a5b5d0;
+  font-size:10px;
+  line-height:1.4;
+  white-space:normal;
+}
+
+/* =====================================
+   JUGADORES CANCHA - ESTILO PREMIUM
+===================================== */
+
+#detallePartido .jugador-cancha{
+  width:clamp(48px, 16%, 76px);
+  min-width:0;
+  text-align:center;
+  position:relative;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+
+#detallePartido .jugador-cancha:active{
+  transform:scale(.94);
+}
+
+#detallePartido .foto-jugador-cancha{
+  width:clamp(39px, 11vw, 56px);
+  height:clamp(39px, 11vw, 56px);
+  max-width:56px;
+  max-height:56px;
+
+  background:linear-gradient(145deg,#fff,#cbd7e7);
+  border:2px solid #fff;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.35),
+    0 0 0 2px rgba(255,255,255,.15);
+}
+
+#detallePartido .numero-jugador-cancha{
+  top:-6px;
+  right:-5px;
+  min-width:21px;
+  height:21px;
+  background:#06142f;
+  border:2px solid #fff;
+  font-size:9px;
+}
+
+#detallePartido .jugador-cancha strong{
+  width:100%;
+  margin-top:7px;
+  padding:4px 3px;
+  border-radius:6px;
+  background:#06142f;
+  color:#fff;
+  font-size:8px;
+  font-weight:800;
+  box-shadow:0 3px 8px rgba(0,0,0,.3);
+}
 
 </style>  
 
@@ -11372,6 +11753,7 @@ function mostrarInicioPublico(boton){
   document
   .getElementById("pantallaPublica")
   .classList.remove("oculto");
+controlarPortadaPublica(true);
 
   // Mostrar Inicio
   document
@@ -11406,10 +11788,41 @@ function mostrarInicioPublico(boton){
 }
 
 
+
+function controlarPortadaPublica(mostrarPortada){
+
+  const portada =
+    document.querySelector(".portada-app-feria");
+
+  const proximoPartido =
+    document.querySelector(".proximo-partido-home");
+
+  if(portada){
+    portada.classList.toggle("oculto", !mostrarPortada);
+  }
+
+  if(proximoPartido){
+    proximoPartido.classList.toggle("oculto", !mostrarPortada);
+  }
+
+}
+
+
 function mostrar(id){
+
   ocultarTodo();
 
   document.getElementById(id).classList.remove("oculto");
+
+  // Ocultar portada en las pantallas públicas secundarias
+ if(
+  id === "jugadores" ||
+  id === "partidos" ||
+  id === "jugadorDetalle" ||
+  id === "detallePartido"
+){
+    controlarPortadaPublica(false);
+  }
 
   if(id === "login"){
 
@@ -11506,10 +11919,27 @@ if(id === "editarJugador"){
   restaurarCategoriasEliminar();
   }
 
+
+  
+if(
+  id === "jugadores" ||
+  id === "partidos" ||
+  id === "jugadorDetalle"
+){
+
+  document.getElementById("jugadores").scrollIntoView({
+    behavior:"instant",
+    block:"start"
+  });
+
+}else{
+
   document.getElementById(id).scrollIntoView({
     behavior:"smooth",
     block:"start"
   });
+
+}
 }
 
 
@@ -20478,10 +20908,10 @@ const titulares =
   `;
 
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+  const pantallaDetalle =
+  document.getElementById("detallePartido");
+
+pantallaDetalle.scrollTop = 0;
 
 }
 
