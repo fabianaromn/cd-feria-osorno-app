@@ -7276,6 +7276,17 @@ overflow-x:hidden;
 .feria-validacion-pie{color:#d3e0f7;font-size:11px;margin:24px 0 16px}
 .feria-validacion-inicio{display:inline-block;color:#fff;background:#c82032;padding:12px 18px;border-radius:12px;font-weight:800;text-decoration:none;font-size:13px}
 
+
+/* TIENDA OFICIAL */
+#store.tienda-feria{background:#06142f;color:#fff;min-height:100vh;margin:0;padding:22px 14px 100px;border-radius:0}
+.tienda-feria h2{color:white}.tienda-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.tienda-producto{background:#0a214d;border:1px solid #274574;border-radius:18px;overflow:hidden;color:white}
+.tienda-producto img{width:100%;height:185px;object-fit:cover;background:#102b5a}
+.tienda-producto .info{padding:12px}.tienda-producto strong{display:block;font-size:14px;min-height:34px}.tienda-producto .precio{font-weight:900;color:#fff;margin:8px 0}
+.tienda-feria button.tienda-rojo,.tienda-admin button.tienda-rojo{background:#c82032;color:white;border:0;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}
+.tienda-producto button{width:100%;font-size:12px}.tienda-panel{background:#fff;color:#071b4a;border-radius:16px;padding:16px;margin-top:16px}
+.tienda-panel input,.tienda-panel textarea,.tienda-panel select,.tienda-admin input,.tienda-admin textarea{display:block;width:100%;padding:12px;margin:5px 0 12px;border:1px solid #cbd5e1;border-radius:9px;color:#111827}
+.tienda-admin{background:white;border-radius:16px;padding:15px;margin:14px}.tienda-admin label{font-weight:700;font-size:13px}.tienda-fila{padding:12px 0;border-bottom:1px solid #ddd}.tienda-fila button{margin:4px}
 </style>  
 
   
@@ -8416,6 +8427,17 @@ class="oculto gestion-admin">
   </section>
 
 </div>
+<div class="accion-admin" onclick="tiendaAbrirAdmin()" style="margin:15px"><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
+<section id="tiendaAdmin" class="tienda-admin oculto"><h2>🛒 Productos de la tienda</h2><p id="tiendaAdminMensaje"></p>
+<form onsubmit="tiendaGuardarProducto(event)"><input type="hidden" id="tiendaProductoId">
+<label>Nombre *<input id="tiendaProductoNombre" required maxlength="120"></label>
+<label>Precio en pesos *<input id="tiendaProductoPrecio" type="number" required min="1" step="1"></label>
+<label>Stock disponible *<input id="tiendaProductoStock" type="number" required min="0" step="1" value="0"></label>
+<label>Imagen (URL completa o ruta img/...)<input id="tiendaProductoImagen" placeholder="img/camiseta.jpg"></label>
+<label>Descripción<textarea id="tiendaProductoDescripcion" rows="2"></textarea></label>
+<label><input id="tiendaProductoActivo" type="checkbox" checked style="width:auto;display:inline"> Visible en tienda</label><br>
+<button class="tienda-rojo" type="submit">Guardar producto</button> <button type="button" onclick="tiendaLimpiarProducto()">Nuevo</button></form>
+<h3>Productos registrados</h3><div id="tiendaListaAdmin"></div><h3>Pedidos recibidos</h3><div id="tiendaPedidosAdmin"></div></section>
 <nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
   <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
   <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminPartidos')"><span class="menu-inferior-icono">⚽</span><span>Partidos</span></button>
@@ -12337,19 +12359,20 @@ onclick="volver()">
     👤 Socios  
   </h2>    <p>  
     Aquí estará la información de los socios del Club Deportivo Feria Osorno.  
-  </p>  </section>  <section  
-id="store"  
-class="seccion oculto">  <button  
-class="boton"  
-onclick="volver()">
-← Volver
-</button>
-
-  <h2>  
-    🛒 Store  
-  </h2>    <p>  
-    Próximamente encontrarás aquí productos oficiales del Club Deportivo Feria Osorno.  
-  </p>  </section>  
+  </p>  </section>  <section id="store" class="seccion oculto tienda-feria">
+<button class="boton" onclick="volver()">← Volver</button>
+<h2>🛒 Tienda Oficial</h2><p style="color:#a9bde0">El más grande del barrio · Productos oficiales</p>
+<div id="tiendaAviso" role="status"></div><div id="tiendaCatalogo" class="tienda-grid"></div>
+<div class="tienda-panel"><h3>🛍️ Carrito <span id="tiendaContador">(0)</span></h3><div id="tiendaCarrito"></div><strong id="tiendaTotal"></strong>
+<div id="tiendaCheckout" class="oculto">
+<label>Nombre del comprador<input id="tiendaCliente" maxlength="120" autocomplete="name"></label>
+<label>Correo electrónico<input id="tiendaEmail" type="email" autocomplete="email"></label>
+<label>Teléfono<input id="tiendaTelefono" type="tel" maxlength="30"></label>
+<label>Entrega<select id="tiendaEntrega"><option value="retiro">Retiro coordinado con el club</option></select></label>
+<label>Método de pago<select id="tiendaMetodo"><option value="transferencia">Transferencia bancaria</option><option value="online">Tarjeta (próximamente)</option></select></label>
+<button class="tienda-rojo" onclick="tiendaConfirmarPedido()">Confirmar pedido</button>
+<p style="font-size:12px;margin-top:8px">Las transferencias quedan pendientes de verificación por el club. El pago con tarjeta requiere conectar Mercado Pago.</p>
+</div></div></section>  
   
   <script>    
 const SUPABASE_URL = 'https://jqnfmcckavbtfgdilirp.supabase.co';    
@@ -12479,6 +12502,7 @@ async function mostrar(id){
 
 
   document.getElementById(id).classList.remove("oculto");
+  if(id === "store") tiendaCargarCatalogo();
 
   // Ocultar portada en las pantallas públicas secundarias
  if(
@@ -23105,5 +23129,57 @@ async function feriaVerificarQRDesdeURL(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',feriaVerificarQRDesdeURL,{once:true});
 else feriaVerificarQRDesdeURL();
+</script>
+<script>
+
+// TIENDA OFICIAL: catálogo público, carrito y pedidos por transferencia.
+let tiendaProductos=[],tiendaItems={};
+const tiendaDinero=n=>'$'+Number(n||0).toLocaleString('es-CL');
+const tiendaEsc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function tiendaMensaje(t){document.getElementById('tiendaAviso').textContent=t||''}
+async function tiendaCargarCatalogo(){
+ const {data,error}=await supabaseClient.from('tienda_productos').select('id,nombre,precio,stock,imagen_url,descripcion').eq('activo',true).order('id',{ascending:false});
+ if(error){tiendaMensaje('No se pudo cargar la tienda. Ejecuta primero el SQL de instalación.');return;}
+ tiendaProductos=data||[];const cont=document.getElementById('tiendaCatalogo');cont.replaceChildren();
+ if(!tiendaProductos.length)cont.textContent='Pronto encontrarás aquí productos del club.';
+ tiendaProductos.forEach(p=>{let card=document.createElement('article');card.className='tienda-producto';
+ const img=document.createElement('img');img.alt=p.nombre;img.loading='lazy';img.src=p.imagen_url||'img/escudo.png';card.append(img);
+ const info=document.createElement('div');info.className='info';const name=document.createElement('strong');name.textContent=p.nombre;
+ const price=document.createElement('div');price.className='precio';price.textContent=tiendaDinero(p.precio);
+ const btn=document.createElement('button');btn.className='tienda-rojo';btn.textContent=p.stock>0?'＋ Agregar al carrito':'Agotado';btn.disabled=p.stock<=0;btn.onclick=()=>tiendaAgregar(p.id);
+ info.append(name,price,btn);card.append(info);cont.append(card)});tiendaRenderCarrito();
+}
+function tiendaAgregar(id){const p=tiendaProductos.find(x=>x.id===id);if(!p)return;const q=tiendaItems[id]||0;if(q>=p.stock)return alert('No hay más unidades disponibles');tiendaItems[id]=q+1;tiendaRenderCarrito()}
+function tiendaCambiar(id,n){const p=tiendaProductos.find(x=>x.id===id);if(!p)return;tiendaItems[id]=Math.max(0,Math.min(p.stock,(tiendaItems[id]||0)+n));tiendaRenderCarrito()}
+function tiendaRenderCarrito(){const area=document.getElementById('tiendaCarrito');area.replaceChildren();let total=0,cantidad=0;
+ Object.entries(tiendaItems).forEach(([id,q])=>{if(!q)return;const p=tiendaProductos.find(x=>String(x.id)===id);if(!p)return;total+=p.precio*q;cantidad+=q;
+ const fila=document.createElement('div');fila.className='tienda-fila';const name=document.createElement('span');name.textContent=p.nombre+' · '+tiendaDinero(p.precio)+' × '+q+' ';
+ const menos=document.createElement('button');menos.textContent='−';menos.onclick=()=>tiendaCambiar(p.id,-1);const mas=document.createElement('button');mas.textContent='+';mas.onclick=()=>tiendaCambiar(p.id,1);fila.append(name,menos,mas);area.append(fila)});
+ document.getElementById('tiendaContador').textContent='('+cantidad+')';document.getElementById('tiendaTotal').textContent='Total: '+tiendaDinero(total);document.getElementById('tiendaCheckout').classList.toggle('oculto',!cantidad);
+}
+async function tiendaConfirmarPedido(){
+ const nombre=document.getElementById('tiendaCliente').value.trim(),email=document.getElementById('tiendaEmail').value.trim(),telefono=document.getElementById('tiendaTelefono').value.trim(),metodo=document.getElementById('tiendaMetodo').value;
+ if(!nombre||!email||!telefono||!document.getElementById('tiendaEmail').checkValidity())return alert('Completa nombre, correo y teléfono válidos.');
+ if(metodo==='online')return alert('El pago con tarjeta aún no está habilitado. Estamos preparando la integración segura con Mercado Pago. Selecciona transferencia.');
+ const items=Object.entries(tiendaItems).filter(([,q])=>q>0).map(([id,cantidad])=>({producto_id:Number(id),cantidad}));
+ if(!items.length)return;const {data,error}=await supabaseClient.rpc('tienda_crear_pedido',{p_nombre:nombre,p_email:email,p_telefono:telefono,p_items:items});
+ if(error){alert('No se pudo registrar el pedido: '+error.message);return;}
+ tiendaItems={};tiendaRenderCarrito();tiendaMensaje('✅ Pedido #'+data+' registrado. Pago pendiente por transferencia. El club debe comunicarte los datos bancarios y confirmar el pago.');alert('Pedido #'+data+' registrado. Guarda el número y coordina la transferencia con el club.');
+ await tiendaCargarCatalogo();
+}
+async function tiendaAbrirAdmin(){const {data}=await supabaseClient.rpc('es_administrador');if(data!==true)return alert('Solo administradores');const e=document.getElementById('tiendaAdmin');e.classList.toggle('oculto');if(!e.classList.contains('oculto'))tiendaCargarAdmin()}
+async function tiendaCargarAdmin(){const [{data,error},{data:pedidos,error:ep}]=await Promise.all([supabaseClient.from('tienda_productos').select('*').order('id',{ascending:false}),supabaseClient.from('tienda_pedidos').select('*').order('id',{ascending:false}).limit(50)]);
+ const area=document.getElementById('tiendaListaAdmin');area.replaceChildren();if(error)area.textContent=error.message;
+ (data||[]).forEach(p=>{const fila=document.createElement('div');fila.className='tienda-fila';const t=document.createElement('span');t.textContent=p.nombre+' · '+tiendaDinero(p.precio)+' · Stock '+p.stock+' · '+(p.activo?'Activo':'Oculto');const edit=document.createElement('button');edit.textContent='Editar';edit.onclick=()=>tiendaEditarProducto(p);const del=document.createElement('button');del.textContent='Eliminar';del.onclick=()=>tiendaEliminarProducto(p.id);fila.append(t,edit,del);area.append(fila)});
+ const pa=document.getElementById('tiendaPedidosAdmin');pa.replaceChildren();if(ep)pa.textContent=ep.message;
+ (pedidos||[]).forEach(p=>{const fila=document.createElement('div');fila.className='tienda-fila';const t=document.createElement('div');t.textContent='#'+p.id+' · '+p.cliente_nombre+' · '+tiendaDinero(p.total)+' · '+p.estado+' · '+p.cliente_telefono;
+ const btn=document.createElement('button');btn.textContent='Marcar pagado';btn.disabled=p.estado!=='pendiente_transferencia';btn.onclick=async()=>{if(!confirm('¿Confirmas que el dinero ingresó a la cuenta del club?'))return;const {error}=await supabaseClient.from('tienda_pedidos').update({estado:'pagado'}).eq('id',p.id);if(error)alert(error.message);else tiendaCargarAdmin()};fila.append(t,btn);pa.append(fila)});
+}
+function tiendaLimpiarProducto(){['Id','Nombre','Precio','Imagen','Descripcion'].forEach(k=>document.getElementById('tiendaProducto'+k).value='');document.getElementById('tiendaProductoStock').value=0;document.getElementById('tiendaProductoActivo').checked=true}
+function tiendaEditarProducto(p){for(const [k,v] of Object.entries({Id:p.id,Nombre:p.nombre,Precio:p.precio,Stock:p.stock,Imagen:p.imagen_url,Descripcion:p.descripcion}))document.getElementById('tiendaProducto'+k).value=v??'';document.getElementById('tiendaProductoActivo').checked=p.activo;document.getElementById('tiendaAdmin').scrollIntoView({behavior:'smooth'})}
+async function tiendaGuardarProducto(e){e.preventDefault();const id=document.getElementById('tiendaProductoId').value;const obj={nombre:document.getElementById('tiendaProductoNombre').value.trim(),precio:Number(document.getElementById('tiendaProductoPrecio').value),stock:Number(document.getElementById('tiendaProductoStock').value),imagen_url:document.getElementById('tiendaProductoImagen').value.trim(),descripcion:document.getElementById('tiendaProductoDescripcion').value.trim(),activo:document.getElementById('tiendaProductoActivo').checked};
+ const q=id?supabaseClient.from('tienda_productos').update(obj).eq('id',id):supabaseClient.from('tienda_productos').insert(obj);const {error}=await q;if(error)return alert(error.message);tiendaLimpiarProducto();document.getElementById('tiendaAdminMensaje').textContent='✅ Producto guardado';tiendaCargarAdmin()}
+async function tiendaEliminarProducto(id){if(!confirm('¿Eliminar producto? Si tiene pedidos anteriores, puedes ocultarlo en lugar de eliminarlo.'))return;const {error}=await supabaseClient.from('tienda_productos').delete().eq('id',id);if(error)alert(error.message);else tiendaCargarAdmin()}
+
 </script>
 </body>  </html>
