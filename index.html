@@ -23058,7 +23058,7 @@ async function feriaMostrarQR(){
  try{
   const {data,error}=await supabaseClient.rpc('crear_verificacion_credencial');
   if(error)throw error;
-  const url=new URL(location.href);url.search='?verificar_socio='+encodeURIComponent(data);url.hash='';
+  const url=new URL('https://fabianaromn.github.io/cd-feria-osorno-app/');url.searchParams.set('verificar_socio',String(data));
   if(!window.QRCode)throw new Error('No se cargó el generador de códigos QR. Comprueba tu conexión.');
   new QRCode(codigo,{text:url.href,width:220,height:220,correctLevel:QRCode.CorrectLevel.M});
   mensaje.textContent='Código válido durante 2 minutos. Debe escanearse para comprobar el estado en línea.';
