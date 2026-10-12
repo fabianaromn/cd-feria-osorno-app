@@ -12046,8 +12046,13 @@ class="seccion oculto detalle-partido-publico">
       <button type="submit" id="feriaEnviarRecuperacionBoton" style="width:100%;margin-top:10px">Enviar enlace de recuperación</button>
     </form>
     <p id="feriaRecuperacionMensaje" role="status" aria-live="polite" style="font-size:12px;line-height:1.5;margin-top:10px;color:#071b4a"></p>
-    <button type="button" onclick="feriaCerrarRecuperacion()" style="margin-top:8px;background:transparent;color:#071b4a;border:0;text-decoration:underline;cursor:pointer">Volver al ingreso</button>
+    <button type="button" onclick="feriaCerrarRecuperacion()
+    " style="margin-top:8px;background:transparent;color:#071b4a;border:0;text-decoration:underline;cursor:pointer">Volver al ingreso</button>
   </div>
+
+
+
+
   <p class="portal-socios-aviso">Acceso exclusivo para socios registrados del club.</p>
  </div>
 
@@ -22546,6 +22551,29 @@ async function feriaEnviarRecuperacion(event){
   }
 }
 
+
+
+
+
+
+
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+
+  if (event === "PASSWORD_RECOVERY") {
+
+    console.log("Recuperación de contraseña detectada");
+
+    feriaMostrarActivacion(
+      "Crea una nueva contraseña para recuperar tu acceso al Portal de Socios."
+    );
+
+  }
+
+});
+
+
+
 /* ===========================================================
    ACTIVACIÓN DE SOCIOS POR INVITACIÓN SUPABASE
    Compatible con enlaces invite/recovery, tokens y PKCE.
@@ -22553,14 +22581,21 @@ async function feriaEnviarRecuperacion(event){
 const FERIA_URL_PUBLICA = "https://fabianaromn.github.io/cd-feria-osorno-app/";
 let feriaActivacionEnCurso = false;
 
+
 function feriaEsEnlaceActivacion(){
   const query = new URLSearchParams(window.location.search);
   const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+
   const tipo = query.get("type") || hash.get("type");
-  return ["invite", "recovery"].includes(tipo) ||
-    query.has("token_hash") || query.has("code") ||
-    (hash.has("access_token") && ["invite", "recovery"].includes(tipo));
+
+  return (
+    ["invite", "recovery"].includes(tipo) ||
+    query.has("token_hash") ||
+    query.has("code") ||
+    hash.has("access_token")
+  );
 }
+
 
 function feriaMostrarActivacion(mensaje = "Crea una contraseña para activar tu acceso al Portal de Socios."){
   let panel = document.getElementById("feriaActivacionSocio");
