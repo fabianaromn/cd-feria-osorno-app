@@ -7233,6 +7233,17 @@ overflow-x:hidden;
 #portalSociosPublico .feria-socio-detalle p{margin:9px 0;color:#dbeafe;line-height:1.5}
 #portalSociosPublico .feria-socio-detalle a{color:#a9d3ff;text-decoration:underline}
 #portalSociosPublico .feria-socio-vacio{color:#c7d8ef;line-height:1.5;padding:16px 4px}
+
+/* Gestión de beneficios de socios */
+.feria-admin-beneficios{margin:14px 0;padding:16px;background:#fff;border:1px solid #dce3ed;border-radius:16px;color:#071b4a}
+.feria-admin-beneficios h3{margin:10px 0 14px}
+.feria-admin-beneficios label{display:block;margin:10px 0;font-size:12px;font-weight:800}
+.feria-admin-beneficios input:not([type=checkbox]),.feria-admin-beneficios textarea{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #cdd5e2;border-radius:9px;font:inherit}
+.feria-admin-beneficios .feria-admin-check{display:flex;align-items:center;gap:8px}
+.feria-admin-beneficios .feria-admin-empresa{padding:12px 0;border-bottom:1px solid #dce3ed}
+.feria-admin-beneficios .feria-admin-empresa button{margin:8px 8px 0 0;padding:8px 12px;border:0;border-radius:8px;background:#0c3474;color:#fff;cursor:pointer}
+.feria-admin-beneficios .feria-admin-empresa button:last-child{background:#bd2132}
+
 </style>  
 
   
@@ -8345,6 +8356,32 @@ class="oculto gestion-admin">
     </div>
 
   </div>
+
+  <div class="accion-admin" onclick="feriaAbrirAdminBeneficios()">
+    <div class="accion-admin-icono">🎁</div>
+    <div class="accion-admin-texto"><strong>Gestionar beneficios</strong><span>Agregar, editar y eliminar empresas colaboradoras</span></div>
+    <div class="accion-admin-flecha">›</div>
+  </div>
+  <section id="feriaAdminBeneficios" class="oculto feria-admin-beneficios">
+    <h3>🎁 Empresas colaboradoras</h3>
+    <p id="feriaAdminBeneficiosMensaje" role="status"></p>
+    <form id="feriaFormBeneficio" onsubmit="feriaGuardarBeneficio(event)">
+      <input type="hidden" id="feriaBeneficioId">
+      <label>Nombre de la empresa *<input id="feriaBeneficioNombre" required maxlength="120"></label>
+      <label>Descripción del beneficio *<textarea id="feriaBeneficioDescripcion" required rows="3"></textarea></label>
+      <label>Descuento (ej. 15% o precio especial)<input id="feriaBeneficioDescuento"></label>
+      <label>Dirección<input id="feriaBeneficioDireccion"></label>
+      <label>Teléfono<input id="feriaBeneficioTelefono" type="tel"></label>
+      <label>Instagram<input id="feriaBeneficioInstagram" placeholder="https://instagram.com/..."></label>
+      <label>Logo (URL de imagen)<input id="feriaBeneficioLogo" type="url" placeholder="https://..."></label>
+      <label>Condiciones<textarea id="feriaBeneficioCondiciones" rows="3"></textarea></label>
+      <label class="feria-admin-check"><input type="checkbox" id="feriaBeneficioActivo" checked> Beneficio activo</label>
+      <button class="boton" type="submit">💾 Guardar beneficio</button>
+      <button class="boton" type="button" onclick="feriaLimpiarFormularioBeneficio()">Nuevo / Limpiar</button>
+    </form>
+    <h3>Empresas registradas</h3>
+    <div id="feriaAdminListaBeneficios"></div>
+  </section>
 
 </div>
 <nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
@@ -22771,9 +22808,67 @@ async function feriaActualizarEstadoBeneficios(){
   }
   return feriaBeneficiosHabilitados;
 }
-const FERIA_BENEFICIOS_SOCIOS = [
-  // Ejemplo: { nombre: "Empresa", logo: "img/empresa.png", descripcion: "Beneficio", direccion: "...", telefono: "...", sitio: "https://..." }
-];
+let FERIA_BENEFICIOS_SOCIOS = [];
+let feriaBeneficiosAdminCache = [];
+async function feriaCargarBeneficiosSocio(){
+  const {data,error}=await supabaseClient.rpc("listar_beneficios_socios");
+  if(error) throw error;
+  FERIA_BENEFICIOS_SOCIOS=(data||[]).map(b=>({id:b.id,nombre:b.nombre,logo:b.logo_url}));
+}
+async function feriaAbrirAdminBeneficios(){
+  const panel=document.getElementById("feriaAdminBeneficios");
+  panel.classList.toggle("oculto");
+  if(!panel.classList.contains("oculto")) await feriaCargarAdminBeneficios();
+}
+function feriaAdminMensajeBeneficios(m){document.getElementById("feriaAdminBeneficiosMensaje").textContent=m;}
+function feriaLimpiarFormularioBeneficio(){
+  document.getElementById("feriaFormBeneficio").reset();
+  document.getElementById("feriaBeneficioId").value="";
+}
+async function feriaCargarAdminBeneficios(){
+  const lista=document.getElementById("feriaAdminListaBeneficios");
+  lista.textContent="Cargando empresas...";
+  const {data,error}=await supabaseClient.from("beneficios_socios").select("*").order("nombre");
+  if(error){lista.textContent="Error: "+error.message;return;}
+  feriaBeneficiosAdminCache=data||[];
+  lista.replaceChildren();
+  if(!data.length){lista.textContent="Todavía no hay empresas registradas.";return;}
+  data.forEach(item=>{
+    const box=feriaCrearElemento("div","feria-admin-empresa");
+    box.appendChild(feriaCrearElemento("strong","",item.nombre));
+    box.appendChild(feriaCrearElemento("p","",item.activo?"Activo":"Inactivo"));
+    const editar=feriaCrearElemento("button","","Editar");editar.type="button";
+    editar.onclick=()=>feriaEditarBeneficio(item.id);
+    const eliminar=feriaCrearElemento("button","","Eliminar");eliminar.type="button";
+    eliminar.onclick=()=>feriaEliminarBeneficio(item.id);
+    box.append(editar,eliminar);lista.appendChild(box);
+  });
+}
+function feriaEditarBeneficio(id){
+  const item=feriaBeneficiosAdminCache.find(x=>String(x.id)===String(id));if(!item)return;
+  const campos={Id:"id",Nombre:"nombre",Descripcion:"descripcion",Descuento:"descuento",Direccion:"direccion",Telefono:"telefono",Instagram:"instagram",Logo:"logo_url",Condiciones:"condiciones"};
+  Object.entries(campos).forEach(([campo,col])=>document.getElementById("feriaBeneficio"+campo).value=item[col]??"");
+  document.getElementById("feriaBeneficioActivo").checked=item.activo!==false;
+  document.getElementById("feriaFormBeneficio").scrollIntoView({behavior:"smooth"});
+}
+async function feriaGuardarBeneficio(event){
+  event.preventDefault();
+  const valor=id=>document.getElementById("feriaBeneficio"+id).value.trim();
+  const id=valor("Id");
+  const payload={nombre:valor("Nombre"),descripcion:valor("Descripcion"),descuento:valor("Descuento"),direccion:valor("Direccion"),telefono:valor("Telefono"),instagram:valor("Instagram"),logo_url:valor("Logo"),condiciones:valor("Condiciones"),activo:document.getElementById("feriaBeneficioActivo").checked};
+  feriaAdminMensajeBeneficios("⏳ Guardando...");
+  const q=supabaseClient.from("beneficios_socios");
+  const {error}=id?await q.update(payload).eq("id",id):await q.insert(payload);
+  if(error){feriaAdminMensajeBeneficios("❌ "+error.message);return;}
+  feriaAdminMensajeBeneficios("✅ Beneficio guardado correctamente.");
+  feriaLimpiarFormularioBeneficio();await feriaCargarAdminBeneficios();
+}
+async function feriaEliminarBeneficio(id){
+  if(!confirm("¿Eliminar esta empresa colaboradora?"))return;
+  const {error}=await supabaseClient.from("beneficios_socios").delete().eq("id",id);
+  if(error){feriaAdminMensajeBeneficios("❌ "+error.message);return;}
+  feriaAdminMensajeBeneficios("Empresa eliminada.");await feriaCargarAdminBeneficios();
+}
 const FERIA_BOLETINES_SOCIOS = [
   // Ejemplo: { titulo: "Comunicado", fecha: "2026-10-12", imagen: "img/noticia.jpg", resumen: "...", contenido: "..." }
 ];
@@ -22809,8 +22904,14 @@ function feriaImagenFicha(src,alt){
 async function feriaMostrarDetalleSocio(tipo,indice){
   if(tipo === "beneficios") await feriaActualizarEstadoBeneficios();
   const registros=tipo==="beneficios"?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
-  const item=registros[indice];
+  let item=registros[indice];
   if(!item)return;
+  if(tipo==="beneficios" && feriaBeneficiosHabilitados){
+    const {data,error}=await supabaseClient.rpc("detalle_beneficio_socio",{p_id:item.id});
+    if(error || !data || !data.length){alert("No se pudo verificar el beneficio. Intenta nuevamente.");return;}
+    const b=data[0];
+    item={...item,descripcion:b.descripcion,descuento:b.descuento,direccion:b.direccion,telefono:b.telefono,instagram:b.instagram,condiciones:b.condiciones};
+  }
   const detalle=document.getElementById("feriaSeccionSocioDetalle");
   detalle.replaceChildren();detalle.classList.remove("oculto");
   const tarjeta=feriaCrearElemento("article","feria-socio-detalle");
@@ -22827,14 +22928,14 @@ async function feriaMostrarDetalleSocio(tipo,indice){
     return;
   }
   const campos=tipo==="beneficios"
-    ? [["Beneficio",item.descripcion],["Dirección",item.direccion],["Teléfono",item.telefono]]
+    ? [["Beneficio",item.descripcion],["Descuento",item.descuento],["Dirección",item.direccion],["Teléfono",item.telefono],["Condiciones",item.condiciones]]
     : [["Fecha",item.fecha],["Resumen",item.resumen],["Noticia",item.contenido]];
   campos.forEach(([etiqueta,valor])=>{
     if(valor)tarjeta.appendChild(feriaCrearElemento("p","",etiqueta+": "+valor));
   });
-  if(tipo==="beneficios"&&item.sitio){
-    const url=feriaUrlSegura(item.sitio);
-    if(url){const link=feriaCrearElemento("a","","Visitar sitio web");link.href=url;link.target="_blank";link.rel="noopener noreferrer";tarjeta.appendChild(link);}
+  if(tipo==="beneficios"&&item.instagram){
+    const url=feriaUrlSegura(item.instagram);
+    if(url){const link=feriaCrearElemento("a","","Instagram de la empresa");link.href=url;link.target="_blank";link.rel="noopener noreferrer";tarjeta.appendChild(link);}
   }
   detalle.appendChild(tarjeta);
   detalle.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -22860,7 +22961,11 @@ async function feriaAbrirSeccionSocio(tipo){
     return;
   }
   const esBeneficios=tipo==="beneficios";
-  if(esBeneficios) await feriaActualizarEstadoBeneficios();
+  if(esBeneficios){
+    await feriaActualizarEstadoBeneficios();
+    try{await feriaCargarBeneficiosSocio();}
+    catch(error){console.error(error);FERIA_BENEFICIOS_SOCIOS=[];lista.textContent="No se pudieron cargar las empresas. Comprueba la configuración en Supabase.";}
+  }
   document.getElementById("feriaSeccionSocioTitulo").textContent=esBeneficios?"🎁 Beneficios de socios":"📰 Boletines del club";
   const registros=esBeneficios?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
   lista.replaceChildren();
