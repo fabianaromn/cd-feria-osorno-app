@@ -7252,6 +7252,30 @@ overflow-x:hidden;
 #feriaVerificacionPantalla{position:fixed;inset:0;background:#06142f;z-index:999999;color:white;display:flex;align-items:center;justify-content:center;padding:20px}
 #feriaVerificacionPantalla.oculto{display:none}#feriaVerificacionPantalla>div{width:min(100%,420px);background:#112d61;padding:26px;border-radius:20px;text-align:center}
 #feriaVerificacionPantalla h2{color:white;margin:12px 0}#feriaVerificacionPantalla p{line-height:1.5}
+
+/* Pantalla de verificación pública: no modifica la credencial existente */
+#feriaVerificacionPantalla{overflow-y:auto;align-items:flex-start;padding:30px 16px;background:linear-gradient(155deg,#06142f,#0a285d)}
+#feriaVerificacionPantalla>.feria-validacion-contenedor{width:min(100%,440px);margin:auto;background:transparent;padding:0;border-radius:0;text-align:center}
+.feria-validacion-marca{display:flex;align-items:center;justify-content:center;gap:13px;text-align:left;margin-bottom:28px;color:#fff}
+.feria-validacion-marca img{width:64px;height:64px;object-fit:contain}
+.feria-validacion-marca span{font-size:10px;font-weight:800;letter-spacing:1.7px;color:#b6c9ee}
+#feriaVerificacionPantalla .feria-validacion-marca h2{font-size:24px;line-height:1.15;margin:3px 0;color:white}
+.feria-validacion-marca small{font-size:9px;font-weight:800;letter-spacing:1px;color:#cbd8f1}
+.feria-validacion-tarjeta{background:white;border-radius:22px;padding:30px 22px;color:#071b4a;box-shadow:0 16px 35px rgba(0,0,0,.2)}
+.feria-validacion-icono{font-size:44px;line-height:1.2;margin-bottom:12px}
+#feriaVerificacionPantalla .feria-validacion-tarjeta h3{font-size:21px;color:#071b4a;margin:0 0 9px;font-weight:900}
+#feriaVerificacionPantalla .feria-validacion-tarjeta p{font-size:13px;color:#667085;line-height:1.5}
+#feriaVerificacionDatos{margin:24px 0 16px;padding:18px 8px;border-top:1px solid #e6eaf2;border-bottom:1px solid #e6eaf2}
+#feriaVerificacionDatos span{display:block;color:#69778e;font-size:10px;font-weight:900;letter-spacing:1px}
+#feriaVerificacionDatos strong{display:block;margin:7px 0;font-size:20px;color:#071b4a}
+#feriaVerificacionDatos small{color:#344054;font-weight:700}
+.feria-validacion-estado{border-radius:12px;padding:13px;margin:15px 0;font-weight:800;font-size:13px}
+.feria-validacion-estado.valido{background:#e5f6ec;color:#17663a}
+.feria-validacion-estado.invalido{background:#fff0f1;color:#a82335}
+#feriaVerificacionPantalla .feria-validacion-nota{font-size:12px;margin:10px 0 0}
+.feria-validacion-pie{color:#d3e0f7;font-size:11px;margin:24px 0 16px}
+.feria-validacion-inicio{display:inline-block;color:#fff;background:#c82032;padding:12px 18px;border-radius:12px;font-weight:800;text-decoration:none;font-size:13px}
+
 </style>  
 
   
@@ -23011,8 +23035,22 @@ async function feriaAbrirSeccionSocio(tipo){
   seccion.classList.remove("oculto");
   seccion.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
-</script>  <div id="feriaVerificacionPantalla" class="oculto"><div><h2>CD Feria Osorno</h2><p id="feriaVerificacionResultado">Verificando credencial...</p><button type="button" class="feria-qr-boton" onclick="location.href=location.pathname">Ir al inicio</button></div></div>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+</script>  <div id="feriaVerificacionPantalla" class="oculto" role="main">
+ <div class="feria-validacion-contenedor">
+  <div class="feria-validacion-marca"><img src="img/logo-feria.png" alt="Escudo del club"><div><span>CLUB DEPORTIVO</span><h2>FERIA OSORNO</h2><small>EL MÁS GRANDE DEL BARRIO</small></div></div>
+  <div class="feria-validacion-tarjeta">
+   <div id="feriaVerificacionIcono" class="feria-validacion-icono">⌛</div>
+   <h3 id="feriaVerificacionTitulo">Verificando credencial</h3>
+   <p id="feriaVerificacionSubtitulo">Consultando el estado del socio en línea…</p>
+   <div id="feriaVerificacionDatos" class="oculto"><span>TITULAR</span><strong id="feriaVerificacionNombre"></strong><small id="feriaVerificacionNumero"></small></div>
+   <div id="feriaVerificacionEstado" class="feria-validacion-estado oculto"></div>
+   <p id="feriaVerificacionResultado" class="feria-validacion-nota">Espera un momento.</p>
+  </div>
+  <p class="feria-validacion-pie">Verificación oficial · Club Deportivo Feria Osorno</p>
+  <a class="feria-validacion-inicio" href="./">Ir al inicio del club</a>
+ </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 async function feriaMostrarQR(){
  const panel=document.getElementById('feriaQRPanel'), mensaje=document.getElementById('feriaQRMensaje'), codigo=document.getElementById('feriaQRCodigo');
@@ -23022,27 +23060,48 @@ async function feriaMostrarQR(){
   if(error)throw error;
   const url=new URL(location.href);url.search='?verificar_socio='+encodeURIComponent(data);url.hash='';
   if(!window.QRCode)throw new Error('No se cargó el generador de códigos QR. Comprueba tu conexión.');
-  const canvas=document.createElement('canvas');codigo.appendChild(canvas);
-  await QRCode.toCanvas(canvas,url.href,{width:220,margin:1,errorCorrectionLevel:'M'});
+  new QRCode(codigo,{text:url.href,width:220,height:220,correctLevel:QRCode.CorrectLevel.M});
   mensaje.textContent='Código válido durante 2 minutos. Debe escanearse para comprobar el estado en línea.';
  }catch(e){mensaje.textContent='No fue posible generar el código: '+(e.message||e);}
 }
 async function feriaVerificarQRDesdeURL(){
  const token=new URLSearchParams(location.search).get('verificar_socio');
  if(!token)return;
- const pantalla=document.getElementById('feriaVerificacionPantalla'),resultado=document.getElementById('feriaVerificacionResultado');
+ const pantalla=document.getElementById('feriaVerificacionPantalla');
+ const titulo=document.getElementById('feriaVerificacionTitulo');
+ const subtitulo=document.getElementById('feriaVerificacionSubtitulo');
+ const icono=document.getElementById('feriaVerificacionIcono');
+ const datos=document.getElementById('feriaVerificacionDatos');
+ const estado=document.getElementById('feriaVerificacionEstado');
+ const resultado=document.getElementById('feriaVerificacionResultado');
  pantalla.classList.remove('oculto');
+ function fallo(mensaje){
+  icono.textContent='⚠️';titulo.textContent='VERIFICACIÓN NO DISPONIBLE';
+  subtitulo.textContent='No se pudo validar esta credencial.';
+  resultado.textContent=mensaje;
+  datos.classList.add('oculto');estado.classList.add('oculto');
+ }
  try{
   const {data,error}=await supabaseClient.rpc('verificar_credencial_publica',{p_token:token});
   if(error)throw error;
   const fila=Array.isArray(data)?data[0]:null;
-  if(!fila){resultado.textContent='❌ Código inválido o vencido. Solicita uno nuevo al socio.';return;}
-  resultado.replaceChildren();
-  const titulo=document.createElement('strong');titulo.textContent=fila.habilitado?'✅ BENEFICIOS HABILITADOS':'⚠️ BENEFICIOS NO HABILITADOS';
-  const datos=document.createElement('p');datos.textContent=(fila.nombre||'Socio')+' · Socio N.º '+String(fila.numero_socio).padStart(4,'0');
-  const detalle=document.createElement('p');detalle.textContent=fila.habilitado?'Cuotas al día. Verificado en línea.':'El socio debe regularizar sus cuotas.';
-  resultado.append(titulo,datos,detalle);
- }catch(e){resultado.textContent='No fue posible verificar el código. '+(e.message||e);}
+  if(!fila){fallo('El código ha vencido, ya fue utilizado o no es válido. Solicita al socio un QR nuevo.');return;}
+  datos.classList.remove('oculto');
+  document.getElementById('feriaVerificacionNombre').textContent=fila.nombre||'Socio';
+  document.getElementById('feriaVerificacionNumero').textContent='Socio N.º '+String(fila.numero_socio).padStart(4,'0');
+  estado.classList.remove('oculto','valido','invalido');
+  if(fila.habilitado){
+   icono.textContent='✅';titulo.textContent='SOCIO HABILITADO';
+   subtitulo.textContent='Credencial verificada correctamente';
+   estado.classList.add('valido');estado.textContent='✓ Cuotas al día';
+   resultado.textContent='Puede utilizar los beneficios del club.';
+  }else{
+   icono.textContent='⚠️';titulo.textContent='BENEFICIOS NO HABILITADOS';
+   subtitulo.textContent='Credencial consultada correctamente';
+   estado.classList.add('invalido');estado.textContent='Cuotas pendientes o membresía inactiva';
+   resultado.textContent='El socio debe regularizar su situación para utilizar los beneficios.';
+  }
+ }catch(e){fallo('No fue posible verificar el código. '+(e.message||e));}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',feriaVerificarQRDesdeURL,{once:true});
 else feriaVerificarQRDesdeURL();
