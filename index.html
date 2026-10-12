@@ -7173,6 +7173,66 @@ overflow-x:hidden;
 }
 
 
+
+/* Credencial digital: formato de tarjeta bancaria, solo identificacion */
+.feria-credencial-bancaria{
+  position:relative;overflow:hidden;width:100%;aspect-ratio:1.586;
+  min-height:205px;max-height:290px;border-radius:19px;
+  padding:clamp(15px,4vw,24px);color:#fff;
+  background:linear-gradient(125deg,#071a43 0%,#123b83 57%,#06142f 100%);
+  border:1px solid rgba(166,195,255,.45);
+  box-shadow:0 14px 30px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.16);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.feria-credencial-bancaria:before{
+  content:"";position:absolute;width:210px;height:210px;border:30px solid rgba(255,255,255,.045);
+  border-radius:50%;right:-100px;top:-110px;pointer-events:none;
+}
+.feria-credencial-bancaria:after{
+  content:"";position:absolute;width:130px;height:230px;background:rgba(226,26,50,.72);
+  right:-104px;bottom:-100px;transform:rotate(30deg);pointer-events:none;
+}
+.feria-credencial-superior,.feria-credencial-centro,.feria-credencial-inferior{position:relative;z-index:1}
+.feria-credencial-superior{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.feria-credencial-marca{display:flex;align-items:center;gap:9px;min-width:0}
+.feria-credencial-marca img{width:42px;height:42px;object-fit:contain}
+.feria-credencial-marca span{display:block;font-size:8px;letter-spacing:1.1px;color:#b7c9ec;font-weight:800}
+.feria-credencial-marca strong{display:block;font-size:14px;letter-spacing:.4px;color:#fff}
+.feria-credencial-etiqueta{font-size:8px;letter-spacing:.8px;font-weight:900;color:#fff;background:#d71932;padding:6px 8px;border-radius:12px;white-space:nowrap}
+.feria-credencial-centro{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.feria-credencial-centro p{font-size:12px;letter-spacing:1.5px;font-weight:800;color:#e0e9ff;text-align:right}
+.feria-credencial-chip{width:42px;height:30px;border-radius:7px;background:linear-gradient(135deg,#f9df9e,#b18c48);border:1px solid #fff6cc;position:relative;box-shadow:inset 0 0 0 1px #b79657}
+.feria-credencial-chip:before,.feria-credencial-chip:after{content:"";position:absolute;top:0;bottom:0;border-left:1px solid #a58650}
+.feria-credencial-chip:before{left:13px}.feria-credencial-chip:after{left:27px}
+.feria-credencial-chip i{position:absolute;top:10px;left:0;right:0;border-top:1px solid #a58650}
+.feria-credencial-inferior{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}
+.feria-credencial-identidad{min-width:0;flex:1}
+.feria-credencial-identidad span{display:block;color:#b8c9e8;font-size:9px;font-weight:800;letter-spacing:1.1px}
+.feria-credencial-identidad h2{color:#fff!important;font-size:clamp(16px,4vw,23px)!important;line-height:1.1;margin:5px 0!important;overflow-wrap:anywhere}
+.feria-credencial-identidad p{color:#d7e3fa;font-size:9px;letter-spacing:.5px;font-weight:800;margin-top:8px}
+.feria-credencial-estado{color:#9af4b9;font-size:11px;font-weight:900;white-space:nowrap;text-align:right}
+@media(max-width:380px){.feria-credencial-bancaria{padding:14px;min-height:190px}.feria-credencial-marca img{width:34px;height:34px}.feria-credencial-marca strong{font-size:12px}.feria-credencial-etiqueta{font-size:7px;padding:5px}}
+
+
+/* PORTAL PRIVADO DE SOCIOS — menú y fichas */
+#portalSociosPublico .oculto{display:none!important;}
+#portalSociosPublico .portal-socios-beneficios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:18px 0 22px}
+#portalSociosPublico .portal-socios-beneficios button{min-height:60px;text-align:left;border:1px solid #294879;background:#112a58;color:#fff;padding:15px;border-radius:13px;font-weight:800;cursor:pointer}
+#portalSociosPublico .portal-socios-beneficios button:focus-visible,#portalSociosPublico .feria-socio-volver:focus-visible{outline:3px solid #91baff;outline-offset:2px}
+#portalSociosPublico .feria-socio-cerrar{display:block;width:100%;margin:24px 0 8px;background:#c91d32;color:#fff;border:0;border-radius:12px;padding:16px;font-weight:900;cursor:pointer}
+#portalSociosPublico .feria-socio-contenido{margin:18px 0;padding:16px;background:#102650;border:1px solid #345487;border-radius:15px;color:#fff}
+#portalSociosPublico .feria-socio-contenido h3{color:#fff;margin:8px 0 16px}
+#portalSociosPublico .feria-socio-volver{background:transparent;color:#dbeafe;border:1px solid #4e6c9b;border-radius:9px;padding:10px 12px;cursor:pointer}
+#portalSociosPublico .feria-socio-lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#portalSociosPublico .feria-socio-item{border:1px solid #42608e;background:#0b2045;color:#fff;border-radius:13px;padding:12px;text-align:left;cursor:pointer;min-width:0}
+#portalSociosPublico .feria-socio-item img{display:block;width:100%;aspect-ratio:1.3;object-fit:contain;background:white;border-radius:9px;margin-bottom:10px;padding:8px}
+#portalSociosPublico .feria-socio-item strong{display:block;overflow-wrap:anywhere}
+#portalSociosPublico .feria-socio-item small{display:block;margin-top:6px;color:#bdd0ec}
+#portalSociosPublico .feria-socio-detalle{background:#0b2045;border:1px solid #42608e;border-radius:12px;padding:16px;margin-top:12px;overflow-wrap:anywhere}
+#portalSociosPublico .feria-socio-detalle img{max-width:150px;max-height:110px;object-fit:contain;background:white;padding:8px;border-radius:10px}
+#portalSociosPublico .feria-socio-detalle p{margin:9px 0;color:#dbeafe;line-height:1.5}
+#portalSociosPublico .feria-socio-detalle a{color:#a9d3ff;text-decoration:underline}
+#portalSociosPublico .feria-socio-vacio{color:#c7d8ef;line-height:1.5;padding:16px 4px}
 </style>  
 
   
@@ -12062,67 +12122,43 @@ class="seccion oculto detalle-partido-publico">
      class="oculto"
      style="margin-top:16px;">
 
-  <div style="
-    background:linear-gradient(135deg,#102b60,#06142f);
-    border:1px solid #365487;
-    border-radius:18px;
-    padding:22px;
-    color:white;
-  ">
-
-    <p style="color:#ff5262;font-size:12px;font-weight:bold;">
-      CD FERIA OSORNO · CREDENCIAL DIGITAL
-    </p>
-
-    <p id="credencialNumero"
-       style="margin-top:20px;color:#b8c9e8;">
-    </p>
-
-    <h2 id="credencialNombre"
-        style="color:white;margin-top:8px;">
-    </h2>
-
-    <p id="credencialEstado"
-       style="margin-top:12px;color:#86efac;">
-    </p>
-
-    <p style="margin-top:20px;color:#b8c9e8;">
-      EL MÁS GRANDE DEL BARRIO
-    </p>
-
+  <div class="feria-credencial-bancaria" aria-label="Credencial digital de socio">
+    <div class="feria-credencial-superior">
+      <div class="feria-credencial-marca">
+        <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno" onerror="this.style.display='none'">
+        <div><span>CLUB DEPORTIVO</span><strong>FERIA OSORNO</strong></div>
+      </div>
+      <span class="feria-credencial-etiqueta">SOCIO OFICIAL</span>
+    </div>
+    <div class="feria-credencial-centro">
+      <div class="feria-credencial-chip" aria-hidden="true"><i></i></div>
+      <p id="credencialNumero">SOCIO Nº —</p>
+    </div>
+    <div class="feria-credencial-inferior">
+      <div class="feria-credencial-identidad">
+        <span>TITULAR</span>
+        <h2 id="credencialNombre">Socio CD Feria Osorno</h2>
+        <p>EL MÁS GRANDE DEL BARRIO</p>
+      </div>
+      <span id="credencialEstado" class="feria-credencial-estado">● Estado</span>
+    </div>
   </div>
 
-<button
-  type="button"
-  class="boton"
-  style="width:100%;margin-top:16px;"
-  onclick="mostrarMisCuotasSocio()">
-  📅 Mis cuotas
-</button>
-
-<div
-  id="portalSocioCuotas"
-  class="oculto"
-  style="margin-top:15px;">
+<div id="portalSocioCuotas" class="oculto feria-socio-contenido" aria-live="polite"></div>
+<div class="portal-socios-beneficios" id="feriaMenuPrivadoSocio" aria-label="Menú privado de socios">
+  <button type="button" onclick="feriaAbrirSeccionSocio('cuotas')">📅 Mis cuotas</button>
+  <button type="button" onclick="feriaAbrirSeccionSocio('beneficios')">🎁 Beneficios</button>
+  <button type="button" onclick="feriaAbrirSeccionSocio('boletines')">📰 Boletines</button>
+</div>
+<section id="feriaSeccionSocio" class="oculto feria-socio-contenido" aria-live="polite">
+  <button type="button" class="feria-socio-volver" onclick="feriaVolverMenuSocio()">← Volver al menú</button>
+  <h3 id="feriaSeccionSocioTitulo"></h3>
+  <div id="feriaSeccionSocioLista"></div>
+  <div id="feriaSeccionSocioDetalle" class="oculto"></div>
+</section>
+<button type="button" id="feriaCerrarSesionSocio" class="feria-socio-cerrar" onclick="cerrarSesionSocio()">🚪 Cerrar sesión de socio</button>
 </div>
 
-
-
-  <button
-    type="button"
-    class="boton"
-    style="width:100%;margin-top:16px;"
-    onclick="cerrarSesionSocio()">
-    🚪 Cerrar sesión de socio
-  </button>
-
-</div>
-
-
- <div class="portal-socios-beneficios">
-  <div>📅 Mis cuotas</div><div>🎁 Beneficios</div>
-  <div>🏷️ Descuentos</div><div>📰 Boletines</div>
- </div>
 </section>
 
 <section    
@@ -22360,6 +22396,9 @@ document.getElementById("credencialEstado").textContent =
 
 formulario.classList.add("oculto");
 areaPrivada.classList.remove("oculto");
+feriaVolverMenuSocio();
+const cuotasSocio = document.getElementById("portalSocioCuotas");
+if(cuotasSocio) cuotasSocio.classList.add("oculto");
 
 console.log("Credencial cargada para socio:", socio.id);
 
@@ -22415,6 +22454,9 @@ async function cerrarSesionSocio(){
   document.getElementById("credencialNombre").textContent = "";
   document.getElementById("credencialNumero").textContent = "";
   document.getElementById("credencialEstado").textContent = "";
+feriaVolverMenuSocio();
+const cuotasSocio = document.getElementById("portalSocioCuotas");
+if(cuotasSocio) cuotasSocio.classList.add("oculto");
 }
 
 
@@ -22700,4 +22742,116 @@ if(document.readyState === "loading"){
   feriaProcesarInvitacion();
 }
 
+
+/* ===========================================================
+   PORTAL DE SOCIOS — beneficios y boletines
+   Agrega registros reales a estos arreglos cuando estén disponibles.
+   No se publican empresas o noticias ficticias.
+   =========================================================== */
+const FERIA_BENEFICIOS_SOCIOS = [
+  // Ejemplo: { nombre: "Empresa", logo: "img/empresa.png", descripcion: "Beneficio", direccion: "...", telefono: "...", sitio: "https://..." }
+];
+const FERIA_BOLETINES_SOCIOS = [
+  // Ejemplo: { titulo: "Comunicado", fecha: "2026-10-12", imagen: "img/noticia.jpg", resumen: "...", contenido: "..." }
+];
+
+function feriaVolverMenuSocio(){
+  const seccion=document.getElementById("feriaSeccionSocio");
+  if(seccion) seccion.classList.add("oculto");
+  const menu=document.getElementById("feriaMenuPrivadoSocio");
+  if(menu) menu.classList.remove("oculto");
+  const cuotas=document.getElementById("portalSocioCuotas");
+  if(cuotas) cuotas.classList.add("oculto");
+}
+function feriaCrearElemento(tag,clase,texto){
+  const el=document.createElement(tag);
+  if(clase) el.className=clase;
+  if(texto!==undefined) el.textContent=texto;
+  return el;
+}
+function feriaUrlSegura(url){
+  try{
+    const parsed=new URL(url,window.location.href);
+    return ["https:","http:"].includes(parsed.protocol)?parsed.href:null;
+  }catch(_){return null;}
+}
+function feriaImagenFicha(src,alt){
+  if(!src || typeof src!=="string") return null;
+  const url=feriaUrlSegura(src);
+  if(!url) return null;
+  const img=document.createElement("img");
+  img.src=url;img.alt=alt || "Imagen";img.loading="lazy";
+  return img;
+}
+function feriaMostrarDetalleSocio(tipo,indice){
+  const registros=tipo==="beneficios"?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
+  const item=registros[indice];
+  if(!item)return;
+  const detalle=document.getElementById("feriaSeccionSocioDetalle");
+  detalle.replaceChildren();detalle.classList.remove("oculto");
+  const tarjeta=feriaCrearElemento("article","feria-socio-detalle");
+  const volver=feriaCrearElemento("button","feria-socio-volver","← Volver al listado");
+  volver.type="button";volver.onclick=()=>detalle.classList.add("oculto");
+  tarjeta.appendChild(volver);
+  const img=feriaImagenFicha(tipo==="beneficios"?item.logo:item.imagen,item.nombre||item.titulo);
+  if(img)tarjeta.appendChild(img);
+  tarjeta.appendChild(feriaCrearElemento("h3","",item.nombre||item.titulo||"Información"));
+  const campos=tipo==="beneficios"
+    ? [["Beneficio",item.descripcion],["Dirección",item.direccion],["Teléfono",item.telefono]]
+    : [["Fecha",item.fecha],["Resumen",item.resumen],["Noticia",item.contenido]];
+  campos.forEach(([etiqueta,valor])=>{
+    if(valor)tarjeta.appendChild(feriaCrearElemento("p","",etiqueta+": "+valor));
+  });
+  if(tipo==="beneficios"&&item.sitio){
+    const url=feriaUrlSegura(item.sitio);
+    if(url){const link=feriaCrearElemento("a","","Visitar sitio web");link.href=url;link.target="_blank";link.rel="noopener noreferrer";tarjeta.appendChild(link);}
+  }
+  detalle.appendChild(tarjeta);
+  detalle.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+async function feriaAbrirSeccionSocio(tipo){
+  const menu=document.getElementById("feriaMenuPrivadoSocio");
+  const cuotas=document.getElementById("portalSocioCuotas");
+  const seccion=document.getElementById("feriaSeccionSocio");
+  const lista=document.getElementById("feriaSeccionSocioLista");
+  const detalle=document.getElementById("feriaSeccionSocioDetalle");
+  if(!menu||!cuotas||!seccion||!lista||!detalle)return;
+  menu.classList.add("oculto");
+  cuotas.classList.add("oculto");
+  seccion.classList.add("oculto");
+  detalle.classList.add("oculto");detalle.replaceChildren();
+  if(tipo==="cuotas"){
+    cuotas.classList.remove("oculto");
+    const volver=feriaCrearElemento("button","feria-socio-volver","← Volver al menú");
+    volver.type="button";volver.onclick=feriaVolverMenuSocio;
+    await mostrarMisCuotasSocio();
+    cuotas.prepend(volver);
+    cuotas.scrollIntoView({behavior:"smooth",block:"nearest"});
+    return;
+  }
+  const esBeneficios=tipo==="beneficios";
+  document.getElementById("feriaSeccionSocioTitulo").textContent=esBeneficios?"🎁 Beneficios de socios":"📰 Boletines del club";
+  const registros=esBeneficios?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
+  lista.replaceChildren();
+  if(!registros.length){
+    lista.appendChild(feriaCrearElemento("p","feria-socio-vacio",esBeneficios
+      ? "Próximamente encontrarás aquí las empresas colaboradoras y sus beneficios exclusivos."
+      : "Todavía no hay boletines publicados. Aquí aparecerán las noticias y comunicados del club."));
+  }else{
+    const grid=feriaCrearElemento("div","feria-socio-lista");
+    registros.forEach((item,i)=>{
+      const boton=feriaCrearElemento("button","feria-socio-item");boton.type="button";
+      const img=feriaImagenFicha(esBeneficios?item.logo:item.imagen,item.nombre||item.titulo);
+      if(img)boton.appendChild(img);
+      boton.appendChild(feriaCrearElemento("strong","",item.nombre||item.titulo||"Sin título"));
+      const subtitulo=esBeneficios?item.descripcion:(item.fecha||item.resumen);
+      if(subtitulo)boton.appendChild(feriaCrearElemento("small","",subtitulo));
+      boton.onclick=()=>feriaMostrarDetalleSocio(tipo,i);
+      grid.appendChild(boton);
+    });
+    lista.appendChild(grid);
+  }
+  seccion.classList.remove("oculto");
+  seccion.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
 </script>  </body>  </html>
