@@ -1,6 +1,17 @@
 <!DOCTYPE html> 
 <html lang="es">   
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+// Mantener selección visual de categorías en la barra desplazable.
+document.querySelectorAll('.feria-series-scroll').forEach(function(bar){
+ bar.addEventListener('click',function(event){
+  const chip=event.target.closest('.feria-chip');
+  if(!chip)return;
+  bar.querySelectorAll('.feria-chip').forEach(function(b){b.classList.remove('activo');});
+  chip.classList.add('activo');
+ });
+});
+
+</script>  
 <head>  <meta charset="UTF-8">  <meta name="viewport"    
 content="width=device-width, initial-scale=1.0">  
 <title>CD Feria Osorno</title>  
@@ -6877,6 +6888,274 @@ overflow-x:hidden;
   background:#cf2039;
   color:white;
 }
+
+/* FORMACIÓN TÁCTICA ADMIN */
+.formacion-admin-feria{margin-top:18px;}
+.formacion-admin-feria .ayuda-formacion-admin{color:#667085;font-size:12px;line-height:1.5;margin:10px 0;}
+.fila-tactica-admin{padding:12px;margin:12px 0;border-radius:12px;background:#f1f5fa;}
+.fila-tactica-admin>strong{display:block;color:#071b4a;font-size:12px;margin-bottom:9px;}
+.puestos-tacticos-admin{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.puesto-tactico-admin{font-size:11px!important;color:#344054!important;margin:0!important;}
+.puesto-tactico-admin select{width:100%;margin-top:5px!important;font-size:12px!important;padding:9px 6px!important;}
+
+/* CANCHA TÁCTICA EN ADMINISTRACIÓN */
+#formularioEditarPartido .selector-formacion-oculto{display:none!important}
+#formularioEditarPartido .cancha-admin-feria{
+  position:relative;min-height:470px;padding:30px 7px 24px;margin:15px 0 12px;
+  display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+  background:repeating-linear-gradient(to bottom,#187c4b 0px,#187c4b 49px,#126c41 49px,#126c41 98px);
+  border:3px solid #e5f5eb;border-radius:16px;isolation:isolate;
+}
+#formularioEditarPartido .cancha-admin-feria::before{
+  content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid rgba(255,255,255,.55);z-index:0;pointer-events:none;
+}
+#formularioEditarPartido .cancha-admin-feria::after{
+  content:"";position:absolute;left:50%;top:50%;width:105px;height:105px;border:2px solid rgba(255,255,255,.55);border-radius:50%;transform:translate(-50%,-50%);z-index:0;pointer-events:none;
+}
+#formularioEditarPartido .cancha-admin-vacia{justify-content:center;align-items:center;text-align:center;color:#fff;font-size:13px;font-weight:800}
+#formularioEditarPartido .linea-admin-feria{position:relative;z-index:2;display:flex;justify-content:space-evenly;gap:3px;width:100%;align-items:center}
+#formularioEditarPartido .puesto-cancha-admin{position:relative;width:clamp(48px,17%,78px);min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;cursor:pointer}
+#formularioEditarPartido .avatar-cancha-admin{position:relative;width:clamp(39px,11vw,54px);height:clamp(39px,11vw,54px);border-radius:50%;border:2px solid #fff;background:#dbe6f3;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3);color:#0b2046;font-size:21px}
+#formularioEditarPartido .avatar-cancha-admin img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+#formularioEditarPartido .avatar-cancha-admin small{position:absolute;right:-5px;top:-7px;min-width:21px;height:21px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;border-radius:50%;background:#06142f;color:white;font-size:10px;font-weight:900}
+#formularioEditarPartido .puesto-cancha-admin strong{display:block;max-width:100%;padding:4px 5px;background:#06142f;color:white;border-radius:6px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#formularioEditarPartido .puesto-cancha-admin select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:3}
+#formularioEditarPartido .botones-esquema-feria{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:12px 0}
+#formularioEditarPartido .botones-esquema-feria button{border:1px solid #d8e0ec;border-radius:10px;padding:11px 3px;background:#eef2f8;color:#071b4a;font-weight:900;font-size:11px;cursor:pointer}
+#formularioEditarPartido .botones-esquema-feria button.activo{background:#ed1c2e;color:white;border-color:#ed1c2e}
+
+/* ===== REDISEÑO FERIA: ADMINISTRACIÓN Y LOGIN ===== */
+#login.login-feria-premium:not(.oculto){
+  position:fixed;inset:0;z-index:12000;display:block;overflow-y:auto;
+  margin:0;padding:22px 18px 42px;border-radius:0;background:#06142f;
+  color:#fff;overscroll-behavior-y:contain;
+}
+.login-feria-contenido{max-width:440px;margin:0 auto;}
+.login-feria-volver{background:transparent;border:0;color:#b5c5e2;font-weight:800;font-size:12px;padding:10px 0 24px;cursor:pointer;}
+.login-feria-identidad{text-align:center;padding:12px 0 28px;}
+.login-feria-identidad img{width:94px;height:94px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));}
+.login-feria-identidad span{display:block;margin:13px 0 9px;color:#aabfe2;font-size:10px;font-weight:900;letter-spacing:1.6px;}
+.login-feria-identidad h1{color:#fff;font-size:32px;font-weight:900;letter-spacing:-1px;}
+.login-feria-identidad h1 em{color:#ed3345;font-style:normal;}
+.login-feria-identidad p{margin-top:9px;color:#a9bad6;font-size:12px;}
+.login-feria-tarjeta{background:#0d2450;border:1px solid rgba(134,170,224,.24);border-radius:20px;padding:25px 21px;box-shadow:0 14px 40px rgba(0,0,0,.25);}
+.login-feria-etiqueta{color:#ed3345;font-size:9px;font-weight:900;letter-spacing:1.4px;}
+.login-feria-tarjeta h2{color:#fff;margin:8px 0;font-size:22px;}
+.login-feria-tarjeta p{color:#a9bad6;font-size:12px;line-height:1.5;margin-bottom:17px;}
+.login-feria-tarjeta label{display:block;margin:15px 0 7px;color:#e5ecfa;font-size:12px;font-weight:800;}
+.login-feria-tarjeta input{display:block;width:100%;padding:15px 13px;border-radius:11px;border:1px solid #36507b;background:#071936;color:#fff;font-size:14px;outline:none;}
+.login-feria-tarjeta input:focus{border-color:#6b9dff;}
+.login-feria-ingresar{width:100%;padding:16px 12px;margin-top:22px;background:#ed1c2e;border:0;border-radius:12px;color:#fff;font-size:13px;font-weight:900;cursor:pointer;}
+.login-feria-tarjeta .login-feria-mensaje{margin:12px 0 0;text-align:center;color:#ffb4bd;}
+.login-feria-pie{text-align:center;color:#8199c1;font-size:11px;margin-top:23px;}
+#administracion:not(.oculto){min-height:100vh;background:#06142f;padding-bottom:100px;}
+#administracion .header-admin{background:#071936;border-bottom:1px solid rgba(255,255,255,.10);box-shadow:none;}
+#administracion .header-admin .lema-header{color:#fff;font-size:14px;}
+#administracion .cerrar-admin{background:#142e5b;color:#fff;border-color:#3a4f78;}
+.portada-admin-feria{position:relative;isolation:isolate;min-height:225px;overflow:hidden;display:flex;align-items:center;padding:27px 23px;background:linear-gradient(115deg,#06142f,#0b2e70);color:#fff;}
+.portada-admin-feria::before{content:"";position:absolute;width:140px;height:240px;right:-80px;top:-60px;transform:rotate(35deg);background:#ed1c2e;z-index:-1;}
+.portada-admin-texto{position:relative;z-index:2;max-width:75%;}
+.portada-admin-texto span{font-size:9px;color:#b8c9e7;font-weight:900;letter-spacing:1.2px;}
+.portada-admin-texto h1{font-size:clamp(26px,7vw,39px);line-height:1.05;font-weight:900;margin-top:13px;}
+.portada-admin-texto h1 em{display:block;color:#ed3345;font-style:normal;}
+.portada-admin-linea{width:40px;height:4px;border-radius:4px;background:#ed1c2e;margin:16px 0 12px;}
+.portada-admin-texto p{color:#d5e0f5;font-size:9px;line-height:1.5;font-weight:900;letter-spacing:.7px;}
+.portada-admin-toro{position:absolute;right:6px;bottom:0;width:38%;height:185px;object-fit:contain;object-position:bottom;filter:drop-shadow(0 5px 10px rgba(0,0,0,.3));}
+#administracion .gestion-admin{margin:16px 14px 25px;padding:0 0 12px;}
+#administracion .gestion-admin-titulo h2{color:#fff;}
+#administracion .gestion-admin-titulo p{color:#a9bad6;}
+#administracion .accion-admin{background:#0e2854;border-color:#26416c;box-shadow:0 6px 18px rgba(0,0,0,.15);}
+#administracion .accion-admin-texto strong{color:#fff;}
+#administracion .accion-admin-texto span{color:#a9bad6;}
+#administracion .accion-admin-flecha{color:#e8384c;}
+#administracion .accion-admin-icono{background:#193c76;color:#fff;}
+#administracion .accion-admin-eliminar .accion-admin-texto strong{color:#ff6978;}
+#administracion .partido-admin-home{background:#0e2854;border-color:#35548a;color:#fff;}
+#administracion .partido-admin-cabecera{background:#081b3f;}
+#administracion .partido-admin-info{background:#0e2854;}
+#administracion .partido-admin-equipo strong{color:#fff;}
+#administracion .partido-admin-detalles{background:#091e42;border-color:#35548a;color:#c2d0e9;}
+#administracion .menu-inferior-admin{display:flex;}
+#administracion .menu-inferior-admin .menu-inferior-item.activo{color:#fff;}
+#administracion .menu-inferior-admin .menu-inferior-item.activo .menu-inferior-icono{color:#ed3345;}
+#formularioEditarPartido .boton-convocatoria-formacion{display:block;width:100%;margin:12px 0;padding:13px;border:1px solid #cbd6e7;border-radius:11px;background:#eef3fb;color:#092354;font-weight:900;font-size:12px;cursor:pointer;}
+
+
+/* ===== FERIA: IDENTIDAD VISUAL EN MÓDULOS DE GESTIÓN ===== */
+#agregarPartido,#agregarJugador,#agregarSocio,#listaSocios,#registrarPagoSocio,#estadoCuotasSocios,
+#editarPartido,#eliminarPartido,#editarJugador,#eliminarJugador{
+ background:#06142f !important;color:#fff !important;border-radius:0 !important;
+ margin:0 !important;padding:18px 15px 110px !important;min-height:100vh;width:100%;max-width:100%;
+}
+.feria-subheader{padding:20px 15px 22px;margin:-18px -15px 20px;background:linear-gradient(135deg,#081b40,#123875);border-bottom:3px solid #ed1c2e;}
+.feria-subheader span,.feria-series-cabecera span{display:block;color:#ed3345;font-size:10px;font-weight:900;letter-spacing:1.3px;margin-bottom:7px;}
+.feria-subheader h2{color:#fff !important;font-size:27px !important;font-weight:900;margin:0 0 6px !important;}
+.feria-subheader p{color:#c4d1eb !important;font-size:12px !important;line-height:1.5;}
+#agregarPartido>h2,#agregarJugador>h2,#agregarSocio>h2,#listaSocios>h2,#registrarPagoSocio>h2,#estadoCuotasSocios>h2{display:none;}
+#agregarPartido>p,#agregarJugador>p,#agregarSocio>p,#listaSocios>p,#registrarPagoSocio>p,#estadoCuotasSocios>p{display:none;}
+#agregarPartido>label,#agregarJugador>label,#agregarSocio>label,#registrarPagoSocio>label,#estadoCuotasSocios>label{display:block;color:#e4ebf8;font-weight:800;font-size:12px;margin:13px 0 5px;}
+#agregarPartido input,#agregarPartido select,#agregarJugador input,#agregarJugador select,
+#agregarSocio input,#agregarSocio select,#registrarPagoSocio input,#registrarPagoSocio select,
+#estadoCuotasSocios input,#estadoCuotasSocios select{
+ background:#102650 !important;color:#fff !important;border:1px solid #36527f !important;
+ border-radius:12px !important;min-height:46px;max-width:100%;}
+#agregarPartido input::placeholder,#agregarJugador input::placeholder,#agregarSocio input::placeholder{color:#a7b9d5;}
+#agregarPartido .boton,#agregarJugador .boton,#agregarSocio .boton,
+#registrarPagoSocio .boton,#estadoCuotasSocios .boton,#listaSocios .boton{border-radius:12px;}
+#listaSocios #contenedorSocios{color:#fff;}
+#listaSocios #contenedorSocios>*,#estadoCuotasSocios #resultadoEstadoCuotas{max-width:100%;}
+/* Categorías siempre visibles y desplazables */
+.feria-series-cabecera{margin:18px 0 10px;}
+.feria-series-cabecera strong{color:#fff;font-size:16px;font-weight:900;}
+.feria-series-scroll{display:flex;align-items:stretch;gap:8px;overflow-x:auto;overflow-y:hidden;
+ scroll-snap-type:x proximity;scrollbar-width:none;padding:4px 1px 13px;margin-bottom:16px;
+ -webkit-overflow-scrolling:touch;}
+.feria-series-scroll::-webkit-scrollbar{display:none;}
+.feria-chip{flex:0 0 auto;scroll-snap-align:start;padding:12px 14px;border:1px solid #36527f;
+ border-radius:24px;background:#102650;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;}
+.feria-chip.activo{background:#ed1c2e;border-color:#ed1c2e;color:#fff;}
+#listaEditarPartidos>.categorias-partidos,#listaEliminarPartidos>.categorias-partidos,
+#listaEditarJugadores>.categorias-partidos,#listaEliminarJugadores>.categorias-partidos,
+#listaEditarPartidos>.titulo-categorias-partidos,#listaEliminarPartidos>.titulo-categorias-partidos,
+#listaEditarJugadores>.titulo-categorias-partidos,#listaEliminarJugadores>.titulo-categorias-partidos{display:none !important;}
+#editarPartido .cabecera-seccion-publica,#eliminarPartido .cabecera-seccion-publica,
+#editarJugador .cabecera-seccion-publica,#eliminarJugador .cabecera-seccion-publica{padding:15px 0;}
+#editarPartido .cabecera-seccion-publica h2,#eliminarPartido .cabecera-seccion-publica h2,
+#editarJugador .cabecera-seccion-publica h2,#eliminarJugador .cabecera-seccion-publica h2{color:#fff !important;}
+#editarPartido .cabecera-seccion-publica p,#eliminarPartido .cabecera-seccion-publica p,
+#editarJugador .cabecera-seccion-publica p,#eliminarJugador .cabecera-seccion-publica p{color:#b5c5e1 !important;}
+#editarPartido .cabecera-listado-editar,#eliminarPartido .cabecera-listado-editar,
+#editarJugador .cabecera-listado-editar,#eliminarJugador .cabecera-listado-editar{color:#fff;}
+
+
+/* ===== FERIA 2026: CONSISTENCIA VISUAL ADMIN ===== */
+#administracion,#administracion *{box-sizing:border-box}
+#agregarPartido,#editarPartido,#eliminarPartido,#formularioEditarPartido,
+#agregarJugador,#editarJugador,#eliminarJugador,#formularioEditarJugador,
+#agregarSocio,#listaSocios,#editarSocio,#registrarPagoSocio,#estadoCuotasSocios,
+#menuAdminFinanzas,#resumenFinanciero,#movimientosFinancieros,
+#agregarIngreso,#agregarGasto,#editarIngreso,#editarGasto,
+#detallePartidoAdmin,#titularesPartido,#suplentesPartido,#goleadoresPartido{
+ background:#06142f!important;color:#fff!important;
+ border-radius:0!important;max-width:100%;
+}
+/* Corregir tarjetas blancas con texto blanco, también las generadas con JS */
+#listaSocios #contenedorSocios .card,#estadoCuotasSocios #resultadoEstadoCuotas .card,
+#listaEditarPartidos .card,#listaEliminarPartidos .card,
+#listaEditarJugadores .card,#listaEliminarJugadores .card,
+#listaSocios #contenedorSocios>div{
+ background:#102650!important;color:#fff!important;
+ border:1px solid #304b7a!important;border-radius:16px!important;
+ box-shadow:0 6px 18px rgba(0,0,0,.17)!important;
+}
+#listaSocios #contenedorSocios .card *,#listaSocios #contenedorSocios>div *,
+#listaEditarPartidos .card *,#listaEliminarPartidos .card *,
+#listaEditarJugadores .card *,#listaEliminarJugadores .card *{
+ color:#fff;
+}
+#listaSocios #contenedorSocios .card h3,#listaSocios #contenedorSocios .card strong,
+#listaEditarPartidos .card strong,#listaEliminarPartidos .card strong,
+#listaEditarJugadores .card strong,#listaEliminarJugadores .card strong{color:#fff!important;}
+#listaSocios #contenedorSocios .card p,#listaSocios #contenedorSocios .card p strong{color:#d6e2f5!important;}
+/* Todos los formularios secundarios con el mismo aspecto */
+#formularioEditarPartido,#editarSocio,#registrarPagoSocio,#estadoCuotasSocios,
+#resumenFinanciero,#movimientosFinancieros{padding-bottom:105px!important;}
+#formularioEditarPartido label,#editarSocio label,#registrarPagoSocio label,
+#estadoCuotasSocios label,#resumenFinanciero label,#movimientosFinancieros label{
+ color:#dce7f8!important;font-size:12px;font-weight:800;
+}
+#formularioEditarPartido input,#formularioEditarPartido select,
+#editarSocio input,#editarSocio select,#editarSocio textarea,
+#registrarPagoSocio input,#registrarPagoSocio select,
+#estadoCuotasSocios input,#estadoCuotasSocios select,
+#resumenFinanciero input,#resumenFinanciero select,
+#movimientosFinancieros input,#movimientosFinancieros select{
+ background:#102650!important;color:#fff!important;
+ border:1px solid #36527f!important;border-radius:12px!important;
+ max-width:100%;min-height:43px;
+}
+#formularioEditarPartido h2,#editarSocio h2,#registrarPagoSocio h2,
+#estadoCuotasSocios h2,#resumenFinanciero h2,#movimientosFinancieros h2{color:#fff!important;}
+#formularioEditarPartido .marcador-edicion{background:#102650!important;}
+#formularioEditarPartido .equipo-edicion strong{color:#fff!important;}
+#formularioEditarPartido .separador-marcador{color:#b6c8e4!important;}
+/* Flecha de regreso compacta y accesible */
+.boton-volver-solo{width:42px!important;height:42px!important;min-width:42px!important;
+ padding:0!important;display:inline-flex!important;align-items:center;justify-content:center;
+ background:#ed1c2e!important;color:#fff!important;border:0!important;
+ border-radius:12px!important;font-size:24px!important;font-weight:900!important;
+ text-decoration:none!important;vertical-align:middle;}
+/* Portal de socios (público, sin datos personales antes de autenticar) */
+#portalSociosPublico{position:fixed;inset:0 0 72px;z-index:100;background:#06142f;
+ color:#fff;overflow-y:auto;padding:22px 18px 35px;overscroll-behavior:contain;}
+#portalSociosPublico.oculto{display:none!important;}
+.portal-socios-hero{padding:25px 20px;background:linear-gradient(130deg,#102b62,#071b3f);
+ border-radius:18px;border:1px solid #2e4c83;margin:14px 0 18px;}
+.portal-socios-hero small{color:#ed3345;font-weight:900;letter-spacing:1.2px;}
+.portal-socios-hero h2{font-size:29px;color:#fff;margin:12px 0 8px;}
+.portal-socios-hero p{font-size:13px;color:#b7c9e6;line-height:1.5;}
+.portal-socios-tarjeta{padding:19px;border-radius:16px;background:#102650;border:1px solid #304b7a;}
+.portal-socios-tarjeta label{display:block;font-size:12px;font-weight:800;margin:13px 0 7px;}
+.portal-socios-tarjeta input{width:100%;background:#081b3f;color:#fff;padding:14px;
+ border:1px solid #42608e;border-radius:11px;}
+.portal-socios-tarjeta button{width:100%;padding:14px;border:0;border-radius:11px;
+ background:#ed1c2e;color:#fff;font-weight:900;margin-top:18px;}
+.portal-socios-beneficios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px;}
+.portal-socios-beneficios div{background:#102650;border-radius:12px;padding:15px 11px;font-size:12px;font-weight:800;}
+.portal-socios-aviso{color:#b7c9e6;font-size:11px;line-height:1.5;margin-top:12px;}
+
+
+/* ===== CONTRASTE CONSISTENTE · FERIA OSORNO ===== */
+/* Superficies azul marino: encabezados blancos y descripciones claras. */
+#formularioEditarPartido .detalle-deportivo-cabecera h3,
+#formularioEditarPartido .detalle-deportivo-cabecera p,
+#formularioEditarPartido .detalle-deportivo-cabecera > span{color:#fff!important;}
+#formularioEditarPartido .detalle-deportivo-cabecera > span{color:#ff4a5d!important;}
+#formularioEditarPartido .detalle-deportivo-cabecera p{color:#bdcdea!important;}
+/* Tarjetas financieras: siempre fondo oscuro + texto claro, incluidos los
+   registros creados dinámicamente y los importes del resumen. */
+#resumenFinanciero .card,
+#movimientosFinancieros #listaMovimientosFinancieros .card{
+ background:#102650!important;
+ color:#f7faff!important;
+ border:1px solid #36527f!important;
+ border-radius:17px!important;
+ box-shadow:0 5px 16px rgba(0,0,0,.2)!important;
+}
+#resumenFinanciero .card h2,
+#resumenFinanciero .card h3,
+#resumenFinanciero .card p,
+#resumenFinanciero .card strong,
+#resumenFinanciero .card span,
+#movimientosFinancieros #listaMovimientosFinancieros .card h2,
+#movimientosFinancieros #listaMovimientosFinancieros .card h3,
+#movimientosFinancieros #listaMovimientosFinancieros .card p,
+#movimientosFinancieros #listaMovimientosFinancieros .card strong,
+#movimientosFinancieros #listaMovimientosFinancieros .card span{
+ color:#f7faff!important;
+}
+#resumenFinanciero .card p,
+#movimientosFinancieros #listaMovimientosFinancieros .card p{line-height:1.55!important;}
+#resumenFinanciero #totalIngresos,
+#resumenFinanciero #totalGastos,
+#resumenFinanciero #saldoFinanciero{color:#fff!important;font-size:25px!important;font-weight:900!important;}
+#resumenFinanciero>div>h3,
+#resumenFinanciero #desgloseIngresos,
+#resumenFinanciero #desgloseGastos{color:#f7faff!important;}
+#resumenFinanciero #desgloseIngresos *,
+#resumenFinanciero #desgloseGastos *{color:#dbe7fb!important;}
+#resumenFinanciero>p,
+#movimientosFinancieros>p{color:#c3d1e9!important;}
+/* Etiquetas y ayudas legibles también en edición de partidos. */
+#formularioEditarPartido .detalle-deportivo-admin>h3{color:#fff!important;}
+#formularioEditarPartido .formacion-admin-feria,
+#formularioEditarPartido .formacion-admin-feria *{color:#092354;}
+#formularioEditarPartido .formacion-admin-feria .ayuda-formacion-admin{color:#586c88!important;}
+#formularioEditarPartido .formacion-admin-feria button{color:inherit;}
+/* Contraste explícito de controles sobre superficies oscuras. */
+#resumenFinanciero select,#movimientosFinancieros select{color:#fff!important;color-scheme:dark;}
+#resumenFinanciero select option,#movimientosFinancieros select option{background:#102650;color:#fff;}
+
 </style>  
 
   
@@ -6892,39 +7171,29 @@ overflow-x:hidden;
 
 </div>
   
-  <section id="login" class="seccion oculto">    <h2>🔐 Acceso administrador</h2>    <p style="color:#667085; margin-bottom:18px;">  
-    Ingresa tus datos para administrar el plantel.  
-  </p>  <input
-id="loginEmail"
-type="email"
-placeholder="Correo electrónico"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<input
-id="loginPassword"
-type="password"
-placeholder="Contraseña"
-style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
-
-> 
-
-<button
-class="boton"
-style="width:100%; margin-top:15px;"
-onclick="iniciarSesion()"
-
-> 
-
-🔐 Ingresar
-
-  </button>    <p  
-    id="mensajeLogin"  
-    style="margin-top:15px; text-align:center;"  
-  ></p>  
-
-      </section>
+  <section id="login" class="seccion oculto login-feria-premium">
+    <div class="login-feria-contenido">
+      <button type="button" class="login-feria-volver" onclick="mostrarInicioPublico()">← Volver a la app</button>
+      <div class="login-feria-identidad">
+        <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
+        <span>CLUB DEPORTIVO FERIA OSORNO</span>
+        <h1>Acceso <em>directiva</em></h1>
+        <p>Panel privado de administración del club.</p>
+      </div>
+      <div class="login-feria-tarjeta">
+        <span class="login-feria-etiqueta">ÁREA RESTRINGIDA</span>
+        <h2>Bienvenido de nuevo</h2>
+        <p>Ingresa con tus credenciales de administrador.</p>
+        <label for="loginEmail">Correo electrónico</label>
+        <input id="loginEmail" type="email" autocomplete="username" placeholder="correo@ejemplo.cl">
+        <label for="loginPassword">Contraseña</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña">
+        <button type="button" class="login-feria-ingresar" onclick="iniciarSesion()">Ingresar al panel →</button>
+        <p id="mensajeLogin" class="login-feria-mensaje" aria-live="polite"></p>
+      </div>
+      <p class="login-feria-pie">🔵 🔴 El más grande del barrio</p>
+    </div>
+  </section>
 
   <div id="pantallaPublica">
 
@@ -7236,10 +7505,10 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
 
   <button
   class="menu-inferior-item"
-  onclick="mostrar('tabla')">
+  onclick="mostrarPortalSociosPublico(this)">
 
-    <span class="menu-inferior-icono">▦</span>
-    <span>Tabla</span>
+    <span class="menu-inferior-icono">👥</span>
+    <span>Socios</span>
 
   </button>
 
@@ -7395,80 +7664,14 @@ class="seccion oculto">
 
   <!-- PARTIDOS Y JUGADORES -->
 
-<section class="menu-publico">
-
-  <div
-  class="acceso-publico"
-  onclick="mostrarMenuAdmin('menuAdminPartidos')">
-
-    <div class="icono-publico">⚽</div>
-
-    <h3>PARTIDOS</h3>
-
+<section class="portada-admin-feria">
+  <div class="portada-admin-texto">
+    <span>CD FERIA OSORNO · PANEL PRIVADO</span>
+    <h1>GESTIÓN <em>FERIANA</em></h1>
+    <div class="portada-admin-linea"></div>
+    <p>PARTIDOS · JUGADORES · SOCIOS · FINANZAS</p>
   </div>
-
-
-  <div
-  class="acceso-publico"
-  onclick="mostrarMenuAdmin('menuAdminJugadores')">
-
-    <div class="icono-publico">👥</div>
-
-    <h3>JUGADORES</h3>
-
-  </div>
-
-
-  <div
-  class="acceso-publico"
-  onclick="mostrarMenuAdmin('menuAdminFinanzas')">
-
-    <div class="icono-publico">💰</div>
-
-    <h3>FINANZAS</h3>
-
-  </div>
-
-
-  <div
-  class="acceso-publico"
-  onclick="mostrarMenuAdmin('menuAdminSocios')">
-
-    <div class="icono-publico">👤</div>
-
-    <h3>SOCIOS</h3>
-
-  </div>
-
-</section>
-
-
-<section class="hero-feria hero-admin">
-
-  <div class="hero-contenido">
-
-    <div class="hero-etiqueta">
-      CLUB DEPORTIVO FERIA OSORNO
-    </div>
-
-    <h1>
-      ACCESO
-      <span>DIRECTIVA</span>
-    </h1>
-
-    <div class="hero-linea"></div>
-
-    <p>
-      PASIÓN · HISTORIA · FAMILIA
-    </p>
-
-  </div>
-
-  <img
-    src="img/toro-feria.png"
-    class="hero-toro"
-    alt="Mascota CD Feria Osorno">
-
+  <img src="img/toro-feria.png" alt="Mascota Feria Osorno" class="portada-admin-toro">
 </section>
 
 <section
@@ -8067,12 +8270,20 @@ class="oculto gestion-admin">
   </div>
 
 </div>
+<nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
+  <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminPartidos')"><span class="menu-inferior-icono">⚽</span><span>Partidos</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminJugadores')"><span class="menu-inferior-icono">♟</span><span>Jugadores</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminSocios')"><span class="menu-inferior-icono">👥</span><span>Socios</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminFinanzas')"><span class="menu-inferior-icono">▦</span><span>Finanzas</span></button>
+</nav>
 </section>
 
 
 <section
 id="agregarSocio"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · SOCIOS</span><h2>Registrar socio</h2><p>Incorpora un nuevo socio a la institución.</p></div>
 
   <button
   class="boton"
@@ -8218,6 +8429,7 @@ class="seccion oculto">
 <section
 id="listaSocios"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · SOCIOS</span><h2>Lista de socios</h2><p>Consulta los socios registrados y su información.</p></div>
 
   <button
   class="boton"
@@ -8399,6 +8611,7 @@ class="seccion oculto">
 <section
 id="registrarPagoSocio"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · SOCIOS</span><h2>Registrar pago</h2><p>Administra las cuotas y pagos mensuales.</p></div>
 
   <button
   class="boton"
@@ -8645,6 +8858,7 @@ class="selector-meses-pago">
 <section
 id="estadoCuotasSocios"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · SOCIOS</span><h2>Estado de cuotas</h2><p>Revisa pagos y meses pendientes por socio.</p></div>
 
   <button
   class="boton"
@@ -9582,6 +9796,7 @@ cursor:pointer;
 <section
 id="agregarJugador"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · JUGADORES</span><h2>Nuevo jugador</h2><p>Incorpora un integrante al plantel del club.</p></div>
 
   <button
 class="boton"
@@ -9829,7 +10044,8 @@ class="seccion oculto pantalla-editar-jugador">
   </div>
 
 
-  <div
+  <div class="feria-series-cabecera"><span>CATEGORÍAS</span><strong>Desliza y selecciona una serie</strong></div><div class="feria-series-scroll" aria-label="Seleccionar serie"><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Primera Serie')">Primera Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Segunda Serie')">Segunda Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Serie Senior')">Serie Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Serie Super Senior')">Serie Super Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Infantil U8')">Infantil U8</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Infantil U10')">Infantil U10</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Infantil U13')">Infantil U13</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditarJugador('Infantil U15')">Infantil U15</button></div>
+<div
   id="listaEditarJugadores">
 
 
@@ -10005,7 +10221,8 @@ class="seccion oculto pantalla-eliminar-jugador">
   </div>
 
 
-  <div id="listaEliminarJugadores">
+  <div class="feria-series-cabecera"><span>CATEGORÍAS</span><strong>Desliza y selecciona una serie</strong></div><div class="feria-series-scroll" aria-label="Seleccionar serie"><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Primera Serie')">Primera Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Segunda Serie')">Segunda Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Serie Senior')">Serie Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Serie Super Senior')">Serie Super Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Infantil U8')">Infantil U8</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Infantil U10')">Infantil U10</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Infantil U13')">Infantil U13</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminarJugador('Infantil U15')">Infantil U15</button></div>
+<div id="listaEliminarJugadores">
 
     <div class="titulo-categorias-partidos">
       <span>CATEGORÍAS</span>
@@ -10178,7 +10395,8 @@ class="seccion oculto pantalla-editar-partido">
   </div>
 
 
-  <div id="listaEditarPartidos">
+  <div class="feria-series-cabecera"><span>CATEGORÍAS</span><strong>Desliza y selecciona una serie</strong></div><div class="feria-series-scroll" aria-label="Seleccionar serie"><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Primera Serie')">Primera Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Segunda Serie')">Segunda Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Serie Senior')">Serie Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Serie Super Senior')">Serie Super Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Infantil U8')">Infantil U8</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Infantil U10')">Infantil U10</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Infantil U13')">Infantil U13</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEditar('Infantil U15')">Infantil U15</button></div>
+<div id="listaEditarPartidos">
 
 
     <div class="titulo-categorias-partidos">
@@ -10599,34 +10817,29 @@ class="seccion oculto formulario-partido-moderno">
     </div>
 
 
-    <!-- TITULARES -->
-
-    <div
-    class="detalle-partido-opcion"
-    onclick="abrirAdministrarTitulares()">
-
-      <div class="detalle-partido-icono">
-        ⚽
+    <!-- FORMACIÓN TÁCTICA OFICIAL -->
+    <div class="editar-partido-bloque formacion-admin-feria">
+      <div class="editar-partido-titulo"><span>ALINEACIÓN</span><strong>Formación táctica oficial</strong></div>
+      <p class="ayuda-formacion-admin">Selecciona una formación y toca cada jugador en la cancha para asignar un titular.</p>
+      <select id="editarFormacionOficial" class="selector-formacion-oculto" onchange="prepararFormacionAdmin()" aria-label="Esquema táctico">
+        <option value="">Por confirmar</option>
+        <option value="4-3-3">4-3-3</option>
+        <option value="4-4-2">4-4-2</option>
+        <option value="3-4-3">3-4-3</option>
+        <option value="4-2-1-3">4-2-1-3</option>
+      </select>
+      <div id="puestosFormacionAdmin"></div>
+      <div class="botones-esquema-feria" id="botonesEsquemaFeria">
+        <button type="button" onclick="elegirEsquemaAdmin('4-3-3')">4-3-3</button>
+        <button type="button" onclick="elegirEsquemaAdmin('4-4-2')">4-4-2</button>
+        <button type="button" onclick="elegirEsquemaAdmin('3-4-3')">3-4-3</button>
+        <button type="button" onclick="elegirEsquemaAdmin('4-2-1-3')">4-2-1-3</button>
       </div>
-
-      <div class="detalle-partido-texto">
-
-        <strong>
-          Once titular
-        </strong>
-
-        <span>
-          Seleccionar los 11 jugadores iniciales
-        </span>
-
-      </div>
-
-      <div class="detalle-partido-flecha">
-        ›
-      </div>
-
+      <p class="ayuda-formacion-admin">Selecciona los 11 jugadores disponibles y después ubícalos en la cancha.</p>
+      <button type="button" class="boton-convocatoria-formacion" onclick="abrirAdministrarTitulares()">👥 Elegir los 11 jugadores del partido →</button>
+      <p id="mensajeFormacionAdmin" class="mensaje-editar-partido"></p>
+      <button class="guardar-partido-moderno" type="button" onclick="guardarFormacionAdmin()">GUARDAR FORMACIÓN OFICIAL</button>
     </div>
-
 
     <!-- SUPLENTES -->
 
@@ -11198,7 +11411,8 @@ class="seccion oculto pantalla-eliminar-partido">
   </div>
 
 
-  <div id="listaEliminarPartidos">
+  <div class="feria-series-cabecera"><span>CATEGORÍAS</span><strong>Desliza y selecciona una serie</strong></div><div class="feria-series-scroll" aria-label="Seleccionar serie"><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Primera Serie')">Primera Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Segunda Serie')">Segunda Serie</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Serie Senior')">Serie Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Serie Super Senior')">Serie Super Senior</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Infantil U8')">Infantil U8</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Infantil U10')">Infantil U10</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Infantil U13')">Infantil U13</button><button type="button" class="feria-chip" onclick="seleccionarCategoriaEliminar('Infantil U15')">Infantil U15</button></div>
+<div id="listaEliminarPartidos">
 
 
     <div class="titulo-categorias-partidos">
@@ -11476,6 +11690,7 @@ class="seccion oculto">
 <section
 id="agregarPartido"
 class="seccion oculto">
+<div class="feria-subheader"><span>CD FERIA OSORNO · PARTIDOS</span><h2>Nuevo partido</h2><p>Registra un encuentro y su información oficial.</p></div>
 
  <button
 class="boton"
@@ -11788,7 +12003,30 @@ class="seccion oculto detalle-partido-publico">
 </section>
 
 
-  <section    
+  
+<section id="portalSociosPublico" class="oculto" aria-label="Portal de socios">
+ <button type="button" class="boton-volver-solo" aria-label="Volver" onclick="mostrarInicioPublico()">←</button>
+ <div class="portal-socios-hero">
+  <small>CD FERIA OSORNO · SOCIOS</small>
+  <h2>Tu club, más cerca</h2>
+  <p>Consulta tus cuotas, beneficios, descuentos exclusivos y boletines del club.</p>
+ </div>
+ <div class="portal-socios-tarjeta">
+  <h3>Acceso de socios</h3>
+  <label for="portalSocioCorreo">Correo electrónico</label>
+  <input id="portalSocioCorreo" type="email" autocomplete="email" placeholder="correo@ejemplo.cl">
+  <label for="portalSocioClave">Contraseña</label>
+  <input id="portalSocioClave" type="password" autocomplete="current-password" placeholder="Tu contraseña">
+  <button type="button" onclick="avisoPortalSocios()">Ingresar a mi cuenta</button>
+  <p class="portal-socios-aviso">Estamos preparando el acceso privado de socios. Todavía no está habilitada la consulta de datos personales.</p>
+ </div>
+ <div class="portal-socios-beneficios">
+  <div>📅 Mis cuotas</div><div>🎁 Beneficios</div>
+  <div>🏷️ Descuentos</div><div>📰 Boletines</div>
+ </div>
+</section>
+
+<section    
 id="tabla"    
 class="seccion oculto">  <button    
 class="boton"    
@@ -12046,6 +12284,7 @@ function mostrar(id){
 .classList.add("oculto");
 
 cargarBannerPartido();
+  marcarMenuAdminActivo("inicio");
 
 }
 
@@ -12131,7 +12370,24 @@ if(
 
 
 
+function marcarMenuAdminActivo(id){
+  const items = document.querySelectorAll(".menu-inferior-admin .menu-inferior-item");
+  const destinos = ["inicio", "menuAdminPartidos", "menuAdminJugadores", "menuAdminSocios", "menuAdminFinanzas"];
+  items.forEach((boton, i) => boton.classList.toggle("activo", destinos[i] === id));
+}
+
+function mostrarInicioAdmin(boton){
+  ["menuAdminPartidos", "menuAdminJugadores", "menuAdminFinanzas", "menuAdminSocios"].forEach(id => {
+    document.getElementById(id).classList.add("oculto");
+  });
+  document.getElementById("bannerPartidoAdmin").classList.remove("oculto");
+  marcarMenuAdminActivo("inicio");
+  document.getElementById("administracion").scrollTo({top:0,behavior:"smooth"});
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
 function mostrarMenuAdmin(id){
+  marcarMenuAdminActivo(id);
 
   const bannerPartidoAdmin =
 document.getElementById("bannerPartidoAdmin");
@@ -15567,7 +15823,7 @@ async function cargarSaldoActualClub(){
 
       fecha: gasto.fecha,
 
-      created_at: ingreso.created_at,
+      created_at: gasto.created_at,
 
       monto: Number(gasto.monto || 0),
 
@@ -16918,6 +17174,7 @@ async function abrirFormularioEditarPartido(id){
     "";
 
   mostrar("formularioEditarPartido");
+  await cargarFormacionAdmin(partido.id);
 
 }
 
@@ -17456,6 +17713,7 @@ async function guardarTitulares(){
 
   mensaje.style.color =
   "#16803c";
+  await cargarFormacionAdmin(partidoId);
 
 }
 
@@ -20575,6 +20833,160 @@ function volverGestionJugadores(){
 
 }
 
+// =====================================
+// FORMACIÓN TÁCTICA - ADMIN Y PÚBLICO
+// =====================================
+const ESQUEMAS_FERIA = {
+  "4-3-3": [3,3,4,1],
+  "4-4-2": [2,4,4,1],
+  "3-4-3": [3,4,3,1],
+  "4-2-1-3": [3,1,2,4,1]
+};
+
+function puestosEsquemaFeria(esquema){
+  const filas = ESQUEMAS_FERIA[esquema] || [];
+  const puestos = [];
+  filas.forEach(function(cantidad, fila){
+    for(let i=1;i<=cantidad;i++) puestos.push("F"+(fila+1)+"P"+i);
+  });
+  return puestos;
+}
+
+let titularesFormacionAdmin = [];
+let asignacionesFormacionAdmin = {};
+
+async function cargarFormacionAdmin(partidoId){
+  const mensaje = document.getElementById("mensajeFormacionAdmin");
+  const selector = document.getElementById("editarFormacionOficial");
+  mensaje.textContent = "⏳ Cargando formación...";
+  selector.value = "";
+  titularesFormacionAdmin = [];
+  asignacionesFormacionAdmin = {};
+  const [partidoRes, jugadoresRes] = await Promise.all([
+    supabaseClient.from("Partidos").select("formacion").eq("id",partidoId).single(),
+    supabaseClient.from("PartidoJugadores")
+      .select("jugador_id,posicion_cancha,Jugadores(id,name,number,photo_url)")
+      .eq("partido_id",partidoId).eq("tipo","Titular")
+  ]);
+  if(partidoRes.error || jugadoresRes.error){
+    console.error(partidoRes.error || jugadoresRes.error);
+    mensaje.textContent = "⚠️ No se pudo cargar la formación. Comprueba la columna formacion en Supabase.";
+    return;
+  }
+  selector.value = ESQUEMAS_FERIA[partidoRes.data.formacion] ? partidoRes.data.formacion : "";
+  titularesFormacionAdmin = jugadoresRes.data || [];
+  titularesFormacionAdmin.forEach(function(item){
+    if(item.posicion_cancha && /^F[1-5]P[1-4]$/.test(item.posicion_cancha)){
+      asignacionesFormacionAdmin[item.posicion_cancha] = String(item.jugador_id);
+    }
+  });
+  mensaje.textContent = "";
+  prepararFormacionAdmin(true);
+}
+
+function elegirEsquemaAdmin(esquema){
+  document.getElementById("editarFormacionOficial").value = esquema;
+  prepararFormacionAdmin();
+}
+
+function prepararFormacionAdmin(conservar=false){
+  const esquema = document.getElementById("editarFormacionOficial").value;
+  const contenedor = document.getElementById("puestosFormacionAdmin");
+  if(!conservar) asignacionesFormacionAdmin = {};
+  document.querySelectorAll("#botonesEsquemaFeria button").forEach(function(boton){
+    boton.classList.toggle("activo", boton.textContent.trim() === esquema);
+  });
+  if(!esquema){
+    contenedor.innerHTML = '<div class="cancha-admin-feria cancha-admin-vacia"><span>⚽ Selecciona una formación abajo para comenzar</span></div>';
+    return;
+  }
+  const filas = ESQUEMAS_FERIA[esquema];
+  contenedor.innerHTML = '<div class="cancha-admin-feria">' + filas.map(function(cantidad, fila){
+    return '<div class="linea-admin-feria">' + Array.from({length:cantidad},function(_, i){
+      const puesto = "F"+(fila+1)+"P"+(i+1);
+      const valor = asignacionesFormacionAdmin[puesto] || "";
+      const item = titularesFormacionAdmin.find(x=>String(x.jugador_id)===valor);
+      const jugador = item && item.Jugadores;
+      const nombre = jugador ? String(jugador.name || "Jugador") : "Elegir";
+      const foto = jugador && jugador.photo_url ? '<img src="'+jugador.photo_url+'" alt="">' : '<span>👤</span>';
+      const inicial = jugador ? String(jugador.number ?? "-") : "+";
+      const opciones = titularesFormacionAdmin.map(function(item){
+        const j = item.Jugadores;
+        if(!j) return "";
+        const nombreOpcion = String(j.name || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll('"',"&quot;");
+        return '<option value="'+item.jugador_id+'" '+(String(item.jugador_id)===valor?'selected':'')+'>'+nombreOpcion+'</option>';
+      }).join("");
+      return '<div class="puesto-cancha-admin"><div class="avatar-cancha-admin">'+foto+'<small>'+inicial+'</small></div>'+
+        '<strong>'+nombre.replaceAll("&","&amp;").replaceAll("<","&lt;")+'</strong>'+
+        '<select aria-label="Asignar '+puesto+'" data-puesto="'+puesto+'" onchange="actualizarAsignacionTactica(this)"><option value="">Elegir jugador</option>'+opciones+'</select></div>';
+    }).join("")+'</div>';
+  }).join("")+'</div>';
+}
+
+function actualizarAsignacionTactica(select){
+  const puesto = select.dataset.puesto;
+  const valor = select.value;
+  if(valor && Object.entries(asignacionesFormacionAdmin).some(([p,id])=>p!==puesto && id===valor)){
+    alert("Este jugador ya está asignado en otra posición.");
+    select.value = asignacionesFormacionAdmin[puesto] || "";
+    return;
+  }
+  asignacionesFormacionAdmin[puesto] = valor;
+  prepararFormacionAdmin(true);
+}
+
+async function guardarFormacionAdmin(){
+  const id = Number(document.getElementById("editarPartidoId").value);
+  const esquema = document.getElementById("editarFormacionOficial").value;
+  const mensaje = document.getElementById("mensajeFormacionAdmin");
+  const puestos = puestosEsquemaFeria(esquema);
+  const valores = puestos.map(p => asignacionesFormacionAdmin[p] || "");
+  if(esquema && (titularesFormacionAdmin.length !== 11 || valores.some(v=>!v) || new Set(valores).size !== 11)){
+    mensaje.textContent = "⚠️ Debes tener 11 titulares y asignar cada jugador una sola vez.";
+    return;
+  }
+  mensaje.textContent = "⏳ Guardando formación...";
+  // Primero se actualizan las posiciones. Si falla alguna, no se publica la formación.
+  for(const item of titularesFormacionAdmin){
+    const puesto = esquema ? puestos.find(p=>asignacionesFormacionAdmin[p]===String(item.jugador_id)) : null;
+    const {error} = await supabaseClient.from("PartidoJugadores")
+      .update({posicion_cancha:puesto})
+      .eq("partido_id",id).eq("jugador_id",item.jugador_id).eq("tipo","Titular");
+    if(error){console.error(error);mensaje.textContent="❌ Error guardando posiciones. Intenta nuevamente.";return;}
+  }
+  const {error} = await supabaseClient.from("Partidos").update({formacion:esquema || null}).eq("id",id);
+  if(error){console.error(error);mensaje.textContent="❌ Error guardando el esquema.";return;}
+  mensaje.textContent = "✅ Formación oficial guardada correctamente.";
+}
+
+function crearCanchaTacticaPublica(titulares, esquema){
+  const puestos = puestosEsquemaFeria(esquema);
+  const asignados = titulares.filter(item=>puestos.includes(item.posicion_cancha));
+  if(!esquema || asignados.length !== 11 || new Set(asignados.map(x=>x.posicion_cancha)).size !== 11){
+    return `<div class="linea-cancha linea-delanteros">${crearLineaCancha(titulares,"Delantero")}</div>
+      <div class="linea-cancha linea-medios">${crearLineaCancha(titulares,"Medio")}</div>
+      <div class="linea-cancha linea-defensas">${crearLineaCancha(titulares,"Defensa")}</div>
+      <div class="linea-cancha linea-arquero">${crearLineaCancha(titulares,"Arquero")}</div>`;
+  }
+  const filas = ESQUEMAS_FERIA[esquema];
+  return filas.map(function(cantidad,fila){
+    const jugadores = Array.from({length:cantidad},function(_,i){
+      return asignados.find(item=>item.posicion_cancha==="F"+(fila+1)+"P"+(i+1));
+    }).filter(Boolean);
+    return `<div class="linea-cancha">${jugadores.map(item=>crearJugadorCanchaTactica(item.Jugadores)).join("")}</div>`;
+  }).join("");
+}
+
+function crearJugadorCanchaTactica(jugador){
+  if(!jugador) return "";
+  const foto = jugador.photo_url
+    ? `<img src="${jugador.photo_url}" alt="">`
+    : `<div class="jugador-cancha-sin-foto">👤</div>`;
+  return `<div class="jugador-cancha"><div class="foto-jugador-cancha">${foto}
+    <span class="numero-jugador-cancha">${jugador.number ?? "-"}</span></div>
+    <strong>${jugador.name || "Jugador"}</strong></div>`;
+}
+
 async function verDetallePartido(partidoId){
 
   mostrar("detallePartido");
@@ -20614,6 +21026,7 @@ async function verDetallePartido(partidoId){
       goles_contra,
       estado,
       jornada,
+      formacion,
       categories(name)
     `)
     .eq("id", partidoId)
@@ -21068,31 +21481,15 @@ if(goles && goles.length > 0){
   <span>FORMACIÓN OFICIAL</span>
 
   <strong class="formacion-oficial-valor">
-    Por confirmar
+    ${partido.formacion || "Por confirmar"}
   </strong>
 
 </div>
 
 
      <div class="cancha-formacion">
-
-  <div class="linea-cancha linea-delanteros">
-    ${crearLineaCancha(titulares, "Delantero")}
-  </div>
-
-  <div class="linea-cancha linea-medios">
-    ${crearLineaCancha(titulares, "Medio")}
-  </div>
-
-  <div class="linea-cancha linea-defensas">
-    ${crearLineaCancha(titulares, "Defensa")}
-  </div>
-
-  <div class="linea-cancha linea-arquero">
-    ${crearLineaCancha(titulares, "Arquero")}
-  </div>
-
-</div>
+       ${crearCanchaTacticaPublica(titulares, partido.formacion)}
+     </div>
 
     </div>
 
@@ -21658,5 +22055,47 @@ if(
 }, { passive:true });
 
 
+
+
+/* Portal de socios: pantalla visual, acceso seguro pendiente de implementar */
+function mostrarPortalSociosPublico(boton){
+  ocultarTodo();
+  controlarPortadaPublica(false);
+  const portal=document.getElementById('portalSociosPublico');
+  portal.classList.remove('oculto');
+  document.querySelectorAll('.menu-inferior-publico:not(.menu-inferior-admin) .menu-inferior-item')
+    .forEach(el=>el.classList.remove('activo'));
+  if(boton) boton.classList.add('activo');
+  portal.scrollTop=0;
+}
+function avisoPortalSocios(){
+  alert('El portal de socios está en construcción. El acceso se habilitará cuando configuremos cuentas individuales y permisos seguros.');
+}
+const _feriaMostrarOriginal=mostrar;
+mostrar=function(id){
+  const portal=document.getElementById('portalSociosPublico');
+  if(portal)portal.classList.add('oculto');
+  return _feriaMostrarOriginal.apply(this,arguments);
+};
+const _feriaMostrarInicioOriginal=mostrarInicioPublico;
+mostrarInicioPublico=function(boton){
+  const portal=document.getElementById('portalSociosPublico');
+  if(portal)portal.classList.add('oculto');
+  return _feriaMostrarInicioOriginal.apply(this,arguments);
+};
+/* Flechas: conservan el manejador existente para no romper la navegación */
+function normalizarFlechasVolverFeria(){
+ document.querySelectorAll('button').forEach(btn=>{
+  if(btn.dataset.flechaFeria)return;
+  const texto=btn.textContent.trim();
+  if(!/^([←‹]|⬅)\s*volver(?:\s+.*)?$/i.test(texto))return;
+  btn.dataset.flechaFeria='1';btn.dataset.textoAnteriorFeria=texto;
+  btn.textContent='←';btn.classList.add('boton-volver-solo');
+  btn.setAttribute('aria-label',texto);
+  btn.title=texto;
+ });
+}
+normalizarFlechasVolverFeria();
+new MutationObserver(normalizarFlechasVolverFeria).observe(document.body,{childList:true,subtree:true});
 
 </script>  </body>  </html>
