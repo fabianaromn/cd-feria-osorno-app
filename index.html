@@ -1088,7 +1088,7 @@ font-size: 16px;
 
   object-fit:contain;
 
-  margin-bottom:10px;
+  ;
 
   filter:
     drop-shadow(0 5px 8px rgba(0,0,0,.32));
@@ -7156,6 +7156,23 @@ overflow-x:hidden;
 #resumenFinanciero select,#movimientosFinancieros select{color:#fff!important;color-scheme:dark;}
 #resumenFinanciero select option,#movimientosFinancieros select option{background:#102650;color:#fff;}
 
+
+
+/* CONTRASTE EN TARJETAS DE CUOTAS */
+.tarjeta-cuota,
+.card-cuota,
+.cuota-card {
+  background: #ffffff;
+  color: #102447;
+}
+
+.tarjeta-cuota *,
+.card-cuota *,
+.cuota-card * {
+  color: #102447;
+}
+
+
 </style>  
 
   
@@ -12020,6 +12037,70 @@ class="seccion oculto detalle-partido-publico">
   <button type="button" onclick="avisoPortalSocios()">Ingresar a mi cuenta</button>
   <p class="portal-socios-aviso">Estamos preparando el acceso privado de socios. Todavía no está habilitada la consulta de datos personales.</p>
  </div>
+
+
+<!-- ÁREA PRIVADA DEL SOCIO -->
+<div id="portalSocioPrivado"
+     class="oculto"
+     style="margin-top:16px;">
+
+  <div style="
+    background:linear-gradient(135deg,#102b60,#06142f);
+    border:1px solid #365487;
+    border-radius:18px;
+    padding:22px;
+    color:white;
+  ">
+
+    <p style="color:#ff5262;font-size:12px;font-weight:bold;">
+      CD FERIA OSORNO · CREDENCIAL DIGITAL
+    </p>
+
+    <p id="credencialNumero"
+       style="margin-top:20px;color:#b8c9e8;">
+    </p>
+
+    <h2 id="credencialNombre"
+        style="color:white;margin-top:8px;">
+    </h2>
+
+    <p id="credencialEstado"
+       style="margin-top:12px;color:#86efac;">
+    </p>
+
+    <p style="margin-top:20px;color:#b8c9e8;">
+      EL MÁS GRANDE DEL BARRIO
+    </p>
+
+  </div>
+
+<button
+  type="button"
+  class="boton"
+  style="width:100%;margin-top:16px;"
+  onclick="mostrarMisCuotasSocio()">
+  📅 Mis cuotas
+</button>
+
+<div
+  id="portalSocioCuotas"
+  class="oculto"
+  style="margin-top:15px;">
+</div>
+
+
+
+  <button
+    type="button"
+    class="boton"
+    style="width:100%;margin-top:16px;"
+    onclick="cerrarSesionSocio()">
+    🚪 Cerrar sesión de socio
+  </button>
+
+</div>
+
+
  <div class="portal-socios-beneficios">
   <div>📅 Mis cuotas</div><div>🎁 Beneficios</div>
   <div>🏷️ Descuentos</div><div>📰 Boletines</div>
@@ -12232,9 +12313,36 @@ function controlarPortadaPublica(mostrarPortada){
 }
 
 
-function mostrar(id){
+
+async function mostrar(id){
+
+  // Pantallas que requieren permisos administrativos
+  const pantallasAdmin = [
+    "administracion",
+    "listaSocios",
+    "registrarPagoSocio",
+    "estadoCuotasSocios",
+    "resumenFinanciero",
+    "movimientosFinancieros",
+    "editarJugador",
+    "editarPartido",
+    "eliminarPartido"
+  ];
+
+  if(pantallasAdmin.includes(id)){
+
+    const { data: esAdmin, error } =
+      await supabaseClient.rpc("es_administrador");
+
+    if(error || esAdmin !== true){
+      alert("⛔ Acceso exclusivo para administradores.");
+      return;
+    }
+
+  }
 
   ocultarTodo();
+
 
   document.getElementById(id).classList.remove("oculto");
 
@@ -13165,14 +13273,25 @@ mostrar("agregarJugador");
 
 
   
+
 async function mostrarAgregarPartido(){
 
-const { data } = await supabaseClient.auth.getSession();
+  const { data, error } =
+    await supabaseClient.auth.getSession();
 
-if(!data.session){
-mostrar("login");
-return;
-}
+  if(error || !data.session){
+    mostrar("login");
+    return;
+  }
+
+  const { data: esAdmin, error: errorAdmin } =
+    await supabaseClient.rpc("es_administrador");
+
+  if(errorAdmin || esAdmin !== true){
+    alert("⛔ Acceso exclusivo para administradores.");
+    return;
+  }
+
 
 mostrar("agregarPartido");
 }
@@ -13205,34 +13324,54 @@ async function cerrarSesion(){
 
 }
 
-  
 async function iniciarSesion(){
 
-const email = document.getElementById("loginEmail").value.trim();
-const password = document.getElementById("loginPassword").value;
-const mensaje = document.getElementById("mensajeLogin");
+  const email =
+    document.getElementById("loginEmail").value.trim();
 
-if(!email || !password){
-mensaje.innerText = "⚠️ Completa correo y contraseña.";
-return;
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const mensaje =
+    document.getElementById("mensajeLogin");
+
+  if(!email || !password){
+    mensaje.innerText = "⚠️ Completa correo y contraseña.";
+    return;
+  }
+
+  mensaje.innerText = "⏳ Iniciando sesión...";
+
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+    mensaje.innerText = "❌ Correo o contraseña incorrectos.";
+    return;
+  }
+
+  // Verificar autorización administrativa
+  const { data: esAdmin, error: errorAdmin } =
+    await supabaseClient.rpc("es_administrador");
+
+  if(errorAdmin || esAdmin !== true){
+
+    await supabaseClient.auth.signOut();
+
+    mensaje.innerText =
+      "⛔ Esta cuenta no tiene permisos de administrador.";
+
+    return;
+  }
+
+  mensaje.innerText = "✅ Sesión administrativa iniciada.";
+
+  mostrar("administracion");
 }
 
-mensaje.innerText = "⏳ Iniciando sesión...";
-
-const { data, error } = await supabaseClient.auth.signInWithPassword({
-email: email,
-password: password
-});
-
-if(error){
-mensaje.innerText = "❌ Correo o contraseña incorrectos.";
-return;
-}
-
-mensaje.innerText = "✅ Sesión iniciada.";
-
-mostrar("administracion");
-}
 
 
 async function guardarJugador(){
@@ -14670,12 +14809,16 @@ async function cargarEstadoCuotas(){
 
 
       html += `
-        <div
-        class="card"
-        style="
-        margin-bottom:10px;
-        text-align:left;
-        ">
+      
+<div
+class="card"
+style="
+margin-bottom:10px;
+text-align:left;
+background:#ffffff;
+color:#102447;
+">
+
 
           <div
           style="
@@ -14718,12 +14861,16 @@ async function cargarEstadoCuotas(){
     }else{
 
       html += `
-        <div
-        class="card"
-        style="
-        margin-bottom:10px;
-        text-align:left;
-        ">
+    
+<div
+class="card"
+style="
+margin-bottom:10px;
+text-align:left;
+background:#ffffff;
+color:#102447;
+">
+
 
           <div
           style="
@@ -14751,7 +14898,29 @@ async function cargarEstadoCuotas(){
   }
 
 
-  contenedor.innerHTML = html;
+  
+contenedor.innerHTML = html;
+
+contenedor.querySelectorAll(
+  ".card p, .card p strong"
+).forEach(elemento => {
+  elemento.style.setProperty(
+    "color",
+    "#102447",
+    "important"
+  );
+});
+
+contenedor.querySelectorAll(
+  ".card div > strong:first-child"
+).forEach(elemento => {
+  elemento.style.setProperty(
+    "color",
+    "#102447",
+    "important"
+  );
+});
+
 
 }
 
@@ -22068,9 +22237,87 @@ function mostrarPortalSociosPublico(boton){
   if(boton) boton.classList.add('activo');
   portal.scrollTop=0;
 }
-function avisoPortalSocios(){
-  alert('El portal de socios está en construcción. El acceso se habilitará cuando configuremos cuentas individuales y permisos seguros.');
+
+
+async function avisoPortalSocios(){
+
+  const portal =
+    document.getElementById("portalSociosPublico");
+
+  const campos = portal.querySelectorAll(
+    'input[type="email"], input[type="password"]'
+  );
+
+  const correo = campos[0]?.value.trim();
+  const clave = campos[1]?.value;
+
+  if(!correo || !clave){
+    alert("Ingresa tu correo y contraseña.");
+    return;
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: correo,
+      password: clave
+    });
+
+  if(error){
+    alert("No se pudo iniciar sesión. Revisa tus datos.");
+    return;
+  }
+
+  const { data: socioId, error: errorSocio } =
+    await supabaseClient.rpc("mi_socio_id");
+
+  if(errorSocio || !socioId){
+
+    await supabaseClient.auth.signOut();
+
+    alert("Esta cuenta no tiene una ficha de socio asociada.");
+    return;
+  }
+
+  const { data: socio, error: errorFicha } =
+    await supabaseClient
+      .from("Socios")
+      .select("id,nombre,estado")
+      .eq("id", socioId)
+      .single();
+
+  if(errorFicha || !socio){
+
+    await supabaseClient.auth.signOut();
+
+    alert("No fue posible cargar tu ficha de socio.");
+    return;
+  }
+
+  
+const areaPrivada =
+  document.getElementById("portalSocioPrivado");
+
+const formulario =
+  document.querySelector(
+    "#portalSociosPublico .portal-socios-tarjeta"
+  );
+
+document.getElementById("credencialNumero").textContent =
+  "SOCIO Nº " + String(socio.id).padStart(4, "0");
+
+document.getElementById("credencialNombre").textContent =
+  socio.nombre || "Socio CD Feria Osorno";
+
+document.getElementById("credencialEstado").textContent =
+  "● " + (socio.estado || "Estado no informado");
+
+formulario.classList.add("oculto");
+areaPrivada.classList.remove("oculto");
+
+console.log("Credencial cargada para socio:", socio.id);
+
 }
+
 const _feriaMostrarOriginal=mostrar;
 mostrar=function(id){
   const portal=document.getElementById('portalSociosPublico');
@@ -22097,5 +22344,128 @@ function normalizarFlechasVolverFeria(){
 }
 normalizarFlechasVolverFeria();
 new MutationObserver(normalizarFlechasVolverFeria).observe(document.body,{childList:true,subtree:true});
+
+
+async function cerrarSesionSocio(){
+
+  const { error } =
+    await supabaseClient.auth.signOut();
+
+  if(error){
+    alert("No se pudo cerrar la sesión.");
+    return;
+  }
+
+  document.getElementById("portalSocioPrivado")
+    .classList.add("oculto");
+
+  document.querySelector(
+    "#portalSociosPublico .portal-socios-tarjeta"
+  ).classList.remove("oculto");
+
+  document.getElementById("portalSocioClave").value = "";
+
+  document.getElementById("credencialNombre").textContent = "";
+  document.getElementById("credencialNumero").textContent = "";
+  document.getElementById("credencialEstado").textContent = "";
+}
+
+
+async function mostrarMisCuotasSocio(){
+
+  const contenedor =
+    document.getElementById("portalSocioCuotas");
+
+  contenedor.classList.remove("oculto");
+  contenedor.textContent = "Cargando cuotas...";
+
+  const { data: socioId, error: errorId } =
+    await supabaseClient.rpc("mi_socio_id");
+
+  if(errorId || !socioId){
+    contenedor.textContent =
+      "No se pudo identificar al socio.";
+    return;
+  }
+
+  const anio = new Date().getFullYear();
+
+  const { data: pagos, error } =
+    await supabaseClient
+      .from("PagoSocios")
+      .select("mes,monto,fecha_pago")
+      .eq("socios_id", socioId)
+      .eq("anio", anio);
+
+  if(error){
+    contenedor.textContent =
+      "No se pudieron cargar las cuotas.";
+    return;
+  }
+
+  const meses = [
+    "Enero","Febrero","Marzo","Abril",
+    "Mayo","Junio","Julio","Agosto",
+    "Septiembre","Octubre","Noviembre","Diciembre"
+  ];
+
+  const formatoPesos =
+    new Intl.NumberFormat("es-CL", {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    });
+
+  contenedor.innerHTML = "";
+
+  meses.forEach((nombre, indice) => {
+
+    const pago = pagos.find(
+      p => Number(p.mes) === indice + 1
+    );
+
+    const tarjeta = document.createElement("div");
+
+    tarjeta.style.cssText = `
+      background:#102b60;
+      color:white;
+      padding:14px;
+      margin-bottom:8px;
+      border-radius:12px;
+      border:1px solid #365487;
+    `;
+
+    const titulo = document.createElement("strong");
+    titulo.textContent = nombre;
+
+    const estado = document.createElement("span");
+    estado.textContent = pago
+      ? "✅ Pagado"
+      : "⏳ Pendiente";
+
+    estado.style.color = pago
+      ? "#86efac"
+      : "#fda4af";
+
+    estado.style.float = "right";
+
+    tarjeta.append(titulo, estado);
+
+    if(pago){
+
+      const monto = document.createElement("p");
+      monto.style.marginTop = "8px";
+      monto.textContent =
+        "Monto: " + formatoPesos.format(pago.monto || 0);
+
+      tarjeta.appendChild(monto);
+    }
+
+    contenedor.appendChild(tarjeta);
+
+  });
+
+}
+
 
 </script>  </body>  </html>
