@@ -7244,6 +7244,14 @@ overflow-x:hidden;
 .feria-admin-beneficios .feria-admin-empresa button{margin:8px 8px 0 0;padding:8px 12px;border:0;border-radius:8px;background:#0c3474;color:#fff;cursor:pointer}
 .feria-admin-beneficios .feria-admin-empresa button:last-child{background:#bd2132}
 
+.feria-qr-boton{display:block;margin:12px auto;padding:11px 16px;border:1px solid #5075b4;border-radius:12px;background:#112d61;color:white;font-weight:800;cursor:pointer}
+.feria-qr-panel{background:#102751;color:#fff;border:1px solid #4666a0;border-radius:16px;margin:12px 0;padding:18px;text-align:center}
+.feria-qr-panel h3{color:white}.feria-qr-panel p{color:#dbe6ff;font-size:12px;margin:10px 0}
+#feriaQRCodigo{display:flex;justify-content:center;margin:14px auto}#feriaQRCodigo canvas{background:white;padding:10px;border-radius:12px;max-width:100%}
+.feria-qr-cerrar{background:#b71c32}
+#feriaVerificacionPantalla{position:fixed;inset:0;background:#06142f;z-index:999999;color:white;display:flex;align-items:center;justify-content:center;padding:20px}
+#feriaVerificacionPantalla.oculto{display:none}#feriaVerificacionPantalla>div{width:min(100%,420px);background:#112d61;padding:26px;border-radius:20px;text-align:center}
+#feriaVerificacionPantalla h2{color:white;margin:12px 0}#feriaVerificacionPantalla p{line-height:1.5}
 </style>  
 
   
@@ -12181,6 +12189,15 @@ class="seccion oculto detalle-partido-publico">
     </div>
   </div>
 
+<button type="button" id="feriaBotonVerificar" class="feria-qr-boton" onclick="feriaMostrarQR()">▦ Verificar credencial</button>
+<div id="feriaQRPanel" class="oculto feria-qr-panel" aria-live="polite">
+  <h3>Verificación de socio</h3>
+  <p>Presenta este código al comercio. Vence en 2 minutos.</p>
+  <div id="feriaQRCodigo"></div>
+  <p id="feriaQRMensaje"></p>
+  <button type="button" class="feria-qr-boton" onclick="feriaMostrarQR()">↻ Renovar código</button>
+  <button type="button" class="feria-qr-boton feria-qr-cerrar" onclick="document.getElementById('feriaQRPanel').classList.add('oculto')">Cerrar</button>
+</div>
 <div id="feriaEstadoBeneficios" class="feria-socio-estado-beneficios" role="status" aria-live="polite">Consultando estado de cuotas...</div>
 <div id="portalSocioCuotas" class="oculto feria-socio-contenido" aria-live="polite"></div>
 <div class="portal-socios-beneficios" id="feriaMenuPrivadoSocio" aria-label="Menú privado de socios">
@@ -22994,4 +23011,40 @@ async function feriaAbrirSeccionSocio(tipo){
   seccion.classList.remove("oculto");
   seccion.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
-</script>  </body>  </html>
+</script>  <div id="feriaVerificacionPantalla" class="oculto"><div><h2>CD Feria Osorno</h2><p id="feriaVerificacionResultado">Verificando credencial...</p><button type="button" class="feria-qr-boton" onclick="location.href=location.pathname">Ir al inicio</button></div></div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script>
+async function feriaMostrarQR(){
+ const panel=document.getElementById('feriaQRPanel'), mensaje=document.getElementById('feriaQRMensaje'), codigo=document.getElementById('feriaQRCodigo');
+ panel.classList.remove('oculto');codigo.replaceChildren();mensaje.textContent='Generando verificación segura...';
+ try{
+  const {data,error}=await supabaseClient.rpc('crear_verificacion_credencial');
+  if(error)throw error;
+  const url=new URL(location.href);url.search='?verificar_socio='+encodeURIComponent(data);url.hash='';
+  if(!window.QRCode)throw new Error('No se cargó el generador de códigos QR. Comprueba tu conexión.');
+  const canvas=document.createElement('canvas');codigo.appendChild(canvas);
+  await QRCode.toCanvas(canvas,url.href,{width:220,margin:1,errorCorrectionLevel:'M'});
+  mensaje.textContent='Código válido durante 2 minutos. Debe escanearse para comprobar el estado en línea.';
+ }catch(e){mensaje.textContent='No fue posible generar el código: '+(e.message||e);}
+}
+async function feriaVerificarQRDesdeURL(){
+ const token=new URLSearchParams(location.search).get('verificar_socio');
+ if(!token)return;
+ const pantalla=document.getElementById('feriaVerificacionPantalla'),resultado=document.getElementById('feriaVerificacionResultado');
+ pantalla.classList.remove('oculto');
+ try{
+  const {data,error}=await supabaseClient.rpc('verificar_credencial_publica',{p_token:token});
+  if(error)throw error;
+  const fila=Array.isArray(data)?data[0]:null;
+  if(!fila){resultado.textContent='❌ Código inválido o vencido. Solicita uno nuevo al socio.';return;}
+  resultado.replaceChildren();
+  const titulo=document.createElement('strong');titulo.textContent=fila.habilitado?'✅ BENEFICIOS HABILITADOS':'⚠️ BENEFICIOS NO HABILITADOS';
+  const datos=document.createElement('p');datos.textContent=(fila.nombre||'Socio')+' · Socio N.º '+String(fila.numero_socio).padStart(4,'0');
+  const detalle=document.createElement('p');detalle.textContent=fila.habilitado?'Cuotas al día. Verificado en línea.':'El socio debe regularizar sus cuotas.';
+  resultado.append(titulo,datos,detalle);
+ }catch(e){resultado.textContent='No fue posible verificar el código. '+(e.message||e);}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',feriaVerificarQRDesdeURL,{once:true});
+else feriaVerificarQRDesdeURL();
+</script>
+</body>  </html>
