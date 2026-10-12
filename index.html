@@ -12036,7 +12036,19 @@ class="seccion oculto detalle-partido-publico">
   <label for="portalSocioClave">Contraseña</label>
   <input id="portalSocioClave" type="password" autocomplete="current-password" placeholder="Tu contraseña">
   <button type="button" onclick="avisoPortalSocios()">Ingresar a mi cuenta</button>
-  <p class="portal-socios-aviso">Estamos preparando el acceso privado de socios. Todavía no está habilitada la consulta de datos personales.</p>
+  <button type="button" id="feriaBotonRecuperar" onclick="feriaMostrarRecuperacion()" style="display:block;width:100%;margin:2px 0 14px;padding:12px;border:1px solid #8ca6d8;border-radius:10px;background:transparent;color:#173d86;font-size:13px;font-weight:800;cursor:pointer">¿Olvidaste tu contraseña?</button>
+  <div id="feriaPanelRecuperacion" class="oculto" style="margin:12px 0 18px;padding:16px;border-radius:13px;background:#edf3ff;border:1px solid #cad9f4">
+    <h4 style="color:#071b4a;margin:0 0 8px">Recuperar acceso</h4>
+    <p style="font-size:12px;line-height:1.5;color:#344054;margin:0 0 12px">Te enviaremos un enlace para crear una nueva contraseña.</p>
+    <form id="feriaFormRecuperacion" onsubmit="feriaEnviarRecuperacion(event)">
+      <label for="feriaCorreoRecuperacion">Correo electrónico del socio</label>
+      <input id="feriaCorreoRecuperacion" type="email" autocomplete="email" placeholder="correo@ejemplo.cl" required>
+      <button type="submit" id="feriaEnviarRecuperacionBoton" style="width:100%;margin-top:10px">Enviar enlace de recuperación</button>
+    </form>
+    <p id="feriaRecuperacionMensaje" role="status" aria-live="polite" style="font-size:12px;line-height:1.5;margin-top:10px;color:#071b4a"></p>
+    <button type="button" onclick="feriaCerrarRecuperacion()" style="margin-top:8px;background:transparent;color:#071b4a;border:0;text-decoration:underline;cursor:pointer">Volver al ingreso</button>
+  </div>
+  <p class="portal-socios-aviso">Acceso exclusivo para socios registrados del club.</p>
  </div>
 
 
@@ -22278,12 +22290,8 @@ async function avisoPortalSocios(){
   const portal =
     document.getElementById("portalSociosPublico");
 
-  const campos = portal.querySelectorAll(
-    'input[type="email"], input[type="password"]'
-  );
-
-  const correo = campos[0]?.value.trim();
-  const clave = campos[1]?.value;
+  const correo = document.getElementById("portalSocioCorreo").value.trim();
+  const clave = document.getElementById("portalSocioClave").value;
 
   if(!correo || !clave){
     alert("Ingresa tu correo y contraseña.");
@@ -22503,6 +22511,40 @@ async function mostrarMisCuotasSocio(){
 
 
 
+
+/* Recuperación de acceso de socios por correo, sin crear nuevas cuentas. */
+function feriaMostrarRecuperacion(){
+  const panel = document.getElementById("feriaPanelRecuperacion");
+  panel.classList.remove("oculto");
+  document.getElementById("feriaCorreoRecuperacion").value =
+    document.getElementById("portalSocioCorreo").value.trim();
+  document.getElementById("feriaRecuperacionMensaje").textContent = "";
+  document.getElementById("feriaCorreoRecuperacion").focus();
+}
+function feriaCerrarRecuperacion(){
+  document.getElementById("feriaPanelRecuperacion").classList.add("oculto");
+}
+async function feriaEnviarRecuperacion(event){
+  event.preventDefault();
+  const correo = document.getElementById("feriaCorreoRecuperacion").value.trim();
+  const mensaje = document.getElementById("feriaRecuperacionMensaje");
+  const boton = document.getElementById("feriaEnviarRecuperacionBoton");
+  if(!correo) return;
+  boton.disabled = true;
+  mensaje.textContent = "Enviando solicitud...";
+  try{
+    const {error} = await supabaseClient.auth.resetPasswordForEmail(correo, {
+      redirectTo: "https://fabianaromn.github.io/cd-feria-osorno-app/"
+    });
+    if(error) throw error;
+    mensaje.textContent = "Si el correo está registrado, recibirás un enlace para restablecer tu contraseña. Revisa también Spam.";
+  }catch(error){
+    mensaje.textContent = "No se pudo enviar el enlace en este momento. Espera unos minutos e inténtalo nuevamente.";
+    console.error("Error al solicitar recuperación:", error);
+  }finally{
+    boton.disabled = false;
+  }
+}
 
 /* ===========================================================
    ACTIVACIÓN DE SOCIOS POR INVITACIÓN SUPABASE
