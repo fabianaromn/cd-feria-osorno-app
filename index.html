@@ -7287,6 +7287,41 @@ overflow-x:hidden;
 .tienda-producto button{width:100%;font-size:12px}.tienda-panel{background:#fff;color:#071b4a;border-radius:16px;padding:16px;margin-top:16px}
 .tienda-panel input,.tienda-panel textarea,.tienda-panel select,.tienda-admin input,.tienda-admin textarea{display:block;width:100%;padding:12px;margin:5px 0 12px;border:1px solid #cbd5e1;border-radius:9px;color:#111827}
 .tienda-admin{background:white;border-radius:16px;padding:15px;margin:14px}.tienda-admin label{font-weight:700;font-size:13px}.tienda-fila{padding:12px 0;border-bottom:1px solid #ddd}.tienda-fila button{margin:4px}
+
+/* CARRITO FERIA OSORNO · azul marino, rojo institucional y blanco */
+#store .tienda-panel{background:transparent;color:#fff;padding:0;margin-top:28px;border-radius:0}
+#store .tienda-carrito-cabecera{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:4px 2px 12px;border-bottom:1px solid rgba(255,255,255,.16)}
+#store .tienda-carrito-cabecera small{display:block;color:#ff4052;font-size:9px;font-weight:900;letter-spacing:1.1px;margin-bottom:5px}
+#store .tienda-carrito-cabecera h3{color:#fff;font-size:23px;font-weight:900}
+#store .tienda-carrito-cabecera h3 span{font-size:15px;color:#a9bde0}
+#store .tienda-carrito-icono{display:grid;place-items:center;background:#123c8c;border:1px solid #3566b1;border-radius:13px;width:48px;height:48px;font-size:23px}
+#store .tienda-fila{display:flex;gap:13px;align-items:center;background:#fff;border:1px solid #dfe5ef;border-radius:16px;padding:12px;margin-bottom:10px;color:#071b4a;box-shadow:0 5px 16px rgba(0,0,0,.14)}
+#store .tienda-carrito-foto{width:88px;height:95px;flex:0 0 88px;object-fit:cover;border-radius:12px;background:#e9eef6}
+#store .tienda-carrito-detalle{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+#store .tienda-carrito-detalle strong{font-size:14px;line-height:1.2;color:#071b4a}
+#store .tienda-carrito-detalle small{font-size:9px;color:#c82032;font-weight:900;letter-spacing:.7px}
+#store .tienda-carrito-detalle b{font-size:15px;color:#071b4a}
+#store .tienda-carrito-controles{display:flex;justify-content:space-between;align-items:center;margin-top:3px}
+#store .tienda-cantidad{display:flex;align-items:center;gap:0;background:#f0f3f8;border-radius:9px;overflow:hidden}
+#store .tienda-cantidad button{background:transparent;border:0;margin:0;padding:8px 12px;color:#071b4a;font-weight:900;font-size:17px;cursor:pointer}
+#store .tienda-cantidad button:disabled{opacity:.35}
+#store .tienda-cantidad span{min-width:22px;text-align:center;font-size:13px;font-weight:900}
+#store .tienda-eliminar{background:#fff1f2;border:0;border-radius:8px;color:#c82032;font-size:16px;margin:0;padding:8px 10px;cursor:pointer}
+#store .tienda-vacio{background:#102852;border:1px dashed #5472a4;border-radius:14px;padding:20px;text-align:center;color:#c9d8ee;font-size:13px}
+#store .tienda-resumen{background:#fff;border-radius:17px;color:#071b4a;padding:18px 16px;margin-top:14px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+#store .tienda-resumen>span{display:block;font-size:11px;font-weight:900;letter-spacing:.7px;margin-bottom:15px}
+#store .tienda-resumen-linea{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:#64748b;margin-bottom:12px}
+#store .tienda-resumen-linea strong{color:#071b4a}
+#store .tienda-resumen-total{padding-top:13px;border-top:1px solid #e5eaf2;color:#071b4a;font-weight:900;font-size:16px}
+#store .tienda-resumen-total strong{font-size:21px}
+#store .tienda-continuar{display:block;width:100%;background:#c82032;border:0;border-radius:12px;padding:15px 12px;color:#fff;font-size:14px;font-weight:900;cursor:pointer}
+#store .tienda-continuar:disabled{background:#9da6b8;cursor:not-allowed}
+#store #tiendaCheckout{background:#fff;color:#071b4a;border-radius:16px;padding:18px 15px;margin-top:15px}
+#store .tienda-checkout-titulo{font-size:17px;color:#071b4a;margin-bottom:14px}
+#store #tiendaCheckout label{display:block;font-size:12px;font-weight:800;margin-bottom:10px}
+#store #tiendaCheckout .tienda-rojo{width:100%;margin-top:8px}
+@media(max-width:360px){#store .tienda-carrito-foto{width:72px;height:82px;flex-basis:72px}#store .tienda-fila{gap:9px;padding:9px}}
+
 </style>  
 
   
@@ -12363,8 +12398,8 @@ onclick="volver()">
 <button class="boton" onclick="volver()">← Volver</button>
 <h2>🛒 Tienda Oficial</h2><p style="color:#a9bde0">El más grande del barrio · Productos oficiales</p>
 <div id="tiendaAviso" role="status"></div><div id="tiendaCatalogo" class="tienda-grid"></div>
-<div class="tienda-panel"><h3>🛍️ Carrito <span id="tiendaContador">(0)</span></h3><div id="tiendaCarrito"></div><strong id="tiendaTotal"></strong>
-<div id="tiendaCheckout" class="oculto">
+<div class="tienda-panel"><div class="tienda-carrito-cabecera"><div><small>TIENDA OFICIAL · CD FERIA OSORNO</small><h3>🛍️ Mi carrito <span id="tiendaContador">(0)</span></h3></div><span class="tienda-carrito-icono">🛒</span></div><div id="tiendaCarrito"></div><div class="tienda-resumen"><span>RESUMEN DEL PEDIDO</span><div class="tienda-resumen-linea"><span>Subtotal</span><strong id="tiendaSubtotal">$0</strong></div><div class="tienda-resumen-linea tienda-resumen-total"><span>Total a pagar</span><strong id="tiendaTotal">$0</strong></div><button type="button" id="tiendaContinuar" class="tienda-continuar" onclick="tiendaMostrarCheckout()">🔒 Continuar compra →</button></div>
+<div id="tiendaCheckout" class="oculto"><h3 class="tienda-checkout-titulo">Datos para finalizar tu pedido</h3>
 <label>Nombre del comprador<input id="tiendaCliente" maxlength="120" autocomplete="name"></label>
 <label>Correo electrónico<input id="tiendaEmail" type="email" autocomplete="email"></label>
 <label>Teléfono<input id="tiendaTelefono" type="tel" maxlength="30"></label>
@@ -23151,11 +23186,37 @@ async function tiendaCargarCatalogo(){
 }
 function tiendaAgregar(id){const p=tiendaProductos.find(x=>x.id===id);if(!p)return;const q=tiendaItems[id]||0;if(q>=p.stock)return alert('No hay más unidades disponibles');tiendaItems[id]=q+1;tiendaRenderCarrito()}
 function tiendaCambiar(id,n){const p=tiendaProductos.find(x=>x.id===id);if(!p)return;tiendaItems[id]=Math.max(0,Math.min(p.stock,(tiendaItems[id]||0)+n));tiendaRenderCarrito()}
-function tiendaRenderCarrito(){const area=document.getElementById('tiendaCarrito');area.replaceChildren();let total=0,cantidad=0;
- Object.entries(tiendaItems).forEach(([id,q])=>{if(!q)return;const p=tiendaProductos.find(x=>String(x.id)===id);if(!p)return;total+=p.precio*q;cantidad+=q;
- const fila=document.createElement('div');fila.className='tienda-fila';const name=document.createElement('span');name.textContent=p.nombre+' · '+tiendaDinero(p.precio)+' × '+q+' ';
- const menos=document.createElement('button');menos.textContent='−';menos.onclick=()=>tiendaCambiar(p.id,-1);const mas=document.createElement('button');mas.textContent='+';mas.onclick=()=>tiendaCambiar(p.id,1);fila.append(name,menos,mas);area.append(fila)});
- document.getElementById('tiendaContador').textContent='('+cantidad+')';document.getElementById('tiendaTotal').textContent='Total: '+tiendaDinero(total);document.getElementById('tiendaCheckout').classList.toggle('oculto',!cantidad);
+function tiendaMostrarCheckout(){
+ const checkout=document.getElementById('tiendaCheckout');
+ checkout.classList.remove('oculto');
+ checkout.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function tiendaRenderCarrito(){
+ const area=document.getElementById('tiendaCarrito');area.replaceChildren();let total=0,cantidad=0;
+ Object.entries(tiendaItems).forEach(([id,q])=>{
+  if(!q)return;const p=tiendaProductos.find(x=>String(x.id)===id);if(!p)return;
+  total+=p.precio*q;cantidad+=q;
+  const fila=document.createElement('div');fila.className='tienda-fila';
+  const foto=document.createElement('img');foto.className='tienda-carrito-foto';foto.src=p.imagen_url||'img/escudo.png';foto.alt=p.nombre;foto.loading='lazy';
+  const detalle=document.createElement('div');detalle.className='tienda-carrito-detalle';
+  const nombre=document.createElement('strong');nombre.textContent=p.nombre;
+  const tipo=document.createElement('small');tipo.textContent='PRODUCTO OFICIAL';
+  const precio=document.createElement('b');precio.textContent=tiendaDinero(p.precio);
+  const controles=document.createElement('div');controles.className='tienda-carrito-controles';
+  const cantidadControl=document.createElement('div');cantidadControl.className='tienda-cantidad';
+  const menos=document.createElement('button');menos.type='button';menos.textContent='−';menos.setAttribute('aria-label','Disminuir cantidad');menos.onclick=()=>tiendaCambiar(p.id,-1);
+  const valor=document.createElement('span');valor.textContent=q;
+  const mas=document.createElement('button');mas.type='button';mas.textContent='+';mas.setAttribute('aria-label','Aumentar cantidad');mas.disabled=q>=p.stock;mas.onclick=()=>tiendaCambiar(p.id,1);
+  cantidadControl.append(menos,valor,mas);
+  const eliminar=document.createElement('button');eliminar.type='button';eliminar.className='tienda-eliminar';eliminar.textContent='🗑';eliminar.title='Eliminar producto';eliminar.setAttribute('aria-label','Eliminar producto');eliminar.onclick=()=>{delete tiendaItems[p.id];tiendaRenderCarrito()};
+  controles.append(cantidadControl,eliminar);detalle.append(nombre,tipo,precio,controles);fila.append(foto,detalle);area.append(fila);
+ });
+ if(!cantidad){const vacio=document.createElement('p');vacio.className='tienda-vacio';vacio.textContent='Tu carrito está vacío. Agrega productos oficiales para comenzar.';area.append(vacio)}
+ document.getElementById('tiendaContador').textContent='('+cantidad+')';
+ document.getElementById('tiendaSubtotal').textContent=tiendaDinero(total);
+ document.getElementById('tiendaTotal').textContent=tiendaDinero(total);
+ document.getElementById('tiendaContinuar').disabled=!cantidad;
+ if(!cantidad)document.getElementById('tiendaCheckout').classList.add('oculto');
 }
 async function tiendaConfirmarPedido(){
  const nombre=document.getElementById('tiendaCliente').value.trim(),email=document.getElementById('tiendaEmail').value.trim(),telefono=document.getElementById('tiendaTelefono').value.trim(),metodo=document.getElementById('tiendaMetodo').value;
