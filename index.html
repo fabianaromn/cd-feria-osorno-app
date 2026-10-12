@@ -22502,4 +22502,125 @@ async function mostrarMisCuotasSocio(){
 }
 
 
+
+
+/* ===========================================================
+   ACTIVACIÓN DE SOCIOS POR INVITACIÓN SUPABASE
+   Compatible con enlaces invite/recovery, tokens y PKCE.
+   =========================================================== */
+const FERIA_URL_PUBLICA = "https://fabianaromn.github.io/cd-feria-osorno-app/";
+let feriaActivacionEnCurso = false;
+
+function feriaEsEnlaceActivacion(){
+  const query = new URLSearchParams(window.location.search);
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const tipo = query.get("type") || hash.get("type");
+  return ["invite", "recovery"].includes(tipo) ||
+    query.has("token_hash") || query.has("code") ||
+    (hash.has("access_token") && ["invite", "recovery"].includes(tipo));
+}
+
+function feriaMostrarActivacion(mensaje = "Crea una contraseña para activar tu acceso al Portal de Socios."){
+  let panel = document.getElementById("feriaActivacionSocio");
+  if(!panel){
+    panel = document.createElement("section");
+    panel.id = "feriaActivacionSocio";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-label", "Activar cuenta de socio");
+    panel.style.cssText = "position:fixed;inset:0;z-index:200000;background:#06142f;color:white;overflow-y:auto;padding:55px 18px;display:flex;align-items:flex-start;justify-content:center";
+    panel.innerHTML = `
+      <div style="width:100%;max-width:440px;background:#102650;border:1px solid #34548a;border-radius:20px;padding:25px 20px;box-shadow:0 16px 45px #0005">
+        <p style="font-size:11px;font-weight:900;color:#ff4657;letter-spacing:1px">CD FERIA OSORNO · PORTAL DE SOCIOS</p>
+        <h2 style="font-size:26px;margin:12px 0;color:white">Activa tu cuenta</h2>
+        <p id="feriaActivacionMensaje" style="font-size:13px;line-height:1.5;color:#d4e0f5;margin-bottom:20px"></p>
+        <form id="feriaFormularioActivacion">
+          <label for="feriaClaveNueva" style="display:block;margin:12px 0 6px;font-weight:700">Nueva contraseña</label>
+          <input id="feriaClaveNueva" type="password" minlength="8" autocomplete="new-password" required placeholder="Mínimo 8 caracteres" style="width:100%;padding:14px;border-radius:10px;background:#071936;border:1px solid #5371a0;color:white">
+          <label for="feriaClaveConfirmar" style="display:block;margin:15px 0 6px;font-weight:700">Repetir contraseña</label>
+          <input id="feriaClaveConfirmar" type="password" minlength="8" autocomplete="new-password" required placeholder="Repite tu contraseña" style="width:100%;padding:14px;border-radius:10px;background:#071936;border:1px solid #5371a0;color:white">
+          <button id="feriaGuardarClave" type="submit" style="width:100%;margin-top:20px;padding:15px;border:0;border-radius:11px;background:#ed1c2e;color:white;font-weight:900;cursor:pointer">Activar mi cuenta</button>
+        </form>
+        <p id="feriaActivacionEstado" role="status" style="font-size:13px;line-height:1.5;margin-top:15px;color:#ffb7bf"></p>
+        <button id="feriaIrPortal" type="button" hidden style="width:100%;margin-top:14px;padding:14px;border:1px solid #7891c1;border-radius:11px;background:#183a74;color:white;font-weight:800">Ir al Portal de Socios</button>
+      </div>`;
+    document.body.appendChild(panel);
+    document.getElementById("feriaFormularioActivacion").addEventListener("submit", feriaGuardarContrasenaInvitado);
+    document.getElementById("feriaIrPortal").addEventListener("click", () => {
+      window.history.replaceState({}, "", window.location.pathname);
+      panel.remove();
+      mostrarPortalSociosPublico();
+    });
+  }
+  document.getElementById("feriaActivacionMensaje").textContent = mensaje;
+  return panel;
+}
+
+async function feriaGuardarContrasenaInvitado(event){
+  event.preventDefault();
+  const clave = document.getElementById("feriaClaveNueva").value;
+  const confirmar = document.getElementById("feriaClaveConfirmar").value;
+  const estado = document.getElementById("feriaActivacionEstado");
+  if(clave.length < 8 || clave !== confirmar){
+    estado.textContent = "Las contraseñas deben coincidir y tener al menos 8 caracteres.";
+    return;
+  }
+  const boton = document.getElementById("feriaGuardarClave");
+  boton.disabled = true;
+  estado.textContent = "Guardando tu contraseña...";
+  try{
+    const {data: sesion} = await supabaseClient.auth.getSession();
+    if(!sesion?.session) throw new Error("El enlace expiró o no se pudo validar. Solicita una nueva invitación.");
+    const {error} = await supabaseClient.auth.updateUser({password: clave});
+    if(error) throw error;
+    document.getElementById("feriaFormularioActivacion").hidden = true;
+    estado.style.color = "#86efac";
+    estado.textContent = "✅ Contraseña creada correctamente. Ya puedes ingresar al Portal de Socios.";
+    document.getElementById("feriaIrPortal").hidden = false;
+    await supabaseClient.auth.signOut();
+    window.history.replaceState({}, "", window.location.pathname);
+  }catch(err){
+    estado.textContent = "❌ " + (err.message || "No se pudo activar la cuenta.");
+    boton.disabled = false;
+  }
+}
+
+async function feriaProcesarInvitacion(){
+  if(feriaActivacionEnCurso || !feriaEsEnlaceActivacion()) return;
+  feriaActivacionEnCurso = true;
+  feriaMostrarActivacion("Verificando tu invitación...");
+  const query = new URLSearchParams(window.location.search);
+  try{
+    if(query.has("error")) throw new Error(query.get("error_description") || "El enlace no es válido.");
+    const tokenHash = query.get("token_hash");
+    const tipo = query.get("type");
+    if(tokenHash && ["invite", "recovery"].includes(tipo)){
+      const {error} = await supabaseClient.auth.verifyOtp({token_hash:tokenHash,type:tipo});
+      if(error) throw error;
+    }
+    // Supabase-js procesa automáticamente los códigos PKCE y los tokens de hash
+    // al inicializar el cliente. Esperamos a que la sesión esté disponible.
+    let sesion = null;
+    for(let intento=0;intento<12;intento++){
+      const resultado = await supabaseClient.auth.getSession();
+      sesion = resultado.data?.session;
+      if(sesion) break;
+      await new Promise(resolve => setTimeout(resolve,250));
+    }
+    if(!sesion) throw new Error("No se pudo validar la invitación. Solicita al club que envíe un enlace nuevo.");
+    feriaMostrarActivacion();
+  }catch(err){
+    const panel = feriaMostrarActivacion("No fue posible validar este enlace.");
+    panel.querySelector("#feriaFormularioActivacion").hidden = true;
+    panel.querySelector("#feriaActivacionEstado").textContent = "❌ " + (err.message || "Enlace inválido o vencido.");
+  }
+}
+
+// Mostrar la activación solo cuando la URL proviene de una invitación.
+if(document.readyState === "loading"){
+  document.addEventListener("DOMContentLoaded", feriaProcesarInvitacion, {once:true});
+}else{
+  feriaProcesarInvitacion();
+}
+
 </script>  </body>  </html>
