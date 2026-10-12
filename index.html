@@ -8425,6 +8425,7 @@ class="seccion oculto">
   width:100%;
   margin-top:10px;
   "
+  id="botonGuardarSocio"
   onclick="guardarSocio()">
 
     💾 Guardar socio
@@ -12320,6 +12321,7 @@ async function mostrar(id){
   const pantallasAdmin = [
     "administracion",
     "listaSocios",
+    "agregarSocio",
     "registrarPagoSocio",
     "estadoCuotasSocios",
     "resumenFinanciero",
@@ -13677,97 +13679,58 @@ document.getElementById("listaEditarJugadores").innerHTML;
 
 
 async function guardarSocio(){
+  const campo = id => document.getElementById(id);
+  const nombre = campo("socioNombre").value.trim().replace(/\s+/g," ");
+  const rut = campo("socioRut").value.trim();
+  const fechaIngreso = campo("socioFechaIngreso").value;
+  const estado = campo("socioEstado").value;
+  const montoTexto = campo("socioMontoCuota").value.trim();
+  const observaciones = campo("socioObservaciones").value.trim();
+  const mensaje = campo("mensajeSocio");
+  const boton = document.getElementById("botonGuardarSocio");
 
-  const nombre =
-  document.getElementById("socioNombre").value.trim();
-
-  const rut =
-  document.getElementById("socioRut").value.trim();
-
-  const fechaIngreso =
-  document.getElementById("socioFechaIngreso").value;
-
-  const estado =
-  document.getElementById("socioEstado").value;
-
-  const montoCuota =
-  document.getElementById("socioMontoCuota").value;
-
-  const observaciones =
-  document.getElementById("socioObservaciones").value.trim();
-
-  const mensaje =
-  document.getElementById("mensajeSocio");
-
-
-  if(!nombre || !fechaIngreso || !montoCuota){
-
-  mensaje.innerText =
-  "⚠️ Completa nombre, fecha de ingreso y cuota mensual.";
-
-    mensaje.style.color = "#c82032";
-
-    return;
-
+  function aviso(texto, color){
+    mensaje.textContent = texto;
+    mensaje.style.color = color;
   }
 
+  if(!nombre || !fechaIngreso || montoTexto === ""){
+    aviso("⚠️ Completa nombre, fecha de ingreso y cuota mensual.", "#ffb4b4");
+    return;
+  }
+  const monto = Number(montoTexto);
+  if(!Number.isSafeInteger(monto) || monto < 0){
+    aviso("⚠️ La cuota debe ser un número entero igual o mayor que cero.", "#ffb4b4");
+    return;
+  }
+  if(rut && !/^[0-9.]{7,12}-[0-9kK]$/.test(rut)){
+    aviso("⚠️ Revisa el formato del RUT (ejemplo: 12.345.678-9).", "#ffb4b4");
+    return;
+  }
 
-  mensaje.innerText =
-  "⏳ Guardando socio...";
+  if(boton){ boton.disabled = true; boton.textContent = "⏳ Guardando..."; }
+  aviso("⏳ Guardando socio...", "#dce8ff");
+  try {
+    const {data: permiso, error: errorPermiso} = await supabaseClient.rpc("es_administrador");
+    if(errorPermiso || permiso !== true) throw new Error("Acceso exclusivo para administradores.");
 
-  mensaje.style.color =
-  "#667085";
-
-
-  const { error } =
-  await supabaseClient
-    .from("Socios")
-    .insert([{
-
-      nombre: nombre,
-      rut: rut || null,
-      fecha_ingreso: fechaIngreso,
-      estado: estado,
-      monto_cuota: Number(montoCuota),
-      observaciones: observaciones
-
+    const {error} = await supabaseClient.from("Socios").insert([{
+      nombre, rut: rut || null, fecha_ingreso: fechaIngreso,
+      estado, monto_cuota: monto, observaciones
     }]);
+    if(error) throw error;
 
-
-  if(error){
-
-    console.error(
-      "Error al guardar socio:",
-      error
-    );
-
-    mensaje.innerText =
-    "❌ No se pudo guardar el socio.";
-
-    mensaje.style.color =
-    "#c82032";
-
-    return;
-
+    aviso("✅ Socio registrado correctamente. Puedes verlo en Lista de socios.", "#8ff0ae");
+    ["socioNombre","socioRut","socioFechaIngreso","socioMontoCuota","socioObservaciones"]
+      .forEach(id => campo(id).value = "");
+    campo("socioEstado").value = "Activo";
+  } catch(error){
+    console.error("Error al registrar socio:", error);
+    aviso("❌ No se pudo guardar: " + (error.message || "Error desconocido"), "#ffb4b4");
+  } finally {
+    if(boton){ boton.disabled = false; boton.textContent = "💾 Guardar socio"; }
   }
-
-
-  mensaje.innerText =
-  "✅ Socio registrado correctamente.";
-
-  mensaje.style.color =
-  "green";
-
-
-  document.getElementById("socioNombre").value = "";
-  document.getElementById("socioRut").value = "";
-  document.getElementById("socioFechaIngreso").value = "";
-  document.getElementById("socioEstado").value = "Activo";
-  document.getElementById("socioMontoCuota").value = "";
-  document.getElementById("socioObservaciones").value = "";
-
 }
-
 
 
 function actualizarTextoBanner(id, texto){
@@ -14311,6 +14274,14 @@ margin-top:15px;
     🗑️ Eliminar
   </button>
 
+  <button
+  type="button"
+  class="boton"
+  style="grid-column:1/-1;background:#123c8c;"
+  onclick="enviarInvitacionSocio(${socio.id})">
+    ✉️ Enviar invitación de acceso
+  </button>
+
 </div>
 
       </div>
@@ -14320,6 +14291,69 @@ margin-top:15px;
 
 }
 
+
+// Invitación privada desde Administración > Socios.
+async function enviarInvitacionSocio(socioId){
+  const id = Number(socioId);
+  if(!Number.isSafeInteger(id) || id <= 0){
+    alert("ID de socio inválido.");
+    return;
+  }
+
+  const { data: sesionData, error: sesionError } =
+    await supabaseClient.auth.getSession();
+  if(sesionError || !sesionData?.session){
+    alert("Debes iniciar sesión como administrador.");
+    return;
+  }
+
+  const { data: esAdmin, error: adminError } =
+    await supabaseClient.rpc("es_administrador");
+  if(adminError || esAdmin !== true){
+    alert("Solo los administradores pueden enviar invitaciones.");
+    return;
+  }
+
+  const { data: socio, error: socioError } =
+    await supabaseClient.from("Socios")
+      .select("id,nombre").eq("id",id).single();
+  if(socioError || !socio){
+    alert("No se pudo encontrar al socio.");
+    return;
+  }
+
+  const correoIngresado = prompt(
+    `Correo para invitar a ${socio.nombre}:`, ""
+  );
+  if(correoIngresado === null) return;
+  const correo = correoIngresado.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)){
+    alert("Ingresa un correo electrónico válido.");
+    return;
+  }
+  if(!confirm(`¿Enviar invitación a ${correo} para ${socio.nombre}?`)) return;
+
+  try{
+    const { data, error } = await supabaseClient.functions.invoke(
+      "invitar-socio", { body: { socio_id:id, correo } }
+    );
+    if(error){
+      let detalle = error.message || "Error al llamar a la función";
+      if(error.context && typeof error.context.json === "function"){
+        try{
+          const respuesta = await error.context.json();
+          detalle = respuesta.error || respuesta.message || detalle;
+        }catch(_e){}
+      }
+      throw new Error(detalle);
+    }
+    if(!data?.ok) throw new Error(data?.error || "No se confirmó la invitación.");
+    alert("✅ Invitación enviada y cuenta vinculada. Revisa el correo del socio.");
+  }catch(err){
+    console.error("Error al invitar socio:",err);
+    alert("❌ " + (err.message || "No se pudo enviar la invitación."));
+  }
+}
 
 async function editarSocio(id){
 
