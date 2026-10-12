@@ -12144,6 +12144,7 @@ class="seccion oculto detalle-partido-publico">
     </div>
   </div>
 
+<div id="feriaEstadoBeneficios" class="feria-socio-estado-beneficios" role="status" aria-live="polite">Consultando estado de cuotas...</div>
 <div id="portalSocioCuotas" class="oculto feria-socio-contenido" aria-live="polite"></div>
 <div class="portal-socios-beneficios" id="feriaMenuPrivadoSocio" aria-label="Menú privado de socios">
   <button type="button" onclick="feriaAbrirSeccionSocio('cuotas')">📅 Mis cuotas</button>
@@ -22396,7 +22397,11 @@ document.getElementById("credencialEstado").textContent =
 
 formulario.classList.add("oculto");
 areaPrivada.classList.remove("oculto");
+await feriaActualizarEstadoBeneficios();
 feriaVolverMenuSocio();
+feriaBeneficiosHabilitados = false;
+const avisoBeneficios = document.getElementById("feriaEstadoBeneficios");
+if(avisoBeneficios) avisoBeneficios.textContent = "";
 const cuotasSocio = document.getElementById("portalSocioCuotas");
 if(cuotasSocio) cuotasSocio.classList.add("oculto");
 
@@ -22748,6 +22753,24 @@ if(document.readyState === "loading"){
    Agrega registros reales a estos arreglos cuando estén disponibles.
    No se publican empresas o noticias ficticias.
    =========================================================== */
+let feriaBeneficiosHabilitados = false;
+async function feriaActualizarEstadoBeneficios(){
+  feriaBeneficiosHabilitados = false;
+  const aviso = document.getElementById("feriaEstadoBeneficios");
+  if(aviso) aviso.textContent = "⏳ Comprobando cuotas...";
+  try{
+    const {data,error} = await supabaseClient.rpc("socio_beneficios_al_dia");
+    if(error) throw error;
+    feriaBeneficiosHabilitados = data === true;
+    if(aviso) aviso.textContent = feriaBeneficiosHabilitados
+      ? "✅ Beneficios habilitados: cuotas al día."
+      : "🔒 Beneficios suspendidos: revisa tus cuotas de enero al mes actual.";
+  }catch(error){
+    console.error("Error al validar cuotas del socio:",error);
+    if(aviso) aviso.textContent = "⚠️ No fue posible verificar tus cuotas. Los beneficios permanecen bloqueados.";
+  }
+  return feriaBeneficiosHabilitados;
+}
 const FERIA_BENEFICIOS_SOCIOS = [
   // Ejemplo: { nombre: "Empresa", logo: "img/empresa.png", descripcion: "Beneficio", direccion: "...", telefono: "...", sitio: "https://..." }
 ];
@@ -22783,7 +22806,8 @@ function feriaImagenFicha(src,alt){
   img.src=url;img.alt=alt || "Imagen";img.loading="lazy";
   return img;
 }
-function feriaMostrarDetalleSocio(tipo,indice){
+async function feriaMostrarDetalleSocio(tipo,indice){
+  if(tipo === "beneficios") await feriaActualizarEstadoBeneficios();
   const registros=tipo==="beneficios"?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
   const item=registros[indice];
   if(!item)return;
@@ -22796,6 +22820,12 @@ function feriaMostrarDetalleSocio(tipo,indice){
   const img=feriaImagenFicha(tipo==="beneficios"?item.logo:item.imagen,item.nombre||item.titulo);
   if(img)tarjeta.appendChild(img);
   tarjeta.appendChild(feriaCrearElemento("h3","",item.nombre||item.titulo||"Información"));
+  if(tipo === "beneficios" && !feriaBeneficiosHabilitados){
+    tarjeta.appendChild(feriaCrearElemento("p","feria-socio-vacio","🔒 Para utilizar este beneficio debes tener pagadas todas las cuotas desde enero hasta el mes actual. Consulta Mis cuotas."));
+    detalle.appendChild(tarjeta);
+    detalle.scrollIntoView({behavior:"smooth",block:"nearest"});
+    return;
+  }
   const campos=tipo==="beneficios"
     ? [["Beneficio",item.descripcion],["Dirección",item.direccion],["Teléfono",item.telefono]]
     : [["Fecha",item.fecha],["Resumen",item.resumen],["Noticia",item.contenido]];
@@ -22830,9 +22860,13 @@ async function feriaAbrirSeccionSocio(tipo){
     return;
   }
   const esBeneficios=tipo==="beneficios";
+  if(esBeneficios) await feriaActualizarEstadoBeneficios();
   document.getElementById("feriaSeccionSocioTitulo").textContent=esBeneficios?"🎁 Beneficios de socios":"📰 Boletines del club";
   const registros=esBeneficios?FERIA_BENEFICIOS_SOCIOS:FERIA_BOLETINES_SOCIOS;
   lista.replaceChildren();
+  if(esBeneficios && !feriaBeneficiosHabilitados){
+    lista.appendChild(feriaCrearElemento("p","feria-socio-vacio","🔒 Puedes conocer las empresas colaboradoras, pero para usar sus beneficios debes pagar todas las cuotas desde enero hasta el mes actual."));
+  }
   if(!registros.length){
     lista.appendChild(feriaCrearElemento("p","feria-socio-vacio",esBeneficios
       ? "Próximamente encontrarás aquí las empresas colaboradoras y sus beneficios exclusivos."
@@ -22845,7 +22879,8 @@ async function feriaAbrirSeccionSocio(tipo){
       if(img)boton.appendChild(img);
       boton.appendChild(feriaCrearElemento("strong","",item.nombre||item.titulo||"Sin título"));
       const subtitulo=esBeneficios?item.descripcion:(item.fecha||item.resumen);
-      if(subtitulo)boton.appendChild(feriaCrearElemento("small","",subtitulo));
+      if(subtitulo && !esBeneficios) boton.appendChild(feriaCrearElemento("small","",subtitulo));
+      if(esBeneficios) boton.appendChild(feriaCrearElemento("small","",feriaBeneficiosHabilitados ? "Ver beneficio" : "🔒 Requiere cuotas al día"));
       boton.onclick=()=>feriaMostrarDetalleSocio(tipo,i);
       grid.appendChild(boton);
     });
