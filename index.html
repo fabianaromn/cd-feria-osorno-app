@@ -7415,14 +7415,7 @@ overflow-x:hidden;
   </div>
 
 
-  <div
-  class="acceso-publico"
-  onclick="mostrar('estadisticas')">
-
-    <div class="icono-publico">📈</div>
-    <h3>ESTADÍSTICAS</h3>
-
-  </div>
+  <div class="acceso-publico" onclick="mostrar('feriaHistoria')"><div class="icono-publico">🏆</div><h3>HISTORIA</h3></div>
 
 
   <div
@@ -7621,15 +7614,13 @@ overflow-x:hidden;
 </section>
 
   
-<section    
-id="inicio"    
-class="seccion">  <h2>    
-📢 Últimas novedades    
-</h2>  <p>    
-Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.    
-</p>  <br>  <p>    
-🔵🔴 Estamos construyendo nuestra plataforma deportiva.    
-</p>  
+<section id="inicio" class="seccion feria-noticias-home">
+  <div class="feria-noticias-titulo"><div><span>EL MÁS GRANDE DEL BARRIO</span><h2>Actualidad <em>Feriana</em></h2></div><span class="feria-noticias-contador">01 / 03</span></div>
+  <article class="feria-noticia-destacada">
+    <div class="feria-noticia-imagen"><img src="img/noticia-arauco.png" alt="CD Feria Osorno: doble triunfo ante Arauco" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('sin-foto')"><span>⚽ FECHA 6 · CLAUSURA 2026</span></div>
+    <div class="feria-noticia-texto"><small>RESULTADOS · PRIMERA Y SEGUNDA SERIE</small><h3>¡Doble triunfo ante Arauco!</h3><p>El sábado, Feria Osorno celebró victorias en Segunda y Primera Serie frente a Arauco, por la sexta fecha del Clausura 2026 de la Asociación de los Barrios Reloncaví. ¡Vamos, Feria!</p></div>
+  </article>
+  <div class="feria-noticias-proximas"><article><span>📸</span><div><strong>La vida de nuestro club</strong><p>Pronto compartiremos nuevas imágenes y momentos ferianos.</p></div></article><article><span>📣</span><div><strong>Noticias y actividades</strong><p>Este espacio estará disponible para próximos comunicados.</p></div></article></div>
 </section> 
   
 
@@ -7684,7 +7675,7 @@ Bienvenidos a la aplicación oficial del Club Deportivo Feria Osorno.
   onclick="mostrar('estadisticas')">
 
     <span class="menu-inferior-icono">•••</span>
-    <span>Más</span>
+    <span>Descubre</span>
 
   </button>
 
@@ -8462,7 +8453,9 @@ class="oculto gestion-admin">
   </section>
 
 </div>
-<div class="accion-admin" onclick="tiendaAbrirAdmin()" style="margin:15px"><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
+<div id="feriaEstadisticasAcceso" class="accion-admin" style="margin:15px" onclick="feriaAbrirEstadisticasAdmin()"><div class="accion-admin-icono">📊</div><div class="accion-admin-texto"><strong>Estadísticas internas</strong><span>Acceso exclusivo para administradores</span></div><div class="accion-admin-flecha">›</div></div>
+<div id="feriaAccesoTiendaInicio" class="accion-admin" onclick="tiendaAbrirAdmin()" style="margin:15px"><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
+<section id="feriaEstadisticasAdmin" class="tienda-admin oculto"><h2>📊 Estadísticas del club</h2><p>Panel interno reservado para administradores. Próximamente podremos incorporar resultados, rendimiento por serie y registros históricos.</p><button class="boton" onclick="document.getElementById('feriaEstadisticasAdmin').classList.add('oculto')">Cerrar</button></section>
 <section id="tiendaAdmin" class="tienda-admin oculto"><h2>🛒 Productos de la tienda</h2><p id="tiendaAdminMensaje"></p>
 <form onsubmit="tiendaGuardarProducto(event)"><input type="hidden" id="tiendaProductoId">
 <label>Nombre *<input id="tiendaProductoNombre" required maxlength="120"></label>
@@ -11576,6 +11569,15 @@ class="seccion oculto formulario-jugador-moderno">
   </div>
 
 
+  <div class="feria-edicion-extra">
+    <h3>📖 Trayectoria Feriana</h3><p>Escribe la historia que se verá en la ficha pública del jugador.</p>
+    <textarea id="feriaTrayectoriaJugador" rows="4" maxlength="2500" placeholder="Ej.: Llegó al club en 2020 y ha defendido nuestros colores..."></textarea>
+    <h3>🏆 Palmarés</h3><p>Agrega títulos individuales o colectivos. La copa y su descripción aparecerán en la ficha pública.</p>
+    <div id="feriaPalmaresEditor"></div><button type="button" class="boton" onclick="feriaAgregarPalmares()">＋ Agregar copa</button>
+    <h3>📸 Momentos</h3><p>Sube fotografías del jugador (máximo 5 MB por imagen).</p>
+    <div id="feriaMomentosEditor"></div>
+    <label>Seleccionar fotos<input id="feriaMomentosArchivos" type="file" accept="image/*" multiple></label>
+  </div>
   <p
   id="mensajeEditarJugador"
   class="mensaje-editar-jugador">
@@ -12239,7 +12241,7 @@ class="seccion oculto detalle-partido-publico">
 
 
 
-  <p class="portal-socios-aviso">Acceso exclusivo para socios registrados del club.</p>
+  <p class="portal-socios-aviso">Acceso exclusivo para socios abonados del club.</p>
  </div>
 
 
@@ -12317,8 +12319,8 @@ class="seccion oculto pantalla-mas-publica">
 
   <div class="mas-cabecera">
     <span>CLUB DEPORTIVO FERIA OSORNO</span>
-    <h2>Más</h2>
-    <p>Todo nuestro club en un solo lugar</p>
+    <h2>Descubre la Feria</h2>
+    <p>Historias, actividades y todo lo que nos une</p>
   </div>
 
   <div class="mas-grupo">
@@ -12327,12 +12329,7 @@ class="seccion oculto pantalla-mas-publica">
       EXPLORA EL CLUB
     </div>
 
-    <button class="mas-opcion"
-    onclick="mostrar('socios')">
-      <span>👥</span>
-      <strong>Socios</strong>
-      <span>›</span>
-    </button>
+    <button class="mas-opcion" onclick="mostrar('feriaHistoria')"><span>🏆</span><strong>Nuestra historia</strong><span>›</span></button>
 
     <button class="mas-opcion"
     onclick="mostrar('store')">
@@ -12349,12 +12346,8 @@ class="seccion oculto pantalla-mas-publica">
       INFORMACIÓN
     </div>
 
-    <button class="mas-opcion"
-    onclick="mostrar('estadisticasDetalle')">
-      <span>📈</span>
-      <strong>Estadísticas</strong>
-      <span>›</span>
-    </button>
+    <button class="mas-opcion" onclick="mostrar('feriaEscuela')"><span>⚽</span><strong>Escuela de fútbol</strong><span>›</span></button>
+    <button class="mas-opcion" onclick="mostrar('feriaComunidad')"><span>🤝</span><strong>Comunidad feriana</strong><span>›</span></button>
 
   </div>
 
@@ -12394,7 +12387,11 @@ onclick="volver()">
     👤 Socios  
   </h2>    <p>  
     Aquí estará la información de los socios del Club Deportivo Feria Osorno.  
-  </p>  </section>  <section id="store" class="seccion oculto tienda-feria">
+  </p>  </section>
+<section id="feriaHistoria" class="seccion oculto feria-pagina-informativa"><button class="boton" onclick="mostrar('estadisticas')">← Descubre la Feria</button><span>IDENTIDAD FERIANA</span><h2>🏆 Nuestra historia</h2><p>Somos el Club Deportivo Feria Osorno, parte del deporte de barrio en Puerto Montt. En este espacio compartiremos nuestra historia, recuerdos, títulos y protagonistas.</p><div class="feria-info-caja"><strong>El más grande del barrio</strong><p>Próximamente: hitos históricos, fotografías y logros del club.</p></div></section>
+<section id="feriaEscuela" class="seccion oculto feria-pagina-informativa"><button class="boton" onclick="mostrar('estadisticas')">← Descubre la Feria</button><span>FORMANDO FUTURO</span><h2>⚽ Escuela de fútbol</h2><p>Nuestra escuela gratuita reúne a niños y jóvenes que comparten la pasión por el fútbol y nuestros colores.</p><div class="feria-info-caja"><strong>Entrenamientos</strong><p>Consulta con el club los horarios y requisitos de participación actualizados.</p></div></section>
+<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="boton" onclick="mostrar('estadisticas')">← Descubre la Feria</button><span>MUCHO MÁS QUE FÚTBOL</span><h2>🤝 Comunidad feriana</h2><p>Actividades, beneficios, encuentros y acciones que fortalecen la vida de nuestro barrio.</p><div class="feria-info-caja"><strong>Un club que nos une</strong><p>Próximamente compartiremos iniciativas de la comunidad.</p></div></section>
+<section id="store" class="seccion oculto tienda-feria">
 <button class="boton" onclick="volver()">← Volver</button>
 <h2>🛒 Tienda Oficial</h2><p style="color:#a9bde0">El más grande del barrio · Productos oficiales</p>
 <div id="tiendaAviso" role="status"></div><div id="tiendaCatalogo" class="tienda-grid"></div>
@@ -12585,6 +12582,7 @@ async function mostrar(id){
 .classList.add("oculto");
 
 cargarBannerPartido();
+  feriaMostrarAccesoTienda(true);
   marcarMenuAdminActivo("inicio");
 
 }
@@ -12682,12 +12680,14 @@ function mostrarInicioAdmin(boton){
     document.getElementById(id).classList.add("oculto");
   });
   document.getElementById("bannerPartidoAdmin").classList.remove("oculto");
+  feriaMostrarAccesoTienda(true);
   marcarMenuAdminActivo("inicio");
   document.getElementById("administracion").scrollTo({top:0,behavior:"smooth"});
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function mostrarMenuAdmin(id){
+  feriaMostrarAccesoTienda(false);
   marcarMenuAdminActivo(id);
 
   const bannerPartidoAdmin =
@@ -12766,7 +12766,8 @@ function verJugador(
   foto,
   fechaNacimiento,
   categoria,
-  yearJoined
+  yearJoined,
+  jugadorId
 ){
 
   mostrar("jugadorDetalle");
@@ -12911,7 +12912,7 @@ function verJugador(
         </div>
 
 
-        <div class="perfil-jugador-historia">
+        <div class="perfil-jugador-historia" id="feriaTrayectoriaPublica">
 
 
           <span class="perfil-jugador-historia-club">
@@ -12988,7 +12989,7 @@ function verJugador(
         </div>
 
 
-        <div class="perfil-jugador-palmares-vacio">
+        <div class="perfil-jugador-palmares-vacio" id="feriaPalmaresPublico">
 
           <div>
             🏆
@@ -13028,7 +13029,7 @@ function verJugador(
         </div>
 
 
-        <div class="perfil-jugador-galeria-vacia">
+        <div class="perfil-jugador-galeria-vacia" id="feriaMomentosPublico">
 
           <div>
             📸
@@ -13052,7 +13053,7 @@ function verJugador(
     </div>
 
   `;
-
+  feriaCargarExtrasPublicos(nombre,categoria,jugadorId);
 }
 
 
@@ -13380,7 +13381,8 @@ window.scrollTo(0,0);
                       '${jugador.photo_url || ''}',
                       '${jugador.birth_date || ''}',
                       '${nombreBD}',
-                      '${jugador.year_joined || ''}'
+                      '${jugador.year_joined || ''}',
+                      ${jugador.id}
                     )">
 
 
@@ -20690,6 +20692,9 @@ async function abrirFormularioEditarJugador(id){
       photo_url,
       birth_date,
       year_joined,
+      trayectoria_feriana,
+      palmares_feriano,
+      momentos_ferianos,
       category_id,
       categories(name)
     `)
@@ -20799,6 +20804,7 @@ async function abrirFormularioEditarJugador(id){
   "";
 
 
+  feriaPrepararExtrasJugador(jugador);
   mostrar("formularioEditarJugador");
 
 }
@@ -21056,6 +21062,8 @@ async function guardarEdicionJugador(){
 
 
   // ACTUALIZAR BASE DE DATOS
+  let momentosGuardados;
+  try{momentosGuardados=await feriaSubirMomentosJugador(id)}catch(e){mensaje.innerText='❌ No se pudieron subir los momentos: '+e.message;mensaje.style.color='#c82032';return;}
 
   const {
     data: jugadorActualizado,
@@ -21085,7 +21093,10 @@ async function guardarEdicionJugador(){
       : null,
 
       photo_url:
-      fotoJugadorUrl
+      fotoJugadorUrl,
+      trayectoria_feriana: document.getElementById('feriaTrayectoriaJugador').value.trim(),
+      palmares_feriano: feriaLeerPalmares(),
+      momentos_ferianos: momentosGuardados
 
     })
     .eq("id", id)
@@ -22145,7 +22156,7 @@ document.addEventListener("touchend", function(event){
   // =====================================
 
   // Debe comenzar cerca del borde izquierdo
-  if(inicioTouchX > 120) return;
+  if(inicioTouchX > -1) return;
 
   // Debe deslizar al menos 60px a la derecha
   if(movimientoX < 60) return;
@@ -23242,5 +23253,25 @@ async function tiendaGuardarProducto(e){e.preventDefault();const id=document.get
  const q=id?supabaseClient.from('tienda_productos').update(obj).eq('id',id):supabaseClient.from('tienda_productos').insert(obj);const {error}=await q;if(error)return alert(error.message);tiendaLimpiarProducto();document.getElementById('tiendaAdminMensaje').textContent='✅ Producto guardado';tiendaCargarAdmin()}
 async function tiendaEliminarProducto(id){if(!confirm('¿Eliminar producto? Si tiene pedidos anteriores, puedes ocultarlo en lugar de eliminarlo.'))return;const {error}=await supabaseClient.from('tienda_productos').delete().eq('id',id);if(error)alert(error.message);else tiendaCargarAdmin()}
 
+</script>
+<style>
+.feria-noticias-home{margin:0 14px 105px!important;padding:0!important;background:transparent!important;border-radius:0!important;color:white}.feria-noticias-titulo{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:12px 0 16px}.feria-noticias-titulo span{color:#ed3345;font-size:10px;font-weight:900;letter-spacing:1px}.feria-noticias-titulo h2{font-size:25px;font-weight:900;margin-top:5px}.feria-noticias-titulo em{font-style:normal;color:#ed3345}.feria-noticias-contador{color:#a6bbdf!important}.feria-noticia-destacada{background:linear-gradient(160deg,#102b5c,#071b3c);border:1px solid #284a81;border-radius:20px;overflow:hidden;box-shadow:0 12px 25px #0004}.feria-noticia-imagen{height:195px;position:relative;background:linear-gradient(130deg,#0b2b61,#b91f34);display:flex;align-items:end}.feria-noticia-imagen.sin-foto:before{content:'⚽  FERIA OSORNO  🔵🔴';position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:#fff;font-size:19px}.feria-noticia-imagen img{width:100%;height:100%;object-fit:cover}.feria-noticia-imagen span{position:absolute;left:12px;bottom:12px;background:#d71920;color:#fff;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900}.feria-noticia-texto{padding:19px}.feria-noticia-texto small{color:#ed3345;font-weight:900;font-size:10px}.feria-noticia-texto h3{font-size:23px;margin:8px 0 10px}.feria-noticia-texto p{font-size:13px;line-height:1.6;color:#d4e0f3}.feria-noticias-proximas{display:grid;gap:10px;margin-top:12px}.feria-noticias-proximas article{display:flex;align-items:center;gap:12px;background:#0c2149;border:1px solid #243e69;border-radius:14px;padding:15px}.feria-noticias-proximas article>span{font-size:25px}.feria-noticias-proximas strong{font-size:13px}.feria-noticias-proximas p{font-size:11px;color:#aebdd6;margin-top:4px}.feria-pagina-informativa{background:#06142f!important;color:#fff!important;min-height:85vh;margin:0!important;padding:165px 17px 100px!important;border-radius:0!important}.feria-pagina-informativa>span{color:#ed3345;font-weight:900;font-size:10px}.feria-pagina-informativa h2{font-size:27px;margin:12px 0}.feria-pagina-informativa p{color:#c8d6ef;line-height:1.7}.feria-info-caja{padding:20px;margin-top:25px;background:#0d2859;border-radius:16px;border-left:4px solid #ed3345}.feria-edicion-extra{background:#102650;color:white;border-radius:16px;padding:17px;margin:15px 0}.feria-edicion-extra h3{margin:20px 0 6px;font-size:17px;color:white}.feria-edicion-extra p{color:#b6c7e4;font-size:12px;line-height:1.5;margin-bottom:10px}.feria-edicion-extra textarea,.feria-edicion-extra input,.feria-edicion-extra select{display:block;width:100%;padding:12px;background:#071a3b;color:white;border:1px solid #48648d;border-radius:10px;margin:7px 0}.feria-copa-fila,.feria-momento-fila{padding:10px;border:1px solid #36527f;border-radius:10px;margin:9px 0}.feria-copa-fila button,.feria-momento-fila button{background:#bd2033;color:white;border:0;border-radius:8px;padding:8px}.feria-momento-fila img{width:80px;height:80px;object-fit:cover;border-radius:10px}.feria-palmares-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feria-copa-publica{background:#0d2a5b;border:1px solid #2a4b80;border-radius:15px;text-align:center;padding:17px 8px}.feria-copa-publica span{display:block;font-size:40px}.feria-copa-publica strong{display:block;color:#fff;font-size:12px;margin:8px 0 3px}.feria-momentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feria-momentos-grid img{width:100%;height:170px;object-fit:cover;border-radius:13px}
+</style>
+<script>
+function feriaMostrarAccesoTienda(visible){['feriaAccesoTiendaInicio','feriaEstadisticasAcceso'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('oculto',!visible)});if(!visible){document.getElementById('tiendaAdmin')?.classList.add('oculto');document.getElementById('feriaEstadisticasAdmin')?.classList.add('oculto')}}
+async function feriaAbrirEstadisticasAdmin(){const {data,error}=await supabaseClient.rpc('es_administrador');if(error||data!==true)return alert('Acceso solo para administradores');document.getElementById('feriaEstadisticasAdmin').classList.toggle('oculto')}
+let feriaMomentosEditados=[];
+let feriaPalmaresEditados=[];
+function feriaPrepararExtrasJugador(j){document.getElementById('feriaTrayectoriaJugador').value=j.trayectoria_feriana||'';feriaPalmaresEditados=Array.isArray(j.palmares_feriano)?j.palmares_feriano:[];feriaMomentosEditados=Array.isArray(j.momentos_ferianos)?j.momentos_ferianos:[];document.getElementById('feriaMomentosArchivos').value='';feriaRenderPalmares();feriaRenderMomentos()}
+function feriaAgregarPalmares(){feriaPalmaresEditados.push({puesto:1,texto:''});feriaRenderPalmares()}
+function feriaRenderPalmares(){const el=document.getElementById('feriaPalmaresEditor');el.replaceChildren();feriaPalmaresEditados.forEach((p,i)=>{const fila=document.createElement('div');fila.className='feria-copa-fila';const select=document.createElement('select');[1,2,3].forEach(n=>{const op=document.createElement('option');op.value=n;op.textContent=n===1?'🥇 Primer lugar':n===2?'🥈 Segundo lugar':'🥉 Tercer lugar';select.appendChild(op)});select.value=p.puesto||1;select.onchange=()=>p.puesto=Number(select.value);const input=document.createElement('input');input.placeholder='Ej.: 1er lugar Apertura 2026';input.maxLength=120;input.value=p.texto||'';input.oninput=()=>p.texto=input.value;const quitar=document.createElement('button');quitar.type='button';quitar.textContent='Eliminar copa';quitar.onclick=()=>{feriaPalmaresEditados.splice(i,1);feriaRenderPalmares()};fila.append(select,input,quitar);el.append(fila)})}
+function feriaLeerPalmares(){return feriaPalmaresEditados.filter(p=>String(p.texto||'').trim()).map(p=>({puesto:Number(p.puesto)||1,texto:String(p.texto).trim()}))}
+function feriaRenderMomentos(){const el=document.getElementById('feriaMomentosEditor');el.replaceChildren();feriaMomentosEditados.forEach((url,i)=>{const fila=document.createElement('div');fila.className='feria-momento-fila';const img=document.createElement('img');img.src=url;img.alt='Momento del jugador';const b=document.createElement('button');b.type='button';b.textContent='Quitar de la galería';b.onclick=()=>{feriaMomentosEditados.splice(i,1);feriaRenderMomentos()};fila.append(img,b);el.append(fila)})}
+async function feriaSubirMomentosJugador(id){const input=document.getElementById('feriaMomentosArchivos');const archivos=Array.from(input.files||[]);if(feriaMomentosEditados.length+archivos.length>20)throw new Error('Máximo 20 imágenes por jugador');for(const f of archivos){if(!f.type.startsWith('image/')||f.size>5*1024*1024)throw new Error('Las imágenes deben ser JPG, PNG o WEBP de hasta 5 MB');const extension=(f.name.split('.').pop()||'jpg').toLowerCase();const path=id+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+extension;const {error}=await supabaseClient.storage.from('momentos-jugadores').upload(path,f,{contentType:f.type,upsert:false});if(error)throw error;const {data}=supabaseClient.storage.from('momentos-jugadores').getPublicUrl(path);feriaMomentosEditados.push(data.publicUrl)}return feriaMomentosEditados}
+async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();if(error||!data)return;const historia=document.getElementById('feriaTrayectoriaPublica');if(historia&&data.trayectoria_feriana){const p=document.createElement('p');p.textContent=data.trayectoria_feriana;historia.append(p)}const palmares=document.getElementById('feriaPalmaresPublico');if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){palmares.replaceChildren();palmares.className='feria-palmares-grid';data.palmares_feriano.forEach(item=>{const box=document.createElement('div');box.className='feria-copa-publica';const copa=document.createElement('span');copa.textContent=Number(item.puesto)===1?'🏆':Number(item.puesto)===2?'🥈':'🥉';const texto=document.createElement('strong');texto.textContent=item.texto;box.append(copa,texto);palmares.append(box)})}const momentos=document.getElementById('feriaMomentosPublico');if(momentos&&Array.isArray(data.momentos_ferianos)&&data.momentos_ferianos.length){momentos.replaceChildren();momentos.className='feria-momentos-grid';data.momentos_ferianos.forEach(url=>{if(typeof url!=='string'||!url.startsWith('https://'))return;const img=document.createElement('img');img.src=url;img.alt='Momento feriano';img.loading='lazy';momentos.append(img)})}}catch(e){console.warn('Datos de trayectoria:',e)}}
+// Gesto de volver desde cualquier pantalla. Conserva la navegación existente.
+let feriaGestoInicio=null;
+document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];feriaGestoInicio={x:t.clientX,y:t.clientY,ancho:window.innerWidth,elemento:e.target}}, {passive:true});
+document.addEventListener('touchend',e=>{if(!feriaGestoInicio||e.changedTouches.length!==1)return;const a=feriaGestoInicio;feriaGestoInicio=null;const t=e.changedTouches[0],dx=t.clientX-a.x,dy=t.clientY-a.y;if(a.x>45||dx<85||Math.abs(dy)>Math.abs(dx)*.55)return;if(a.elemento.closest('input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad'))return;if(document.getElementById('feriaSeccionSocioDetalle')&&!document.getElementById('feriaSeccionSocioDetalle').classList.contains('oculto')){document.getElementById('feriaSeccionSocioDetalle').classList.add('oculto');return}if(document.getElementById('portalSocioCuotas')&&!document.getElementById('portalSocioCuotas').classList.contains('oculto')){feriaVolverMenuSocio();return}if(document.getElementById('feriaSeccionSocio')&&!document.getElementById('feriaSeccionSocio').classList.contains('oculto')){feriaVolverMenuSocio();return}if(!document.getElementById('portalSociosPublico').classList.contains('oculto')){mostrarInicioPublico();return}if(!document.getElementById('feriaHistoria').classList.contains('oculto')||!document.getElementById('feriaEscuela').classList.contains('oculto')||!document.getElementById('feriaComunidad').classList.contains('oculto')){mostrar('estadisticas');return}if(!document.getElementById('administracion').classList.contains('oculto')){const visible=['menuAdminPartidos','menuAdminJugadores','menuAdminSocios','menuAdminFinanzas'].some(id=>!document.getElementById(id).classList.contains('oculto'));if(visible){mostrarInicioAdmin();return}}const secciones=['formularioEditarJugador','editarJugador','eliminarJugador','agregarJugador','formularioEditarPartido','editarPartido','eliminarPartido','agregarPartido','jugadorDetalle','detallePartido','partidos','jugadores','store','estadisticas','login'];if(secciones.some(id=>{const el=document.getElementById(id);return el&&!el.classList.contains('oculto')})){if(typeof volver==='function')volver();else mostrarInicioPublico()}}, {passive:true});
 </script>
 </body>  </html>
