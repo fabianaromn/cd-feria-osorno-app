@@ -8453,19 +8453,9 @@ class="oculto gestion-admin">
   </section>
 
 </div>
-<div id="feriaEstadisticasAcceso" class="accion-admin" style="margin:15px" onclick="feriaAbrirEstadisticasAdmin()"><div class="accion-admin-icono">📊</div><div class="accion-admin-texto"><strong>Estadísticas internas</strong><span>Acceso exclusivo para administradores</span></div><div class="accion-admin-flecha">›</div></div>
-<div id="feriaAccesoTiendaInicio" class="accion-admin" onclick="tiendaAbrirAdmin()" style="margin:15px"><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
-<section id="feriaEstadisticasAdmin" class="tienda-admin oculto"><h2>📊 Estadísticas del club</h2><p>Panel interno reservado para administradores. Próximamente podremos incorporar resultados, rendimiento por serie y registros históricos.</p><button class="boton" onclick="document.getElementById('feriaEstadisticasAdmin').classList.add('oculto')">Cerrar</button></section>
-<section id="tiendaAdmin" class="tienda-admin oculto"><h2>🛒 Productos de la tienda</h2><p id="tiendaAdminMensaje"></p>
-<form onsubmit="tiendaGuardarProducto(event)"><input type="hidden" id="tiendaProductoId">
-<label>Nombre *<input id="tiendaProductoNombre" required maxlength="120"></label>
-<label>Precio en pesos *<input id="tiendaProductoPrecio" type="number" required min="1" step="1"></label>
-<label>Stock disponible *<input id="tiendaProductoStock" type="number" required min="0" step="1" value="0"></label>
-<label>Imagen (URL completa o ruta img/...)<input id="tiendaProductoImagen" placeholder="img/camiseta.jpg"></label>
-<label>Descripción<textarea id="tiendaProductoDescripcion" rows="2"></textarea></label>
-<label><input id="tiendaProductoActivo" type="checkbox" checked style="width:auto;display:inline"> Visible en tienda</label><br>
-<button class="tienda-rojo" type="submit">Guardar producto</button> <button type="button" onclick="tiendaLimpiarProducto()">Nuevo</button></form>
-<h3>Productos registrados</h3><div id="tiendaListaAdmin"></div><h3>Pedidos recibidos</h3><div id="tiendaPedidosAdmin"></div></section>
+<div id="feriaHerramientasInicio" class="feria-herramientas-inicio"><div id="feriaEstadisticasAcceso" class="accion-admin"  onclick="feriaAbrirEstadisticasAdmin()"><div class="accion-admin-icono">📊</div><div class="accion-admin-texto"><strong>Estadísticas internas</strong><span>Acceso exclusivo para administradores</span></div><div class="accion-admin-flecha">›</div></div>
+<div id="feriaAccesoTiendaInicio" class="accion-admin" onclick="tiendaAbrirAdmin()" ><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
+</div>
 <nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
   <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
   <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminPartidos')"><span class="menu-inferior-icono">⚽</span><span>Partidos</span></button>
@@ -8476,6 +8466,35 @@ class="oculto gestion-admin">
 </section>
 
 
+
+<section id="feriaEstadisticasAdmin" class="seccion oculto feria-admin-pantalla">
+ <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
+ <h2>📊 Estadísticas internas</h2>
+ <p class="feria-admin-descripcion">Panel privado del CD Feria Osorno.</p>
+ <div class="feria-admin-panel-tarjeta"><strong>⚽ Rendimiento por serie</strong><p>Próximamente: partidos, triunfos, empates y derrotas.</p></div>
+ <div class="feria-admin-panel-tarjeta"><strong>🏆 Historial deportivo</strong><p>Próximamente: campeonatos, temporadas y resultados.</p></div>
+ <div class="feria-admin-panel-tarjeta"><strong>👥 Información del club</strong><p>Próximamente: indicadores de jugadores y socios.</p></div>
+</section>
+<section id="tiendaAdmin" class="seccion oculto feria-admin-pantalla">
+ <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
+ <h2>🛒 Gestionar tienda</h2><p class="feria-admin-descripcion">Productos, inventario y pedidos del club.</p>
+ <div class="feria-admin-panel-tarjeta">
+ <h3>Agregar o editar producto</h3><p id="tiendaAdminMensaje" role="status"></p>
+ <form onsubmit="tiendaGuardarProducto(event)"><input type="hidden" id="tiendaProductoId">
+ <label>Nombre *<input id="tiendaProductoNombre" required maxlength="120"></label>
+ <label>Precio en pesos *<input id="tiendaProductoPrecio" type="number" required min="1" step="1"></label>
+ <label>Stock disponible *<input id="tiendaProductoStock" type="number" required min="0" step="1" value="0"></label>
+ <label>Fotografía del producto<input id="tiendaProductoArchivo" type="file" accept="image/jpeg,image/png,image/webp"></label>
+ <p class="feria-ayuda-archivo">Selecciona una imagen desde tu teléfono o computador (máximo 5 MB).</p>
+ <label>Imagen actual (URL o ruta, opcional)<input id="tiendaProductoImagen" placeholder="Se completará al subir una foto"></label>
+ <label>Descripción<textarea id="tiendaProductoDescripcion" rows="2"></textarea></label>
+ <label class="feria-check-tienda"><input id="tiendaProductoActivo" type="checkbox" checked> Visible en tienda</label>
+ <button class="tienda-rojo" type="submit" id="tiendaGuardarBoton">Guardar producto</button>
+ <button type="button" onclick="tiendaLimpiarProducto()">Nuevo producto</button>
+ </form></div>
+ <div class="feria-admin-panel-tarjeta"><h3>Productos registrados</h3><div id="tiendaListaAdmin"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>Pedidos recibidos</h3><div id="tiendaPedidosAdmin"></div></div>
+</section>
 <section
 id="agregarSocio"
 class="seccion oculto">
@@ -12390,7 +12409,7 @@ onclick="volver()">
   </p>  </section>
 <section id="feriaHistoria" class="seccion oculto feria-pagina-informativa">
 <button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
-<span>IDENTIDAD FERIANA</span><h2>🏆 Nuestra historia</h2>
+<h2>🏆 Nuestra historia</h2>
 <p>Un espacio para descubrir las raíces, las personas y los momentos que han construido al Club Deportivo Feria Osorno.</p>
 <div class="feria-historia-grid">
 <article class="feria-historia-tarjeta"><span>📜</span><h3>Nuestros orígenes</h3><p>Completa aquí el año de fundación, cómo nació el club y quiénes impulsaron sus primeros pasos.</p></article>
@@ -12400,8 +12419,8 @@ onclick="volver()">
 <article class="feria-historia-tarjeta"><span>📅</span><h3>Línea de tiempo</h3><p>Aquí podrás incorporar fechas importantes, ascensos, aniversarios y grandes jornadas.</p></article>
 <article class="feria-historia-tarjeta"><span>❤️</span><h3>Nuestra identidad</h3><p>Los colores, el barrio, los valores y las tradiciones que nos unen.</p></article>
 </div><div class="feria-info-caja"><strong>El más grande del barrio</strong><p>Esta sección está preparada para completar con la historia real del club.</p></div></section>
-<section id="feriaEscuela" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><span>FORMANDO FUTURO</span><h2>⚽ Escuela de fútbol</h2><p>Nuestra escuela gratuita reúne a niños y jóvenes que comparten la pasión por el fútbol y nuestros colores.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🧒</span><h3>Formación y valores</h3><p>Compañerismo, respeto y alegría por aprender jugando.</p></article><article class="feria-historia-tarjeta"><span>📅</span><h3>Entrenamientos</h3><p>Consulta directamente con el club los horarios y cupos vigentes.</p></article><article class="feria-historia-tarjeta"><span>📷</span><h3>Nuestros pequeños protagonistas</h3><p>Pronto compartiremos fotografías, actividades y experiencias de la escuela.</p></article></div></section>
-<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><span>MUCHO MÁS QUE FÚTBOL</span><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
+<section id="feriaEscuela" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>⚽ Escuela de fútbol</h2><p>Nuestra escuela gratuita reúne a niños y jóvenes que comparten la pasión por el fútbol y nuestros colores.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🧒</span><h3>Formación y valores</h3><p>Compañerismo, respeto y alegría por aprender jugando.</p></article><article class="feria-historia-tarjeta"><span>📅</span><h3>Entrenamientos</h3><p>Consulta directamente con el club los horarios y cupos vigentes.</p></article><article class="feria-historia-tarjeta"><span>📷</span><h3>Nuestros pequeños protagonistas</h3><p>Pronto compartiremos fotografías, actividades y experiencias de la escuela.</p></article></div></section>
+<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
 <section id="store" class="seccion oculto tienda-feria">
 <button class="feria-volver-icono" onclick="feriaVolverDesdeTienda()" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
 <h2>🛒 Tienda Oficial</h2><p style="color:#a9bde0">El más grande del barrio · Productos oficiales</p>
@@ -23250,7 +23269,6 @@ async function tiendaConfirmarPedido(){
  tiendaItems={};tiendaRenderCarrito();tiendaMensaje('✅ Pedido #'+data+' registrado. Pago pendiente por transferencia. El club debe comunicarte los datos bancarios y confirmar el pago.');alert('Pedido #'+data+' registrado. Guarda el número y coordina la transferencia con el club.');
  await tiendaCargarCatalogo();
 }
-async function tiendaAbrirAdmin(){const {data}=await supabaseClient.rpc('es_administrador');if(data!==true)return alert('Solo administradores');const e=document.getElementById('tiendaAdmin');e.classList.toggle('oculto');if(!e.classList.contains('oculto'))tiendaCargarAdmin()}
 async function tiendaCargarAdmin(){const [{data,error},{data:pedidos,error:ep}]=await Promise.all([supabaseClient.from('tienda_productos').select('*').order('id',{ascending:false}),supabaseClient.from('tienda_pedidos').select('*').order('id',{ascending:false}).limit(50)]);
  const area=document.getElementById('tiendaListaAdmin');area.replaceChildren();if(error)area.textContent=error.message;
  (data||[]).forEach(p=>{const fila=document.createElement('div');fila.className='tienda-fila';const t=document.createElement('span');t.textContent=p.nombre+' · '+tiendaDinero(p.precio)+' · Stock '+p.stock+' · '+(p.activo?'Activo':'Oculto');const edit=document.createElement('button');edit.textContent='Editar';edit.onclick=()=>tiendaEditarProducto(p);const del=document.createElement('button');del.textContent='Eliminar';del.onclick=()=>tiendaEliminarProducto(p.id);fila.append(t,edit,del);area.append(fila)});
@@ -23258,10 +23276,22 @@ async function tiendaCargarAdmin(){const [{data,error},{data:pedidos,error:ep}]=
  (pedidos||[]).forEach(p=>{const fila=document.createElement('div');fila.className='tienda-fila';const t=document.createElement('div');t.textContent='#'+p.id+' · '+p.cliente_nombre+' · '+tiendaDinero(p.total)+' · '+p.estado+' · '+p.cliente_telefono;
  const btn=document.createElement('button');btn.textContent='Marcar pagado';btn.disabled=p.estado!=='pendiente_transferencia';btn.onclick=async()=>{if(!confirm('¿Confirmas que el dinero ingresó a la cuenta del club?'))return;const {error}=await supabaseClient.from('tienda_pedidos').update({estado:'pagado'}).eq('id',p.id);if(error)alert(error.message);else tiendaCargarAdmin()};fila.append(t,btn);pa.append(fila)});
 }
-function tiendaLimpiarProducto(){['Id','Nombre','Precio','Imagen','Descripcion'].forEach(k=>document.getElementById('tiendaProducto'+k).value='');document.getElementById('tiendaProductoStock').value=0;document.getElementById('tiendaProductoActivo').checked=true}
+function tiendaLimpiarProducto(){['Id','Nombre','Precio','Imagen','Descripcion'].forEach(k=>document.getElementById('tiendaProducto'+k).value='');document.getElementById('tiendaProductoStock').value=0;document.getElementById('tiendaProductoArchivo').value='';document.getElementById('tiendaProductoActivo').checked=true}
 function tiendaEditarProducto(p){for(const [k,v] of Object.entries({Id:p.id,Nombre:p.nombre,Precio:p.precio,Stock:p.stock,Imagen:p.imagen_url,Descripcion:p.descripcion}))document.getElementById('tiendaProducto'+k).value=v??'';document.getElementById('tiendaProductoActivo').checked=p.activo;document.getElementById('tiendaAdmin').scrollIntoView({behavior:'smooth'})}
-async function tiendaGuardarProducto(e){e.preventDefault();const id=document.getElementById('tiendaProductoId').value;const obj={nombre:document.getElementById('tiendaProductoNombre').value.trim(),precio:Number(document.getElementById('tiendaProductoPrecio').value),stock:Number(document.getElementById('tiendaProductoStock').value),imagen_url:document.getElementById('tiendaProductoImagen').value.trim(),descripcion:document.getElementById('tiendaProductoDescripcion').value.trim(),activo:document.getElementById('tiendaProductoActivo').checked};
- const q=id?supabaseClient.from('tienda_productos').update(obj).eq('id',id):supabaseClient.from('tienda_productos').insert(obj);const {error}=await q;if(error)return alert(error.message);tiendaLimpiarProducto();document.getElementById('tiendaAdminMensaje').textContent='✅ Producto guardado';tiendaCargarAdmin()}
+async function tiendaGuardarProducto(e){e.preventDefault();
+ const boton=document.getElementById('tiendaGuardarBoton');boton.disabled=true;
+ const archivo=document.getElementById('tiendaProductoArchivo')?.files?.[0];
+ if(archivo){
+  if(!['image/jpeg','image/png','image/webp'].includes(archivo.type)||archivo.size>5*1024*1024){alert('Selecciona JPG, PNG o WEBP de máximo 5 MB');boton.disabled=false;return;}
+  const ext=archivo.type==='image/png'?'png':archivo.type==='image/webp'?'webp':'jpg';
+  const ruta='productos/'+Date.now()+'-'+Math.random().toString(36).slice(2,10)+'.'+ext;
+  const {error:err}=await supabaseClient.storage.from('tienda-productos').upload(ruta,archivo,{contentType:archivo.type,upsert:false});
+  if(err){alert('No se pudo subir la foto: '+err.message);boton.disabled=false;return;}
+  const {data:foto}=supabaseClient.storage.from('tienda-productos').getPublicUrl(ruta);
+  document.getElementById('tiendaProductoImagen').value=foto.publicUrl;
+ }
+ const id=document.getElementById('tiendaProductoId').value;const obj={nombre:document.getElementById('tiendaProductoNombre').value.trim(),precio:Number(document.getElementById('tiendaProductoPrecio').value),stock:Number(document.getElementById('tiendaProductoStock').value),imagen_url:document.getElementById('tiendaProductoImagen').value.trim(),descripcion:document.getElementById('tiendaProductoDescripcion').value.trim(),activo:document.getElementById('tiendaProductoActivo').checked};
+ const q=id?supabaseClient.from('tienda_productos').update(obj).eq('id',id):supabaseClient.from('tienda_productos').insert(obj);const {error}=await q;if(error){alert(error.message);boton.disabled=false;return;}tiendaLimpiarProducto();boton.disabled=false;document.getElementById('tiendaAdminMensaje').textContent='✅ Producto guardado';tiendaCargarAdmin()}
 async function tiendaEliminarProducto(id){if(!confirm('¿Eliminar producto? Si tiene pedidos anteriores, puedes ocultarlo en lugar de eliminarlo.'))return;const {error}=await supabaseClient.from('tienda_productos').delete().eq('id',id);if(error)alert(error.message);else tiendaCargarAdmin()}
 
 </script>
@@ -23269,8 +23299,6 @@ async function tiendaEliminarProducto(id){if(!confirm('¿Eliminar producto? Si t
 .feria-noticias-home{margin:0 14px 105px!important;padding:0!important;background:transparent!important;border-radius:0!important;color:white}.feria-noticias-titulo{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:12px 0 16px}.feria-noticias-titulo span{color:#ed3345;font-size:10px;font-weight:900;letter-spacing:1px}.feria-noticias-titulo h2{font-size:25px;font-weight:900;margin-top:5px}.feria-noticias-titulo em{font-style:normal;color:#ed3345}.feria-noticias-contador{color:#a6bbdf!important}.feria-noticia-destacada{background:linear-gradient(160deg,#102b5c,#071b3c);border:1px solid #284a81;border-radius:20px;overflow:hidden;box-shadow:0 12px 25px #0004}.feria-noticia-imagen{height:195px;position:relative;background:linear-gradient(130deg,#0b2b61,#b91f34);display:flex;align-items:end}.feria-noticia-imagen.sin-foto:before{content:'⚽  FERIA OSORNO  🔵🔴';position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:#fff;font-size:19px}.feria-noticia-imagen img{width:100%;height:100%;object-fit:cover}.feria-noticia-imagen span{position:absolute;left:12px;bottom:12px;background:#d71920;color:#fff;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900}.feria-noticia-texto{padding:19px}.feria-noticia-texto small{color:#ed3345;font-weight:900;font-size:10px}.feria-noticia-texto h3{font-size:23px;margin:8px 0 10px}.feria-noticia-texto p{font-size:13px;line-height:1.6;color:#d4e0f3}.feria-noticias-proximas{display:grid;gap:10px;margin-top:12px}.feria-noticias-proximas article{display:flex;align-items:center;gap:12px;background:#0c2149;border:1px solid #243e69;border-radius:14px;padding:15px}.feria-noticias-proximas article>span{font-size:25px}.feria-noticias-proximas strong{font-size:13px}.feria-noticias-proximas p{font-size:11px;color:#aebdd6;margin-top:4px}.feria-pagina-informativa{background:#06142f!important;color:#fff!important;min-height:85vh;margin:0!important;padding:22px 17px 105px!important;border-radius:0!important}.feria-pagina-informativa>span{color:#ed3345;font-weight:900;font-size:10px}.feria-pagina-informativa h2{font-size:27px;margin:12px 0}.feria-pagina-informativa p{color:#c8d6ef;line-height:1.7}.feria-info-caja{padding:20px;margin-top:25px;background:#0d2859;border-radius:16px;border-left:4px solid #ed3345}.feria-edicion-extra{background:#102650;color:white;border-radius:16px;padding:17px;margin:15px 0}.feria-edicion-extra h3{margin:20px 0 6px;font-size:17px;color:white}.feria-edicion-extra p{color:#b6c7e4;font-size:12px;line-height:1.5;margin-bottom:10px}.feria-edicion-extra textarea,.feria-edicion-extra input,.feria-edicion-extra select{display:block;width:100%;padding:12px;background:#071a3b;color:white;border:1px solid #48648d;border-radius:10px;margin:7px 0}.feria-copa-fila,.feria-momento-fila{padding:10px;border:1px solid #36527f;border-radius:10px;margin:9px 0}.feria-copa-fila button,.feria-momento-fila button{background:#bd2033;color:white;border:0;border-radius:8px;padding:8px}.feria-momento-fila img{width:80px;height:80px;object-fit:cover;border-radius:10px}.feria-palmares-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feria-copa-publica{background:#0d2a5b;border:1px solid #2a4b80;border-radius:15px;text-align:center;padding:17px 8px}.feria-copa-publica span{display:block;font-size:40px}.feria-copa-publica strong{display:block;color:#fff;font-size:12px;margin:8px 0 3px}.feria-momentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feria-momentos-grid img{width:100%;height:170px;object-fit:cover;border-radius:13px}
 </style>
 <script>
-function feriaMostrarAccesoTienda(visible){['feriaAccesoTiendaInicio','feriaEstadisticasAcceso'].forEach(id=>{const el=document.getElementById(id);if(el){el.classList.toggle('oculto',!visible);el.style.setProperty('display',visible?'flex':'none','important');el.setAttribute('aria-hidden',String(!visible));}});if(!visible){document.getElementById('tiendaAdmin')?.classList.add('oculto');document.getElementById('feriaEstadisticasAdmin')?.classList.add('oculto')}}
-async function feriaAbrirEstadisticasAdmin(){const {data,error}=await supabaseClient.rpc('es_administrador');if(error||data!==true)return alert('Acceso solo para administradores');document.getElementById('feriaEstadisticasAdmin').classList.toggle('oculto')}
 let feriaMomentosEditados=[];
 let feriaPalmaresEditados=[];
 function feriaPrepararExtrasJugador(j){document.getElementById('feriaTrayectoriaJugador').value=j.trayectoria_feriana||'';feriaPalmaresEditados=Array.isArray(j.palmares_feriano)?j.palmares_feriano:[];feriaMomentosEditados=Array.isArray(j.momentos_ferianos)?j.momentos_ferianos:[];document.getElementById('feriaMomentosArchivos').value='';feriaRenderPalmares();feriaRenderMomentos()}
@@ -23320,5 +23348,72 @@ function feriaVolverDesdeTienda(){
     };
   }
 })();
+</script>
+
+<style id="feria-ajustes-finales">
+/* Páginas públicas secundarias: pegadas al borde superior, independientes del encabezado */
+#feriaHistoria:not(.oculto),#feriaEscuela:not(.oculto),#feriaComunidad:not(.oculto){
+ position:fixed!important;inset:0 0 70px 0!important;z-index:90!important;
+ overflow-y:auto!important;overscroll-behavior:contain;
+ display:block!important;margin:0!important;padding:16px 17px 28px!important;
+ min-height:0!important;height:auto!important;max-height:none!important;
+ background:#06142f!important;
+}
+#feriaHistoria .feria-volver-icono,#feriaEscuela .feria-volver-icono,#feriaComunidad .feria-volver-icono{display:grid!important;margin:0 0 17px!important}
+#feriaHistoria h2,#feriaEscuela h2,#feriaComunidad h2{margin:0 0 12px!important}
+#feriaHerramientasInicio{padding:12px 15px 90px}
+#feriaHerramientasInicio.oculto{display:none!important}
+#feriaHerramientasInicio .accion-admin{margin:12px 0!important}
+#feriaEstadisticasAdmin.feria-admin-pantalla,#tiendaAdmin.feria-admin-pantalla{
+ position:fixed!important;inset:0 0 70px 0!important;z-index:95!important;
+ overflow-y:auto!important;overscroll-behavior:contain;
+ margin:0!important;padding:18px 16px 35px!important;
+ min-height:0!important;height:auto!important;
+ background:#06142f!important;color:#fff!important;border-radius:0!important
+}
+#feriaEstadisticasAdmin.feria-admin-pantalla.oculto,#tiendaAdmin.feria-admin-pantalla.oculto{display:none!important}
+.feria-admin-pantalla h2{color:#fff!important;font-size:25px!important;margin:5px 0 10px!important}
+.feria-admin-pantalla .feria-admin-descripcion{color:#b5c9e7;font-size:14px;margin-bottom:20px}
+.feria-admin-panel-tarjeta{background:#102b59;border:1px solid #2b4d80;border-radius:16px;padding:17px;margin:14px 0;color:#fff}
+.feria-admin-panel-tarjeta h3,.feria-admin-panel-tarjeta strong{color:#fff}
+.feria-admin-panel-tarjeta p{color:#c4d5ee;font-size:13px;line-height:1.5;margin:9px 0}
+.feria-admin-panel-tarjeta label{display:block;margin:14px 0 5px;font-weight:700;font-size:13px;color:#fff}
+.feria-admin-panel-tarjeta input:not([type="checkbox"]):not([type="file"]),.feria-admin-panel-tarjeta textarea{
+ display:block;width:100%;padding:12px;border-radius:10px;border:1px solid #43659a;
+ background:#081b3b;color:#fff;box-sizing:border-box
+}
+.feria-admin-panel-tarjeta input[type="file"]{display:block;width:100%;padding:12px;border:1px dashed #6d91c3;border-radius:12px;background:#091e42;color:white}
+.feria-admin-panel-tarjeta .feria-ayuda-archivo{font-size:12px;color:#a8c5ed}
+.feria-admin-panel-tarjeta .feria-check-tienda{display:flex;align-items:center;gap:10px}
+.feria-admin-panel-tarjeta .feria-check-tienda input{width:auto}
+.feria-admin-panel-tarjeta button{border-radius:10px;padding:10px 13px;border:0;cursor:pointer}
+.feria-admin-panel-tarjeta button.tienda-rojo{background:#d51e37;color:white;font-weight:800}
+.feria-admin-panel-tarjeta .tienda-fila{color:#fff;border-color:#3b5481}
+.menu-inferior-publico{z-index:120!important}
+</style>
+<script id="feria-ajustes-navegacion">
+let feriaPantallaAdminAbierta=null;
+function feriaMostrarAccesoTienda(visible){
+ const grupo=document.getElementById('feriaHerramientasInicio');
+ if(grupo)grupo.classList.toggle('oculto',!visible);
+ if(!visible)feriaCerrarPantallaAdmin(true);
+}
+function feriaCerrarPantallaAdmin(silencioso=false){
+ document.getElementById('feriaEstadisticasAdmin')?.classList.add('oculto');
+ document.getElementById('tiendaAdmin')?.classList.add('oculto');
+ feriaPantallaAdminAbierta=null;
+ if(!silencioso){mostrarInicioAdmin();window.scrollTo(0,0)}
+}
+async function feriaAbrirPantallaAdmin(id){
+ const {data,error}=await supabaseClient.rpc('es_administrador');
+ if(error||data!==true){alert('Acceso exclusivo para administradores');return}
+ feriaCerrarPantallaAdmin(true);
+ document.getElementById(id).classList.remove('oculto');
+ feriaPantallaAdminAbierta=id;
+ window.scrollTo(0,0);
+ if(id==='tiendaAdmin')await tiendaCargarAdmin();
+}
+function feriaAbrirEstadisticasAdmin(){return feriaAbrirPantallaAdmin('feriaEstadisticasAdmin')}
+function tiendaAbrirAdmin(){return feriaAbrirPantallaAdmin('tiendaAdmin')}
 </script>
 </body>  </html>
