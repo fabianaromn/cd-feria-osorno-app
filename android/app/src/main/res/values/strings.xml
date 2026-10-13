@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CD Feria Osorno</string>
+    <string name="title_activity_main">CD Feria Osorno</string>
+    <string name="package_name">cl.cdferiaosorno.app</string>
+    <string name="custom_url_scheme">cl.cdferiaosorno.app</string>
+</resources>

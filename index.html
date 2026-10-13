@@ -23364,10 +23364,77 @@ function feriaLeerPalmares(){return feriaPalmaresEditados.filter(p=>String(p.tex
 function feriaRenderMomentos(){const el=document.getElementById('feriaMomentosEditor');el.replaceChildren();feriaMomentosEditados.forEach((url,i)=>{const fila=document.createElement('div');fila.className='feria-momento-fila';const img=document.createElement('img');img.src=url;img.alt='Momento del jugador';const b=document.createElement('button');b.type='button';b.textContent='Quitar de la galería';b.onclick=()=>{feriaMomentosEditados.splice(i,1);feriaRenderMomentos()};fila.append(img,b);el.append(fila)})}
 async function feriaSubirMomentosJugador(id){const input=document.getElementById('feriaMomentosArchivos');const archivos=Array.from(input.files||[]);if(feriaMomentosEditados.length+archivos.length>20)throw new Error('Máximo 20 imágenes por jugador');for(const f of archivos){if(!f.type.startsWith('image/')||f.size>5*1024*1024)throw new Error('Las imágenes deben ser JPG, PNG o WEBP de hasta 5 MB');const extension=(f.name.split('.').pop()||'jpg').toLowerCase();const path=id+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+extension;const {error}=await supabaseClient.storage.from('momentos-jugadores').upload(path,f,{contentType:f.type,upsert:false});if(error)throw error;const {data}=supabaseClient.storage.from('momentos-jugadores').getPublicUrl(path);feriaMomentosEditados.push(data.publicUrl)}return feriaMomentosEditados}
 async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();if(error||!data)return;const historia=document.getElementById('feriaTrayectoriaPublica');if(historia){const p=historia.querySelector('.feria-trayectoria-guardada');if(p)p.remove();if(data.trayectoria_feriana){const nuevo=document.createElement('p');nuevo.className='feria-trayectoria-guardada';nuevo.textContent=data.trayectoria_feriana;historia.append(nuevo);historia.querySelectorAll('p:not(.feria-trayectoria-guardada)').forEach(x=>x.style.display='none')}else{const pred=historia.querySelector('.feria-trayectoria-default');if(pred)pred.style.display=''}}const palmares=document.getElementById('feriaPalmaresPublico');if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){palmares.replaceChildren();palmares.className='feria-palmares-grid';data.palmares_feriano.forEach(item=>{const box=document.createElement('div');box.className='feria-copa-publica';const copa=document.createElement('span');copa.textContent=Number(item.puesto)===1?'🏆':Number(item.puesto)===2?'🥈':'🥉';const texto=document.createElement('strong');texto.textContent=item.texto;box.append(copa,texto);palmares.append(box)})}const momentos=document.getElementById('feriaMomentosPublico');if(momentos&&Array.isArray(data.momentos_ferianos)&&data.momentos_ferianos.length){momentos.replaceChildren();momentos.className='feria-momentos-grid';data.momentos_ferianos.forEach(url=>{if(typeof url!=='string'||!url.startsWith('https://'))return;const img=document.createElement('img');img.src=url;img.alt='Momento feriano';img.loading='lazy';momentos.append(img)})}}catch(e){console.warn('Datos de trayectoria:',e)}}
-// Gesto de volver desde cualquier pantalla. Conserva la navegación existente.
-let feriaGestoInicio=null;
-document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];feriaGestoInicio={x:t.clientX,y:t.clientY,ancho:window.innerWidth,elemento:e.target}}, {passive:true});
-document.addEventListener('touchend',e=>{if(!feriaGestoInicio||e.changedTouches.length!==1)return;const a=feriaGestoInicio;feriaGestoInicio=null;const t=e.changedTouches[0],dx=t.clientX-a.x,dy=t.clientY-a.y;if(a.x>45||dx<85||Math.abs(dy)>Math.abs(dx)*.55)return;if(a.elemento.closest('input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad'))return;if(document.getElementById('feriaSeccionSocioDetalle')&&!document.getElementById('feriaSeccionSocioDetalle').classList.contains('oculto')){document.getElementById('feriaSeccionSocioDetalle').classList.add('oculto');return}if(document.getElementById('portalSocioCuotas')&&!document.getElementById('portalSocioCuotas').classList.contains('oculto')){feriaVolverMenuSocio();return}if(document.getElementById('feriaSeccionSocio')&&!document.getElementById('feriaSeccionSocio').classList.contains('oculto')){feriaVolverMenuSocio();return}if(!document.getElementById('portalSociosPublico').classList.contains('oculto')){mostrarInicioPublico();return}if(!document.getElementById('feriaHistoria').classList.contains('oculto')||!document.getElementById('feriaEscuela').classList.contains('oculto')||!document.getElementById('feriaComunidad').classList.contains('oculto')){mostrar('estadisticas');return}if(!document.getElementById('administracion').classList.contains('oculto')){const visible=['menuAdminPartidos','menuAdminJugadores','menuAdminSocios','menuAdminFinanzas'].some(id=>!document.getElementById(id).classList.contains('oculto'));if(visible){mostrarInicioAdmin();return}}const secciones=['formularioEditarJugador','editarJugador','eliminarJugador','agregarJugador','formularioEditarPartido','editarPartido','eliminarPartido','agregarPartido','jugadorDetalle','detallePartido','partidos','jugadores','store','estadisticas','login'];if(secciones.some(id=>{const el=document.getElementById(id);return el&&!el.classList.contains('oculto')})){if(typeof volver==='function')volver();else mostrarInicioPublico()}}, {passive:true});
+// Historial real de pantallas: guarda el estado anterior a cada navegación.
+// Incluye subpantallas de socios, administración, partidos y jugadores.
+(function(){
+  const pila=[];
+  let restaurando=false;
+  let inicio=null;
+  const MAX=45;
+  const selectores='[id],.menu-inferior-item,.portada-app-feria,.proximo-partido-home';
+  function captura(){
+    return {
+      elementos:Array.from(document.querySelectorAll(selectores)).map(el=>({
+        el:el,
+        oculto:el.classList.contains('oculto'),
+        activo:el.classList.contains('activo')
+      })),
+      scroll:window.scrollY
+    };
+  }
+  function firma(estado){
+    return estado.elementos.filter(x=>x.oculto||x.activo).map(x=>
+      (x.el.id||x.el.className||x.el.tagName)+':'+Number(x.oculto)+Number(x.activo)
+    ).join('|');
+  }
+  function recuperar(estado){
+    restaurando=true;
+    estado.elementos.forEach(x=>{
+      if(!x.el.isConnected)return;
+      x.el.classList.toggle('oculto',x.oculto);
+      x.el.classList.toggle('activo',x.activo);
+    });
+    requestAnimationFrame(()=>{
+      window.scrollTo(0,estado.scroll||0);
+      setTimeout(()=>{restaurando=false;},100);
+    });
+  }
+  // Se registra ANTES del onclick para recordar exactamente de dónde se entró.
+  document.addEventListener('click',function(e){
+    if(restaurando)return;
+    const control=e.target.closest('button,a,[onclick],.menu-inferior-item,.card,.accion-admin,.feria-chip,.categoria-partido,.jugador-card-publico');
+    if(!control)return;
+    const anterior=captura();
+    const clave=firma(anterior);
+    setTimeout(()=>{
+      if(restaurando)return;
+      if(firma(captura())===clave)return; // No fue una navegación.
+      if(pila.length && firma(pila[pila.length-1])===clave)return;
+      pila.push(anterior);
+      if(pila.length>MAX)pila.shift();
+    },450);
+  },true);
+  document.addEventListener('touchstart',function(e){
+    if(e.touches.length!==1){inicio=null;return;}
+    const t=e.touches[0];
+    inicio={x:t.clientX,y:t.clientY,elemento:e.target};
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(!inicio||e.changedTouches.length!==1)return;
+    const a=inicio;inicio=null;
+    const t=e.changedTouches[0],dx=t.clientX-a.x,dy=t.clientY-a.y;
+    if(a.x>45||dx<85||Math.abs(dy)>Math.abs(dx)*.55)return;
+    if(a.elemento.closest('input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad'))return;
+    if(!pila.length)return;
+    const actual=firma(captura());
+    while(pila.length){
+      const anterior=pila.pop();
+      if(firma(anterior)===actual)continue;
+      recuperar(anterior);
+      break;
+    }
+  },{passive:true});
+})();
 </script>
 <style id="feria-revision-octubre">
 #feriaAccesoTiendaInicio.oculto,#feriaEstadisticasAcceso.oculto{display:none!important}

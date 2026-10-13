@@ -1,0 +1,9 @@
+{
+  "appId": "cl.cdferiaosorno.app",
+  "appName": "CD Feria Osorno",
+  "webDir": "www",
+  "server": {
+    "url": "https://fabianaromn.github.io/cd-feria-osorno-app/",
+    "cleartext": false
+  }
+}
