@@ -8431,26 +8431,6 @@ class="oculto gestion-admin">
     <div class="accion-admin-texto"><strong>Gestionar beneficios</strong><span>Agregar, editar y eliminar empresas colaboradoras</span></div>
     <div class="accion-admin-flecha">›</div>
   </div>
-  <section id="feriaAdminBeneficios" class="oculto feria-admin-beneficios">
-    <h3>🎁 Empresas colaboradoras</h3>
-    <p id="feriaAdminBeneficiosMensaje" role="status"></p>
-    <form id="feriaFormBeneficio" onsubmit="feriaGuardarBeneficio(event)">
-      <input type="hidden" id="feriaBeneficioId">
-      <label>Nombre de la empresa *<input id="feriaBeneficioNombre" required maxlength="120"></label>
-      <label>Descripción del beneficio *<textarea id="feriaBeneficioDescripcion" required rows="3"></textarea></label>
-      <label>Descuento (ej. 15% o precio especial)<input id="feriaBeneficioDescuento"></label>
-      <label>Dirección<input id="feriaBeneficioDireccion"></label>
-      <label>Teléfono<input id="feriaBeneficioTelefono" type="tel"></label>
-      <label>Instagram<input id="feriaBeneficioInstagram" placeholder="https://instagram.com/..."></label>
-      <label>Logo (URL de imagen)<input id="feriaBeneficioLogo" type="url" placeholder="https://..."></label>
-      <label>Condiciones<textarea id="feriaBeneficioCondiciones" rows="3"></textarea></label>
-      <label class="feria-admin-check"><input type="checkbox" id="feriaBeneficioActivo" checked> Beneficio activo</label>
-      <button class="boton" type="submit">💾 Guardar beneficio</button>
-      <button class="boton" type="button" onclick="feriaLimpiarFormularioBeneficio()">Nuevo / Limpiar</button>
-    </form>
-    <h3>Empresas registradas</h3>
-    <div id="feriaAdminListaBeneficios"></div>
-  </section>
 
 </div>
 <div id="feriaHerramientasInicio" class="feria-herramientas-inicio"><div id="feriaEstadisticasAcceso" class="accion-admin"  onclick="feriaAbrirEstadisticasAdmin()"><div class="accion-admin-icono">📊</div><div class="accion-admin-texto"><strong>Estadísticas internas</strong><span>Acceso exclusivo para administradores</span></div><div class="accion-admin-flecha">›</div></div>
@@ -8466,6 +8446,34 @@ class="oculto gestion-admin">
 </section>
 
 
+
+  <section id="feriaAdminBeneficios" class="seccion oculto feria-admin-beneficios feria-admin-pantalla">
+    <button type="button" class="feria-volver-icono" onclick="feriaCerrarAdminBeneficios()" aria-label="Regresar">←</button>
+    <div class="feria-beneficios-encabezado"><span>CLUB DEPORTIVO FERIA OSORNO</span><h2>🎁 Empresas colaboradoras</h2><p>Gestiona los beneficios exclusivos para socios abonados.</p></div>
+
+    <p id="feriaAdminBeneficiosMensaje" role="status"></p>
+    <form id="feriaFormBeneficio" onsubmit="feriaGuardarBeneficio(event)">
+      <input type="hidden" id="feriaBeneficioId">
+      <label>Nombre de la empresa *<input id="feriaBeneficioNombre" required maxlength="120"></label>
+      <label>Descripción del beneficio *<textarea id="feriaBeneficioDescripcion" required rows="3"></textarea></label>
+      <label>Descuento (ej. 15% o precio especial)<input id="feriaBeneficioDescuento"></label>
+      <label>Dirección<input id="feriaBeneficioDireccion"></label>
+      <label>Teléfono<input id="feriaBeneficioTelefono" type="tel"></label>
+      <label>Instagram<input id="feriaBeneficioInstagram" placeholder="https://instagram.com/..."></label>
+      <label>Logo de la empresa
+      <input id="feriaBeneficioArchivo" type="file" accept="image/png,image/jpeg,image/webp" onchange="feriaPrevisualizarLogoBeneficio(this)">
+    </label>
+    <p class="feria-logo-ayuda">Selecciona una imagen PNG, JPG o WEBP de hasta 5 MB.</p>
+    <div class="feria-logo-preview" id="feriaLogoPreview" hidden><img id="feriaLogoPreviewImg" alt="Vista previa del logo"></div>
+    <input id="feriaBeneficioLogo" type="hidden">
+      <label>Condiciones<textarea id="feriaBeneficioCondiciones" rows="3"></textarea></label>
+      <label class="feria-admin-check"><input type="checkbox" id="feriaBeneficioActivo" checked> Beneficio activo</label>
+      <button class="boton" type="submit">💾 Guardar beneficio</button>
+      <button class="boton" type="button" onclick="feriaLimpiarFormularioBeneficio()">Nuevo / Limpiar</button>
+    </form>
+    <h3 class="feria-beneficios-lista-titulo">Empresas registradas</h3>
+    <div id="feriaAdminListaBeneficios"></div>
+  </section>
 
 <section id="feriaEstadisticasAdmin" class="seccion oculto feria-admin-pantalla">
  <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
@@ -12717,6 +12725,7 @@ function mostrarInicioAdmin(boton){
 }
 
 function mostrarMenuAdmin(id){
+  document.getElementById("feriaAdminBeneficios")?.classList.add("oculto");
   feriaMostrarAccesoTienda(false);
   marcarMenuAdminActivo(id);
 
@@ -22957,14 +22966,33 @@ async function feriaCargarBeneficiosSocio(){
   FERIA_BENEFICIOS_SOCIOS=(data||[]).map(b=>({id:b.id,nombre:b.nombre,logo:b.logo_url}));
 }
 async function feriaAbrirAdminBeneficios(){
+  feriaCerrarPantallaAdmin(true);
   const panel=document.getElementById("feriaAdminBeneficios");
-  panel.classList.toggle("oculto");
-  if(!panel.classList.contains("oculto")) await feriaCargarAdminBeneficios();
+  if(!panel)return;
+  panel.classList.remove("oculto");
+  window.scrollTo(0,0);
+  await feriaCargarAdminBeneficios();
+}
+function feriaCerrarAdminBeneficios(){
+  document.getElementById("feriaAdminBeneficios")?.classList.add("oculto");
+  mostrarMenuAdmin("menuAdminSocios");
+  window.scrollTo(0,0);
+}
+function feriaPrevisualizarLogoBeneficio(input){
+ const file=input.files?.[0];if(!file)return;
+ if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5*1024*1024){
+  alert("Selecciona una imagen PNG, JPG o WEBP de máximo 5 MB");input.value="";return;
+ }
+ const url=URL.createObjectURL(file);
+ const img=document.getElementById('feriaLogoPreviewImg');
+ img.onload=()=>URL.revokeObjectURL(url);
+ img.src=url;document.getElementById('feriaLogoPreview').hidden=false;
 }
 function feriaAdminMensajeBeneficios(m){document.getElementById("feriaAdminBeneficiosMensaje").textContent=m;}
 function feriaLimpiarFormularioBeneficio(){
   document.getElementById("feriaFormBeneficio").reset();
   document.getElementById("feriaBeneficioId").value="";
+  document.getElementById("feriaLogoPreview").hidden=true;
 }
 async function feriaCargarAdminBeneficios(){
   const lista=document.getElementById("feriaAdminListaBeneficios");
@@ -22975,14 +23003,25 @@ async function feriaCargarAdminBeneficios(){
   lista.replaceChildren();
   if(!data.length){lista.textContent="Todavía no hay empresas registradas.";return;}
   data.forEach(item=>{
-    const box=feriaCrearElemento("div","feria-admin-empresa");
-    box.appendChild(feriaCrearElemento("strong","",item.nombre));
-    box.appendChild(feriaCrearElemento("p","",item.activo?"Activo":"Inactivo"));
-    const editar=feriaCrearElemento("button","","Editar");editar.type="button";
-    editar.onclick=()=>feriaEditarBeneficio(item.id);
-    const eliminar=feriaCrearElemento("button","","Eliminar");eliminar.type="button";
-    eliminar.onclick=()=>feriaEliminarBeneficio(item.id);
-    box.append(editar,eliminar);lista.appendChild(box);
+    const box=feriaCrearElemento("article","feria-beneficio-empresa-card");
+    const cabecera=feriaCrearElemento("div","feria-beneficio-empresa-cabecera");
+    const logo=feriaCrearElemento("div","feria-beneficio-empresa-logo");
+    if(item.logo_url){
+      const img=document.createElement("img");img.src=item.logo_url;img.alt="Logo de "+item.nombre;
+      img.onerror=()=>{logo.textContent="🏢"};logo.appendChild(img);
+    }else{logo.textContent="🏢"}
+    const info=feriaCrearElemento("div","feria-beneficio-empresa-info");
+    info.appendChild(feriaCrearElemento("strong","",item.nombre));
+    info.appendChild(feriaCrearElemento("span",item.activo?"feria-beneficio-activo":"feria-beneficio-inactivo",item.activo?"● Beneficio activo":"● Beneficio inactivo"));
+    cabecera.append(logo,info);box.appendChild(cabecera);
+    if(item.descripcion)box.appendChild(feriaCrearElemento("p","feria-beneficio-descripcion",item.descripcion));
+    if(item.descuento)box.appendChild(feriaCrearElemento("div","feria-beneficio-descuento","🎁 "+item.descuento));
+    if(item.direccion)box.appendChild(feriaCrearElemento("p","feria-beneficio-detalle","📍 "+item.direccion));
+    if(item.condiciones)box.appendChild(feriaCrearElemento("p","feria-beneficio-detalle","Condiciones: "+item.condiciones));
+    const acciones=feriaCrearElemento("div","feria-beneficio-acciones");
+    const editar=feriaCrearElemento("button","feria-beneficio-editar","Editar");editar.type="button";editar.onclick=()=>feriaEditarBeneficio(item.id);
+    const eliminar=feriaCrearElemento("button","feria-beneficio-eliminar","Eliminar");eliminar.type="button";eliminar.onclick=()=>feriaEliminarBeneficio(item.id);
+    acciones.append(editar,eliminar);box.append(acciones);lista.appendChild(box);
   });
 }
 function feriaEditarBeneficio(id){
@@ -22990,12 +23029,29 @@ function feriaEditarBeneficio(id){
   const campos={Id:"id",Nombre:"nombre",Descripcion:"descripcion",Descuento:"descuento",Direccion:"direccion",Telefono:"telefono",Instagram:"instagram",Logo:"logo_url",Condiciones:"condiciones"};
   Object.entries(campos).forEach(([campo,col])=>document.getElementById("feriaBeneficio"+campo).value=item[col]??"");
   document.getElementById("feriaBeneficioActivo").checked=item.activo!==false;
+  const preview=document.getElementById("feriaLogoPreview");
+  if(item.logo_url){document.getElementById("feriaLogoPreviewImg").src=item.logo_url;preview.hidden=false}
+  else preview.hidden=true;
+  document.getElementById("feriaBeneficioArchivo").value="";
   document.getElementById("feriaFormBeneficio").scrollIntoView({behavior:"smooth"});
 }
 async function feriaGuardarBeneficio(event){
   event.preventDefault();
   const valor=id=>document.getElementById("feriaBeneficio"+id).value.trim();
   const id=valor("Id");
+  const archivo=document.getElementById("feriaBeneficioArchivo")?.files?.[0];
+  if(archivo){
+    if(!["image/png","image/jpeg","image/webp"].includes(archivo.type)||archivo.size>5*1024*1024){
+      feriaAdminMensajeBeneficios("❌ Archivo inválido. Máximo 5 MB.");return;
+    }
+    feriaAdminMensajeBeneficios("⏳ Subiendo logo...");
+    const extension=archivo.type==="image/png"?"png":archivo.type==="image/webp"?"webp":"jpg";
+    const ruta="colaboradores/"+Date.now()+"-"+Math.random().toString(36).slice(2,9)+"."+extension;
+    const {error:subidaError}=await supabaseClient.storage.from("logos-beneficios").upload(ruta,archivo,{contentType:archivo.type,upsert:false});
+    if(subidaError){feriaAdminMensajeBeneficios("❌ No se pudo subir el logo: "+subidaError.message);return}
+    const {data:urlData}=supabaseClient.storage.from("logos-beneficios").getPublicUrl(ruta);
+    document.getElementById("feriaBeneficioLogo").value=urlData.publicUrl;
+  }
   const payload={nombre:valor("Nombre"),descripcion:valor("Descripcion"),descuento:valor("Descuento"),direccion:valor("Direccion"),telefono:valor("Telefono"),instagram:valor("Instagram"),logo_url:valor("Logo"),condiciones:valor("Condiciones"),activo:document.getElementById("feriaBeneficioActivo").checked};
   feriaAdminMensajeBeneficios("⏳ Guardando...");
   const q=supabaseClient.from("beneficios_socios");
@@ -23416,4 +23472,37 @@ async function feriaAbrirPantallaAdmin(id){
 function feriaAbrirEstadisticasAdmin(){return feriaAbrirPantallaAdmin('feriaEstadisticasAdmin')}
 function tiendaAbrirAdmin(){return feriaAbrirPantallaAdmin('tiendaAdmin')}
 </script>
-</body>  </html>
+<style id="feria-beneficios-v2">
+#feriaAdminBeneficios.feria-admin-pantalla{position:fixed!important;inset:0 0 70px 0!important;z-index:96!important;overflow-y:auto!important;overscroll-behavior:contain;margin:0!important;padding:18px 16px 36px!important;min-height:0!important;height:auto!important;background:#06142f!important;color:#fff!important;border-radius:0!important}
+#feriaAdminBeneficios.oculto{display:none!important}
+#feriaAdminBeneficios .feria-volver-icono{margin:0 0 20px!important}
+.feria-beneficios-encabezado{padding:5px 0 18px}
+.feria-beneficios-encabezado>span{font-size:10px;letter-spacing:2px;color:#ff334c;font-weight:900}
+.feria-beneficios-encabezado h2{color:#fff!important;font-size:25px;margin:10px 0!important}
+.feria-beneficios-encabezado p{color:#b7c8e4;font-size:14px;line-height:1.5}
+#feriaAdminBeneficios form{background:#102b59!important;border:1px solid #294b7e;border-radius:18px;padding:18px;margin-bottom:25px}
+#feriaAdminBeneficios form label{display:block;color:#fff;font-size:13px;font-weight:700;margin:13px 0 6px}
+#feriaAdminBeneficios form input:not([type="checkbox"]):not([type="file"]),#feriaAdminBeneficios form textarea{display:block;width:100%;background:#071b3d!important;color:#fff!important;border:1px solid #45669a!important;border-radius:11px;padding:12px;box-sizing:border-box}
+#feriaAdminBeneficios input[type=file]{display:block;width:100%;padding:12px;background:#081d41;border:1px dashed #7090bf;border-radius:11px;color:#fff}
+#feriaAdminBeneficios .feria-logo-ayuda{color:#aac1e3;font-size:12px}
+#feriaAdminBeneficios .feria-logo-preview{margin:10px 0}
+#feriaAdminBeneficios .feria-logo-preview img{width:100px;height:100px;object-fit:contain;background:#fff;border-radius:14px;padding:9px}
+#feriaAdminBeneficios .feria-admin-check{display:flex;align-items:center;gap:10px}
+#feriaAdminBeneficios .feria-admin-check input{width:auto}
+#feriaAdminBeneficios form button{background:#d51e37;color:#fff;border:0;border-radius:10px;padding:12px 14px;font-weight:800;margin:8px 5px 0 0}
+.feria-beneficios-lista-titulo{color:#fff!important;margin:25px 0 14px}
+.feria-beneficio-empresa-card{background:#102b59;border:1px solid #35558a;border-radius:18px;padding:17px;margin:13px 0;color:#fff}
+.feria-beneficio-empresa-cabecera{display:flex;align-items:center;gap:14px}
+.feria-beneficio-empresa-logo{width:68px;height:68px;flex-shrink:0;background:#fff;border-radius:13px;display:grid;place-items:center;color:#102b59;font-size:27px;overflow:hidden}
+.feria-beneficio-empresa-logo img{width:100%;height:100%;object-fit:contain;padding:5px}
+.feria-beneficio-empresa-info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.feria-beneficio-empresa-info strong{font-size:20px;color:#fff}
+.feria-beneficio-activo{color:#64e5a4;font-size:12px;font-weight:800}
+.feria-beneficio-inactivo{color:#f8a3a3;font-size:12px;font-weight:800}
+.feria-beneficio-descripcion{color:#e5edfa;line-height:1.5;margin:14px 0}
+.feria-beneficio-descuento{background:#1d4075;border-left:3px solid #ff334c;border-radius:9px;padding:12px;margin:12px 0;font-weight:800;color:#fff}
+.feria-beneficio-detalle{color:#c2d3eb;font-size:13px;margin:8px 0}
+.feria-beneficio-acciones{display:flex;gap:10px;margin-top:16px}
+.feria-beneficio-acciones button{padding:10px 17px;border:0;border-radius:10px;font-weight:800;color:white}
+.feria-beneficio-editar{background:#244e91}.feria-beneficio-eliminar{background:#c82039}
+</style></body>  </html>
