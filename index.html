@@ -13535,25 +13535,31 @@ mostrar("agregarPartido");
 async function cerrarSesion(){
 
   const { error } =
-  await supabaseClient.auth.signOut();
+    await supabaseClient.auth.signOut();
 
   if(error){
-
     console.error(error);
-
     return;
-
   }
 
+  // Salir de administración
   ocultarTodo();
 
+  // Mostrar la versión pública
   document
-  .getElementById("pantallaPublica")
-  .classList.remove("oculto");
+    .getElementById("pantallaPublica")
+    .classList.remove("oculto");
 
+  // Activar Actualidad Feriana
+  mostrar("inicio");
+
+  // Mostrar portada y próximo partido
+  controlarPortadaPublica(true);
+
+  // Volver arriba
   window.scrollTo({
-    top:0,
-    behavior:"smooth"
+    top: 0,
+    behavior: "instant"
   });
 
 }
@@ -23038,6 +23044,8 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {
       (x.el.id||x.el.className||x.el.tagName)+':'+Number(x.oculto)+Number(x.activo)
     ).join('|');
   }
+
+
   function recuperar(estado){
     restaurando=true;
     estado.elementos.forEach(x=>{
