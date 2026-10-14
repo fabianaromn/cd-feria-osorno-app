@@ -23340,9 +23340,72 @@ console.log("Valores de máscara:", valoresMascara);
     rc.filter='blur(1px)';
     rc.drawImage(mascara,0,0,W,H);
     rc.filter='none';rc.globalCompositeOperation='source-over';
-    const final=feriaFotoCanvas(W,H),fc=final.getContext('2d');
-    fc.drawImage(fondo,0,0,W,H);
-    fc.drawImage(recorte,0,0);
+   // =====================================
+// ENCUADRE AUTOMÁTICO DEL JUGADOR
+// =====================================
+
+// Detectar los límites de la persona
+const datosRecorte = rc.getImageData(0,0,W,H).data;
+
+let minX=W, maxX=0;
+let minY=H, maxY=0;
+
+for(let y=0;y<H;y+=3){
+  for(let x=0;x<W;x+=3){
+
+    const alpha=datosRecorte[(y*W+x)*4+3];
+
+    if(alpha>100){
+      minX=Math.min(minX,x);
+      maxX=Math.max(maxX,x);
+      minY=Math.min(minY,y);
+      maxY=Math.max(maxY,y);
+    }
+
+  }
+}
+
+// Crear fotografía final
+const final=feriaFotoCanvas(W,H);
+const fc=final.getContext('2d');
+
+// Dibujar fondo oficial
+fc.drawImage(fondo,0,0,W,H);
+
+if(maxY>minY && maxX>minX){
+
+  const anchoPersona=maxX-minX;
+  const altoPersona=maxY-minY;
+
+  // Espacio superior e inferior para el encuadre
+  const escala=Math.min(
+    (W*0.82)/anchoPersona,
+    (H*0.88)/altoPersona
+  );
+
+  // Centrar horizontalmente
+  const centroX=(minX+maxX)/2;
+
+  // Posicionar la cabeza con margen superior
+  const margenSuperior=H*0.07;
+
+  const destinoX=W/2-centroX*escala;
+  const destinoY=margenSuperior-minY*escala;
+
+  fc.drawImage(
+    recorte,
+    destinoX,
+    destinoY,
+    W*escala,
+    H*escala
+  );
+
+}else{
+
+  // Mantener encuadre original si falla la detección
+  fc.drawImage(recorte,0,0);
+
+}
     const blob=await new Promise(resolve=>final.toBlob(resolve,'image/jpeg',.88));
     if(!blob)throw new Error('No se pudo generar la fotografía final.');
     if(blob.size>5*1024*1024)throw new Error('La foto procesada supera 5 MB.');
