@@ -7332,6 +7332,15 @@ body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-publico,
 body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-admin {display:none!important;}
 body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-nav {display:grid!important;}
 </style>
+<style id="feria-tienda-identidad-estilo">
+/* Identidad visual de Tienda Oficial, alineada con los accesos del club */
+#store .feria-tienda-identidad{text-align:center;padding:20px 8px 29px;}
+#store .feria-tienda-identidad img{display:block;width:94px;height:94px;object-fit:contain;margin:0 auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));}
+#store .feria-tienda-identidad span{display:block;margin:13px 0 9px;color:#aabfe2;font-size:10px;font-weight:900;letter-spacing:1.6px;}
+#store .feria-tienda-identidad h1{margin:0;color:#fff;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1.2;}
+#store .feria-tienda-identidad h1 em{color:#ed3345;font-style:normal;}
+#store .feria-tienda-identidad p{margin-top:10px;color:#a9bad6;font-size:12px;}
+</style>
 </head>  
   
   <body>
@@ -7364,7 +7373,7 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
         <button type="button" class="login-feria-ingresar" onclick="iniciarSesion()">Ingresar al panel →</button>
         <p id="mensajeLogin" class="login-feria-mensaje" aria-live="polite"></p>
       </div>
-      <p class="login-feria-pie">🔵 🔴 El más grande del barrio</p>
+      
     </div>
   </section>
 
@@ -7476,9 +7485,7 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
     <i></i>
   </div>
 
-  <p class="portada-app-lema">
-    El más grande del barrio
-  </p>
+  
 
 </div>
 
@@ -7486,8 +7493,6 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
   <div class="portada-app-titulo">
 
     <h1>INICIO</h1>
-
-    <p>El más grande del barrio</p>
 
   </div>
 
@@ -7622,12 +7627,8 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
 
   
 <section id="inicio" class="seccion feria-noticias-home">
-  <div class="feria-noticias-titulo"><div><span>EL MÁS GRANDE DEL BARRIO</span><h2>Actualidad <em>Feriana</em></h2></div><span class="feria-noticias-contador">01 / 03</span></div>
-  <article class="feria-noticia-destacada">
-    <div class="feria-noticia-imagen"><img src="img/noticia-arauco.png" alt="CD Feria Osorno: doble triunfo ante Arauco" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('sin-foto')"><span>⚽ FECHA 6 · CLAUSURA 2026</span></div>
-    <div class="feria-noticia-texto"><small>RESULTADOS · PRIMERA Y SEGUNDA SERIE</small><h3>¡Doble triunfo ante Arauco!</h3><p>El sábado, Feria Osorno celebró victorias en Segunda y Primera Serie frente a Arauco, por la sexta fecha del Clausura 2026 de la Asociación de los Barrios Reloncaví. ¡Vamos, Feria!</p></div>
-  </article>
-  <div class="feria-noticias-proximas"><article><span>📸</span><div><strong>La vida de nuestro club</strong><p>Pronto compartiremos nuevas imágenes y momentos ferianos.</p></div></article><article><span>📣</span><div><strong>Noticias y actividades</strong><p>Este espacio estará disponible para próximos comunicados.</p></div></article></div>
+  <div class="feria-noticias-titulo"><div><span>NOTICIAS DEL CLUB</span><h2>Actualidad <em>Feriana</em></h2></div><span class="feria-noticias-contador" id="feriaNoticiasContador"></span></div>
+  <div id="feriaNoticiasDinamicas"><p style="color:#b6c7e4;padding:15px">Cargando noticias...</p></div>
 </section> 
   
 
@@ -8444,6 +8445,7 @@ class="oculto gestion-admin">
 <div id="feriaAccesoTiendaInicio" class="accion-admin" onclick="tiendaAbrirAdmin()" ><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
 <div class="accion-admin" onclick="feriaAbrirEditorHistoria()"><div class="accion-admin-icono">📜</div><div class="accion-admin-texto"><strong>Nuestra historia</strong><span>Editar relatos, fotografías y personas históricas</span></div><div class="accion-admin-flecha">›</div></div>
 <div class="accion-admin" onclick="feriaAdminEscuela()"><div class="accion-admin-icono">🏫</div><div class="accion-admin-texto"><strong>Gestionar Escuela de Fútbol</strong><span>Publicar beneficios, nutrición y apoyo académico</span></div><div class="accion-admin-flecha">›</div></div>
+<div class="accion-admin" onclick="feriaAbrirActualidadAdmin()"><div class="accion-admin-icono">📰</div><div class="accion-admin-texto"><strong>Gestionar Actualidad Feriana</strong><span>Publicar, editar y eliminar noticias del club</span></div><div class="accion-admin-flecha">›</div></div>
 </div>
 <nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
   <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
@@ -12247,13 +12249,16 @@ class="seccion oculto detalle-partido-publico">
   
 <section id="portalSociosPublico" class="oculto" aria-label="Portal de socios">
  <button type="button" class="boton-volver-solo" aria-label="Volver" onclick="mostrarInicioPublico()">←</button>
- <div class="portal-socios-hero">
-  <small>CD FERIA OSORNO · SOCIOS</small>
-  <h2>Tu club, más cerca</h2>
-  <p>Consulta tus cuotas, beneficios, descuentos exclusivos y boletines del club.</p>
+ <div class="feria-socio-login-identidad">
+   <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
+   <span>CLUB DEPORTIVO FERIA OSORNO</span>
+   <h1>Acceso <em>socio</em></h1>
+   <p>Tu espacio privado en el club.</p>
  </div>
  <div class="portal-socios-tarjeta">
-  <h3>Acceso de socios</h3>
+   <span class="login-feria-etiqueta">ACCESO EXCLUSIVO</span>
+   <h3>Bienvenido de nuevo</h3>
+   <p class="feria-socio-login-descripcion">Ingresa con tus credenciales de socio.</p>
   <label for="portalSocioCorreo">Correo electrónico</label>
   <input id="portalSocioCorreo" type="email" autocomplete="email" placeholder="correo@ejemplo.cl">
   <label for="portalSocioClave">Contraseña</label>
@@ -12301,7 +12306,6 @@ class="seccion oculto detalle-partido-publico">
       <div class="feria-credencial-identidad">
         <span>TITULAR</span>
         <h2 id="credencialNombre">Socio CD Feria Osorno</h2>
-        <p>EL MÁS GRANDE DEL BARRIO</p>
       </div>
       <span id="credencialEstado" class="feria-credencial-estado">● Estado</span>
     </div>
@@ -12434,12 +12438,25 @@ onclick="volver()">
 <button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('entrenamientos')"><span>📅</span><h3>Entrenamientos</h3><p>Días, horarios y lugares para entrenar.</p></button>
 
 </div>
-<div class="feria-contenido-card feria-acceso-escuela" style="margin-top:22px">
-<div class="feria-acceso-icono">🔐</div><span class="feria-lead">ACCESO PRIVADO</span>
-<h3>Directiva de la escuela</h3>
-<p>Espacio de trabajo para organizar beneficios, nutrición, apoyo escolar, documentos y finanzas de la escuela.</p>
-<button type="button" class="feria-boton feria-login-escuela" onclick="feriaIngresarEscuela()">🔐 Iniciar sesión <span>→</span></button>
-<p style="font-size:11px;margin-top:12px">Acceso exclusivo para las cuentas autorizadas de la directiva de la Escuela de Fútbol.</p>
+<div class="feria-contenido-card feria-acceso-escuela feria-escuela-login-directo" style="margin-top:22px">
+  <div class="feria-escuela-login-identidad">
+    <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
+    <span>CLUB DEPORTIVO FERIA OSORNO</span>
+    <h2>Acceso <em>escuela</em></h2>
+    <p>Ingresa con tu cuenta autorizada de la Escuela de Fútbol.</p>
+  </div>
+  <div class="feria-escuela-login-tarjeta">
+    <span class="feria-escuela-login-etiqueta">ESCUELA DE FÚTBOL</span>
+    <h3>Bienvenido de nuevo</h3>
+    <p>Acceso para apoderados y directiva de la escuela.</p>
+    <label for="escuelaLoginEmail">Correo electrónico</label>
+    <input id="escuelaLoginEmail" type="email" autocomplete="username" placeholder="correo@ejemplo.cl">
+    <label for="escuelaLoginPassword">Contraseña</label>
+    <input id="escuelaLoginPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña">
+    <button type="button" class="feria-escuela-login-boton" onclick="feriaAccederEscuelaDesdeFormulario()">Ingresar a la escuela →</button>
+    <p id="escuelaLoginMensaje" role="status" aria-live="polite"></p>
+  </div>
+  
 </div></section>
 <section id="feriaEspecial" class="seccion oculto feria-pagina-informativa feria-especial"><button class="feria-volver-icono" onclick="feriaVolverEspecial()" aria-label="Volver">←</button><div id="feriaEspecialContenido"></div></section>
 <section id="feriaEscuelaInterna" class="seccion oculto feria-pagina-informativa feria-especial feria-panel-exclusivo">
@@ -12450,7 +12467,12 @@ onclick="volver()">
 <section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
 <section id="store" class="seccion oculto tienda-feria">
 <button class="feria-volver-icono" onclick="feriaVolverDesdeTienda()" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
-<h2>🛒 Tienda Oficial</h2><p style="color:#a9bde0">El más grande del barrio · Productos oficiales</p>
+<div class="feria-tienda-identidad">
+  <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
+  <span>CLUB DEPORTIVO FERIA OSORNO</span>
+  <h1>Tienda <em>Oficial</em></h1>
+  <p>Productos oficiales del club.</p>
+</div>
 <div id="tiendaAviso" role="status"></div><div id="tiendaCatalogo" class="tienda-grid"></div>
 <div class="tienda-panel"><div class="tienda-carrito-cabecera"><div><small>TIENDA OFICIAL · CD FERIA OSORNO</small><h3>🛍️ Mi carrito <span id="tiendaContador">(0)</span></h3></div><span class="tienda-carrito-icono">🛒</span></div><div id="tiendaCarrito"></div><div class="tienda-resumen"><span>RESUMEN DEL PEDIDO</span><div class="tienda-resumen-linea"><span>Subtotal</span><strong id="tiendaSubtotal">$0</strong></div><div class="tienda-resumen-linea tienda-resumen-total"><span>Total a pagar</span><strong id="tiendaTotal">$0</strong></div><button type="button" id="tiendaContinuar" class="tienda-continuar" onclick="tiendaMostrarCheckout()">🔒 Continuar compra →</button></div>
 <div id="tiendaCheckout" class="oculto"><h3 class="tienda-checkout-titulo">Datos para finalizar tu pedido</h3>
@@ -12586,6 +12608,8 @@ async function mostrar(id){
     }
 
   }
+
+  if(id === "login" && typeof feriaActualizarAspectoLogin === "function") feriaActualizarAspectoLogin();
 
   ocultarTodo();
 
@@ -22891,7 +22915,7 @@ async function feriaAbrirSeccionSocio(tipo){
 }
 </script>  <div id="feriaVerificacionPantalla" class="oculto" role="main">
  <div class="feria-validacion-contenedor">
-  <div class="feria-validacion-marca"><img src="img/logo-feria.png" alt="Escudo del club"><div><span>CLUB DEPORTIVO</span><h2>FERIA OSORNO</h2><small>EL MÁS GRANDE DEL BARRIO</small></div></div>
+  <div class="feria-validacion-marca"><img src="img/logo-feria.png" alt="Escudo del club"><div><span>CLUB DEPORTIVO</span><h2>FERIA OSORNO</h2></div></div>
   <div class="feria-validacion-tarjeta">
    <div id="feriaVerificacionIcono" class="feria-validacion-icono">⌛</div>
    <h3 id="feriaVerificacionTitulo">Verificando credencial</h3>
@@ -23865,6 +23889,133 @@ window.feriaEnviarInvitacionEscuela=async function(){
   msg.textContent='✅ Solicitud de invitación procesada. Verifica que el correo haya llegado y que el usuario figure en Supabase.';
  }catch(e){msg.textContent='❌ No se pudo enviar: '+(e.message||e)+'. Verifica la configuración de la función invitar-escuela.';}
 };
+})();
+</script>
+
+<style id="feria-login-socios-escuela-unificado">
+/* Misma identidad visual del acceso a directiva, sin modificar la autenticación. */
+#portalSociosPublico:not(:has(#portalSocioPrivado:not(.oculto))){min-height:100vh;background:#06142f!important;color:#fff!important;padding:22px 18px 55px!important}
+#portalSociosPublico:not(:has(#portalSocioPrivado:not(.oculto)))>.boton-volver-solo{background:transparent!important;color:#b5c5e2!important;border:0!important;box-shadow:none!important;padding:10px 0 20px!important}
+#portalSociosPublico .feria-socio-login-identidad{text-align:center;max-width:440px;margin:0 auto;padding:12px 0 28px}
+#portalSociosPublico .feria-socio-login-identidad img{width:94px;height:94px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+#portalSociosPublico .feria-socio-login-identidad span{display:block;margin:13px 0 9px;color:#aabfe2;font-size:10px;font-weight:900;letter-spacing:1.6px}
+#portalSociosPublico .feria-socio-login-identidad h1{color:white;font-size:32px;font-weight:900;letter-spacing:-1px;margin:0}
+#portalSociosPublico .feria-socio-login-identidad h1 em{color:#ed3345;font-style:normal}
+#portalSociosPublico .feria-socio-login-identidad p{margin-top:9px;color:#a9bad6;font-size:12px}
+#portalSociosPublico .portal-socios-tarjeta{max-width:440px;margin:0 auto!important;background:#0d2450!important;border:1px solid rgba(134,170,224,.24)!important;border-radius:20px!important;padding:25px 21px!important;box-shadow:0 14px 40px rgba(0,0,0,.25)!important;color:white!important}
+#portalSociosPublico .portal-socios-tarjeta h3{color:white!important;margin:8px 0!important;font-size:22px!important}
+#portalSociosPublico .portal-socios-tarjeta .feria-socio-login-descripcion{color:#a9bad6!important;font-size:12px!important;line-height:1.5!important;margin-bottom:17px!important}
+#portalSociosPublico .portal-socios-tarjeta label{display:block;color:#e5ecfa!important;font-size:12px!important;font-weight:800!important;margin:15px 0 7px!important}
+#portalSociosPublico .portal-socios-tarjeta>input{display:block;width:100%!important;box-sizing:border-box;padding:15px 13px!important;border-radius:11px!important;border:1px solid #36507b!important;background:#e7effe!important;color:#071936!important;font-size:14px!important;min-height:48px}
+#portalSociosPublico .portal-socios-tarjeta>button[onclick="avisoPortalSocios()"]{display:block;width:100%!important;padding:16px 12px!important;margin-top:22px!important;background:#ed1c2e!important;border:0!important;border-radius:12px!important;color:white!important;font-size:13px!important;font-weight:900!important}
+#portalSociosPublico .portal-socios-aviso{color:#a9bad6!important;text-align:center;font-size:11px!important}
+#portalSociosPublico:has(#portalSocioPrivado:not(.oculto)) .feria-socio-login-identidad,
+#portalSociosPublico:has(#portalSocioPrivado:not(.oculto)) .portal-socios-tarjeta{display:none!important}
+#login.feria-login-modo-escuela .login-feria-identidad h1 em{color:#ed3345}
+</style>
+<script id="feria-login-escuela-etiquetas">
+function feriaActualizarAspectoLogin(){
+ const escuela=window.feriaLoginDesdeEscuela===true;
+ const login=document.getElementById('login');if(!login)return;
+ login.classList.toggle('feria-login-modo-escuela',escuela);
+ const titulo=login.querySelector('.login-feria-identidad h1');
+ const subtitulo=login.querySelector('.login-feria-identidad p');
+ const etiqueta=login.querySelector('.login-feria-etiqueta');
+ const descripcion=login.querySelector('.login-feria-tarjeta>p');
+ const boton=login.querySelector('.login-feria-ingresar');
+ const volver=login.querySelector('.login-feria-volver');
+ if(titulo)titulo.innerHTML=escuela?'Acceso <em>escuela</em>':'Acceso <em>directiva</em>';
+ if(subtitulo)subtitulo.textContent=escuela?'Acceso privado a la Escuela de Fútbol.':'Panel privado de administración del club.';
+ if(etiqueta)etiqueta.textContent=escuela?'ESCUELA DE FÚTBOL':'ÁREA RESTRINGIDA';
+ if(descripcion)descripcion.textContent=escuela?'Ingresa con tus credenciales de la Escuela de Fútbol.':'Ingresa con tus credenciales de administrador.';
+ if(boton)boton.textContent=escuela?'Ingresar a la escuela →':'Ingresar al panel →';
+ if(volver)volver.setAttribute('onclick',escuela?"window.feriaLoginDesdeEscuela=false;mostrar('feriaEscuela')":"mostrarInicioPublico()");
+}
+</script>
+<style id="feria-escuela-login-directo-estilo">
+#feriaEscuela .feria-escuela-login-directo{background:transparent!important;border:0!important;box-shadow:none!important;padding:8px 0 15px!important}
+#feriaEscuela .feria-escuela-login-identidad{text-align:center;padding:8px 0 22px}
+#feriaEscuela .feria-escuela-login-identidad img{width:88px;height:88px;object-fit:contain;display:block;margin:0 auto}
+#feriaEscuela .feria-escuela-login-identidad span{display:block;color:#aabfe2;font-size:10px;letter-spacing:1.5px;font-weight:900;margin-top:12px}
+#feriaEscuela .feria-escuela-login-identidad h2{font-size:30px;color:#fff;margin:10px 0 5px;font-weight:900}
+#feriaEscuela .feria-escuela-login-identidad h2 em{color:#ed3345;font-style:normal}
+#feriaEscuela .feria-escuela-login-identidad p{color:#a9bad6;font-size:12px}
+#feriaEscuela .feria-escuela-login-tarjeta{background:#0d2450;border:1px solid rgba(134,170,224,.28);border-radius:20px;padding:24px 20px;color:white}
+#feriaEscuela .feria-escuela-login-etiqueta{color:#ff344c;font-size:10px;font-weight:900;letter-spacing:1.3px}
+#feriaEscuela .feria-escuela-login-tarjeta h3{color:white;font-size:22px;margin:10px 0 5px}
+#feriaEscuela .feria-escuela-login-tarjeta p{color:#a9bad6;font-size:12px;margin:7px 0 14px}
+#feriaEscuela .feria-escuela-login-tarjeta label{display:block;color:#e5ecfa;font-size:12px;font-weight:800;margin:15px 0 7px}
+#feriaEscuela .feria-escuela-login-tarjeta input{display:block;box-sizing:border-box;width:100%;min-height:48px;padding:13px;border:1px solid #36507b;border-radius:11px;background:#e7effe;color:#071936;font-size:14px}
+#feriaEscuela .feria-escuela-login-boton{display:block;width:100%;border:0;border-radius:12px;background:#ed1c2e;color:#fff;font-weight:900;font-size:13px;padding:16px 12px;margin-top:22px;cursor:pointer}
+#feriaEscuela .feria-escuela-login-pie{text-align:center;color:#a9bad6;font-size:11px;margin-top:22px}
+#feriaEscuela #escuelaLoginMensaje{min-height:18px;margin:10px 0 0}
+</style>
+<script id="feria-escuela-login-directo-script">
+async function feriaAccederEscuelaDesdeFormulario(){
+  const email=document.getElementById('escuelaLoginEmail').value.trim();
+  const password=document.getElementById('escuelaLoginPassword').value;
+  const estado=document.getElementById('escuelaLoginMensaje');
+  if(!email||!password){estado.textContent='⚠️ Completa correo y contraseña.';return;}
+  document.getElementById('loginEmail').value=email;
+  document.getElementById('loginPassword').value=password;
+  window.feriaLoginDesdeEscuela=true;
+  estado.textContent='⏳ Verificando acceso...';
+  try{
+    await iniciarSesion();
+    estado.textContent=document.getElementById('mensajeLogin').textContent;
+    document.getElementById('loginPassword').value='';
+    document.getElementById('escuelaLoginPassword').value='';
+  }catch(error){estado.textContent='❌ No se pudo ingresar: '+(error.message||error);}
+}
+document.getElementById('escuelaLoginPassword')?.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.preventDefault();feriaAccederEscuelaDesdeFormulario();}
+});
+</script>
+<style id="feria-actualidad-estilos">
+#feriaActualidadPanel{position:fixed;inset:0;z-index:999999;background:#06142f;color:white;overflow-y:auto;padding:18px max(16px,calc((100vw - 560px)/2)) 80px;box-sizing:border-box}
+#feriaActualidadPanel[hidden]{display:none!important}
+#feriaActualidadPanel h2{font-size:25px;margin:12px 0}#feriaActualidadPanel p{color:#b8cbe9;font-size:13px;line-height:1.6}
+.feria-act-card{background:#102951;border:1px solid #2b4d80;border-radius:15px;padding:17px;margin:13px 0}
+.feria-act-field{width:100%;box-sizing:border-box;display:block;margin:6px 0 13px;padding:12px;border-radius:9px;border:1px solid #496b9b;background:#e9f0ff;color:#0b1930;font-size:14px}
+.feria-act-btn{padding:11px 14px;border:0;border-radius:10px;background:#d7192c;color:#fff;font-weight:800;cursor:pointer;margin:4px 6px 4px 0}
+.feria-act-btn.alt{background:#24477e}.feria-act-thumb{width:100%;max-height:180px;object-fit:cover;border-radius:9px;margin:8px 0}
+#feriaNoticiasDinamicas .feria-noticia-destacada{margin-bottom:14px}#feriaNoticiasDinamicas .feria-noticia-imagen img{display:block}
+</style>
+<div id="feriaActualidadPanel" hidden>
+<button class="feria-act-btn alt" onclick="feriaCerrarActualidadAdmin()">← Volver a administración</button>
+<h2>📰 Gestionar Actualidad Feriana</h2><p>Agrega noticias a la portada. Solo la administración principal puede modificar publicaciones.</p>
+<div class="feria-act-card">
+<h3 id="feriaActFormTitulo">Nueva noticia</h3>
+<label>Categoría / sección<input id="feriaActCategoria" class="feria-act-field" maxlength="100" placeholder="RESULTADOS · PRIMERA SERIE"></label>
+<label>Etiqueta sobre la foto<input id="feriaActEtiqueta" class="feria-act-field" maxlength="100" placeholder="⚽ FECHA 6 · CLAUSURA 2026"></label>
+<label>Título de la noticia<input id="feriaActTitulo" class="feria-act-field" maxlength="180" placeholder="Escribe el titular"></label>
+<label>Descripción<textarea id="feriaActDescripcion" class="feria-act-field" rows="5" placeholder="Contenido de la noticia"></textarea></label>
+<label>Fotografía (JPG, PNG o WEBP, máximo 10 MB)<input id="feriaActFoto" type="file" accept="image/jpeg,image/png,image/webp" class="feria-act-field"></label>
+<label style="display:flex;gap:10px;align-items:center;margin:12px 0"><input id="feriaActPublicado" type="checkbox" checked> Publicar en la portada</label>
+<button class="feria-act-btn" id="feriaActGuardarBtn" onclick="feriaGuardarActualidad()">💾 Publicar noticia</button>
+<button class="feria-act-btn alt" onclick="feriaLimpiarActualidad()">Cancelar edición</button>
+<p id="feriaActEstado" aria-live="polite"></p>
+</div>
+<h3>Noticias registradas</h3><div id="feriaActListado"></div>
+</div>
+<script id="feria-actualidad-funciones">
+(function(){
+let noticias=[],editando=null,publicando=false;
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mensaje=(s,error=false)=>{const el=$('feriaActEstado');if(el){el.textContent=s;el.style.color=error?'#ff9fa9':'#91efc2';}};
+async function permiso(){const r=await supabaseClient.rpc('es_administrador');if(r.error||r.data!==true)throw Error('Acceso exclusivo de la administración principal.');}
+async function cargarAdmin(){const {data,error}=await supabaseClient.from('actualidad_feriana').select('*').order('creado_en',{ascending:false}).order('id',{ascending:false});if(error)throw error;noticias=data||[];$('feriaActListado').innerHTML=noticias.length?noticias.map(n=>`<article class="feria-act-card"><strong>${esc(n.titulo)}</strong><p>${esc(n.categoria)} · ${n.publicado?'🟢 Publicada':'⚪ Borrador'}</p>${n.foto_url?`<img class="feria-act-thumb" src="${esc(n.foto_url)}" alt="">`:''}<p>${esc(n.descripcion)}</p><button class="feria-act-btn alt" onclick="feriaEditarActualidad(${Number(n.id)})">✏️ Editar</button><button class="feria-act-btn" onclick="feriaEliminarActualidad(${Number(n.id)})">🗑️ Eliminar</button></article>`).join(''):'<p>Aún no hay noticias.</p>';}
+window.feriaAbrirActualidadAdmin=async()=>{try{await permiso();$('feriaActualidadPanel').hidden=false;feriaLimpiarActualidad();await cargarAdmin();$('feriaActualidadPanel').scrollTop=0;}catch(e){alert(e.message);$('feriaActualidadPanel').hidden=true;}};
+window.feriaCerrarActualidadAdmin=()=>{$('feriaActualidadPanel').hidden=true;};
+window.feriaLimpiarActualidad=()=>{editando=null;$('feriaActFormTitulo').textContent='Nueva noticia';$('feriaActCategoria').value='';$('feriaActEtiqueta').value='';$('feriaActTitulo').value='';$('feriaActDescripcion').value='';$('feriaActFoto').value='';$('feriaActPublicado').checked=true;$('feriaActGuardarBtn').textContent='💾 Publicar noticia';mensaje('');};
+window.feriaEditarActualidad=id=>{const n=noticias.find(x=>Number(x.id)===Number(id));if(!n)return;editando=id;$('feriaActFormTitulo').textContent='Editar noticia';$('feriaActCategoria').value=n.categoria||'';$('feriaActEtiqueta').value=n.etiqueta||'';$('feriaActTitulo').value=n.titulo||'';$('feriaActDescripcion').value=n.descripcion||'';$('feriaActFoto').value='';$('feriaActPublicado').checked=!!n.publicado;$('feriaActGuardarBtn').textContent='💾 Guardar cambios';$('feriaActualidadPanel').scrollTop=0;mensaje('Editando noticia. Puedes conservar la foto actual sin seleccionar otra.');};
+window.feriaGuardarActualidad=async()=>{if(publicando)return;publicando=true;$('feriaActGuardarBtn').disabled=true;try{await permiso();const titulo=$('feriaActTitulo').value.trim();if(!titulo)throw Error('Escribe el título de la noticia.');const fila={categoria:$('feriaActCategoria').value.trim()||'NOTICIAS DEL CLUB',etiqueta:$('feriaActEtiqueta').value.trim(),titulo,descripcion:$('feriaActDescripcion').value.trim(),publicado:$('feriaActPublicado').checked,actualizado_en:new Date().toISOString()};const foto=$('feriaActFoto').files[0];if(foto){if(!['image/jpeg','image/png','image/webp'].includes(foto.type))throw Error('La foto debe ser JPG, PNG o WEBP.');if(foto.size>10*1024*1024)throw Error('La fotografía supera los 10 MB.');mensaje('Subiendo fotografía...');const ext=foto.type==='image/png'?'png':foto.type==='image/webp'?'webp':'jpg';const ruta='noticias/'+crypto.randomUUID()+'.'+ext;const {error}=await supabaseClient.storage.from('actualidad-feriana').upload(ruta,foto,{contentType:foto.type});if(error)throw error;fila.foto_url=supabaseClient.storage.from('actualidad-feriana').getPublicUrl(ruta).data.publicUrl;}
+const r=editando?await supabaseClient.from('actualidad_feriana').update(fila).eq('id',editando).select('id'):await supabaseClient.from('actualidad_feriana').insert(fila).select('id');if(r.error)throw r.error;if(!r.data?.length)throw Error('No se pudo confirmar el guardado. Revisa los permisos.');feriaLimpiarActualidad();await cargarAdmin();await window.feriaCargarActualidad();mensaje('✅ Noticia guardada correctamente.');}catch(e){mensaje('❌ '+e.message,true);}finally{publicando=false;$('feriaActGuardarBtn').disabled=false;}};
+window.feriaEliminarActualidad=async id=>{if(!confirm('¿Eliminar definitivamente esta noticia?'))return;try{await permiso();const r=await supabaseClient.from('actualidad_feriana').delete().eq('id',id).select('id');if(r.error)throw r.error;if(!r.data?.length)throw Error('No se pudo eliminar.');await cargarAdmin();await window.feriaCargarActualidad();mensaje('Noticia eliminada.');}catch(e){mensaje('❌ '+e.message,true);}};
+window.feriaCargarActualidad=async()=>{const cont=$('feriaNoticiasDinamicas');if(!cont)return;try{const {data,error}=await supabaseClient.from('actualidad_feriana').select('id,categoria,etiqueta,titulo,descripcion,foto_url,creado_en').eq('publicado',true).order('creado_en',{ascending:false}).order('id',{ascending:false}).limit(30);if(error)throw error;const rows=data||[];$('feriaNoticiasContador').textContent=rows.length?`${String(1).padStart(2,'0')} / ${String(rows.length).padStart(2,'0')}`:'';cont.innerHTML=rows.length?rows.map(n=>`<article class="feria-noticia-destacada"><div class="feria-noticia-imagen ${n.foto_url?'':'sin-foto'}">${n.foto_url?`<img src="${esc(n.foto_url)}" alt="${esc(n.titulo)}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('sin-foto')">`:''}${n.etiqueta?`<span>${esc(n.etiqueta)}</span>`:''}</div><div class="feria-noticia-texto"><small>${esc(n.categoria)}</small><h3>${esc(n.titulo)}</h3><p>${esc(n.descripcion)}</p></div></article>`).join(''):'<p style="color:#c8d6ef;padding:12px">Pronto publicaremos noticias del club.</p>';}catch(e){console.warn('Actualidad Feriana:',e);cont.innerHTML='<p style="color:#ffc5c5;padding:12px">No fue posible cargar las noticias. Revisa la configuración de Supabase.</p>';}};
+window.addEventListener('DOMContentLoaded',()=>window.feriaCargarActualidad());
+window.addEventListener('pageshow',()=>window.feriaCargarActualidad());
 })();
 </script>
 </body>  </html>
