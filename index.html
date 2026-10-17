@@ -7322,6 +7322,41 @@ overflow-x:hidden;
 #store #tiendaCheckout .tienda-rojo{width:100%;margin-top:8px}
 @media(max-width:360px){#store .tienda-carrito-foto{width:72px;height:82px;flex-basis:72px}#store .tienda-fila{gap:9px;padding:9px}}
 
+
+/* Informes adicionales: botones de descarga a ancho completo */
+#feriaEstadisticasAdmin .feria-informes-ayuda{color:#c5d5f0;font-size:12px;line-height:1.5;margin:8px 0 15px}
+#feriaEstadisticasAdmin .feria-informes-acciones{display:grid;grid-template-columns:1fr;gap:11px}
+#feriaEstadisticasAdmin .feria-informe-boton{width:100%;min-height:76px;display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid rgba(255,255,255,.18);border-radius:15px;color:#fff;text-align:left;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.12);transition:transform .15s,filter .15s}
+#feriaEstadisticasAdmin .feria-informe-boton:active{transform:scale(.98)}
+#feriaEstadisticasAdmin .feria-informe-boton:hover{filter:brightness(1.09)}
+#feriaEstadisticasAdmin .feria-informe-azul{background:linear-gradient(120deg,#2155a2,#123b7b)}
+#feriaEstadisticasAdmin .feria-informe-rojo{background:linear-gradient(120deg,#db203b,#a91330)}
+#feriaEstadisticasAdmin .feria-informe-icono{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;background:rgba(255,255,255,.14);border-radius:12px;font-size:23px}
+#feriaEstadisticasAdmin .feria-informe-texto{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#feriaEstadisticasAdmin .feria-informe-texto strong{font-size:14px;font-weight:900;line-height:1.2;color:#fff}
+#feriaEstadisticasAdmin .feria-informe-texto small{font-size:11px;color:rgba(255,255,255,.85);font-weight:600}
+#feriaEstadisticasAdmin .feria-informe-flecha{flex-shrink:0;font-size:23px;font-weight:900;color:#fff}
+
+
+/* Tarjeta premium de convenios - vista privada de socios */
+#portalSociosPublico .feria-socio-detalle:has(.feria-beneficio-premium-cabecera){background:linear-gradient(155deg,#0a1b3d,#102f63);border:1px solid #365d9a;border-radius:20px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+#portalSociosPublico .feria-beneficio-premium-cabecera{display:flex;align-items:center;gap:14px;margin:18px 0 20px;min-width:0}
+#portalSociosPublico .feria-beneficio-premium-logo{width:108px;height:96px;max-width:108px;max-height:96px;flex-shrink:0;object-fit:contain;background:white;border-radius:14px;padding:9px}
+#portalSociosPublico .feria-beneficio-premium-marca{min-width:0;flex:1}
+#portalSociosPublico .feria-beneficio-premium-marca h3{color:white;font-size:23px;line-height:1.15;margin:7px 0}
+#portalSociosPublico .feria-beneficio-premium-marca small{color:#c3d5f3;font-size:12px}
+#portalSociosPublico .feria-beneficio-premium-etiqueta{display:block;font-size:10px;font-weight:900;letter-spacing:1px;color:#c3d9ff}
+#portalSociosPublico .feria-beneficio-premium-destacado{background:linear-gradient(135deg,#1a4584,#153364);border:1px solid #416cb0;border-radius:16px;padding:18px;margin:0 0 17px}
+#portalSociosPublico .feria-beneficio-premium-descuento{display:block;font-size:clamp(27px,7vw,42px);line-height:1.2;color:white;font-weight:900;margin:8px 0;overflow-wrap:anywhere}
+#portalSociosPublico .feria-beneficio-premium-destacado p{font-size:14px;color:#e4efff;line-height:1.55;margin:8px 0 0}
+#portalSociosPublico .feria-beneficio-premium-datos{display:grid;gap:13px;margin:15px 0 19px}
+#portalSociosPublico .feria-beneficio-premium-fila{display:flex;gap:11px;align-items:flex-start;color:#e6efff;line-height:1.4}
+#portalSociosPublico .feria-beneficio-premium-icono{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;background:#1b4178;border-radius:10px}
+#portalSociosPublico .feria-beneficio-premium-fila div{min-width:0;display:grid;gap:3px;overflow-wrap:anywhere}
+#portalSociosPublico .feria-beneficio-premium-fila small{font-size:11px;color:#a9c4e9;font-weight:800}
+#portalSociosPublico .feria-beneficio-premium-fila div>span{font-size:13px;color:white}
+#portalSociosPublico a.feria-beneficio-premium-enlace{display:block;text-align:center;background:#cf1b38;color:white;text-decoration:none;font-weight:900;font-size:13px;padding:15px;border-radius:12px}
+@media(max-width:390px){#portalSociosPublico .feria-beneficio-premium-logo{width:88px;height:82px}#portalSociosPublico .feria-beneficio-premium-marca h3{font-size:20px}}
 </style>  
 
   
@@ -7340,6 +7375,18 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
 #store .feria-tienda-identidad h1{margin:0;color:#fff;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1.2;}
 #store .feria-tienda-identidad h1 em{color:#ed3345;font-style:normal;}
 #store .feria-tienda-identidad p{margin-top:10px;color:#a9bad6;font-size:12px;}
+</style>
+<style id="feria-cabeceras-unificadas-v1">
+.feria-cabecera-unificada{text-align:center;padding:20px 8px 29px;color:#fff;}
+.feria-cabecera-unificada img{display:block;width:94px;height:94px;object-fit:contain;margin:0 auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));}
+.feria-cabecera-unificada span{display:block;margin:13px 0 9px;color:#aabfe2;font-size:10px;font-weight:900;letter-spacing:1.6px;}
+.feria-cabecera-unificada h1{margin:0;color:#fff;font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1.2;}
+.feria-cabecera-unificada h1 em{color:#ed3345;font-style:normal;}
+.feria-cabecera-unificada p{margin-top:10px;color:#a9bad6;font-size:12px;line-height:1.55;}
+#feriaHistoria>.feria-cabecera-unificada+ h2,#feriaComunidad>.feria-cabecera-unificada+ h2{display:none!important;}
+#feriaHistoria>.feria-cabecera-unificada+ h2+p,#feriaComunidad>.feria-cabecera-unificada+ h2+p{display:none!important;}
+#feriaEspecialContenido.feria-cabecera-especial>.feria-lead,#feriaEspecialContenido.feria-cabecera-especial>.feria-lead+h2{display:none!important;}
+#portalSociosPublico>.feria-cabecera-unificada{margin:0 auto;max-width:500px;}
 </style>
 </head>  
   
@@ -8493,7 +8540,7 @@ class="oculto gestion-admin">
  <div class="feria-admin-panel-tarjeta feria-stats-filtros">
   <label>Categoría<select id="feriaStatsCategoria" onchange="feriaStatsActualizar()"><option value="">Cargando categorías...</option></select></label>
   <label>Campeonato<select id="feriaStatsCampeonato" onchange="feriaStatsActualizar()"><option value="">Todos los campeonatos</option></select></label>
-  <label>Partidos mínimos para playoffs<input id="feriaStatsMinimo" type="number" min="1" max="100" value="5" oninput="feriaStatsDibujar()"></label>
+  <label>Partidos mínimos para playoffs<input id="feriaStatsMinimo" type="number" min="1" max="100" value="6" oninput="feriaStatsDibujar()"></label>
   <button type="button" onclick="feriaStatsCargar()">🔄 Actualizar datos</button>
   <button type="button" class="tienda-rojo" onclick="feriaStatsPDF()">📄 Descargar informe PDF</button>
   <p id="feriaStatsEstado" role="status"></p>
@@ -8501,6 +8548,28 @@ class="oculto gestion-admin">
  <div class="feria-stats-resumen" id="feriaStatsResumen"></div>
  <div class="feria-admin-panel-tarjeta"><h3>📋 Asistencia por jornada</h3><p class="feria-admin-descripcion">Titular y suplente suman una asistencia por partido. Un suplente no necesita haber ingresado.</p><div class="feria-stats-scroll" id="feriaStatsAsistencia"></div></div>
  <div class="feria-admin-panel-tarjeta"><h3>⚽ Tabla de goleadores</h3><div class="feria-stats-scroll" id="feriaStatsGoleadores"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>🏆 Clasificación a playoffs</h3><p class="feria-admin-descripcion">El mínimo es orientativo. Confirma qué jornadas son válidas según el reglamento.</p><div class="feria-stats-scroll" id="feriaStatsPlayoffs"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>📈 Rendimiento del equipo</h3><div id="feriaStatsRendimiento"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>🥇 Rankings del plantel</h3><div class="feria-stats-scroll" id="feriaStatsRankings"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>👤 Ficha individual del jugador</h3><label>Jugador<select id="feriaStatsJugador" onchange="feriaStatsFicha()"><option value="">Selecciona un jugador</option></select></label><div id="feriaStatsFichaDetalle"></div><button type="button" onclick="feriaStatsPDFIndividual()">📄 Descargar ficha PDF</button></div>
+ <div class="feria-admin-panel-tarjeta"><h3>📅 Comparar campeonatos</h3><p class="feria-admin-descripcion">Comparación de los partidos con resultado registrado en esta categoría.</p><div class="feria-stats-scroll" id="feriaStatsComparativas"></div></div>
+ <div class="feria-admin-panel-tarjeta feria-informes-extra">
+  <h3>📄 Informes adicionales</h3>
+  <p class="feria-informes-ayuda">Descarga los reportes deportivos de la categoría y campeonato seleccionados.</p>
+  <div class="feria-informes-acciones">
+   <button type="button" class="feria-informe-boton feria-informe-azul" onclick="feriaStatsPDFExtra('playoffs')">
+    <span class="feria-informe-icono" aria-hidden="true">🏆</span>
+    <span class="feria-informe-texto"><strong>Clasificación a playoffs</strong><small>Descargar informe PDF</small></span>
+    <span class="feria-informe-flecha" aria-hidden="true">↓</span>
+   </button>
+   <button type="button" class="feria-informe-boton feria-informe-rojo" onclick="feriaStatsPDFExtra('rendimiento')">
+    <span class="feria-informe-icono" aria-hidden="true">📊</span>
+    <span class="feria-informe-texto"><strong>Rendimiento y rankings</strong><small>Descargar informe PDF</small></span>
+    <span class="feria-informe-flecha" aria-hidden="true">↓</span>
+   </button>
+  </div>
+ </div>
+
 </section>
 <section id="tiendaAdmin" class="seccion oculto feria-admin-pantalla">
  <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
@@ -12257,12 +12326,7 @@ class="seccion oculto detalle-partido-publico">
   
 <section id="portalSociosPublico" class="oculto" aria-label="Portal de socios">
  <button type="button" class="boton-volver-solo" aria-label="Volver" onclick="mostrarInicioPublico()">←</button>
- <div class="feria-socio-login-identidad">
-   <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
-   <span>CLUB DEPORTIVO FERIA OSORNO</span>
-   <h1>Acceso <em>socio</em></h1>
-   <p>Tu espacio privado en el club.</p>
- </div>
+ <div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Socios</h1><p>Tu espacio privado en el club.</p></div>
  <div class="portal-socios-tarjeta">
    <span class="login-feria-etiqueta">ACCESO EXCLUSIVO</span>
    <h3>Bienvenido de nuevo</h3>
@@ -12297,6 +12361,7 @@ class="seccion oculto detalle-partido-publico">
 <div id="portalSocioPrivado"
      class="oculto"
      style="margin-top:16px;">
+<button type="button" id="feriaCerrarSesionSocio" class="feria-socio-cerrar" onclick="cerrarSesionSocio()">🚪 Cerrar sesión de socio</button>
 
   <div class="feria-credencial-bancaria" aria-label="Credencial digital de socio">
     <div class="feria-credencial-superior">
@@ -12341,7 +12406,7 @@ class="seccion oculto detalle-partido-publico">
   <div id="feriaSeccionSocioLista"></div>
   <div id="feriaSeccionSocioDetalle" class="oculto"></div>
 </section>
-<button type="button" id="feriaCerrarSesionSocio" class="feria-socio-cerrar" onclick="cerrarSesionSocio()">🚪 Cerrar sesión de socio</button>
+
 </div>
 
 </section>
@@ -12432,7 +12497,7 @@ onclick="volver()">
   </p>  </section>
 <section id="feriaEditorHistoria" class="seccion oculto feria-admin-pantalla feria-editor-historia"><button type="button" class="feria-volver-icono" onclick="feriaCerrarEditorHistoria()">←</button><span class="feria-lead">ADMINISTRACIÓN · PATRIMONIO DEL CLUB</span><h2>📜 Nuestra historia</h2><p>Prepara y revisa el contenido histórico del club. Los cambios se guardan como borrador en este dispositivo, <strong>no se publican todavía</strong>. La publicación para todos los socios requerirá conectar el editor a Supabase.</p><div class="feria-editor-aviso">📝 Borrador local · Pendiente de sincronización con Supabase</div><div id="feriaEditorHistoriaCampos"></div><button type="button" class="feria-boton" onclick="feriaGuardarBorradorHistoria()">💾 Guardar borrador</button><button type="button" class="feria-boton feria-editor-preview" onclick="feriaPrevisualizarHistoria()">👁 Vista previa pública</button><p id="feriaEditorHistoriaEstado" role="status"></p></section>
 <section id="feriaHistoria" class="seccion oculto feria-pagina-informativa">
-<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Volver">←</button><h2>🏆 Nuestra historia</h2><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p>
+<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Volver">←</button><div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Nuestra <em>historia</em></h1><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p></div><h2>🏆 Nuestra historia</h2><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p>
 <div class="feria-historia-grid">
 <button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('origenes')"><span>📜</span><h3>Nuestros orígenes</h3><p>Todo comenzó con trabajadores, sueños y un club que se convirtió en familia.</p></button>
 <button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('titulos')"><span>🏆</span><h3>Vitrina de títulos</h3><p>Más de 150 copas y una sede llena de recuerdos.</p></button>
@@ -12472,7 +12537,7 @@ onclick="volver()">
 <div class="feria-escuela-marca"><img src="img/logo-feria.png" alt="Escudo Feria Osorno" onerror="this.style.display='none'"><div><span>FERIA SOMOS TODOS</span><h1>Escuela de Fútbol</h1><p>Formando personas, construyendo sueños.</p></div></div>
 <div id="feriaEscuelaInternaContenido"></div>
 <nav class="feria-escuela-nav" aria-label="Navegación exclusiva de la escuela"><button type="button" data-escuela="beneficios" onclick="feriaModuloEscuela('beneficios')">🎁<small>Beneficios</small></button><button type="button" data-escuela="nutricion" onclick="feriaModuloEscuela('nutricion')">🥗<small>Nutrición</small></button><button type="button" data-escuela="academia" onclick="feriaModuloEscuela('academia')">📚<small>Apoyo escolar</small></button><button type="button" data-escuela="documentos" onclick="feriaModuloEscuela('documentos')">📄<small>Documentos</small></button><button type="button" data-escuela="finanzas" onclick="feriaModuloEscuela('finanzas')">💰<small>Finanzas</small></button></nav></section>
-<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
+<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Comunidad <em>feriana</em></h1><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p></div><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
 <section id="store" class="seccion oculto tienda-feria">
 <button class="feria-volver-icono" onclick="feriaVolverDesdeTienda()" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
 <div class="feria-tienda-identidad">
@@ -22845,24 +22910,47 @@ async function feriaMostrarDetalleSocio(tipo,indice){
   const volver=feriaCrearElemento("button","feria-socio-volver","← Volver al listado");
   volver.type="button";volver.onclick=()=>detalle.classList.add("oculto");
   tarjeta.appendChild(volver);
-  const img=feriaImagenFicha(tipo==="beneficios"?item.logo:item.imagen,item.nombre||item.titulo);
-  if(img)tarjeta.appendChild(img);
-  tarjeta.appendChild(feriaCrearElemento("h3","",item.nombre||item.titulo||"Información"));
-  if(tipo === "beneficios" && !feriaBeneficiosHabilitados){
-    tarjeta.appendChild(feriaCrearElemento("p","feria-socio-vacio","🔒 Para utilizar este beneficio debes tener pagadas todas las cuotas desde enero hasta el mes actual. Consulta Mis cuotas."));
-    detalle.appendChild(tarjeta);
-    detalle.scrollIntoView({behavior:"smooth",block:"nearest"});
-    return;
-  }
-  const campos=tipo==="beneficios"
-    ? [["Beneficio",item.descripcion],["Descuento",item.descuento],["Dirección",item.direccion],["Teléfono",item.telefono],["Condiciones",item.condiciones]]
-    : [["Fecha",item.fecha],["Resumen",item.resumen],["Noticia",item.contenido]];
-  campos.forEach(([etiqueta,valor])=>{
-    if(valor)tarjeta.appendChild(feriaCrearElemento("p","",etiqueta+": "+valor));
-  });
-  if(tipo==="beneficios"&&item.instagram){
-    const url=feriaUrlSegura(item.instagram);
-    if(url){const link=feriaCrearElemento("a","","Instagram de la empresa");link.href=url;link.target="_blank";link.rel="noopener noreferrer";tarjeta.appendChild(link);}
+  if(tipo==="beneficios"){
+    const cabecera=feriaCrearElemento("div","feria-beneficio-premium-cabecera");
+    const img=feriaImagenFicha(item.logo,item.nombre);
+    if(img){img.className="feria-beneficio-premium-logo";cabecera.appendChild(img);}
+    const marca=feriaCrearElemento("div","feria-beneficio-premium-marca");
+    marca.appendChild(feriaCrearElemento("span","feria-beneficio-premium-etiqueta","CONVENIO EXCLUSIVO · CD FERIA OSORNO"));
+    marca.appendChild(feriaCrearElemento("h3","",item.nombre||"Empresa colaboradora"));
+    marca.appendChild(feriaCrearElemento("small","","Beneficio para nuestros socios"));
+    cabecera.appendChild(marca);tarjeta.appendChild(cabecera);
+    if(!feriaBeneficiosHabilitados){
+      tarjeta.appendChild(feriaCrearElemento("p","feria-socio-vacio","🔒 Para utilizar este beneficio debes tener pagadas todas las cuotas desde enero hasta el mes actual. Consulta Mis cuotas."));
+      detalle.appendChild(tarjeta);
+      detalle.scrollIntoView({behavior:"smooth",block:"nearest"});return;
+    }
+    const destacado=feriaCrearElemento("div","feria-beneficio-premium-destacado");
+    destacado.appendChild(feriaCrearElemento("span","feria-beneficio-premium-etiqueta","BENEFICIO PARA SOCIOS"));
+    if(item.descuento)destacado.appendChild(feriaCrearElemento("strong","feria-beneficio-premium-descuento",String(item.descuento)));
+    if(item.descripcion)destacado.appendChild(feriaCrearElemento("p","",item.descripcion));
+    tarjeta.appendChild(destacado);
+    const detalles=feriaCrearElemento("div","feria-beneficio-premium-datos");
+    [["📍", "Dirección",item.direccion],["📞","Teléfono",item.telefono],["🛡️","Condiciones",item.condiciones]].forEach(([icono,etiqueta,valor])=>{
+      if(!valor)return;
+      const fila=feriaCrearElemento("div","feria-beneficio-premium-fila");
+      fila.appendChild(feriaCrearElemento("span","feria-beneficio-premium-icono",icono));
+      const datos=feriaCrearElemento("div","");
+      datos.appendChild(feriaCrearElemento("small","",etiqueta));
+      datos.appendChild(feriaCrearElemento("span","",String(valor)));
+      fila.appendChild(datos);detalles.appendChild(fila);
+    });
+    tarjeta.appendChild(detalles);
+    if(item.instagram){const url=feriaUrlSegura(item.instagram);if(url){
+      const link=feriaCrearElemento("a","feria-beneficio-premium-enlace","Ver Instagram de la empresa ↗");
+      link.href=url;link.target="_blank";link.rel="noopener noreferrer";tarjeta.appendChild(link);
+    }}
+  }else{
+    const img=feriaImagenFicha(item.imagen,item.titulo);
+    if(img)tarjeta.appendChild(img);
+    tarjeta.appendChild(feriaCrearElemento("h3","",item.titulo||"Información"));
+    [["Fecha",item.fecha],["Resumen",item.resumen],["Noticia",item.contenido]].forEach(([etiqueta,valor])=>{
+      if(valor)tarjeta.appendChild(feriaCrearElemento("p","",etiqueta+": "+valor));
+    });
   }
   detalle.appendChild(tarjeta);
   detalle.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -23833,12 +23921,37 @@ window.feriaIngresarEscuela=async()=>{window.feriaEscuelaDesdeAdmin=false;try{co
 function showPanel(){ocultarTodo();$('pantallaPublica').classList.remove('oculto');if(typeof controlarPortadaPublica==='function')controlarPortadaPublica(false);$('feriaEscuelaInterna').classList.remove('oculto');}
 window.feriaModuloEscuela=async(tipo)=>{try{rol=await getRol();if(!rol)throw Error('Cuenta sin autorización escolar');if(!MOD[tipo])tipo='beneficios';if(['finanzas','documentos'].includes(tipo)&&rol!=='directiva')throw Error('Solo la directiva puede ingresar');admin=false;actual=tipo;showPanel();const nav=$('feriaEscuelaInterna').querySelectorAll('.feria-escuela-nav button');nav.forEach(b=>{b.classList.toggle('activo',b.dataset.escuela===tipo);b.classList.remove('esc-inaccesible');if(['finanzas','documentos'].includes(b.dataset.escuela)){b.innerHTML=(b.dataset.escuela==='finanzas'?'💰':'📁')+'🔒<small>'+(b.dataset.escuela==='finanzas'?'Finanzas':'Documentos')+'</small>';}});if(['finanzas','documentos'].includes(tipo)){await privado(tipo);}else{await contenidos(false);}if(rol==='directiva')feriaBotonInvitacionesEscuela();}catch(e){alert(e.message);}};
 window.feriaAdminEscuela=async()=>{if(!await isAdmin()){alert('Solo la administración principal puede editar estos contenidos.');return;}window.feriaEscuelaDesdeAdmin=true;admin=true;actual='beneficios';showPanel();await contenidos(true);};
-async function contenidos(edicion){const [titulo,modulo]=MOD[actual];box('<div class="esc-card"><h2>'+titulo+(edicion?' · Administración':'')+'</h2>'+(edicion?'<div style="display:flex;flex-wrap:wrap;gap:7px">'+['beneficios','nutricion','academia'].map(t=>'<button class="esc-btn sec" onclick="feriaAdminEscuelaSeccion(\''+t+'\')">'+MOD[t][0]+'</button>').join('')+'</div><input id="escTitulo" placeholder="Título"><textarea id="escTexto" placeholder="Descripción"></textarea><label><input type="checkbox" id="escPublicado" checked style="width:auto"> Publicado</label><input id="escArchivo" type="file"><button class="esc-btn" onclick="feriaEscuelaGuardar()">💾 Guardar</button>':'')+'</div><div id="escEstado"></div><div id="escListado"></div>');const q=supabaseClient.from('escuela_contenidos').select('*').eq('modulo',modulo).order('id',{ascending:false});if(!edicion)q.eq('publicado',true);const {data,error}=await q;if(error){notice(error.message,true);return;}items=data||[];$('escListado').innerHTML=items.length?items.map((r,i)=>'<article class="esc-card"><h3>'+esc(r.titulo)+'</h3><p>'+esc(r.descripcion)+'</p>'+(r.archivo_url?'<button class="esc-btn sec" onclick="feriaEscuelaAbrirArchivo('+i+')">📎 Archivo</button>':'')+(edicion?'<button class="esc-btn sec" onclick="feriaEscuelaEditar('+i+')">Editar</button><button class="esc-btn sec" onclick="feriaEscuelaEliminar('+i+')">Eliminar</button>':'')+'</article>').join(''):'<div class="esc-card">Aún no hay publicaciones.</div>';}
+const CURSOS_FERIA=['1.º básico','2.º básico','3.º básico','4.º básico','5.º básico','6.º básico','7.º básico','8.º básico','1.º medio','2.º medio'];
+const MATERIAS_FERIA=['Matemáticas','Lenguaje','Inglés','Historia'];
+const etiquetaFeria=(curso,materia)=>'[AULA:'+curso+'|'+materia+']';
+const separarFeria=t=>{const m=String(t||'').match(/^\[AULA:(\d+)\|(\d+)\]\s*/);return m?{curso:+m[1],materia:+m[2],titulo:String(t).slice(m[0].length)}:null;};
+const opcionesFeria=(lista)=>lista.map((x,i)=>'<option value="'+i+'">'+esc(x)+'</option>').join('');
+async function contenidos(edicion){
+ const [titulo,modulo]=MOD[actual],academia=actual==='academia';
+ const campos=edicion&&academia?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><label>Curso<select id="escCurso">'+opcionesFeria(CURSOS_FERIA)+'</select></label><label>Asignatura<select id="escMateria">'+opcionesFeria(MATERIAS_FERIA)+'</select></label></div><p class="esc-muted">Un PDF por curso y asignatura. Si ya existe uno, al guardar se reemplazará su publicación.</p>':'';
+ box('<div class="esc-card"><h2>'+titulo+(edicion?' · Administración':'')+'</h2>'+(edicion?'<div style="display:flex;flex-wrap:wrap;gap:7px">'+['beneficios','nutricion','academia'].map(t=>'<button class="esc-btn sec" onclick="feriaAdminEscuelaSeccion(\''+t+'\')">'+MOD[t][0]+'</button>').join('')+'</div>'+campos+'<input id="escTitulo" placeholder="Título"><textarea id="escTexto" placeholder="Descripción"></textarea><label><input type="checkbox" id="escPublicado" checked style="width:auto"> Publicado</label><input id="escArchivo" type="file" accept="'+(academia?'.pdf,application/pdf':'*/*')+'"><button class="esc-btn" onclick="feriaEscuelaGuardar()">💾 Guardar</button>':'')+'</div><div id="escEstado"></div><div id="escListado"></div>');
+ const q=supabaseClient.from('escuela_contenidos').select('*').eq('modulo',modulo).order('id',{ascending:false});if(!edicion)q.eq('publicado',true);
+ const {data,error}=await q;if(error){notice(error.message,true);return;}items=data||[];
+ const visibles=academia&&!edicion?items.filter(r=>!separarFeria(r.titulo)):items;
+ $('escListado').innerHTML=visibles.length?visibles.map(r=>{const i=items.indexOf(r),meta=separarFeria(r.titulo);return '<article class="esc-card"><h3>'+esc(meta?meta.titulo:r.titulo)+'</h3>'+(meta?'<p>📚 '+esc(CURSOS_FERIA[meta.curso]||'Curso')+' · '+esc(MATERIAS_FERIA[meta.materia]||'Asignatura')+'</p>':'')+'<p>'+esc(r.descripcion)+'</p>'+(r.archivo_url?'<button class="esc-btn sec" onclick="feriaEscuelaAbrirArchivo('+i+')">📖 Ver material</button>':'')+(edicion?'<button class="esc-btn sec" onclick="feriaEscuelaEditar('+i+')">Editar</button><button class="esc-btn sec" onclick="feriaEscuelaEliminar('+i+')">Eliminar</button>':'')+'</article>';}).join(''):'<div class="esc-card">'+(academia&&!edicion?'Selecciona un curso y asignatura para ver sus materiales.':'Aún no hay publicaciones.')+'</div>';
+}
+
 window.feriaAdminEscuelaSeccion=async t=>{if(!await isAdmin())return;admin=true;actual=t;await contenidos(true);};
-window.feriaEscuelaEditar=i=>{if(!admin)return;const r=items[i];if(!r)return;editId=r.id;$('escTitulo').value=r.titulo;$('escTexto').value=r.descripcion||'';$('escPublicado').checked=!!r.publicado;notice('Editando publicación');};
-window.feriaEscuelaGuardar=async()=>{if(!admin||!await isAdmin())return;try{const titulo=$('escTitulo').value.trim();if(!titulo)throw Error('Ingresa título');const fila={modulo:MOD[actual][1],titulo,descripcion:$('escTexto').value.trim(),publicado:$('escPublicado').checked};const file=$('escArchivo').files[0];if(file){if(file.size>20*1024*1024)throw Error('Máximo 20 MB');const ruta='contenidos/'+crypto.randomUUID()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const r=await supabaseClient.storage.from('escuela-publico').upload(ruta,file);if(r.error)throw r.error;fila.archivo_url='escuela-publico/'+ruta;}const r=editId?await supabaseClient.from('escuela_contenidos').update(fila).eq('id',editId):await supabaseClient.from('escuela_contenidos').insert(fila);if(r.error)throw r.error;editId=null;await contenidos(true);notice('Guardado correctamente');}catch(e){notice(e.message,true);}};
+window.feriaEscuelaEditar=i=>{if(!admin)return;const r=items[i];if(!r)return;editId=r.id;const meta=separarFeria(r.titulo);$('escTitulo').value=meta?meta.titulo:r.titulo;$('escTexto').value=r.descripcion||'';$('escPublicado').checked=!!r.publicado;if(meta&&$('escCurso')){$('escCurso').value=meta.curso;$('escMateria').value=meta.materia;}notice('Editando publicación');};
+window.feriaEscuelaGuardar=async()=>{if(!admin||!await isAdmin())return;try{
+ const titulo=$('escTitulo').value.trim();if(!titulo)throw Error('Ingresa título');const academia=actual==='academia';
+ const curso=academia?Number($('escCurso').value):-1,materia=academia?Number($('escMateria').value):-1;
+ const nombre=academia?etiquetaFeria(curso,materia)+' '+titulo:titulo;
+ const fila={modulo:MOD[actual][1],titulo:nombre,descripcion:$('escTexto').value.trim(),publicado:$('escPublicado').checked};
+ const file=$('escArchivo').files[0];if(academia&&file&&!/\.pdf$/i.test(file.name))throw Error('Solo se admiten archivos PDF');
+ if(file){if(file.size>20*1024*1024)throw Error('Máximo 20 MB');const ruta='contenidos/'+crypto.randomUUID()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const r=await supabaseClient.storage.from('escuela-publico').upload(ruta,file);if(r.error)throw r.error;fila.archivo_url='escuela-publico/'+ruta;}
+ let target=editId;
+ if(academia){const previo=items.find(r=>{const m=separarFeria(r.titulo);return m&&m.curso===curso&&m.materia===materia;});if(previo&&(!target||target!==previo.id))target=previo.id;if(!target&&!file)throw Error('Adjunta el PDF de esta asignatura');}
+ const r=target?await supabaseClient.from('escuela_contenidos').update(fila).eq('id',target):await supabaseClient.from('escuela_contenidos').insert(fila);
+ if(r.error)throw r.error;editId=null;await contenidos(true);notice('Material guardado y publicado correctamente');
+ }catch(e){notice(e.message,true);}};
 window.feriaEscuelaEliminar=async i=>{if(!admin||!await isAdmin()||!confirm('¿Eliminar publicación?'))return;const r=await supabaseClient.from('escuela_contenidos').delete().eq('id',items[i].id);if(r.error){notice(r.error.message,true);return;}await contenidos(true);};
-window.feriaEscuelaAbrirArchivo=async i=>{const a=items[i]?.archivo_url;if(!a)return;let ruta=a.replace(/^escuela-publico\//,'');const r=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,60);if(r.error)notice(r.error.message,true);else window.open(r.data.signedUrl,'_blank','noopener');};
+window.feriaEscuelaAbrirArchivo=async i=>{const a=items[i]?.archivo_url;if(!a)return;let ruta=a.replace(/^escuela-publico\//,'');const r=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,60);if(r.error)notice(r.error.message,true);else {const u=r.data.signedUrl;const nombre=items[i]?.titulo||'Material académico';if(/\.pdf(?:$|\?)/i.test(ruta)){window.feriaEscuelaMostrarPdf(u,nombre);}else window.open(u,'_blank','noopener');}};
 async function privado(tipo){box('<div class="esc-card"><h2>🔒 '+MOD[tipo][0]+'</h2><p>Acceso personal protegido por PIN de seis dígitos.</p><div id="escEstado"></div><div id="escPrivado"></div></div>');const desbloq=await rpc('escuela_desbloqueada');if(desbloq){await abrirPrivado(tipo);return;}const zona=$('escPrivado');zona.innerHTML='<input id="escPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" autocomplete="off" placeholder="PIN de 6 dígitos"><button class="esc-btn" onclick="feriaValidarPin()">🔓 Desbloquear</button><button class="esc-btn sec" onclick="feriaConfigurarPin()">Crear mi PIN (primera vez)</button><p class="esc-muted">Si ya tienes un PIN, utiliza Desbloquear.</p>';}
 window.feriaConfigurarPin=async()=>{const pin=$('escPin')?.value||'';if(!/^\d{6}$/.test(pin)){notice('Ingresa exactamente seis dígitos',true);return;}try{const ok=await rpc('escuela_configurar_pin',{p_pin:pin});if(!ok)throw Error('No se pudo crear. Quizás ya tienes un PIN configurado.');notice('PIN creado. Ahora presiona Desbloquear.');}catch(e){notice(e.message,true);}};
 window.feriaValidarPin=async()=>{const pin=$('escPin')?.value||'';if(!/^\d{6}$/.test(pin)){notice('Se requieren seis dígitos',true);return;}try{const ok=await rpc('escuela_validar_pin',{p_pin:pin});if(!ok)throw Error('PIN incorrecto, no configurado o acceso temporalmente bloqueado.');await abrirPrivado(actual);}catch(e){notice(e.message,true);}};
@@ -24059,7 +24172,7 @@ async function feriaStatsCargar(){
  const estado=document.getElementById('feriaStatsEstado');estado.textContent='⏳ Cargando estadísticas desde Supabase...';
  try{
   const [partidos,convocados,goles,jugadores,categorias]=await Promise.all([
-   feriaStatsTodas('Partidos','id,fecha,jornada,campeonato,rival,category_id,estado'),
+   feriaStatsTodas('Partidos','id,fecha,jornada,campeonato,rival,category_id,estado,goles_favor,goles_contra,local_visitante,tipo_partido'),
    feriaStatsTodas('PartidoJugadores','partido_id,jugador_id,tipo'),
    feriaStatsTodas('GolesPartido','partido_id,jugador_id,id'),
    feriaStatsTodas('Jugadores','id,name,category_id'),
@@ -24079,6 +24192,7 @@ function feriaStatsActualizar(){
  const nombres=[...new Set(feriaStatsBase.partidos.filter(p=>String(p.category_id)===cat).map(p=>p.campeonato||'Sin campeonato'))].sort();
  sel.innerHTML='<option value="">Todos los campeonatos</option>'+nombres.map(n=>'<option value="'+feriaStatsEsc(n)+'">'+feriaStatsEsc(n)+'</option>').join('');
  if(nombres.includes(old))sel.value=old;
+ else if(nombres.includes("Clausura 2026"))sel.value="Clausura 2026";
  feriaStatsDibujar();
 }
 function feriaStatsCalcular(){
@@ -24104,6 +24218,7 @@ function feriaStatsDibujar(){
  document.getElementById('feriaStatsAsistencia').innerHTML=d.partidos.length?'<table class="feria-stats-tabla"><thead><tr><th>Jugador</th>'+encabezados+'<th>Total</th><th>%</th><th>Playoffs*</th></tr></thead><tbody>'+cuerpo+'</tbody></table><p style="font-size:11px;color:#b6c9e8">*Referencia según el mínimo indicado. Confirma el reglamento oficial y las jornadas válidas.</p>':'<p>No hay partidos registrados para este filtro.</p>';
  const ranking=[...d.filas].filter(f=>f.goles>0).sort((a,b)=>b.goles-a.goles||a.nombre.localeCompare(b.nombre,'es'));
  document.getElementById('feriaStatsGoleadores').innerHTML=ranking.length?'<table class="feria-stats-tabla"><thead><tr><th>Jugador</th><th>Goles</th><th>Asistencias</th></tr></thead><tbody>'+ranking.map(f=>'<tr><td>'+feriaStatsEsc(f.nombre)+'</td><td><strong>'+f.goles+'</strong></td><td>'+f.asistencias.size+'</td></tr>').join('')+'</tbody></table>':'<p>No hay goles registrados para estos partidos.</p>';
+ if(typeof feriaStatsPanelExtra==='function')feriaStatsPanelExtra();
 }
 async function feriaStatsPDF(){
  if(!feriaStatsDatos){alert('Primero carga las estadísticas');return;}
@@ -24169,19 +24284,318 @@ async function feriaStatsPDF(){
   if(notaY<doc.internal.pageSize.getHeight()-12)doc.text('Titulares y suplentes convocados cuentan como asistencia. Minimo de playoffs: '+minimo+'. Verificar reglamento oficial.',12,notaY);
   const nombre='Feria_Osorno_Estadisticas_'+categoria.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf';
   const capacitor=window.Capacitor;
-  const filesystem=capacitor?.Plugins?.Filesystem;
-  const share=capacitor?.Plugins?.Share;
-  if(capacitor?.isNativePlatform?.() && filesystem && share){
+  const esAndroidNativo=Boolean(capacitor?.isNativePlatform?.());
+  if(esAndroidNativo){
+   // En una WebView Android, doc.save() puede abrir una página vacía
+   // en lugar de descargar el archivo. Usamos el sistema de archivos nativo.
+   const filesystem=capacitor?.Plugins?.Filesystem;
+   if(!filesystem){
+    throw new Error('Falta instalar @capacitor/filesystem en el proyecto Android. No se abrió ninguna página ni se perdió el informe.');
+   }
    const base64=doc.output('datauristring').split(',')[1];
-   const directorio=capacitor.Plugins.Filesystem.Directory?.Cache||'CACHE';
-   const guardado=await filesystem.writeFile({path:nombre,data:base64,directory:directorio});
-   await share.share({title:'Estadisticas CD Feria Osorno',url:guardado.uri,dialogTitle:'Guardar o compartir PDF'});
+   let guardado;
+   let ubicacion='Documentos';
+   try{
+    guardado=await filesystem.writeFile({
+     path:nombre,
+     data:base64,
+     directory:'DOCUMENTS',
+     recursive:true
+    });
+   }catch(errorDocumentos){
+    // Algunas versiones de Android restringen Documentos: se guarda
+    // en el espacio de archivos de la aplicación, sin abrir una WebView.
+    console.warn('No se pudo guardar en Documentos:',errorDocumentos);
+    guardado=await filesystem.writeFile({
+     path:nombre,
+     data:base64,
+     directory:'DATA',
+     recursive:true
+    });
+    ubicacion='archivos de la aplicación';
+   }
+   const share=capacitor?.Plugins?.Share;
+   if(share){
+    try{
+     await share.share({
+      title:'Estadísticas CD Feria Osorno',
+      text:'Informe PDF de estadísticas internas',
+      url:guardado.uri,
+      dialogTitle:'Guardar o compartir informe PDF'
+     });
+    }catch(errorCompartir){
+     console.warn('El PDF se guardó, pero no se pudo compartir:',errorCompartir);
+     alert('PDF guardado en '+ubicacion+': '+nombre);
+    }
+   }else{
+    alert('PDF guardado en '+ubicacion+': '+nombre+'. Para compartirlo, instala @capacitor/share.');
+   }
   }else{
+   // En PC el guardado habitual de jsPDF ya funciona correctamente.
    doc.save(nombre);
-   if(capacitor?.isNativePlatform?.())alert('Se solicitó la descarga del PDF. Si Android no la guarda, será necesario habilitar el guardado nativo en la APK.');
   }
  }catch(error){console.error('PDF estadísticas:',error);alert('No se pudo generar el PDF: '+error.message);}
  finally{if(boton){boton.disabled=false;boton.textContent=anterior;}}
 }
+</script>
+<style id="feria-stats-plus-style">
+#feriaEstadisticasAdmin .feria-stats-plus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+#feriaEstadisticasAdmin .feria-stats-plus-card{background:#122f60;border:1px solid #365c91;border-radius:12px;padding:12px;color:white}
+#feriaEstadisticasAdmin .feria-stats-plus-card strong{display:block;font-size:22px}
+#feriaEstadisticasAdmin .feria-stats-plus-card span{font-size:11px;color:#c0d2ef}
+#feriaEstadisticasAdmin .feria-stats-badge{display:inline-block;border-radius:18px;padding:5px 9px;font-size:11px;font-weight:800}
+#feriaEstadisticasAdmin .feria-stats-ok{background:#175a42;color:#baffd8}
+#feriaEstadisticasAdmin .feria-stats-pendiente{background:#72531e;color:#fff0bd}
+#feriaEstadisticasAdmin .feria-stats-ficha-row{border-bottom:1px solid #36527e;padding:9px 0;font-size:13px}
+#feriaEstadisticasAdmin .feria-admin-panel-tarjeta{margin-bottom:14px}
+</style>
+<script id="feria-stats-plus-script">
+(function(){
+'use strict';
+const E=()=>window.feriaStatsEsc||((v)=>String(v??''));
+const min=()=>Math.max(1,Number(document.getElementById('feriaStatsMinimo')?.value)||1);
+const get=()=>typeof feriaStatsDatos!=="undefined"?feriaStatsDatos:null;
+const base=()=>typeof feriaStatsBase!=="undefined"?feriaStatsBase:{partidos:[],convocados:[],goles:[],jugadores:[],categorias:[]};
+const isDone=p=>{const st=String(p.estado||'').toLowerCase();return /final|termin|jugado/.test(st)||(/^[0-9]+$/.test(String(p.goles_favor))&&/^[0-9]+$/.test(String(p.goles_contra))&& !/pendiente|programado|suspendido/.test(st));};
+const metric=ps=>{const done=ps.filter(isDone);let v=0,e=0,d=0,gf=0,gc=0;for(const p of done){const a=Number(p.goles_favor),b=Number(p.goles_contra);if(!Number.isFinite(a)||!Number.isFinite(b))continue;gf+=a;gc+=b;if(a>b)v++;else if(a===b)e++;else d++;}return {partidos:done.length,v,e,d,gf,gc,puntos:v*3+e,rend:done.length?Math.round((v*3+e)*100/(done.length*3)):0};};
+const tbl=(heads,rows)=>'<div class="feria-stats-scroll"><table class="feria-stats-tabla"><thead><tr>'+heads.map(h=>'<th>'+E()(h)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+const statsPlayer=f=>{const d=get(),rows=base().convocados.filter(c=>d.partidos.some(p=>String(p.id)===String(c.partido_id))&&String(c.jugador_id)===String(f.id));const titular=new Set(rows.filter(r=>/titular/i.test(String(r.tipo||''))).map(r=>String(r.partido_id))).size;const suplente=new Set(rows.filter(r=>/suplente/i.test(String(r.tipo||''))).map(r=>String(r.partido_id))).size;return {titular,suplente};};
+window.feriaStatsPanelExtra=function(){const d=get();if(!d)return;const minimo=min(),safe=E();const byId=id=>document.getElementById(id);const m=metric(d.partidos);
+byId('feriaStatsPlayoffs').innerHTML=tbl(['Jugador','Convocatorias','Faltan','Estado'],[...d.filas].sort((a,b)=>b.asistencias.size-a.asistencias.size).map(f=>[safe(f.nombre),String(f.asistencias.size),String(Math.max(0,minimo-f.asistencias.size)),f.asistencias.size>=minimo?'<span class="feria-stats-badge feria-stats-ok">Cumple mínimo</span>':'<span class="feria-stats-badge feria-stats-pendiente">Pendiente</span>']));
+byId('feriaStatsRendimiento').innerHTML='<div class="feria-stats-plus-grid">'+[['Jugados',m.partidos],['Victorias',m.v],['Empates',m.e],['Derrotas',m.d],['Goles a favor',m.gf],['Goles en contra',m.gc],['Diferencia',m.gf-m.gc],['Rendimiento',m.rend+'%']].map(([t,v])=>'<div class="feria-stats-plus-card"><strong>'+v+'</strong><span>'+t+'</span></div>').join('')+'</div><p class="feria-admin-descripcion">Puntos: '+m.puntos+' (3 por victoria, 1 por empate). Solo resultados finalizados.</p>';
+const ranks=[...d.filas].map(f=>({...f,...statsPlayer(f)}));
+byId('feriaStatsRankings').innerHTML=tbl(['Jugador','Convocado','Titular','Suplente','Goles'],ranks.sort((a,b)=>b.asistencias.size-a.asistencias.size||b.goles-a.goles).map(f=>[safe(f.nombre),String(f.asistencias.size),String(f.titular),String(f.suplente),String(f.goles)]));
+const sel=byId('feriaStatsJugador'),prev=sel.value;sel.innerHTML='<option value="">Selecciona un jugador</option>'+d.filas.map(f=>'<option value="'+safe(f.id)+'">'+safe(f.nombre)+'</option>').join('');if(d.filas.some(f=>String(f.id)===prev))sel.value=prev;else if(d.filas.length)sel.value=d.filas[0].id;
+window.feriaStatsFicha();
+const names=[...new Set(base().partidos.filter(p=>String(p.category_id)===String(d.cat)).map(p=>p.campeonato||'Sin campeonato'))].sort();
+byId('feriaStatsComparativas').innerHTML=tbl(['Campeonato','PJ','G','E','P','GF','GC','Rend.'],names.map(n=>{const mm=metric(base().partidos.filter(p=>String(p.category_id)===String(d.cat)&&(p.campeonato||'Sin campeonato')===n));return [safe(n),mm.partidos,mm.v,mm.e,mm.d,mm.gf,mm.gc,mm.rend+'%'].map(String)}));
+};
+window.feriaStatsFicha=function(){const d=get(),out=document.getElementById('feriaStatsFichaDetalle');if(!d||!out)return;const id=document.getElementById('feriaStatsJugador').value,f=d.filas.find(f=>String(f.id)===id);if(!f){out.innerHTML='<p>Selecciona un jugador.</p>';return;}const sp=statsPlayer(f),minimo=min();out.innerHTML='<div class="feria-stats-plus-grid">'+[['Convocatorias',f.asistencias.size],['Titularidades',sp.titular],['Suplencias',sp.suplente],['Goles',f.goles],['Faltan para mínimo',Math.max(0,minimo-f.asistencias.size)],['Asistencia',d.partidos.length?Math.round(f.asistencias.size*100/d.partidos.length)+'%':'—']].map(([t,v])=>'<div class="feria-stats-plus-card"><strong>'+v+'</strong><span>'+t+'</span></div>').join('')+'</div>'+d.partidos.map(p=>'<div class="feria-stats-ficha-row">'+(f.asistencias.has(String(p.id))?'✓ ':'— ')+E()(p.rival||'Rival no registrado')+' · '+E()(p.fecha||'')+'</div>').join('');};
+async function pdfLib(){if(!window.jspdf?.jsPDF){await new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js';sc.onload=res;sc.onerror=()=>rej(Error('No se pudo cargar jsPDF'));document.head.appendChild(sc);});}if(!window.jspdf.jsPDF.API.autoTable){await new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js';sc.onload=res;sc.onerror=()=>rej(Error('No se pudo cargar autoTable'));document.head.appendChild(sc);});}}
+async function savePDF(doc,nombre){const cap=window.Capacitor;if(cap?.isNativePlatform?.()){const fs=cap.Plugins?.Filesystem;if(!fs)throw Error('Capacitor Filesystem no está disponible en esta APK.');const data=doc.output('datauristring').split(',')[1];let result;try{result=await fs.writeFile({path:nombre,data,directory:'DOCUMENTS',recursive:true});}catch(e){result=await fs.writeFile({path:nombre,data,directory:'DATA',recursive:true});}if(cap.Plugins?.Share)await cap.Plugins.Share.share({title:'Estadísticas CD Feria Osorno',url:result.uri,dialogTitle:'Guardar o compartir PDF'});else alert('PDF guardado: '+nombre);}else doc.save(nombre);}
+async function report(tipo){const d=get();if(!d){alert('Primero carga las estadísticas.');return;}try{await pdfLib();const doc=new window.jspdf.jsPDF({orientation:'landscape',unit:'mm',format:'a4'}),cat=base().categorias.find(c=>String(c.id)===String(d.cat))?.name||'Categoría';doc.setFont('helvetica','bold');doc.setTextColor(11,37,80);doc.setFontSize(17);doc.text('CD FERIA OSORNO - ESTADISTICAS INTERNAS',13,18);doc.setFontSize(10);doc.text(cat+' | '+(d.cam||'Todos los campeonatos'),13,26);doc.setFontSize(13);doc.setTextColor(198,32,50);let head=[],body=[],titulo='';if(tipo==='individual'){const id=document.getElementById('feriaStatsJugador').value,f=d.filas.find(f=>String(f.id)===id);if(!f)throw Error('Selecciona un jugador.');titulo='Ficha individual: '+f.nombre;head=['Rival','Fecha','Convocado'];body=d.partidos.map(p=>[p.rival||'Sin rival',p.fecha||'',f.asistencias.has(String(p.id))?'Si':'No']);}else if(tipo==='playoffs'){titulo='Clasificación a playoffs - mínimo '+min();head=['Jugador','Convocatorias','Faltan','Estado'];body=d.filas.map(f=>[f.nombre,String(f.asistencias.size),String(Math.max(0,min()-f.asistencias.size)),f.asistencias.size>=min()?'Cumple mínimo':'Pendiente']);}else{titulo='Rendimiento y rankings';head=['Rival','Fecha','GF','GC','Estado'];body=d.partidos.map(p=>[p.rival||'Sin rival',p.fecha||'',p.goles_favor??'-',p.goles_contra??'-',p.estado||'']);}doc.text(titulo,13,35);doc.autoTable({startY:40,head:[head],body,theme:'grid',styles:{fontSize:9},headStyles:{fillColor:[16,47,96]}});if(tipo==='rendimiento'){const y=doc.lastAutoTable.finalY+10;if(y>165)doc.addPage();const yy=y>165?20:y;doc.setTextColor(198,32,50);doc.text('Rankings del plantel',13,yy);doc.autoTable({startY:yy+4,head:[['Jugador','Convocatorias','Titularidades','Suplencias','Goles']],body:d.filas.map(f=>{const x=statsPlayer(f);return [f.nombre,f.asistencias.size,x.titular,x.suplente,f.goles]}),theme:'grid',styles:{fontSize:8},headStyles:{fillColor:[16,47,96]}});}doc.setFontSize(8);doc.setTextColor(90);doc.text('Uso interno. Titulares y suplentes convocados suman asistencia. Validar reglamento de playoffs.',13,doc.internal.pageSize.getHeight()-8);await savePDF(doc,'Feria_Osorno_'+tipo+'_'+cat.replace(/[^a-zA-Z0-9]/g,'_')+'.pdf');}catch(e){console.error(e);alert('No se pudo generar el PDF: '+e.message);}}
+window.feriaStatsPDFExtra=report;
+window.feriaStatsPDFIndividual=()=>report('individual');
+})();
+</script>
+<script id="feria-cabeceras-especiales-v1">
+(function(){
+function iniciar(){
+ const cont=document.getElementById('feriaEspecialContenido');if(!cont)return;
+ const encabezados={
+  'Entrenamientos':['Entrenamientos','Días, horarios y lugares para entrenar.'],
+  'Formación y valores':['Formación y <em>valores</em>','Formamos personas, además de futbolistas.']
+ };
+ const pintar=()=>{
+  if(cont.querySelector(':scope > .feria-cabecera-unificada'))return;
+  const titulo=cont.querySelector(':scope > h2');
+  const clave=titulo?.textContent?.trim();
+  const datos=encabezados[clave];
+  if(!datos){cont.classList.remove('feria-cabecera-especial');return;}
+  cont.classList.add('feria-cabecera-especial');
+  const div=document.createElement('div');div.className='feria-cabecera-unificada';
+  div.innerHTML='<img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>'+datos[0]+'</h1><p>'+datos[1]+'</p>';
+  cont.prepend(div);
+ };
+ new MutationObserver(pintar).observe(cont,{childList:true});pintar();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();
+})();
+</script>
+<style id="feria-ajustes-academicos-2026">
+#portalSociosPublico #feriaCerrarSesionSocio{position:absolute;top:20px;right:17px;z-index:20;width:auto;max-width:170px;margin:0;padding:11px 12px;background:#c91d32;color:white;border:1px solid #e66a7b;border-radius:22px;font-size:11px;line-height:1.2;box-shadow:0 4px 14px #0004}
+#feriaEscuelaVisorPdf{position:fixed;inset:0;z-index:999999;background:#07142e;display:flex;flex-direction:column;color:white}
+#feriaEscuelaVisorPdf[hidden]{display:none!important}
+#feriaEscuelaVisorPdf .feria-visor-barra{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px;background:#102a57}
+#feriaEscuelaVisorPdf .feria-visor-barra strong{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:52%}
+#feriaEscuelaVisorPdf .feria-visor-barra button,#feriaEscuelaVisorPdf .feria-visor-barra a{background:#c82032;color:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:bold;text-decoration:none;font-size:12px}
+#feriaEscuelaVisorPdf iframe{width:100%;height:100%;flex:1;border:0;background:white}
+#feriaEscuelaPaginas{overflow:auto;flex:1;padding:14px 8px;background:#e8eef8;text-align:center}
+#feriaEscuelaPaginas canvas{display:block;margin:0 auto 16px;max-width:100%;height:auto;box-shadow:0 3px 16px #0003;background:white}
+</style>
+<div id="feriaEscuelaVisorPdf" hidden role="dialog" aria-modal="true" aria-label="Visor de material académico"><div class="feria-visor-barra"><button type="button" onclick="feriaEscuelaCerrarVisor()">← Volver</button><strong id="feriaEscuelaVisorTitulo">Material académico</strong><a id="feriaEscuelaVisorExterno" target="_blank" rel="noopener">Abrir aparte ↗</a></div><div id="feriaEscuelaPaginas" aria-label="Páginas del PDF"></div><iframe id="feriaEscuelaVisorMarco" title="Documento PDF" hidden></iframe></div>
+<script id="feria-visor-pdf-2026">
+window.feriaEscuelaMostrarPdf=async function(url,titulo){
+ const v=document.getElementById('feriaEscuelaVisorPdf'), paginas=document.getElementById('feriaEscuelaPaginas'), marco=document.getElementById('feriaEscuelaVisorMarco');
+ document.getElementById('feriaEscuelaVisorTitulo').textContent=titulo||'Material académico';
+ document.getElementById('feriaEscuelaVisorExterno').href=url;
+ v.hidden=false;paginas.hidden=false;marco.hidden=true;paginas.innerHTML='<p style="color:#071b4a;padding:24px">Cargando material...</p>';
+ const sesion=Date.now();v.dataset.sesion=String(sesion);
+ try{
+  if(!window.pdfjsLib){await new Promise((resolve,reject)=>{const e=document.createElement('script');e.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';e.onload=resolve;e.onerror=reject;document.head.appendChild(e);});}
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const doc=await pdfjsLib.getDocument({url:url}).promise;
+  paginas.innerHTML='';
+  for(let n=1;n<=doc.numPages;n++){
+   if(v.hidden||v.dataset.sesion!==String(sesion))return;
+   const page=await doc.getPage(n),base=page.getViewport({scale:1});
+   const scale=Math.min(2,Math.max(0.7,(Math.min(window.innerWidth-28,720))/base.width));
+   const viewport=page.getViewport({scale});const canvas=document.createElement('canvas');canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);canvas.setAttribute('aria-label','Página '+n);paginas.appendChild(canvas);
+   await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+  }
+ }catch(err){console.warn('Visor PDF:',err);paginas.innerHTML='<p style="color:#071b4a;padding:20px">No se pudo mostrar el PDF aquí. Usa «Abrir aparte».</p>';}
+};
+window.feriaEscuelaCerrarVisor=function(){const v=document.getElementById('feriaEscuelaVisorPdf');v.hidden=true;v.dataset.sesion='cerrada';document.getElementById('feriaEscuelaPaginas').innerHTML='';document.getElementById('feriaEscuelaVisorMarco').src='about:blank';};
+</script>
+<style id="feria-toro-aula-css">
+#toroAula{position:fixed;inset:0;z-index:999999;background:#061633;overflow:auto;color:#fff;font-family:Arial,sans-serif;padding:16px 12px 40px}#toroAula *{box-sizing:border-box}#toroAula .ta-wrap{max-width:650px;margin:auto}#toroAula .ta-top{display:flex;justify-content:space-between;align-items:center;gap:10px}#toroAula .ta-btn{background:#e31c3d;border:0;border-radius:13px;padding:13px 17px;color:white;font-weight:900;cursor:pointer}#toroAula .ta-hero{background:linear-gradient(135deg,#123b80,#2057a5);border:2px solid #4976bd;border-radius:24px;margin-top:18px;padding:20px;text-align:center}#toroAula .ta-mascot{width:175px;height:175px;object-fit:contain;filter:drop-shadow(0 6px 12px #0006)}#toroAula .ta-board{background:#125d48;border:6px solid #e0a455;border-radius:18px;padding:17px;margin:12px 0;font-size:18px;line-height:1.5}#toroAula .ta-card{background:#fff;color:#102448;border-radius:20px;padding:20px;margin:15px 0}#toroAula .ta-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:18px 0}#toroAula .ta-opt{background:#eaf1ff;color:#102b61;border:2px solid #bdd2f5;border-radius:14px;padding:17px 5px;font-size:17px;font-weight:900;cursor:pointer}#toroAula .ta-opt.sel{border-color:#ef2449;background:#ffedf1}#toroAula .ta-next{width:100%;background:#e51e40;color:white;border:0;border-radius:13px;padding:15px;font-size:16px;font-weight:900;cursor:pointer}#toroAula .ta-next:disabled{opacity:.5}#toroAula .ta-feedback{border-radius:14px;padding:14px;background:#d9f8e6;color:#0d6536;font-weight:700;margin-bottom:12px}#toroAula .ta-feedback.bad{background:#fff0d4;color:#864b00}#toroAula .ta-progress{height:12px;background:#37517d;border-radius:20px;overflow:hidden;margin-top:15px}#toroAula .ta-progress span{display:block;background:#ffd43b;height:100%;transition:width .2s}#toroAula .ta-small{color:#d8e5ff;font-size:13px}#toroAula .ta-lessons{display:grid;gap:10px;margin-top:18px}#toroAula .ta-lesson{background:#16386e;border:1px solid #527bb7;color:white;border-radius:15px;text-align:left;padding:16px;font-size:16px;font-weight:800;cursor:pointer}#toroAula .ta-lesson small{display:block;color:#d4e4ff;font-weight:400;margin-top:5px}#toroAula .ta-confetti{text-align:center;font-size:45px;margin:10px}
+#feriaBotonAulaToro{width:100%;background:linear-gradient(120deg,#ed2346,#ff9e2c);border:0;border-radius:15px;color:#fff;font-weight:900;font-size:17px;padding:17px;margin:12px 0;box-shadow:0 5px 16px #0004;cursor:pointer}
+</style>
+<script id="feria-toro-aula-js">(function(){'use strict';
+const lessons=[{"name":"Números y decenas","emoji":"🔢","teach":"10 unidades forman 1 decena. El número 34 tiene 3 decenas y 4 unidades.","q":[["¿Cuántas decenas tiene 47?",["4","7","47"],0,"47 = 4 decenas y 7 unidades."],["¿Cuánto es 30 + 6?",["36","63","306"],0,"30 + 6 = 36."],["¿Qué número es mayor?",["58","85","48"],1,"85 tiene 8 decenas."]]},{"name":"Sumas futboleras","emoji":"⚽","teach":"Para sumar, juntamos cantidades. Si tenemos 8 pelotas y llegan 5, ahora tenemos 13.","q":[["8 + 5 =",["12","13","14"],1,"8 + 5 = 13."],["24 + 13 =",["37","27","47"],0,"24 + 10 + 3 = 37."],["El equipo hizo 16 goles y luego 7. ¿Total?",["21","23","24"],1,"16 + 7 = 23."]]},{"name":"Restas de campeón","emoji":"🥅","teach":"Restar es quitar o saber cuánto falta. Si tienes 15 conos y guardas 6, quedan 9.","q":[["15 − 6 =",["9","8","11"],0,"15 − 6 = 9."],["32 − 10 =",["12","22","42"],1,"Quitamos una decena: 22."],["Había 20 pelotas y prestaron 8. ¿Quedan?",["18","12","10"],1,"20 − 8 = 12."]]},{"name":"Formas y figuras","emoji":"🔺","teach":"El triángulo tiene 3 lados; el cuadrado tiene 4 lados iguales; el rectángulo tiene 4 lados.","q":[["¿Cuántos lados tiene un triángulo?",["3","4","5"],0,"¡Tres lados!"],["¿Cuál tiene 4 lados iguales?",["Triángulo","Cuadrado","Círculo"],1,"El cuadrado tiene 4 lados iguales."],["¿Cuál NO tiene lados rectos?",["Rectángulo","Triángulo","Círculo"],2,"El círculo es redondo."]]},{"name":"Patrones y problemas","emoji":"🌟","teach":"Un patrón sigue una regla. Por ejemplo: 2, 4, 6, 8… sumamos 2 cada vez.","q":[["2, 4, 6, 8, ¿qué sigue?",["9","10","12"],1,"Sumamos 2: sigue 10."],["5, 10, 15, ¿qué sigue?",["20","16","25"],0,"Sumamos 5: sigue 20."],["3 equipos tienen 2 pelotas cada uno. ¿Cuántas hay?",["5","6","9"],1,"2 + 2 + 2 = 6."]]}], mascot="data:image/webp;base64,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";
+let state={lesson:-1,q:0,choice:-1,checked:false,score:0};let root;
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function shell(content){root.innerHTML='<div class="ta-wrap"><div class="ta-top"><button class="ta-btn" onclick="feriaToroCerrar()">← Volver a la escuela</button><strong>🐂 AULA DEL PROFE TORO</strong></div>'+content+'</div>';root.scrollTop=0;}
+function progress(){return '<div class="ta-progress"><span style="width:'+Math.round((state.q/3)*100)+'%"></span></div>';}
+function home(){state.lesson=-1;shell('<div class="ta-hero ta-hero-escuela"><img class="ta-mascot" alt="Profe Toro" src="'+mascot+'"><div class="ta-club">CLUB DEPORTIVO FERIA OSORNO</div><h1>Aprende con el <span>Profe Toro</span></h1><p>Matemáticas · 2.º básico</p><p>¡Cinco aventuras para convertirte en crack de los números!</p></div><div class="ta-lessons">'+lessons.map((l,i)=>'<button class="ta-lesson" onclick="feriaToroLeccion('+i+')">'+l.emoji+' '+(i+1)+'. '+safe(l.name)+' <small>📖 Explicación + 3 desafíos con corrección inmediata</small></button>').join('')+'</div><p class="ta-small">Puedes repetir las actividades todas las veces que quieras.</p>');}
+function render(){const l=lessons[state.lesson];if(state.q>=l.q.length){shell('<div class="ta-hero"><img class="ta-mascot" src="'+mascot+'" alt="Profe Toro"><div class="ta-confetti">🏆 ⭐ 🎉</div><h1>¡Goooool, campeón!</h1><p>Terminaste '+safe(l.name)+'</p><h2>'+state.score+' de 3 respuestas correctas al primer intento</h2><p>¡Lo importante es seguir aprendiendo!</p><button class="ta-btn" onclick="feriaToroInicio()">Elegir otra lección</button></div>');return;}
+const q=l.q[state.q];let f='';if(state.checked){const good=state.choice===q[2];f='<div class="ta-feedback '+(good?'':'bad')+'">'+(good?'🎉 ¡GOOOOL! ¡Correcto! ':'💪 ¡Buen intento! ')+safe(q[3])+(good?'':' Prueba otra respuesta.')+'</div>';}
+shell('<div class="ta-hero"><img class="ta-mascot" src="'+mascot+'" alt="Profe Toro"><h2>'+l.emoji+' '+safe(l.name)+'</h2><div class="ta-board">🧑‍🏫 Pizarra del Profe Toro<br>'+safe(l.teach)+'</div><div class="ta-small">Desafío '+(state.q+1)+' de '+l.q.length+'</div>'+progress()+'</div><div class="ta-card"><h2>🎯 '+safe(q[0])+'</h2><div class="ta-options">'+q[1].map((v,i)=>'<button class="ta-opt '+(state.choice===i?'sel':'')+'" onclick="feriaToroElegir('+i+')">'+safe(v)+'</button>').join('')+'</div>'+f+'<button class="ta-next" '+(state.choice<0?'disabled':'')+' onclick="feriaToroComprobar()">'+(state.checked&&state.choice===q[2]?'Siguiente desafío →':'Comprobar respuesta ✓')+'</button></div>');}
+window.feriaToroInicio=home;window.feriaToroCerrar=function(){if(root){root.remove();root=null;document.body.style.overflow='';}};
+window.feriaToroAbrir=function(){if(root)return;root=document.createElement('section');root.id='toroAula';root.setAttribute('aria-label','Aula interactiva del Profe Toro');document.body.appendChild(root);document.body.style.overflow='hidden';home();};
+window.feriaToroLeccion=function(i){state={lesson:i,q:0,choice:-1,checked:false,score:0};render();};
+window.feriaToroElegir=function(i){state.choice=i;state.checked=false;render();};
+window.feriaToroComprobar=function(){const q=lessons[state.lesson].q[state.q];if(state.choice<0)return;if(state.checked&&state.choice===q[2]){state.q++;state.choice=-1;state.checked=false;render();return;}if(state.choice===q[2]&&!state.checked)state.score++;state.checked=true;render();};
+function inject(){ /* La navegación académica ahora se integra en el módulo escolar. */ }
+})();</script>
+
+<style id="feria-escuela-cursos-estilo">
+.feria-escuela-header-curso{margin:10px 0 22px;text-align:center;padding:24px 12px 18px;background:#06142f;color:#fff}
+.feria-escuela-header-curso img{width:98px;height:98px;object-fit:contain;margin:0 auto 12px;display:block}
+.feria-escuela-header-curso .feria-kicker{font-size:10px;font-weight:900;letter-spacing:2px;color:#b7c9e9;margin-bottom:9px}
+.feria-escuela-header-curso h1{font-size:29px;font-weight:900;line-height:1.1;color:#fff;margin:0}
+.feria-escuela-header-curso h1 span{color:#ff304d}
+.feria-escuela-header-curso p{font-size:12px;color:#bdd1ed;margin:11px auto 0;max-width:320px;line-height:1.5}
+.feria-cursos-card{background:#102a57;border:1px solid #3c5e91;border-radius:17px;padding:16px;margin:12px 0;color:#fff}
+.feria-cursos-card h3{color:#fff;margin:0 0 12px;font-size:19px}
+.feria-cursos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.feria-cursos-grid button,.feria-curso-volver,.feria-curso-jugar,.feria-curso-pdf{border:1px solid #4a75b1;border-radius:13px;background:#204b8c;color:#fff;font-size:13px;font-weight:800;padding:16px 8px;cursor:pointer;min-height:56px}
+.feria-cursos-grid button:active{transform:scale(.98)}
+.feria-curso-volver{background:#102e61;min-height:0;padding:10px 16px;margin-bottom:12px}
+.feria-curso-jugar{background:linear-gradient(110deg,#ec1941,#ff922e);border:0;width:100%;font-size:16px;margin:10px 0}
+.feria-curso-pdf{display:block;text-decoration:none;text-align:center;background:#234f93;width:100%;margin:10px 0}
+.feria-curso-preview{width:100%;height:430px;border:1px solid #5676a8;border-radius:12px;background:#fff;margin-top:12px}
+.feria-curso-note{font-size:12px;line-height:1.5;color:#bed2f1;margin-top:12px}
+#toroAula .ta-hero-escuela{background:#06142f;border:0;border-radius:0;box-shadow:none}
+#toroAula .ta-hero-escuela .ta-mascot{max-height:190px}
+#toroAula .ta-hero-escuela .ta-club{color:#b8c9e9;font-size:10px;letter-spacing:2px;font-weight:900;margin:8px 0}
+#toroAula .ta-hero-escuela h1 span{color:#ff3451}
+
+.feria-cursos-grid button{background:linear-gradient(145deg,#2456a0,#173866);border:1px solid #6586bb;box-shadow:0 5px 0 #0a2045;min-height:76px;font-size:15px;border-radius:17px;transition:transform .15s,box-shadow .15s;letter-spacing:.2px}
+.feria-cursos-grid button:active{transform:translateY(4px);box-shadow:0 1px 0 #0a2045}
+.feria-cursos-card{background:linear-gradient(160deg,#153569,#0c234c);padding:19px}
+#feriaJuegoMateria{position:fixed;inset:0;background:#061632;z-index:999999;overflow:auto;color:white;padding:15px 12px 40px}
+.fjm-wrap{max-width:550px;margin:auto}.fjm-card{background:#133365;border:1px solid #5077b5;border-radius:20px;padding:19px;margin:14px 0}
+.fjm-option{display:block;width:100%;padding:16px;margin:10px 0;border-radius:13px;background:#24508e;color:#fff;border:1px solid #6487c1;text-align:left;font-size:16px}
+.fjm-option.selected{background:#3d72bc;border:2px solid #ffd34c}.fjm-action{background:linear-gradient(100deg,#eb1940,#ff8b28);border:0;color:white;border-radius:13px;padding:15px;font-weight:800;width:100%}
+.fjm-back{background:#214b87;border:1px solid #6687b9;color:#fff;padding:11px 16px;border-radius:11px}
+</style>
+<script id="feria-escuela-cursos-js">
+(function(){
+'use strict';
+const rootId='feriaEscuelaInternaContenido';
+const grades=['1.º básico','2.º básico','3.º básico','4.º básico','5.º básico','6.º básico','7.º básico','8.º básico','1.º medio','2.º medio'];
+const subjects=[['🧮','Matemáticas'],['📖','Lenguaje'],['🌎','Inglés'],['🏛️','Historia']];
+const pdf='Matematicas_2_Basico_Profe_Toro_Feria.pdf';
+let currentGrade=-1,currentSubject=-1,lastMode='';
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function get(){return document.getElementById(rootId);}
+function header(name,subtitle){return '<div class="feria-escuela-header-curso"><img src="img/logo-feria.png" alt="Escudo Feria Osorno"><div class="feria-kicker">CLUB DEPORTIVO FERIA OSORNO</div><h1>'+esc(name)+'</h1><p>'+esc(subtitle)+'</p></div>';}
+function makeButton(label,handler){return '<button type="button" onclick="'+handler+'">'+label+'</button>';}
+function renderGrades(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentGrade=-1;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card"><h3>📚 Elige tu curso</h3><div class="feria-cursos-grid">'+grades.map((g,i)=>makeButton(esc(g),'feriaCursoElegir('+i+')')).join('')+'</div></div>';}
+function renderSubjects(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card">'+makeButton('← Todos los cursos','feriaCursosInicio()').replace('<button','<button class="feria-curso-volver"')+'<h3>📚 '+esc(grades[currentGrade])+'</h3><p class="feria-curso-note">Elige la asignatura que quieres estudiar.</p><div class="feria-cursos-grid">'+subjects.map(([icon,s],i)=>makeButton(icon+' '+s,'feriaCursoMateria('+i+')')).join('')+'</div></div>';}
+async function renderSubject(){
+ const area=document.getElementById('feriaCursosArea');if(!area)return;
+ const curso=currentGrade,materia=currentSubject,subj=subjects[materia][1];
+ area.innerHTML='<div class="feria-cursos-card">'+makeButton('← Asignaturas','feriaCursoElegir('+curso+')').replace('<button','<button class="feria-curso-volver"')+'<h3>'+subjects[materia][0]+' '+esc(subj)+' · '+esc(grades[curso])+'</h3>'+'<p class="feria-curso-note">Aprende jugando y comprueba tus respuestas.</p><button type="button" class="feria-curso-jugar" onclick="feriaJuegoMateriaAbrir('+curso+','+materia+')">🐂 🎮 ¡Jugar y aprender con el Profe Toro!</button>'+'<h3 style="margin-top:20px">📚 Material de estudio</h3><div id="feriaMaterialAsignatura">⏳ Buscando cuadernillo publicado…</div></div>';
+ try{
+ const {data,error}=await supabaseClient.from('escuela_contenidos').select('titulo,descripcion,archivo_url').eq('modulo','apoyo_escolar').eq('publicado',true).like('titulo','[AULA:'+curso+'|'+materia+']%').order('id',{ascending:false}).limit(1);
+ if(error)throw error;if(currentGrade!==curso||currentSubject!==materia)return;
+ const zona=document.getElementById('feriaMaterialAsignatura');if(!zona)return;
+ const r=data&&data[0];if(!r||!r.archivo_url){zona.innerHTML='<p class="feria-curso-note">📘 Aún no hay PDF publicado para esta asignatura. El administrador puede subirlo desde Gestión de Escuela.</p>';return;}
+ const ruta=r.archivo_url.replace(/^escuela-publico\//,'');
+ const firmado=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,3600);if(firmado.error)throw firmado.error;
+ if(currentGrade!==curso||currentSubject!==materia)return;
+ const url=firmado.data.signedUrl;window.feriaPdfAcademiaActual={url,nombre:r.titulo.replace(/^\[AULA:[^\]]+\]\s*/,''),descripcion:r.descripcion};
+ zona.innerHTML='<p class="feria-curso-note">'+esc(r.descripcion||'Cuadernillo de estudio del Profe Toro')+'</p><button class="feria-curso-pdf" onclick="feriaCursoVerPdf()">📖 Visualizar PDF en la app</button><a class="feria-curso-pdf" href="'+esc(url)+'" target="_blank" rel="noopener" download>⬇️ Descargar PDF</a>';
+ }catch(e){const zona=document.getElementById('feriaMaterialAsignatura');if(zona)zona.textContent='No se pudo cargar el material: '+e.message;}
+}
+window.feriaCursoVerPdf=()=>{const p=window.feriaPdfAcademiaActual;if(!p)return;if(typeof window.feriaEscuelaMostrarPdf==='function')window.feriaEscuelaMostrarPdf(p.url,p.nombre);else window.open(p.url,'_blank','noopener');};
+
+window.feriaCursosInicio=renderGrades;
+window.feriaCursoElegir=function(i){currentGrade=i;renderSubjects();};
+window.feriaCursoMateria=function(i){currentSubject=i;renderSubject();};
+function apply(){const el=get();if(!el||el.closest('.oculto')||document.getElementById('feriaEscuelaInterna')?.classList.contains('oculto'))return;const first=el.querySelector('.esc-card h2');if(!first)return;const text=first.textContent||'';if(/Administraci[oó]n/i.test(text))return;let mode=/^\s*🎁?\s*Beneficios/i.test(text)?'beneficios':/Nutrici[oó]n/i.test(text)?'nutricion':/Apoyo acad[eé]mico|Apoyo escolar/i.test(text)?'academia':null;if(!mode)return;
+const wanted={beneficios:['Beneficios','Conoce las oportunidades y convenios para nuestra comunidad.'],nutricion:['Nutrición','Consejos y recursos para crecer fuertes y saludables.'],academia:['Apoyo académico','Elige tu curso y aprende con el Profe Toro.']}[mode];
+if(!el.querySelector('#feriaEscuelaHeaderCursos')){const wrap=document.createElement('div');wrap.id='feriaEscuelaHeaderCursos';wrap.innerHTML=header(...wanted);first.closest('.esc-card').before(wrap);}
+if(mode==='academia'&&!el.querySelector('#feriaCursosArea')){const zone=document.createElement('div');zone.id='feriaCursosArea';first.closest('.esc-card').after(zone);renderGrades();}
+// El encabezado antiguo queda oculto solo en la vista del apoderado, no en Administración.
+first.closest('.esc-card').style.display='none';
+if(mode==='academia'){
+  Array.from(el.querySelectorAll('.esc-card')).forEach(card=>{
+    if(card.contains(document.getElementById('feriaCursosArea')))return;
+    if(card===first.closest('.esc-card'))return;
+    card.style.display='none';
+  });
+}
+}
+const obs=new MutationObserver(()=>{apply();});
+function start(){if(document.body)obs.observe(document.body,{childList:true,subtree:true});apply();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script>
+<script id="feria-juegos-40">
+(function(){
+'use strict';
+const niveles=['1.º básico','2.º básico','3.º básico','4.º básico','5.º básico','6.º básico','7.º básico','8.º básico','1.º medio','2.º medio'];
+const materias=['Matemáticas','Lenguaje','Inglés','Historia'];
+let modal=null, preguntas=[], actual=0, aciertos=0, elegida=-1, intento=false, curso=0, materia=0;
+const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function q(t,opts,correct,why){return {t,opts,correct,why};}
+function banco(c,m){
+const alto=c>=8, medio=c>=5, menor=c<=2;
+if(m===0){const n=[5,12,24,35,48,60,75,90,120,150][c];return [
+q(`¿Cuánto es ${n} + ${n-2}?`,[String(n*2-2),String(n*2+2),String(n*2-4)],0,'Sumamos las dos cantidades.'),
+q(`¿Cuánto es ${n+10} − ${n}?`,['5','10','20'],1,'Al quitar '+n+' quedan 10.'),
+q(`¿Cuánto es ${n} + 10?`,[String(n+1),String(n+10),String(n+20)],1,'Agregar diez aumenta una decena.'),
+q('¿Qué figura tiene tres lados?',['Cuadrado','Triángulo','Círculo'],1,'El triángulo tiene tres lados.'),
+q('Completa el patrón: 3, 6, 9, __',['10','12','15'],1,'La regla es sumar 3.'),
+q(menor?'¿Cuántas decenas hay en 40?':alto?'¿Cuánto es 25% de 200?':'¿Cuánto es 6 × 4?',menor?['4','40','2']:alto?['25','50','75']:['20','24','28'],menor?0:1,menor?'40 tiene cuatro decenas.':alto?'Un cuarto de 200 es 50.':'6 grupos de 4 son 24.'),
+q(alto?'Resuelve: 3x = 21. ¿Cuánto vale x?':medio?'¿Cuánto es 1/2 de 30?':'Si tienes 8 pelotas y recibes 4, ¿cuántas tienes?',alto?['6','7','8']:medio?['10','15','20']:['11','12','13'],1,alto?'21 dividido por 3 es 7.':medio?'La mitad de 30 es 15.':'8 + 4 = 12.')];}
+if(m===1)return [
+q('¿Cuál palabra es un sustantivo?',['Correr','Pelota','Rápidamente'],1,'Pelota nombra un objeto.'),
+q('¿Cuál es un verbo?',['Jugar','Azul','Estadio'],0,'Jugar indica una acción.'),
+q('¿Qué signo cierra una pregunta?',['!','.', '?'],2,'Una pregunta termina con ?.'),
+q('¿Cuál está escrita correctamente?',['mañana','manana','mañána'],0,'Mañana se escribe con ñ.'),
+q('En «El toro lee un libro», ¿quién realiza la acción?',['El libro','El toro','La escuela'],1,'El toro es quien lee.'),
+q(alto?'¿Qué es una tesis en un texto argumentativo?':'¿Qué palabra describe cómo es algo?',['Una idea que se defiende','Una fecha','Una rima'],0,alto?'La tesis expresa la postura principal.':'Una descripción aporta características.'),
+q(alto?'¿Qué recurso compara usando «como»?':'¿Cuál palabra significa lo contrario de feliz?',['Metáfora','Comparación','Hipérbole'],alto?1:0,alto?'La comparación suele usar «como».':'Para cursos iniciales, busca antónimos como triste.')];
+if(m===2)return [
+q('¿Cómo se dice «hola» en inglés?',['Hello','Bye','Please'],0,'Hello significa hola.'),
+q('¿Qué significa «book»?',['Pelota','Libro','Casa'],1,'Book es libro.'),
+q('Completa: I ___ a student.',['is','are','am'],2,'Con I usamos am.'),
+q('¿Qué color es «blue»?',['Rojo','Azul','Verde'],1,'Blue significa azul.'),
+q('¿Cuál es el plural de «cat»?',['cats','cates','caties'],0,'Normalmente añadimos s.'),
+q(alto?'Choose the past tense of «go».':'¿Cómo se dice «gracias»? ',alto?['goed','went','gone']:['Sorry','Thank you','Goodbye'],1,alto?'Went es el pasado simple de go.':'Thank you significa gracias.'),
+q(alto?'Choose: She ___ studying now.':'¿Qué significa «school»?',alto?['am','is','are']:['Escuela','Calle','Mesa'],alto?1:0,alto?'She usa is en presente continuo.':'School es escuela.')];
+return [
+q('¿En qué continente está Chile?',['Europa','América','Asia'],1,'Chile se encuentra en América del Sur.'),
+q('¿Cuál es la capital de Chile?',['Santiago','Valparaíso','Puerto Montt'],0,'Santiago es la capital.'),
+q('¿Qué indica una brújula?',['Temperatura','Direcciones','Horas'],1,'La brújula ayuda a orientarse.'),
+q('¿Qué es una fuente histórica?',['Una evidencia del pasado','Una pelota','Un planeta'],0,'Las fuentes permiten estudiar el pasado.'),
+q('¿Cuál es un derecho de niños y niñas?',['No estudiar','Recibir educación','No jugar'],1,'La educación es un derecho.'),
+q(alto?'¿Qué caracteriza a una democracia?':'¿Qué océano está frente a Chile?',['Participación ciudadana','Un único gobernante sin elecciones','Prohibición de votar'],alto?0:0,alto?'La participación y las elecciones son elementos de la democracia.':'Chile limita al oeste con el océano Pacífico.'),
+q(alto?'¿Qué estudia la geografía humana?':'¿Para qué sirve un mapa?',['Solo volcanes','Poblaciones y actividades humanas','Solo estrellas'],alto?1:0,alto?'Estudia la relación de las personas con el espacio.':'Un mapa ayuda a localizar lugares.')];
+}
+// Correcciones específicas de alternativas para nivel inicial.
+function getPreguntas(c,m){let a=banco(c,m);if(m===1&&c<8)a[5]=q('¿Cuál es un adjetivo?',['Bonito','Correr','Pelota'],0,'Bonito describe una característica.');if(m===1&&c<8)a[6]=q('¿Qué palabra significa lo contrario de feliz?',['Triste','Alegre','Contento'],0,'Triste es antónimo de feliz.');if(m===3&&c<8)a[5]=q('¿Qué océano está frente a Chile?',['Pacífico','Atlántico','Índico'],0,'Es el océano Pacífico.');if(m===3&&c<8)a[6]=q('¿Para qué sirve un mapa?',['Ubicar lugares','Cocinar','Medir peso'],0,'Los mapas permiten localizar lugares.');return a;}
+function paint(){if(!modal)return;const p=preguntas[actual];let body='';if(p){body=`<div class="fjm-card"><div style="font-size:13px;color:#bfd7ff">Desafío ${actual+1} de ${preguntas.length} · ⭐ ${aciertos} aciertos</div><div style="height:9px;border-radius:8px;background:#375887;margin:12px 0"><div style="width:${actual/preguntas.length*100}%;height:100%;background:#ffcd47;border-radius:8px"></div></div><h2 style="color:white;font-size:23px">${html(p.t)}</h2>${p.opts.map((x,i)=>`<button class="fjm-option ${elegida===i?'selected':''}" onclick="feriaJuegoElegir(${i})">${html(x)}</button>`).join('')}${intento?`<div style="padding:13px;border-radius:10px;background:#0b2248;margin:12px 0">${elegida===p.correct?'🎉 ¡Goooool! Respuesta correcta.':'💪 Buen intento, vuelve a probar.'}<p>${html(p.why)}</p></div>`:''}<button class="fjm-action" ${elegida<0?'disabled':''} onclick="feriaJuegoRevisar()">${intento&&elegida===p.correct?'Siguiente desafío →':'Comprobar respuesta'}</button></div>`;}else body=`<div class="fjm-card" style="text-align:center"><h1>🏆 ¡Felicitaciones!</h1><p>Completaste ${html(materias[materia])} de ${html(niveles[curso])}.</p><h2>${aciertos} de ${preguntas.length} aciertos al primer intento</h2><button class="fjm-action" onclick="feriaJuegoReiniciar()">Volver a jugar</button></div>`;
+modal.innerHTML=`<div class="fjm-wrap"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><button class="fjm-back" onclick="feriaJuegoCerrar()">← Volver</button><strong>🐂 PROFE TORO</strong></div><div class="fjm-card" style="text-align:center"><div style="font-size:34px">🐂 📚 ⚽</div><h2 style="color:white;margin:7px 0">${html(materias[materia])}</h2><div>${html(niveles[curso])} · Aprende jugando</div></div>${body}</div>`;modal.scrollTop=0;}
+window.feriaJuegoMateriaAbrir=function(c,m){curso=c;materia=m;preguntas=getPreguntas(c,m);actual=0;aciertos=0;elegida=-1;intento=false;modal=document.createElement('div');modal.id='feriaJuegoMateria';document.body.appendChild(modal);document.body.style.overflow='hidden';paint();};
+window.feriaJuegoElegir=i=>{elegida=i;intento=false;paint();};
+window.feriaJuegoRevisar=()=>{if(elegida<0)return;if(intento&&elegida===preguntas[actual].correct){actual++;elegida=-1;intento=false;paint();return;}if(!intento&&elegida===preguntas[actual].correct)aciertos++;intento=true;paint();};
+window.feriaJuegoReiniciar=()=>{actual=0;aciertos=0;elegida=-1;intento=false;paint();};
+window.feriaJuegoCerrar=()=>{if(modal){modal.remove();modal=null;}document.body.style.overflow='';};
+})();
 </script>
 </body>  </html>
