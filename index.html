@@ -7325,6 +7325,13 @@ overflow-x:hidden;
 </style>  
 
   
+<style id="feria-escuela-nav-exclusiva">
+/* Escuela: navegación independiente, sin duplicar la barra pública. */
+body:has(#feriaEscuelaInterna:not(.oculto)) #pantallaPublica > .menu-inferior-publico,
+body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-publico,
+body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-admin {display:none!important;}
+body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-nav {display:grid!important;}
+</style>
 </head>  
   
   <body>
@@ -8435,6 +8442,8 @@ class="oculto gestion-admin">
 </div>
 <div id="feriaHerramientasInicio" class="feria-herramientas-inicio"><div id="feriaEstadisticasAcceso" class="accion-admin"  onclick="feriaAbrirEstadisticasAdmin()"><div class="accion-admin-icono">📊</div><div class="accion-admin-texto"><strong>Estadísticas internas</strong><span>Acceso exclusivo para administradores</span></div><div class="accion-admin-flecha">›</div></div>
 <div id="feriaAccesoTiendaInicio" class="accion-admin" onclick="tiendaAbrirAdmin()" ><div class="accion-admin-icono">🛒</div><div class="accion-admin-texto"><strong>Gestionar tienda</strong><span>Productos, stock y pedidos</span></div><div class="accion-admin-flecha">›</div></div>
+<div class="accion-admin" onclick="feriaAbrirEditorHistoria()"><div class="accion-admin-icono">📜</div><div class="accion-admin-texto"><strong>Nuestra historia</strong><span>Editar relatos, fotografías y personas históricas</span></div><div class="accion-admin-flecha">›</div></div>
+<div class="accion-admin" onclick="feriaAdminEscuela()"><div class="accion-admin-icono">🏫</div><div class="accion-admin-texto"><strong>Gestionar Escuela de Fútbol</strong><span>Publicar beneficios, nutrición y apoyo académico</span></div><div class="accion-admin-flecha">›</div></div>
 </div>
 <nav class="menu-inferior-publico menu-inferior-admin" aria-label="Navegación de administración">
   <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
@@ -12392,11 +12401,6 @@ class="seccion oculto pantalla-mas-publica">
 
   </div>
 
-  <div class="mas-pie">
-    <img src="img/logo-feria.png" alt="Feria Osorno">
-    <strong>EL MÁS GRANDE DEL BARRIO</strong>
-    <span>Club Deportivo Feria Osorno · Puerto Montt</span>
-  </div>
 
 </section>
 
@@ -12414,19 +12418,35 @@ onclick="volver()">
   </h2>    <p>  
     Aquí estará la información de los socios del Club Deportivo Feria Osorno.  
   </p>  </section>
+<section id="feriaEditorHistoria" class="seccion oculto feria-admin-pantalla feria-editor-historia"><button type="button" class="feria-volver-icono" onclick="feriaCerrarEditorHistoria()">←</button><span class="feria-lead">ADMINISTRACIÓN · PATRIMONIO DEL CLUB</span><h2>📜 Nuestra historia</h2><p>Prepara y revisa el contenido histórico del club. Los cambios se guardan como borrador en este dispositivo, <strong>no se publican todavía</strong>. La publicación para todos los socios requerirá conectar el editor a Supabase.</p><div class="feria-editor-aviso">📝 Borrador local · Pendiente de sincronización con Supabase</div><div id="feriaEditorHistoriaCampos"></div><button type="button" class="feria-boton" onclick="feriaGuardarBorradorHistoria()">💾 Guardar borrador</button><button type="button" class="feria-boton feria-editor-preview" onclick="feriaPrevisualizarHistoria()">👁 Vista previa pública</button><p id="feriaEditorHistoriaEstado" role="status"></p></section>
 <section id="feriaHistoria" class="seccion oculto feria-pagina-informativa">
-<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
-<h2>🏆 Nuestra historia</h2>
-<p>Un espacio para descubrir las raíces, las personas y los momentos que han construido al Club Deportivo Feria Osorno.</p>
+<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Volver">←</button><h2>🏆 Nuestra historia</h2><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p>
 <div class="feria-historia-grid">
-<article class="feria-historia-tarjeta"><span>📜</span><h3>Nuestros orígenes</h3><p>Completa aquí el año de fundación, cómo nació el club y quiénes impulsaron sus primeros pasos.</p></article>
-<article class="feria-historia-tarjeta"><span>🏆</span><h3>Vitrina de títulos</h3><p>Agrega campeonatos, copas y reconocimientos que han marcado nuestra trayectoria.</p></article>
-<article class="feria-historia-tarjeta"><span>👥</span><h3>Personajes históricos</h3><p>Un homenaje a jugadores, dirigentes, entrenadores e hinchas inolvidables.</p></article>
-<article class="feria-historia-tarjeta"><span>📸</span><h3>Archivo fotográfico</h3><p>Próximamente: camisetas antiguas, fotografías de planteles y recuerdos de otras épocas.</p></article>
-<article class="feria-historia-tarjeta"><span>📅</span><h3>Línea de tiempo</h3><p>Aquí podrás incorporar fechas importantes, ascensos, aniversarios y grandes jornadas.</p></article>
-<article class="feria-historia-tarjeta"><span>❤️</span><h3>Nuestra identidad</h3><p>Los colores, el barrio, los valores y las tradiciones que nos unen.</p></article>
-</div><div class="feria-info-caja"><strong>El más grande del barrio</strong><p>Esta sección está preparada para completar con la historia real del club.</p></div></section>
-<section id="feriaEscuela" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>⚽ Escuela de fútbol</h2><p>Nuestra escuela gratuita reúne a niños y jóvenes que comparten la pasión por el fútbol y nuestros colores.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🧒</span><h3>Formación y valores</h3><p>Compañerismo, respeto y alegría por aprender jugando.</p></article><article class="feria-historia-tarjeta"><span>📅</span><h3>Entrenamientos</h3><p>Consulta directamente con el club los horarios y cupos vigentes.</p></article><article class="feria-historia-tarjeta"><span>📷</span><h3>Nuestros pequeños protagonistas</h3><p>Pronto compartiremos fotografías, actividades y experiencias de la escuela.</p></article></div></section>
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('origenes')"><span>📜</span><h3>Nuestros orígenes</h3><p>Todo comenzó con trabajadores, sueños y un club que se convirtió en familia.</p></button>
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('titulos')"><span>🏆</span><h3>Vitrina de títulos</h3><p>Más de 150 copas y una sede llena de recuerdos.</p></button>
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('personas')"><span>👥</span><h3>Personas Históricas</h3><p>Los nombres y rostros que hicieron posible esta historia.</p></button>
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('identidad')"><span>❤️</span><h3>Nuestra identidad</h3><p>Lo que significa llevar a la Feria en el corazón.</p></button>
+</div></section>
+<section id="feriaEscuela" class="seccion oculto feria-pagina-informativa">
+<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Volver">←</button><h2>⚽ Escuela de fútbol</h2><p>Una escuela gratuita donde cada niño importa y cada sueño merece una oportunidad.</p>
+<div class="feria-historia-grid">
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('valores')"><span>🌱</span><h3>Formación y valores</h3><p>Educamos a través del deporte, el respeto y la alegría.</p></button>
+<button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('entrenamientos')"><span>📅</span><h3>Entrenamientos</h3><p>Días, horarios y lugares para entrenar.</p></button>
+
+</div>
+<div class="feria-contenido-card feria-acceso-escuela" style="margin-top:22px">
+<div class="feria-acceso-icono">🔐</div><span class="feria-lead">ACCESO PRIVADO</span>
+<h3>Directiva de la escuela</h3>
+<p>Espacio de trabajo para organizar beneficios, nutrición, apoyo escolar, documentos y finanzas de la escuela.</p>
+<button type="button" class="feria-boton feria-login-escuela" onclick="feriaIngresarEscuela()">🔐 Iniciar sesión <span>→</span></button>
+<p style="font-size:11px;margin-top:12px">Acceso exclusivo para las cuentas autorizadas de la directiva de la Escuela de Fútbol.</p>
+</div></section>
+<section id="feriaEspecial" class="seccion oculto feria-pagina-informativa feria-especial"><button class="feria-volver-icono" onclick="feriaVolverEspecial()" aria-label="Volver">←</button><div id="feriaEspecialContenido"></div></section>
+<section id="feriaEscuelaInterna" class="seccion oculto feria-pagina-informativa feria-especial feria-panel-exclusivo">
+<header class="feria-escuela-header"><button class="feria-volver-icono" onclick="feriaSalirEscuelaInterna()" aria-label="Volver a escuela">←</button><button type="button" class="feria-escuela-salir" onclick="feriaCerrarSesionEscuela()">Cerrar sesión ↗</button></header>
+<div class="feria-escuela-marca"><img src="img/logo-feria.png" alt="Escudo Feria Osorno" onerror="this.style.display='none'"><div><span>FERIA SOMOS TODOS</span><h1>Escuela de Fútbol</h1><p>Formando personas, construyendo sueños.</p></div></div>
+<div id="feriaEscuelaInternaContenido"></div>
+<nav class="feria-escuela-nav" aria-label="Navegación exclusiva de la escuela"><button type="button" data-escuela="beneficios" onclick="feriaModuloEscuela('beneficios')">🎁<small>Beneficios</small></button><button type="button" data-escuela="nutricion" onclick="feriaModuloEscuela('nutricion')">🥗<small>Nutrición</small></button><button type="button" data-escuela="academia" onclick="feriaModuloEscuela('academia')">📚<small>Apoyo escolar</small></button><button type="button" data-escuela="documentos" onclick="feriaModuloEscuela('documentos')">📄<small>Documentos</small></button><button type="button" data-escuela="finanzas" onclick="feriaModuloEscuela('finanzas')">💰<small>Finanzas</small></button></nav></section>
 <section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
 <section id="store" class="seccion oculto tienda-feria">
 <button class="feria-volver-icono" onclick="feriaVolverDesdeTienda()" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
@@ -13592,6 +13612,21 @@ async function iniciarSesion(){
     return;
   }
 
+  // Acceso independiente para la directiva escolar.
+  // No requiere que la cuenta sea administradora del club.
+  if(window.feriaLoginDesdeEscuela){
+    const rolEscuela = await feriaEscuelaRol();
+    if(!rolEscuela){
+      await supabaseClient.auth.signOut();
+      mensaje.innerText = "⛔ Esta cuenta no tiene acceso autorizado a la Escuela de Fútbol.";
+      return;
+    }
+    window.feriaLoginDesdeEscuela = false;
+    mensaje.innerText = "✅ Acceso a la Escuela de Fútbol autorizado.";
+    await feriaModuloEscuela("beneficios");
+    return;
+  }
+
   // Verificar autorización administrativa
   const { data: esAdmin, error: errorAdmin } =
     await supabaseClient.rpc("es_administrador");
@@ -13608,7 +13643,12 @@ async function iniciarSesion(){
 
   mensaje.innerText = "✅ Sesión administrativa iniciada.";
 
-  mostrar("administracion");
+  if(window.feriaLoginDesdeEscuela){
+    window.feriaLoginDesdeEscuela=false;
+    feriaModuloEscuela('beneficios');
+  }else{
+    mostrar("administracion");
+  }
 }
 
 
@@ -23333,12 +23373,22 @@ console.log("Valores de máscara:", valoresMascara);
     }
     if(personas<resultado.datos.length*.008)throw new Error('No se detectó claramente una persona. Prueba con mejor luz y un fondo sencillo.');
     mc.putImageData(pixels,0,0);
-    const recorte=feriaFotoCanvas(W,H),rc=recorte.getContext('2d');
-    rc.drawImage(origen,0,0);
-    rc.globalCompositeOperation='destination-in';
-    rc.imageSmoothingEnabled=true;
-    rc.filter='blur(1px)';
-    rc.drawImage(mascara,0,0,W,H);
+    // =====================================
+// RECORTE DEL JUGADOR SIN ALTERAR COLORES
+// =====================================
+
+const recorte = feriaFotoCanvas(W,H);
+const rc = recorte.getContext('2d');
+
+rc.drawImage(origen,0,0);
+
+rc.globalCompositeOperation = 'destination-in';
+rc.imageSmoothingEnabled = true;
+
+// Aplicar máscara sin desenfoque adicional
+rc.drawImage(mascara,0,0,W,H);
+
+rc.globalCompositeOperation = 'source-over';
     rc.filter='none';rc.globalCompositeOperation='source-over';
    // =====================================
 // ENCUADRE AUTOMÁTICO DEL JUGADOR
@@ -23378,16 +23428,19 @@ if(maxY>minY && maxX>minX){
   const altoPersona=maxY-minY;
 
   // Espacio superior e inferior para el encuadre
+  // Encuadre más natural: jugador más pequeño, sin ampliar píxeles.
+  // Se conserva el color original y el fondo del club.
   const escala=Math.min(
-    (W*0.82)/anchoPersona,
-    (H*0.88)/altoPersona
+    1,
+    (W*0.70)/anchoPersona,
+    (H*0.70)/altoPersona
   );
 
   // Centrar horizontalmente
   const centroX=(minX+maxX)/2;
 
   // Posicionar la cabeza con margen superior
-  const margenSuperior=H*0.07;
+  const margenSuperior=H*0.16;
 
   const destinoX=W/2-centroX*escala;
   const destinoY=margenSuperior-minY*escala;
@@ -23569,5 +23622,249 @@ async function feriaCapturarJugador(){
   await feriaPrepararFotoJugador(input);
 
 }
+</script>
+<style id="feria-historia-escuela-2026">
+.feria-tarjeta-boton{font:inherit;text-align:left;cursor:pointer;width:100%;color:#fff}.feria-tarjeta-boton:active{transform:scale(.98)}
+#feriaEspecial:not(.oculto),#feriaEscuelaInterna:not(.oculto){position:fixed!important;inset:0 0 70px!important;z-index:96!important;overflow-y:auto!important;display:block!important;margin:0!important;padding:18px 17px 115px!important;background:#06142f!important;color:white!important;border-radius:0!important;min-height:0!important}
+.feria-especial h2{font-size:25px;margin:10px 0;color:#fff}.feria-especial h3{font-size:18px;color:white;margin:15px 0 8px}.feria-especial p{color:#d5e1f5;line-height:1.75;font-size:14px;margin:12px 0}.feria-especial .feria-lead{color:#f14a5b;font-size:11px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase}.feria-especial .feria-contenido-card{background:linear-gradient(155deg,#123166,#091c40);border:1px solid #315184;border-radius:18px;padding:18px;margin:15px 0}.feria-especial .feria-banner{display:block;width:100%;max-height:370px;object-fit:cover;border-radius:15px;background:#102653;margin:16px 0}.feria-especial .feria-media-placeholder{min-height:200px;border:1px dashed #6683ae;border-radius:16px;display:grid;place-items:center;text-align:center;padding:22px;background:linear-gradient(135deg,#102d62,#071a3c);color:#d5e1f5;margin:16px 0}.feria-especial .feria-personas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.feria-especial .feria-persona{border:1px solid #35598b;border-radius:15px;background:#102a58;overflow:hidden;color:white;text-align:left;cursor:pointer}.feria-especial .feria-persona img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#183969}.feria-especial .feria-persona strong{display:block;padding:12px;font-size:13px}.feria-especial .feria-valor{border-left:3px solid #e22a40;padding:12px 15px;background:#0c2550;border-radius:10px;margin:10px 0;animation:feriaAparecer .5s ease both}@keyframes feriaAparecer{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.feria-especial .feria-valor:nth-child(even){animation-delay:.12s}.feria-especial .feria-valor:nth-child(odd){animation-delay:.24s}.feria-especial .feria-valor strong{color:#fff}.feria-especial .feria-valor p{margin:5px 0}.feria-especial .feria-horario{border:1px solid #385b8e;border-radius:14px;padding:17px;margin:12px 0;background:#0d2857}.feria-especial .feria-horario strong{color:white}.feria-especial .feria-horario span{display:block;color:#d3e1f5;margin-top:7px}.feria-especial .feria-boton{border:0;border-radius:13px;background:#d71930;color:#fff;font-weight:800;padding:14px 17px;margin:12px 0;cursor:pointer}.feria-especial .feria-escuela-nav{position:fixed;bottom:70px;left:0;right:0;z-index:99;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:#092453;border-top:1px solid #436394}.feria-escuela-nav button{border:0;background:transparent;color:white;font-size:20px;padding:11px 2px;cursor:pointer}.feria-escuela-nav small{display:block;font-size:9px;line-height:1.3;margin-top:4px}.feria-especial .feria-carrusel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 0 18px}.feria-especial .feria-carrusel>*{flex:0 0 83%;scroll-snap-align:center}.feria-especial .feria-carrusel img{height:240px;object-fit:cover;border-radius:16px}.feria-especial .feria-carrusel .feria-media-placeholder{height:240px;margin:0}.feria-especial .feria-dato{color:#fff;font-size:30px;font-weight:900}
+</style>
+<script id="feria-historia-escuela-2026-js">
+// EDITAR AQUÍ LOS ARCHIVOS REALES CUANDO ESTÉN DISPONIBLES.
+const feriaContenido2026={
+  origenFoto:'', // ejemplo: 'img/historia/origenes.jpg'
+  copasVideo:'', // ejemplo: 'img/historia/copas.mp4' (vertical)
+  escuelaFotos:[], // ejemplo: ['img/escuela/1.jpg','img/escuela/2.jpg']
+  protagonistasFotos:[],
+  personas:[
+    {nombre:'Tata Chaco',ingreso:'Socio fundador · 1969',foto:'',resena:'Uno de los socios fundadores de nuestro club. Su compromiso, junto al cariño y generosidad de la Tata Berta, dejó una huella imborrable: el terreno donde se construyó nuestra sede. Esta reseña podrá ampliarse con los recuerdos de su familia y compañeros.'},
+    {nombre:'Tata Berta',ingreso:'Por documentar',foto:'',resena:'Su generosidad y la del Tata Chaco ayudaron a darle un hogar a la Feria. Su historia merece ser contada con fotografías, testimonios y el cariño de las generaciones que disfrutaron de la sede.'}
+  ]
+};
+let feriaOrigenEspecial='feriaHistoria';
+function feriaEsc(texto){return String(texto??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function feriaFotoOPlaceholder(url,etiqueta){return url?`<img class="feria-banner" src="${feriaEsc(url)}" alt="${feriaEsc(etiqueta)}" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><div class="feria-media-placeholder" hidden>📷 Fotografía pendiente de subir</div>`:`<div class="feria-media-placeholder">📷<div>${feriaEsc(etiqueta)}<br><small>Espacio reservado para una fotografía real del club</small></div></div>`;}
+function feriaCarrusel(fotos){return `<div class="feria-carrusel">${fotos.length?fotos.map((f,i)=>feriaFotoOPlaceholder(f,'Recuerdo '+(i+1))).join(''):[1,2,3].map(i=>`<div class="feria-media-placeholder">📸<div>Fotografía ${i}<br><small>Próximamente</small></div></div>`).join('')}</div><p>Desliza para recorrer los recuerdos de nuestra escuela.</p>`;}
+function feriaMostrarEspecial(html,origen){feriaOrigenEspecial=origen||'feriaHistoria';ocultarTodo();document.getElementById('pantallaPublica').classList.remove('oculto');controlarPortadaPublica(false);const el=document.getElementById('feriaEspecial');el.classList.remove('oculto');document.getElementById('feriaEspecialContenido').innerHTML=html;el.scrollTop=0;}
+function feriaVolverEspecial(){mostrar(feriaOrigenEspecial);}
+function feriaAbrirPersona(i){const p=feriaContenido2026.personas[i];if(!p)return;feriaMostrarEspecial(`<span class="feria-lead">Personas que hicieron historia</span><h2>${feriaEsc(p.nombre)}</h2>${feriaFotoOPlaceholder(p.foto,'Retrato de '+p.nombre)}<div class="feria-contenido-card"><strong>Año de ingreso al club</strong><p>${feriaEsc(p.ingreso)}</p><h3>Su historia en la Feria</h3><p>${feriaEsc(p.resena)}</p></div>`,'feriaEspecialPersonas');}
+function feriaAbrirEspecial(tipo){let html='';let origen=['valores','entrenamientos'].includes(tipo)?'feriaEscuela':'feriaHistoria';
+ if(tipo==='origenes')html=`<span class="feria-lead">Desde el 1 de marzo de 1969</span><h2>Nacimos del trabajo. Crecimos como familia.</h2>${feriaFotoOPlaceholder(feriaContenido2026.origenFoto,'Nuestros orígenes')}<div class="feria-contenido-card"><p>Fundado el 1 de marzo de 1969 por un grupo de trabajadores de la empresa ganadera Feria Osorno, nuestro club nació de la amistad, el esfuerzo y las ganas de compartir una pasión. Con el paso de los años llegaron los campeonatos, los desafíos y las alegrías; pero nuestro mayor triunfo siempre ha sido la gente.</p><p>Entre los gestos que marcaron nuestro camino, recordamos con especial cariño al Tata Chaco, uno de nuestros socios fundadores, y a la Tata Berta, quienes regalaron el terreno donde hoy se levanta nuestra sede. Ese lugar se construyó con las manos, el tiempo y el corazón de muchas familias.</p><p>Cada generación ha dejado algo de sí en estos colores, y todavía quedan historias por contar. Te invitamos a recorrer nuestras copas, conocer a las personas que hicieron grande a la Feria y descubrir la identidad que seguimos construyendo juntos.</p></div><button class="feria-boton" onclick="feriaAbrirEspecial('titulos')">Conoce nuestra vitrina de títulos →</button>`;
+ if(tipo==='titulos')html=`<span class="feria-lead">Un legado que sigue creciendo</span><h2>Vitrina de títulos</h2><div class="feria-contenido-card"><div class="feria-dato">Más de 150 copas</div><p>Cada copa guarda un equipo, un esfuerzo y una historia. Nuestra sede es testigo de generaciones que defendieron estos colores con orgullo.</p></div>${feriaContenido2026.copasVideo?`<video controls playsinline preload="metadata" style="width:min(100%,360px);aspect-ratio:9/16;object-fit:cover;border-radius:18px;display:block;margin:auto" src="${feriaEsc(feriaContenido2026.copasVideo)}"></video>`:'<div class="feria-media-placeholder" style="aspect-ratio:9/16;max-width:310px;margin:15px auto">🎬<div>Aquí irá el video vertical de nuestra sede y sus copas<br><small>Formato 9:16, como una historia de Instagram</small></div></div>'}`;
+ if(tipo==='personas'||tipo==='personasLista')html=`<span class="feria-lead">El corazón de nuestra institución</span><h2>Personas Históricas</h2><p>Hay nombres que no se olvidan, porque ayudaron a construir lo que hoy somos.</p><div class="feria-personas">${feriaContenido2026.personas.map((p,i)=>`<button class="feria-persona" onclick="feriaAbrirPersona(${i})">${p.foto?`<img src="${feriaEsc(p.foto)}" alt="${feriaEsc(p.nombre)}">`:'<div class="feria-media-placeholder" style="margin:0;min-height:190px;border:0">👤<br>Foto pendiente</div>'}<strong>${feriaEsc(p.nombre)}</strong></button>`).join('')}</div>`;
+ if(tipo==='identidad')html=`<span class="feria-lead">Mucho más que fútbol</span><h2>Nuestra identidad</h2><div class="feria-contenido-card"><h3>🔵🔴 Los colores que nos unen</h3><p>Azul y rojo: colores que se heredan, se defienden y se llevan con orgullo en cada cancha y en cada reunión familiar.</p></div><div class="feria-valor"><strong>🏠 Nuestra casa</strong><p>Una sede levantada con el aporte de generaciones. Aquí puedes incorporar imágenes antiguas y actuales, testimonios y recuerdos de su construcción.</p></div><div class="feria-valor"><strong>🤝 Nuestra gente</strong><p>Socios, dirigentes, familias, jugadores, hinchas y voluntarios: el verdadero patrimonio de la Feria.</p></div><div class="feria-valor"><strong>⚽ Nuestro compromiso</strong><p>El fútbol como lugar de encuentro y una escuela gratuita que abre oportunidades a niños y jóvenes.</p></div><div class="feria-valor"><strong>🎶 Tradiciones que permanecen</strong><p>Próximamente: el himno o canto del club, camisetas históricas, símbolos, anécdotas y voces de quienes nos representan.</p></div><div class="feria-contenido-card"><h3>Un museo hecho entre todos</h3><p>Invitamos a las familias ferianas a compartir fotos, camisetas, recortes, relatos y recuerdos para preservar nuestra memoria.</p></div>`;
+ if(tipo==='valores')html=`<span class="feria-lead">Escuela gratuita · CD Feria Osorno</span><h2>Formación y valores</h2>${feriaCarrusel(feriaContenido2026.escuelaFotos)}<h3>Formamos personas, además de futbolistas</h3><div class="feria-valor"><strong>🤝 Respeto</strong><p>Aprender a valorar al compañero, al rival y a quienes nos enseñan.</p></div><div class="feria-valor"><strong>💙 Compañerismo</strong><p>Entender que nadie gana solo y que todos tienen un lugar en el equipo.</p></div><div class="feria-valor"><strong>🌱 Disciplina y perseverancia</strong><p>Descubrir que mejorar requiere constancia, paciencia y esfuerzo.</p></div><div class="feria-valor"><strong>📚 Crecimiento integral</strong><p>El deporte acompaña los estudios, los hábitos saludables y la confianza de cada niño.</p></div><div class="feria-valor"><strong>❤️ Inclusión y alegría</strong><p>Una escuela gratuita para que la posibilidad de jugar no dependa del bolsillo de la familia.</p></div>`;
+ if(tipo==='entrenamientos')html=`<span class="feria-lead">Horarios actuales informados por el club</span><h2>Entrenamientos</h2><div class="feria-horario"><strong>📅 Lunes · 17:00 a 18:00</strong><span>Niños de 5 a 9 años</span><span>📍 Gimnasio Chile Barrio</span></div><div class="feria-horario"><strong>📅 Lunes · 18:00 a 19:00</strong><span>Niños de 10 a 13 años</span><span>📍 Gimnasio Chile Barrio</span></div><div class="feria-horario"><strong>📅 Miércoles · 17:00 a 18:10</strong><span>Niños de 10 a 15 años</span><span>📍 Cancha Asociación</span></div><p>Los horarios pueden variar por actividades o disponibilidad de recinto. Consulta con la escuela antes de asistir por primera vez.</p>`;
+ if(tipo==='personasLista'){origen='feriaHistoria';}
+ feriaMostrarEspecial(html,origen);
+}
+// Las fichas de personas vuelven a la cuadrícula, no a una página inexistente.
+const feriaVolverEspecialBase=feriaVolverEspecial;
+feriaVolverEspecial=function(){if(feriaOrigenEspecial==='feriaEspecialPersonas'){feriaAbrirEspecial('personas');return;}feriaVolverEspecialBase();};
+async function feriaIngresarEscuela(){try{const {data:{session}}=await supabaseClient.auth.getSession();if(!session){window.feriaLoginDesdeEscuela=true;mostrar('login');return;}const {data,error}=await supabaseClient.rpc('es_directiva_escuela');if(error||data!==true){alert('Acceso exclusivo para la directiva autorizada de la Escuela de Fútbol.');return;}feriaModuloEscuela('beneficios');}catch(e){alert('No se pudo verificar el acceso.');}}
+async function feriaModuloEscuela(tipo){const {data:permiso,error:permisoError}=await supabaseClient.rpc('es_directiva_escuela');if(permisoError||permiso!==true){alert('Acceso exclusivo para la directiva autorizada de la Escuela de Fútbol.');return;}const el=document.getElementById('feriaEscuelaInterna');ocultarTodo();document.getElementById('pantallaPublica').classList.remove('oculto');controlarPortadaPublica(false);el.classList.remove('oculto');const modulos={beneficios:['🎁 Beneficios','Actividades, convenios, campañas solidarias y oportunidades para nuestros niños y sus familias.'],nutricion:['🥗 Nutrición deportiva','Recursos sobre colaciones saludables, hidratación y alimentación equilibrada para niños que practican deporte. Las pautas personalizadas deben ser indicadas por profesionales.'],academia:['📚 Apoyo escolar','Guías de estudio, material educativo, técnicas de aprendizaje y recursos de apoyo para acompañar el crecimiento académico de cada niño.'],documentos:['📄 Documentos','Reglamentos, autorizaciones familiares, formularios y comunicados oficiales de la escuela.'],finanzas:['💰 Finanzas de la escuela','Aquí se implementará un registro separado de ingresos, gastos, comprobantes y resumen financiero de la escuela, con permisos exclusivos y tablas propias en Supabase.']};const [titulo,desc]=modulos[tipo]||modulos.beneficios;document.getElementById('feriaEscuelaInternaContenido').innerHTML=`<span class="feria-lead">Panel interno · Escuela de fútbol</span><h2>${titulo}</h2><div class="feria-contenido-card"><p>${desc}</p><p><strong>Espacio preparado para incorporar información.</strong> La carga y edición de contenidos aún requiere configurar almacenamiento y permisos de la directiva.</p></div>`;el.scrollTop=0;}
+function feriaSalirEscuelaInterna(){if(window.feriaEscuelaDesdeAdmin){window.feriaEscuelaDesdeAdmin=false;mostrar('administracion');}else{mostrar('feriaEscuela');}}
+</script>
+<style id="feria-ajustes-escuela-historia">
+.feria-acceso-escuela{padding:24px 19px!important;border:1px solid #42669d!important;text-align:center;background:linear-gradient(150deg,#102f67,#081b40)!important}.feria-acceso-icono{font-size:35px;background:#173d7a;border-radius:17px;width:66px;height:66px;display:grid;place-items:center;margin:0 auto 14px}.feria-acceso-escuela h3{font-size:21px!important;margin:8px 0 10px!important}.feria-acceso-escuela p{font-size:13px!important}.feria-login-escuela{display:flex;align-items:center;justify-content:center;gap:20px;width:100%;max-width:330px;margin:18px auto!important;border-radius:14px!important;background:#c82032!important;font-size:14px!important;min-height:50px}.feria-login-escuela span{font-size:20px}
+#feriaEscuelaInterna:not(.oculto){inset:0!important;z-index:2500!important;padding:16px 16px 105px!important;min-height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;background:#06142f!important}
+#feriaEscuelaInterna .feria-escuela-header{display:flex;align-items:center;justify-content:space-between;background:transparent!important;border-radius:0;padding:0;margin:0 0 20px;box-shadow:none}
+#feriaEscuelaInterna .feria-escuela-salir{background:#b91f35;border:1px solid #df6172;color:white;border-radius:24px;padding:10px 13px;font-size:12px;font-weight:800;cursor:pointer}
+#feriaEscuelaInterna .feria-escuela-marca{display:flex;align-items:center;gap:12px;background:linear-gradient(125deg,#12376f,#081d43);border:1px solid #31558c;border-radius:18px;padding:17px 14px;margin-bottom:20px}
+#feriaEscuelaInterna .feria-escuela-marca img{width:62px;height:62px;object-fit:contain;flex-shrink:0}#feriaEscuelaInterna .feria-escuela-marca span{font-size:10px;color:#ff5b72;font-weight:900;letter-spacing:1.2px}#feriaEscuelaInterna .feria-escuela-marca h1{font-size:21px;color:white;margin:5px 0}#feriaEscuelaInterna .feria-escuela-marca p{font-size:11px;color:#d4e3f7;margin:0}
+#feriaEscuelaInterna .feria-escuela-nav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:2600!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));background:#071b42!important;border-top:1px solid #365784!important;padding-bottom:env(safe-area-inset-bottom,0px)}#feriaEscuelaInterna .feria-escuela-nav button{color:#aabbd6;font-size:21px;padding:11px 1px 12px}#feriaEscuelaInterna .feria-escuela-nav button.activo{color:#fff;background:#12366d;border-top:3px solid #ed2941}#feriaEscuelaInterna .feria-escuela-nav small{font-size:9px}
+body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-publico,body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-admin,body:has(#feriaEscuelaInterna:not(.oculto)) .navegacion-publica-fija{display:none!important}
+.feria-editor-historia:not(.oculto){position:fixed!important;inset:0!important;z-index:2501!important;overflow-y:auto!important;margin:0!important;border-radius:0!important}.feria-editor-historia{background:#06142f!important;color:white!important;padding:20px 16px 110px!important;min-height:100vh}.feria-editor-historia h2{color:white;font-size:24px;margin:14px 0}.feria-editor-historia p{color:#d5e1f5;line-height:1.6}.feria-editor-aviso{padding:12px;border:1px solid #5377a7;background:#102c5a;border-radius:12px;margin:16px 0;font-size:12px}.feria-editor-historia label{display:block;font-weight:700;color:white;margin:16px 0 6px;font-size:13px}.feria-editor-historia input,.feria-editor-historia textarea{width:100%;border:1px solid #5675a2;border-radius:11px;padding:12px;background:#f7faff;color:#071b4a;font-size:14px}.feria-editor-historia textarea{min-height:110px;resize:vertical}.feria-editor-historia .feria-boton{display:block;width:100%;background:#c82032;border:0;border-radius:12px;padding:14px;color:white;font-weight:800;margin:12px 0}.feria-editor-historia .feria-editor-preview{background:#1b437d}
+</style>
+<script id="feria-ajustes-escuela-historia-js">
+(function(){
+const modOriginal=window.feriaModuloEscuela;
+window.feriaModuloEscuela=async function(tipo){await modOriginal(tipo);const panel=document.getElementById('feriaEscuelaInterna');if(panel&&!panel.classList.contains('oculto')){panel.querySelectorAll('.feria-escuela-nav button').forEach(b=>b.classList.toggle('activo',b.dataset.escuela===tipo));}};
+})();
+async function feriaCerrarSesionEscuela(){
+ if(!confirm('¿Cerrar la sesión de la directiva de la escuela?'))return;
+ try{const {error}=await supabaseClient.auth.signOut();if(error)throw error;window.feriaLoginDesdeEscuela=false;feriaSalirEscuelaInterna();}catch(e){alert('No se pudo cerrar la sesión: '+(e.message||e));}
+}
+const feriaHistoriaCampos=[['origenTitulo','Título de nuestros orígenes'],['origenTexto','Relato de nuestros orígenes'],['origenFoto','Fotografía de nuestros orígenes (ruta o URL)'],['copasTexto','Texto de vitrina de títulos'],['copasVideo','Video de las copas (ruta o URL)'],['identidadTexto','Nuestra identidad'],['personas','Personas históricas (JSON: nombre, ingreso, foto, resena)']];
+function feriaHistoriaBorrador(){try{return JSON.parse(localStorage.getItem('feria_historia_borrador_2026')||'{}')}catch(e){return {}}}
+function feriaAbrirEditorHistoria(){ocultarTodo();document.getElementById('pantallaPublica').classList.remove('oculto');document.getElementById('administracion').classList.add('oculto');const el=document.getElementById('feriaEditorHistoria');el.classList.remove('oculto');const borrador=feriaHistoriaBorrador();document.getElementById('feriaEditorHistoriaCampos').innerHTML=feriaHistoriaCampos.map(([id,label])=>`<label for="hist_${id}">${label}</label>${['origenTexto','copasTexto','identidadTexto','personas'].includes(id)?`<textarea id="hist_${id}"></textarea>`:`<input id="hist_${id}" type="text">`}`).join('');feriaHistoriaCampos.forEach(([id])=>{const input=document.getElementById('hist_'+id);input.value=borrador[id]??(id==='personas'?JSON.stringify(feriaContenido2026.personas,null,2):feriaContenido2026[id]||'')});el.scrollIntoView({block:'start'});}
+function feriaCerrarEditorHistoria(){document.getElementById('feriaEditorHistoria').classList.add('oculto');mostrar('administracion');}
+function feriaGuardarBorradorHistoria(){const b={};feriaHistoriaCampos.forEach(([id])=>b[id]=document.getElementById('hist_'+id).value);try{const personas=JSON.parse(b.personas);if(!Array.isArray(personas))throw Error('Debe ser una lista');localStorage.setItem('feria_historia_borrador_2026',JSON.stringify(b));document.getElementById('feriaEditorHistoriaEstado').textContent='✅ Borrador guardado en este dispositivo. Aún no publicado.';}catch(e){document.getElementById('feriaEditorHistoriaEstado').textContent='⚠️ Revisa el formato JSON de personas históricas: '+e.message;}}
+function feriaPrevisualizarHistoria(){feriaGuardarBorradorHistoria();const b=feriaHistoriaBorrador();if(b.origenFoto)feriaContenido2026.origenFoto=b.origenFoto;if(b.copasVideo)feriaContenido2026.copasVideo=b.copasVideo;try{if(b.personas)feriaContenido2026.personas=JSON.parse(b.personas)}catch(e){}mostrar('feriaHistoria');}
+</script>
+<script id="feria-historia-supabase-integracion">
+/* Integración Nuestra historia con tablas y bucket historia-club. */
+(function(){
+'use strict';
+const IDS=['origenes','titulos','personas','identidad'];
+let secciones={}, personas=[], multimedia=[], cargado=false;
+const $=id=>document.getElementById(id);
+const esc=window.feriaEsc || (x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])));
+const estado=(txt,err=false)=>{const e=$('feriaEditorHistoriaEstado');if(e){e.textContent=txt;e.style.color=err?'#ffb8c2':'#b6f5d0';}};
+const val=id=>($(id)?.value||'').trim();
+const urlSegura=url=>{try{let u=new URL(url,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
+async function cargar(){
+ const [a,b,c]=await Promise.all([
+ supabaseClient.from('historia_secciones').select('*'),
+ supabaseClient.from('historia_personas').select('*').order('orden',{ascending:true}).order('id',{ascending:true}),
+ supabaseClient.from('historia_multimedia').select('*').order('orden',{ascending:true})]);
+ if(a.error)throw a.error;if(b.error)throw b.error;if(c.error)throw c.error;
+ secciones=Object.fromEntries((a.data||[]).map(x=>[x.id,x]));personas=b.data||[];multimedia=c.data||[];cargado=true;
+ if(secciones.origenes?.imagen_url)feriaContenido2026.origenFoto=secciones.origenes.imagen_url;
+ if(secciones.titulos?.video_url)feriaContenido2026.copasVideo=secciones.titulos.video_url;
+ if(personas.length)feriaContenido2026.personas=personas.map(p=>({nombre:p.nombre,ingreso:p.anio_ingreso?String(p.anio_ingreso):'',foto:p.foto_url||'',resena:p.resena||''}));
+}
+function imagenHTML(url,alt){const u=urlSegura(url);return u?'<img class="feria-banner" loading="lazy" src="'+esc(u)+'" alt="'+esc(alt)+'">':'';}
+function renderEspecial(tipo){
+ const d=secciones[tipo];if(!d)return false;
+ const cont=$('feriaEspecialContenido');if(!cont)return false;
+ let html='<span class="feria-lead">'+esc(d.subtitulo||'CD Feria Osorno')+'</span><h2>'+esc(d.titulo)+'</h2>';
+ if(tipo==='personas'){
+  html+='<p>'+esc(d.contenido||'')+'</p><div class="feria-personas">'+personas.map((p,i)=>'<button class="feria-persona" onclick="feriaAbrirPersona('+i+')">'+(p.foto_url?'<img src="'+esc(urlSegura(p.foto_url))+'" alt="'+esc(p.nombre)+'">':'<div class="feria-media-placeholder">👤</div>')+'<strong>'+esc(p.nombre)+'</strong></button>').join('')+'</div>';
+ }else{
+  if(d.imagen_url)html+=imagenHTML(d.imagen_url,d.titulo);
+  html+='<div class="feria-contenido-card"><p style="white-space:pre-line">'+esc(d.contenido||'')+'</p></div>';
+  if(d.video_url&&urlSegura(d.video_url))html+='<video controls playsinline preload="metadata" style="width:min(100%,360px);display:block;margin:16px auto;border-radius:16px" src="'+esc(urlSegura(d.video_url))+'"></video>';
+  const archivos=multimedia.filter(m=>m.seccion_id===tipo&&m.visible);
+  if(archivos.length)html+='<div class="feria-carrusel">'+archivos.map(m=>m.tipo==='video'?'<video controls playsinline src="'+esc(urlSegura(m.archivo_url))+'"></video>':imagenHTML(m.archivo_url,m.descripcion||d.titulo)).join('')+'</div>';
+ }
+ cont.innerHTML=html;return true;
+}
+const abrirEspecialOriginal=window.feriaAbrirEspecial;
+window.feriaAbrirEspecial=function(tipo){abrirEspecialOriginal(tipo);if(IDS.includes(tipo)&&cargado)renderEspecial(tipo);};
+const abrirPersonaOriginal=window.feriaAbrirPersona;
+window.feriaAbrirPersona=function(i){
+ if(!cargado||!personas.length){abrirPersonaOriginal(i);return;}
+ const p=personas[i];if(!p)return;
+ feriaMostrarEspecial('<span class="feria-lead">Personas que hicieron historia</span><h2>'+esc(p.nombre)+'</h2>'+imagenHTML(p.foto_url,p.nombre)+'<div class="feria-contenido-card"><strong>Año de ingreso al club</strong><p>'+esc(p.anio_ingreso||'Por documentar')+'</p><h3>Su historia en la Feria</h3><p style="white-space:pre-line">'+esc(p.resena||'')+'</p></div>','feriaEspecialPersonas');
+};
+function formSeccion(d){return '<div class="feria-historia-edicion-grupo"><h3>'+esc(d.titulo)+'</h3><label>Título</label><input id="hs_titulo" value="'+esc(d.titulo)+'"><label>Subtítulo</label><input id="hs_subtitulo" value="'+esc(d.subtitulo||'')+'"><label>Relato / contenido</label><textarea id="hs_contenido" rows="8">'+esc(d.contenido||'')+'</textarea><label>Fotografía principal</label><input id="hs_imagen" value="'+esc(d.imagen_url||'')+'" placeholder="URL de imagen"><input type="file" id="hs_imagen_file" accept="image/jpeg,image/png,image/webp"><label>Video</label><input id="hs_video" value="'+esc(d.video_url||'')+'" placeholder="URL de video"><input type="file" id="hs_video_file" accept="video/mp4,video/webm"><button type="button" class="feria-boton" onclick="feriaHistoriaGuardarSeccion()">💾 Publicar sección</button></div>';}
+function formPersona(p={}){return '<div class="feria-historia-edicion-grupo"><h3>'+(p.id?'Editar persona':'Agregar persona')+'</h3><input id="hp_id" type="hidden" value="'+esc(p.id||'')+'"><label>Nombre</label><input id="hp_nombre" value="'+esc(p.nombre||'')+'"><label>Año de ingreso (opcional)</label><input id="hp_anio" type="number" min="1800" max="2100" value="'+esc(p.anio_ingreso||'')+'"><label>Reseña</label><textarea id="hp_resena" rows="5">'+esc(p.resena||'')+'</textarea><label>Fotografía</label><input id="hp_foto" value="'+esc(p.foto_url||'')+'" placeholder="URL de fotografía"><input type="file" id="hp_foto_file" accept="image/jpeg,image/png,image/webp"><label>Orden</label><input id="hp_orden" type="number" value="'+esc(p.orden??personas.length)+'"><button type="button" class="feria-boton" onclick="feriaHistoriaGuardarPersona()">💾 Guardar persona</button>'+(p.id?'<button type="button" class="feria-boton feria-editor-preview" onclick="feriaHistoriaEliminarPersona('+Number(p.id)+')">🗑 Eliminar persona</button>':'')+'</div>';}
+function mostrarEdicion(id){const d=secciones[id];if(!d)return;window.feriaHistoriaSeccionActiva=id;$('feriaHistoriaEdicion').innerHTML=formSeccion(d);}
+window.feriaHistoriaEditarSeccion=mostrarEdicion;
+window.feriaHistoriaEditarPersona=function(id){const p=personas.find(x=>String(x.id)===String(id));$('feriaHistoriaEdicion').innerHTML=formPersona(p);};
+function pintarEditor(){
+ const root=$('feriaEditorHistoriaCampos');root.innerHTML='<label>Selecciona qué quieres editar</label><select id="feriaHistoriaSelector" onchange="feriaHistoriaElegir(this.value)">'+IDS.map(id=>'<option value="'+id+'">'+esc(secciones[id]?.titulo||id)+'</option>').join('')+'<option value="agregar_persona">➕ Agregar persona histórica</option></select><div id="feriaHistoriaEdicion"></div><div id="feriaHistoriaPersonasLista"></div>';
+ mostrarEdicion('origenes');pintarPersonas();
+}
+function pintarPersonas(){const e=$('feriaHistoriaPersonasLista');if(!e)return;e.innerHTML='<h3 style="color:white;margin-top:25px">Personas registradas</h3>'+personas.map(p=>'<button type="button" class="feria-boton feria-editor-preview" onclick="feriaHistoriaEditarPersona('+Number(p.id)+')">✏️ '+esc(p.nombre)+'</button>').join('');}
+window.feriaHistoriaElegir=function(id){if(id==='agregar_persona')$('feriaHistoriaEdicion').innerHTML=formPersona();else mostrarEdicion(id);};
+async function autorizar(){const {data:{session},error}=await supabaseClient.auth.getSession();if(error||!session)throw Error('Inicia sesión con la cuenta administradora antes de editar.');const {data, error:e}=await supabaseClient.rpc('es_admin_historia');if(e||data!==true)throw Error('Esta cuenta no tiene permiso para editar Nuestra historia.');}
+async function subir(id,tipo){const f=$(id)?.files?.[0];if(!f)return null;const imagen=tipo==='imagen';const permitidos=imagen?['image/jpeg','image/png','image/webp']:['video/mp4','video/webm'];if(!permitidos.includes(f.type))throw Error('Formato de archivo no permitido.');if(f.size>50*1024*1024)throw Error('El archivo supera 50 MB.');const extension=f.name.split('.').pop().toLowerCase();const ruta='historia/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+extension;const {error}=await supabaseClient.storage.from('historia-club').upload(ruta,f,{contentType:f.type,upsert:false});if(error)throw error;return supabaseClient.storage.from('historia-club').getPublicUrl(ruta).data.publicUrl;}
+window.feriaHistoriaGuardarSeccion=async function(){try{estado('⏳ Publicando sección...');await autorizar();const id=window.feriaHistoriaSeccionActiva;const titulo=val('hs_titulo');if(!titulo)throw Error('Debes ingresar un título.');const imagen=(await subir('hs_imagen_file','imagen'))||val('hs_imagen')||null;const video=(await subir('hs_video_file','video'))||val('hs_video')||null;const fila={id,titulo,subtitulo:val('hs_subtitulo'),contenido:val('hs_contenido'),imagen_url:imagen,video_url:video,actualizado_en:new Date().toISOString()};const {error}=await supabaseClient.from('historia_secciones').upsert(fila,{onConflict:'id'});if(error)throw error;await cargar();pintarEditor();$('feriaHistoriaSelector').value=id;mostrarEdicion(id);estado('✅ Sección publicada en Supabase. Ya está disponible para la versión pública.');}catch(e){estado('⚠️ '+e.message,true);}};
+window.feriaHistoriaGuardarPersona=async function(){try{estado('⏳ Guardando persona...');await autorizar();const nombre=val('hp_nombre');if(!nombre)throw Error('Debes ingresar el nombre.');const foto=(await subir('hp_foto_file','imagen'))||val('hp_foto')||null;const fila={nombre,anio_ingreso:val('hp_anio')?Number(val('hp_anio')):null,resena:val('hp_resena'),foto_url:foto,orden:Number(val('hp_orden'))||0,visible:true,actualizado_en:new Date().toISOString()};const id=val('hp_id');if(id)fila.id=Number(id);const {error}=await supabaseClient.from('historia_personas').upsert(fila);if(error)throw error;await cargar();pintarEditor();estado('✅ Persona guardada y publicada en Supabase.');}catch(e){estado('⚠️ '+e.message,true);}};
+window.feriaHistoriaEliminarPersona=async function(id){if(!confirm('¿Eliminar esta persona histórica?'))return;try{await autorizar();const {error}=await supabaseClient.from('historia_personas').delete().eq('id',id);if(error)throw error;await cargar();pintarEditor();estado('✅ Persona eliminada.');}catch(e){estado('⚠️ '+e.message,true);}};
+window.feriaAbrirEditorHistoria=async function(){
+ ocultarTodo();$('pantallaPublica').classList.remove('oculto');$('administracion').classList.add('oculto');$('feriaEditorHistoria').classList.remove('oculto');$('feriaEditorHistoriaCampos').innerHTML='<p>Cargando contenidos desde Supabase...</p>';
+ const intro=$('feriaEditorHistoria').querySelector('p');if(intro)intro.textContent='Edita y publica los contenidos históricos del club. Los cambios se guardan en Supabase y se muestran en la versión pública.';
+ const aviso=$('feriaEditorHistoria').querySelector('.feria-editor-aviso');if(aviso)aviso.textContent='☁️ Edición y publicación conectadas a Supabase';
+ const botones=$('feriaEditorHistoria').querySelectorAll(':scope > button');botones.forEach(b=>{if(b.textContent.includes('Guardar borrador')||b.textContent.includes('Vista previa pública'))b.style.display='none';});
+ try{await autorizar();await cargar();pintarEditor();estado('Selecciona una sección, edita y presiona Publicar.');}catch(e){$('feriaEditorHistoriaCampos').innerHTML='<p>No se pudo abrir el editor. Comprueba que ingresaste con la cuenta administradora.</p>';estado('⚠️ '+e.message,true);}
+};
+// Cargar contenidos en todos los dispositivos; mantener textos originales si falla la conexión.
+function iniciar(){cargar().then(()=>{const visible=$('feriaEspecial');if(visible&&!visible.classList.contains('oculto')){ /* La próxima navegación utilizará los datos nuevos. */ }}).catch(e=>console.warn('Nuestra historia: no se pudieron cargar datos de Supabase',e));}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();
+})();
+</script>
+<style id="feria-historia-supabase-estilos">
+.feria-editor-historia select{width:100%;padding:13px;background:#f7faff;color:#071b4a;border-radius:11px;border:1px solid #5675a2;font-size:14px}
+.feria-editor-historia .feria-historia-edicion-grupo{margin-top:18px;padding:15px;border:1px solid #355784;border-radius:16px;background:#0e2853}
+.feria-editor-historia .feria-historia-edicion-grupo h3,.feria-editor-historia #feriaHistoriaPersonasLista h3{color:white}
+.feria-editor-historia input[type=file]{color:#071b4a;background:#e9f1fc}
+</style>
+
+<style id="feria-escuela-integracion-2026">
+#feriaEscuelaInterna .esc-card{padding:17px;margin:12px 0;border:1px solid #355784;border-radius:15px;background:#102a57;color:#fff}
+#feriaEscuelaInterna .esc-card h3{color:white;margin:0 0 9px}
+#feriaEscuelaInterna .esc-card p{color:#d5e3f5;line-height:1.5;white-space:pre-wrap}
+#feriaEscuelaInterna .esc-card input,#feriaEscuelaInterna .esc-card textarea,#feriaEscuelaInterna .esc-card select{width:100%;background:white;color:#091d41;border:1px solid #aac0dc;border-radius:10px;padding:12px;margin:7px 0;font-size:14px}
+#feriaEscuelaInterna .esc-card textarea{min-height:110px}
+#feriaEscuelaInterna .esc-btn{padding:12px 14px;border:0;border-radius:11px;background:#c82032;color:white;font-weight:800;margin:8px 7px 8px 0;cursor:pointer}
+#feriaEscuelaInterna .esc-btn.sec{background:#254a80}
+#feriaEscuelaInterna .esc-muted{color:#bbd0ec;font-size:12px}
+#feriaEscuelaInterna .esc-card a{color:#fff;text-decoration:underline}
+
+</style>
+<script id="feria-escuela-integracion-2026-js">
+(function(){
+'use strict';
+const $=id=>document.getElementById(id), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MOD={beneficios:['🎁 Beneficios','beneficios'],nutricion:['🥗 Nutrición','nutricion'],academia:['📚 Apoyo académico','apoyo_escolar'],finanzas:['💰 Finanzas','finanzas'],documentos:['📁 Documentos','documentos']};
+let rol=null,actual='beneficios',items=[],admin=false,editId=null,finTipo='ingresos',finDatos=[];
+const box=html=>{const el=$('feriaEscuelaInternaContenido');if(el)el.innerHTML=html;};
+const notice=(m,bad=false)=>{const e=$('escEstado');if(e){e.textContent=m;e.style.color=bad?'#ffacb5':'#a6f2c4';}};
+async function rpc(name,args){const r=await supabaseClient.rpc(name,args);if(r.error)throw r.error;return r.data;}
+async function getRol(){const {data:{user}}=await supabaseClient.auth.getUser();if(!user)return null;const {data,error}=await supabaseClient.from('escuela_usuarios').select('rol,activo').eq('usuario_id',user.id).maybeSingle();if(error)throw error;return data?.activo===true?data.rol:null;}
+async function isAdmin(){try{return await rpc('es_administrador')===true;}catch(e){console.warn(e);return false;}}
+window.feriaEscuelaRol=getRol;
+window.feriaIngresarEscuela=async()=>{window.feriaEscuelaDesdeAdmin=false;try{const {data:{session}}=await supabaseClient.auth.getSession();if(!session){window.feriaLoginDesdeEscuela=true;mostrar('login');return;}if(!await getRol()){alert('Esta cuenta no tiene acceso escolar.');return;}await feriaModuloEscuela('beneficios');}catch(e){alert(e.message);}};
+function showPanel(){ocultarTodo();$('pantallaPublica').classList.remove('oculto');if(typeof controlarPortadaPublica==='function')controlarPortadaPublica(false);$('feriaEscuelaInterna').classList.remove('oculto');}
+window.feriaModuloEscuela=async(tipo)=>{try{rol=await getRol();if(!rol)throw Error('Cuenta sin autorización escolar');if(!MOD[tipo])tipo='beneficios';if(['finanzas','documentos'].includes(tipo)&&rol!=='directiva')throw Error('Solo la directiva puede ingresar');admin=false;actual=tipo;showPanel();const nav=$('feriaEscuelaInterna').querySelectorAll('.feria-escuela-nav button');nav.forEach(b=>{b.classList.toggle('activo',b.dataset.escuela===tipo);b.classList.remove('esc-inaccesible');if(['finanzas','documentos'].includes(b.dataset.escuela)){b.innerHTML=(b.dataset.escuela==='finanzas'?'💰':'📁')+'🔒<small>'+(b.dataset.escuela==='finanzas'?'Finanzas':'Documentos')+'</small>';}});if(['finanzas','documentos'].includes(tipo)){await privado(tipo);}else{await contenidos(false);}if(rol==='directiva')feriaBotonInvitacionesEscuela();}catch(e){alert(e.message);}};
+window.feriaAdminEscuela=async()=>{if(!await isAdmin()){alert('Solo la administración principal puede editar estos contenidos.');return;}window.feriaEscuelaDesdeAdmin=true;admin=true;actual='beneficios';showPanel();await contenidos(true);};
+async function contenidos(edicion){const [titulo,modulo]=MOD[actual];box('<div class="esc-card"><h2>'+titulo+(edicion?' · Administración':'')+'</h2>'+(edicion?'<div style="display:flex;flex-wrap:wrap;gap:7px">'+['beneficios','nutricion','academia'].map(t=>'<button class="esc-btn sec" onclick="feriaAdminEscuelaSeccion(\''+t+'\')">'+MOD[t][0]+'</button>').join('')+'</div><input id="escTitulo" placeholder="Título"><textarea id="escTexto" placeholder="Descripción"></textarea><label><input type="checkbox" id="escPublicado" checked style="width:auto"> Publicado</label><input id="escArchivo" type="file"><button class="esc-btn" onclick="feriaEscuelaGuardar()">💾 Guardar</button>':'')+'</div><div id="escEstado"></div><div id="escListado"></div>');const q=supabaseClient.from('escuela_contenidos').select('*').eq('modulo',modulo).order('id',{ascending:false});if(!edicion)q.eq('publicado',true);const {data,error}=await q;if(error){notice(error.message,true);return;}items=data||[];$('escListado').innerHTML=items.length?items.map((r,i)=>'<article class="esc-card"><h3>'+esc(r.titulo)+'</h3><p>'+esc(r.descripcion)+'</p>'+(r.archivo_url?'<button class="esc-btn sec" onclick="feriaEscuelaAbrirArchivo('+i+')">📎 Archivo</button>':'')+(edicion?'<button class="esc-btn sec" onclick="feriaEscuelaEditar('+i+')">Editar</button><button class="esc-btn sec" onclick="feriaEscuelaEliminar('+i+')">Eliminar</button>':'')+'</article>').join(''):'<div class="esc-card">Aún no hay publicaciones.</div>';}
+window.feriaAdminEscuelaSeccion=async t=>{if(!await isAdmin())return;admin=true;actual=t;await contenidos(true);};
+window.feriaEscuelaEditar=i=>{if(!admin)return;const r=items[i];if(!r)return;editId=r.id;$('escTitulo').value=r.titulo;$('escTexto').value=r.descripcion||'';$('escPublicado').checked=!!r.publicado;notice('Editando publicación');};
+window.feriaEscuelaGuardar=async()=>{if(!admin||!await isAdmin())return;try{const titulo=$('escTitulo').value.trim();if(!titulo)throw Error('Ingresa título');const fila={modulo:MOD[actual][1],titulo,descripcion:$('escTexto').value.trim(),publicado:$('escPublicado').checked};const file=$('escArchivo').files[0];if(file){if(file.size>20*1024*1024)throw Error('Máximo 20 MB');const ruta='contenidos/'+crypto.randomUUID()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const r=await supabaseClient.storage.from('escuela-publico').upload(ruta,file);if(r.error)throw r.error;fila.archivo_url='escuela-publico/'+ruta;}const r=editId?await supabaseClient.from('escuela_contenidos').update(fila).eq('id',editId):await supabaseClient.from('escuela_contenidos').insert(fila);if(r.error)throw r.error;editId=null;await contenidos(true);notice('Guardado correctamente');}catch(e){notice(e.message,true);}};
+window.feriaEscuelaEliminar=async i=>{if(!admin||!await isAdmin()||!confirm('¿Eliminar publicación?'))return;const r=await supabaseClient.from('escuela_contenidos').delete().eq('id',items[i].id);if(r.error){notice(r.error.message,true);return;}await contenidos(true);};
+window.feriaEscuelaAbrirArchivo=async i=>{const a=items[i]?.archivo_url;if(!a)return;let ruta=a.replace(/^escuela-publico\//,'');const r=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,60);if(r.error)notice(r.error.message,true);else window.open(r.data.signedUrl,'_blank','noopener');};
+async function privado(tipo){box('<div class="esc-card"><h2>🔒 '+MOD[tipo][0]+'</h2><p>Acceso personal protegido por PIN de seis dígitos.</p><div id="escEstado"></div><div id="escPrivado"></div></div>');const desbloq=await rpc('escuela_desbloqueada');if(desbloq){await abrirPrivado(tipo);return;}const zona=$('escPrivado');zona.innerHTML='<input id="escPin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" autocomplete="off" placeholder="PIN de 6 dígitos"><button class="esc-btn" onclick="feriaValidarPin()">🔓 Desbloquear</button><button class="esc-btn sec" onclick="feriaConfigurarPin()">Crear mi PIN (primera vez)</button><p class="esc-muted">Si ya tienes un PIN, utiliza Desbloquear.</p>';}
+window.feriaConfigurarPin=async()=>{const pin=$('escPin')?.value||'';if(!/^\d{6}$/.test(pin)){notice('Ingresa exactamente seis dígitos',true);return;}try{const ok=await rpc('escuela_configurar_pin',{p_pin:pin});if(!ok)throw Error('No se pudo crear. Quizás ya tienes un PIN configurado.');notice('PIN creado. Ahora presiona Desbloquear.');}catch(e){notice(e.message,true);}};
+window.feriaValidarPin=async()=>{const pin=$('escPin')?.value||'';if(!/^\d{6}$/.test(pin)){notice('Se requieren seis dígitos',true);return;}try{const ok=await rpc('escuela_validar_pin',{p_pin:pin});if(!ok)throw Error('PIN incorrecto, no configurado o acceso temporalmente bloqueado.');await abrirPrivado(actual);}catch(e){notice(e.message,true);}};
+async function abrirPrivado(t){if(!await rpc('escuela_desbloqueada')){await privado(t);return;}if(t==='documentos')await documentos();else await finanzas('resumen');}
+function pesos(n){return new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(n||0);}
+async function cargarFin(){const [i,g]=await Promise.all(['escuela_ingresos','escuela_gastos'].map(t=>supabaseClient.from(t).select('*').order('fecha',{ascending:false})));if(i.error)throw i.error;if(g.error)throw g.error;return [...(i.data||[]).map(x=>({...x,clase:'ingresos'})),...(g.data||[]).map(x=>({...x,clase:'gastos'}))].sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));}
+window.feriaFinanzasEscuela=async t=>{try{await finanzas(t);}catch(e){notice(e.message,true);}};
+async function finanzas(v){actual='finanzas';finDatos=await cargarFin();const ing=finDatos.filter(x=>x.clase==='ingresos').reduce((s,x)=>s+Number(x.monto||0),0),gas=finDatos.filter(x=>x.clase==='gastos').reduce((s,x)=>s+Number(x.monto||0),0);const nav='<div class="esc-card"><h2>💰 Gestión financiera escolar</h2><div class="esc-fin-menu">'+[['resumen','📊 Resumen financiero'],['movimientos','📋 Movimientos financieros'],['ingreso','➕ Registrar ingreso'],['gasto','➖ Registrar gasto']].map(([k,t])=>'<button class="esc-btn '+(v===k?'':'sec')+'" onclick="feriaFinanzasEscuela(\''+k+'\')">'+t+'</button>').join('')+'</div></div><div id="escEstado"></div>';
+if(v==='resumen'){const detalle=(tipo)=>{const mapa={};finDatos.filter(x=>x.clase===tipo).forEach(x=>mapa[x.tipo||'Otros']=(mapa[x.tipo||'Otros']||0)+Number(x.monto||0));return Object.entries(mapa).map(([k,n])=>'<p>'+esc(k)+': <strong>'+pesos(n)+'</strong></p>').join('')||'<p>Sin movimientos</p>';};box(nav+'<div class="esc-card"><h3>Resumen financiero</h3><div class="esc-fin-resumen"><div>Ingresos<strong>'+pesos(ing)+'</strong></div><div>Gastos<strong>'+pesos(gas)+'</strong></div><div>Saldo<strong>'+pesos(ing-gas)+'</strong></div></div><h3>Detalle de ingresos</h3>'+detalle('ingresos')+'<h3>Detalle de gastos</h3>'+detalle('gastos')+'</div>');return;}
+if(v==='movimientos'){box(nav+'<div class="esc-card"><h3>Movimientos financieros</h3><select id="escFiltroTipo" onchange="feriaFiltrarMovimientos()"><option value="todos">Todos</option><option value="ingresos">Ingresos</option><option value="gastos">Gastos</option></select><input id="escFiltroMes" type="month" onchange="feriaFiltrarMovimientos()"><button class="esc-btn sec" onclick="document.getElementById(\'escFiltroMes\').value=\'\';feriaFiltrarMovimientos()">Todos los meses</button><div id="escMovLista"></div></div>');window.feriaFiltrarMovimientos();return;}
+const isIn=v==='ingreso',fila=window.escFinEdit||null;window.escFinEdit=null;const x=fila||{};const field=(id,label,value='',type='text')=>'<label>'+label+'<input id="'+id+'" type="'+type+'" value="'+esc(value)+'"></label>';box(nav+'<div class="esc-card"><h3>'+(fila?'Editar':'Registrar')+' '+(isIn?'ingreso':'gasto')+'</h3>'+field('efFecha','Fecha',x.fecha||new Date().toISOString().slice(0,10),'date')+field('efMonto','Monto $',x.monto||'','number')+field('efTipo','Tipo',x.tipo||'')+field('efDescripcion','Descripción',x.descripcion||'')+field('efDestino',isIn?'Origen':'Destino',isIn?x.origen:x.destino)+field('efMetodo','Método de pago',x.metodo_pago||'')+field('efDocumento','Número de documento',x.numero_documento||'')+field('efResponsable','Responsable',x.responsable||'')+field('efObservaciones','Observaciones',x.observaciones||'')+'<label>Comprobante (archivo)<input id="efComprobante" type="file" accept="image/*,.pdf"></label><button class="esc-btn" onclick="feriaGuardarFinEscuela(\''+(isIn?'ingresos':'gastos')+'\','+(fila?Number(fila.id):'null')+')">💾 Guardar</button></div>');}
+window.feriaFiltrarMovimientos=()=>{const tipo=$('escFiltroTipo')?.value||'todos',mes=$('escFiltroMes')?.value||'';const rows=finDatos.filter(x=>(tipo==='todos'||x.clase===tipo)&&(!mes||String(x.fecha).startsWith(mes)));$('escMovLista').innerHTML=rows.length?rows.map(x=>'<div class="esc-fin-mov"><strong>'+(x.clase==='ingresos'?'🟢 Ingreso':'🔴 Gasto')+' · '+pesos(x.monto)+'</strong><p>'+esc(x.fecha)+' · '+esc(x.tipo)+' · '+esc(x.descripcion||'')+'</p><button class="esc-btn sec" onclick="feriaEditarFinEscuela(\''+x.clase+'\','+Number(x.id)+')">✏️ Editar</button><button class="esc-btn sec" onclick="feriaEliminarFinEscuela(\''+x.clase+'\','+Number(x.id)+')">🗑 Eliminar</button></div>').join(''):'<p>No hay movimientos para este filtro.</p>';};
+window.feriaEditarFinEscuela=async(t,id)=>{const x=finDatos.find(x=>x.clase===t&&x.id===id);if(!x)return;window.escFinEdit=x;await finanzas(t==='ingresos'?'ingreso':'gasto');};
+window.feriaGuardarFinEscuela=async(t,id)=>{try{const val=k=>$(k).value.trim(),monto=Number(val('efMonto'));if(!val('efFecha')||!Number.isFinite(monto)||monto<=0)throw Error('Fecha y monto positivo obligatorios');const fila={fecha:val('efFecha'),monto,tipo:val('efTipo'),descripcion:val('efDescripcion'),metodo_pago:val('efMetodo'),numero_documento:val('efDocumento'),responsable:val('efResponsable'),observaciones:val('efObservaciones')};fila[t==='ingresos'?'origen':'destino']=val('efDestino');const f=$('efComprobante').files[0];if(f){if(f.size>20*1024*1024)throw Error('Máximo 20 MB');const ruta='finanzas/'+crypto.randomUUID()+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');const up=await supabaseClient.storage.from('escuela-privado').upload(ruta,f);if(up.error)throw up.error;fila.comprobante_url=ruta;}const r=id?await supabaseClient.from('escuela_'+t).update(fila).eq('id',id):await supabaseClient.from('escuela_'+t).insert(fila);if(r.error)throw r.error;await finanzas('movimientos');notice('Movimiento guardado correctamente');}catch(e){notice(e.message,true);}};
+window.feriaEliminarFinEscuela=async(t,id)=>{if(!confirm('¿Eliminar movimiento?'))return;const r=await supabaseClient.from('escuela_'+t).delete().eq('id',id);if(r.error){notice(r.error.message,true);return;}await finanzas('movimientos');};
+async function documentos(){const r=await supabaseClient.from('escuela_documentos').select('*').order('numero');if(r.error)throw r.error;box('<div class="esc-card"><h2>📁 Repositorio documental</h2><p>Diez espacios privados de la Escuela de Fútbol.</p></div><div id="escEstado"></div>'+r.data.map(d=>'<div class="esc-card"><h3>📄 '+esc(d.titulo||'Documento '+d.numero)+'</h3><p>'+esc(d.nombre_archivo||'Sin archivo')+'</p><input id="escDoc'+d.numero+'" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp"><button class="esc-btn" onclick="feriaSubirDocumento('+d.numero+')">⬆️ '+(d.archivo_ruta?'Reemplazar':'Subir')+'</button>'+(d.archivo_ruta?'<button class="esc-btn sec" onclick="feriaAbrirDocumento('+d.numero+')">👁️ Abrir</button>':'')+'</div>').join(''));window.escDocumentos=r.data;}
+window.feriaSubirDocumento=async n=>{try{const f=$('escDoc'+n).files[0];if(!f)throw Error('Selecciona un archivo');if(f.size>20*1024*1024)throw Error('Máximo 20 MB');const ruta='documentos/'+crypto.randomUUID()+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');const up=await supabaseClient.storage.from('escuela-privado').upload(ruta,f);if(up.error)throw up.error;const {data:{user}}=await supabaseClient.auth.getUser();const r=await supabaseClient.from('escuela_documentos').update({archivo_ruta:ruta,nombre_archivo:f.name,actualizado_en:new Date().toISOString(),actualizado_por:user.id}).eq('numero',n);if(r.error)throw r.error;await documentos();notice('Archivo guardado');}catch(e){notice(e.message,true);}};
+window.feriaAbrirDocumento=async n=>{const d=window.escDocumentos?.find(x=>x.numero===n);if(!d?.archivo_ruta)return;const r=await supabaseClient.storage.from('escuela-privado').createSignedUrl(d.archivo_ruta,60);if(r.error)notice(r.error.message,true);else window.open(r.data.signedUrl,'_blank','noopener');};
+})();
+</script>
+
+<style id="feria-escuela-finanzas-estilos">
+#feriaEscuelaInterna .esc-fin-menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#feriaEscuelaInterna .esc-fin-menu button{margin:0;font-size:12px;min-height:54px}
+#feriaEscuelaInterna .esc-fin-resumen{display:grid;grid-template-columns:1fr;gap:10px}
+#feriaEscuelaInterna .esc-fin-resumen>div{padding:16px;background:#071b42;border:1px solid #41669b;border-radius:12px;color:white}
+#feriaEscuelaInterna .esc-fin-resumen strong{display:block;font-size:24px;margin-top:5px;color:white}
+#feriaEscuelaInterna .esc-fin-mov{border-bottom:1px solid #41669b;padding:12px 0}
+#feriaEscuelaInterna .esc-card label{display:block;margin:10px 0;color:#eaf1ff}
+#feriaEscuelaInterna .esc-card h2{color:white}
+</style>
+<script id="feria-invitaciones-escuela-2026">
+(function(){
+const get=id=>document.getElementById(id);
+window.feriaBotonInvitacionesEscuela=function(){
+ const panel=get('feriaEscuelaInternaContenido');if(!panel||get('escuelaInvitarAcceso'))return;
+ const b=document.createElement('button');b.id='escuelaInvitarAcceso';b.type='button';b.className='esc-btn sec';
+ b.textContent='✉️ Invitar apoderado o directiva';b.style.cssText='display:block;width:100%;margin:14px 0 18px';
+ b.onclick=window.feriaAbrirInvitacionesEscuela;panel.prepend(b);
+};
+window.feriaAbrirInvitacionesEscuela=async function(){
+ const {data:{user},error}=await supabaseClient.auth.getUser();if(error||!user){alert('Inicia sesión primero');return;}
+ const {data:directiva,error:e}=await supabaseClient.rpc('es_directiva_escuela');
+ if(e||directiva!==true){alert('Solo la directiva escolar puede enviar invitaciones');return;}
+ const area=get('feriaEscuelaInternaContenido');
+ area.innerHTML=`<div class="esc-card"><h2>✉️ Invitaciones Escuela de Fútbol</h2><p>Invita a personas sin necesidad de que sean socias del club.</p><label>Correo electrónico</label><input id="escInvEmail" type="email" placeholder="correo@ejemplo.com" autocomplete="email"><label>Tipo de acceso</label><select id="escInvRol"><option value="apoderado">Apoderado (solo beneficios, nutrición y apoyo escolar)</option><option value="directiva">Directiva escolar (documentos y finanzas con PIN)</option></select><button type="button" class="esc-btn" onclick="feriaEnviarInvitacionEscuela()">✉️ Enviar invitación</button><button type="button" class="esc-btn sec" onclick="feriaModuloEscuela('beneficios')">← Volver a Escuela</button><p id="escInvMensaje" role="status"></p></div>`;
+};
+window.feriaEnviarInvitacionEscuela=async function(){
+ const email=get('escInvEmail')?.value.trim().toLowerCase(),rol=get('escInvRol')?.value;
+ const msg=get('escInvMensaje');if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='⚠️ Ingresa un correo válido.';return;}
+ if(!confirm('¿Enviar invitación de '+rol+' a '+email+'?'))return;
+ msg.textContent='⏳ Enviando invitación...';
+ try{
+  const {data,error}=await supabaseClient.functions.invoke('invitar-escuela',{body:{email,rol}});
+  if(error)throw error;
+  if(data?.error)throw Error(typeof data.error==='string'?data.error:JSON.stringify(data.error));
+  msg.textContent='✅ Solicitud de invitación procesada. Verifica que el correo haya llegado y que el usuario figure en Supabase.';
+ }catch(e){msg.textContent='❌ No se pudo enviar: '+(e.message||e)+'. Verifica la configuración de la función invitar-escuela.';}
+};
+})();
 </script>
 </body>  </html>
