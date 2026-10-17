@@ -8489,10 +8489,18 @@ class="oculto gestion-admin">
 <section id="feriaEstadisticasAdmin" class="seccion oculto feria-admin-pantalla">
  <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
  <h2>📊 Estadísticas internas</h2>
- <p class="feria-admin-descripcion">Panel privado del CD Feria Osorno.</p>
- <div class="feria-admin-panel-tarjeta"><strong>⚽ Rendimiento por serie</strong><p>Próximamente: partidos, triunfos, empates y derrotas.</p></div>
- <div class="feria-admin-panel-tarjeta"><strong>🏆 Historial deportivo</strong><p>Próximamente: campeonatos, temporadas y resultados.</p></div>
- <div class="feria-admin-panel-tarjeta"><strong>👥 Información del club</strong><p>Próximamente: indicadores de jugadores y socios.</p></div>
+ <p class="feria-admin-descripcion">Asistencia de convocados y goleadores por categoría y campeonato.</p>
+ <div class="feria-admin-panel-tarjeta feria-stats-filtros">
+  <label>Categoría<select id="feriaStatsCategoria" onchange="feriaStatsActualizar()"><option value="">Cargando categorías...</option></select></label>
+  <label>Campeonato<select id="feriaStatsCampeonato" onchange="feriaStatsActualizar()"><option value="">Todos los campeonatos</option></select></label>
+  <label>Partidos mínimos para playoffs<input id="feriaStatsMinimo" type="number" min="1" max="100" value="5" oninput="feriaStatsDibujar()"></label>
+  <button type="button" onclick="feriaStatsCargar()">🔄 Actualizar datos</button>
+  <button type="button" class="tienda-rojo" onclick="feriaStatsPDF()">📄 Descargar informe PDF</button>
+  <p id="feriaStatsEstado" role="status"></p>
+ </div>
+ <div class="feria-stats-resumen" id="feriaStatsResumen"></div>
+ <div class="feria-admin-panel-tarjeta"><h3>📋 Asistencia por jornada</h3><p class="feria-admin-descripcion">Titular y suplente suman una asistencia por partido. Un suplente no necesita haber ingresado.</p><div class="feria-stats-scroll" id="feriaStatsAsistencia"></div></div>
+ <div class="feria-admin-panel-tarjeta"><h3>⚽ Tabla de goleadores</h3><div class="feria-stats-scroll" id="feriaStatsGoleadores"></div></div>
 </section>
 <section id="tiendaAdmin" class="seccion oculto feria-admin-pantalla">
  <button type="button" class="feria-volver-icono" onclick="feriaCerrarPantallaAdmin()" aria-label="Regresar">←</button>
@@ -23259,6 +23267,7 @@ async function feriaAbrirPantallaAdmin(id){
  feriaPantallaAdminAbierta=id;
  window.scrollTo(0,0);
  if(id==='tiendaAdmin')await tiendaCargarAdmin();
+ if(id==='feriaEstadisticasAdmin')await feriaStatsIniciar();
 }
 function feriaAbrirEstadisticasAdmin(){return feriaAbrirPantallaAdmin('feriaEstadisticasAdmin')}
 function tiendaAbrirAdmin(){return feriaAbrirPantallaAdmin('tiendaAdmin')}
@@ -24017,5 +24026,95 @@ window.feriaCargarActualidad=async()=>{const cont=$('feriaNoticiasDinamicas');if
 window.addEventListener('DOMContentLoaded',()=>window.feriaCargarActualidad());
 window.addEventListener('pageshow',()=>window.feriaCargarActualidad());
 })();
+</script>
+<style id="feria-estadisticas-estilo">
+#feriaEstadisticasAdmin{color:white}#feriaEstadisticasAdmin .feria-stats-filtros{display:grid;gap:12px}
+#feriaEstadisticasAdmin label{display:grid;gap:6px;font-weight:700;font-size:13px}
+#feriaEstadisticasAdmin select,#feriaEstadisticasAdmin input{width:100%;padding:12px;background:#e8f0ff;color:#071733;border:0;border-radius:10px}
+#feriaEstadisticasAdmin button{padding:12px;border-radius:10px;background:#254b83;color:#fff;border:0;font-weight:700}
+#feriaEstadisticasAdmin button.tienda-rojo{background:#d51e37}
+.feria-stats-resumen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.feria-stats-kpi{background:#122f60;border:1px solid #2a548d;border-radius:12px;padding:14px}
+.feria-stats-kpi strong{display:block;font-size:24px;color:#fff}.feria-stats-kpi span{font-size:12px;color:#bdd3f4}
+.feria-stats-scroll{overflow-x:auto;max-width:100%}.feria-stats-tabla{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;color:#fff}
+.feria-stats-tabla th,.feria-stats-tabla td{padding:10px 9px;border-bottom:1px solid #35527e;text-align:center}
+.feria-stats-tabla th:first-child,.feria-stats-tabla td:first-child{text-align:left;position:sticky;left:0;background:#112b55;z-index:1}
+.feria-stats-tabla th{background:#1e437a}.feria-stats-si{color:#8af2b4;font-weight:800}.feria-stats-no{color:#9cb1cf}.feria-stats-cumple{color:#8af2b4;font-weight:800}
+</style>
+<script id="feria-estadisticas-funciones">
+let feriaStatsBase={partidos:[],convocados:[],goles:[],jugadores:[],categorias:[]};
+let feriaStatsDatos=null;
+function feriaStatsEsc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function feriaStatsTodas(tabla,columnas){
+ let filas=[];
+ for(let desde=0;desde<20000;desde+=1000){
+  const {data,error}=await supabaseClient.from(tabla).select(columnas).range(desde,desde+999);
+  if(error)throw new Error(tabla+': '+error.message);
+  filas.push(...(data||[]));if(!data||data.length<1000)break;
+ }
+ return filas;
+}
+async function feriaStatsIniciar(){await feriaStatsCargar();}
+async function feriaStatsCargar(){
+ const estado=document.getElementById('feriaStatsEstado');estado.textContent='⏳ Cargando estadísticas desde Supabase...';
+ try{
+  const [partidos,convocados,goles,jugadores,categorias]=await Promise.all([
+   feriaStatsTodas('Partidos','id,fecha,jornada,campeonato,rival,category_id,estado'),
+   feriaStatsTodas('PartidoJugadores','partido_id,jugador_id,tipo'),
+   feriaStatsTodas('GolesPartido','partido_id,jugador_id,id'),
+   feriaStatsTodas('Jugadores','id,name,category_id'),
+   feriaStatsTodas('categories','id,name')
+  ]);
+  feriaStatsBase={partidos,convocados,goles,jugadores,categorias};
+  const cat=document.getElementById('feriaStatsCategoria'),prev=cat.value;
+  cat.innerHTML=categorias.map(c=>'<option value="'+feriaStatsEsc(c.id)+'">'+feriaStatsEsc(c.name)+'</option>').join('');
+  if(categorias.some(c=>String(c.id)===prev))cat.value=prev;
+  else{const senior=categorias.find(c=>/senior/i.test(c.name)&&!/super/i.test(c.name));if(senior)cat.value=senior.id;}
+  estado.textContent='✅ Datos cargados. Las asistencias se cuentan por convocatoria, sin duplicar jugadores.';
+  feriaStatsActualizar();
+ }catch(e){console.error(e);estado.textContent='❌ '+e.message;}
+}
+function feriaStatsActualizar(){
+ const cat=document.getElementById('feriaStatsCategoria').value,sel=document.getElementById('feriaStatsCampeonato'),old=sel.value;
+ const nombres=[...new Set(feriaStatsBase.partidos.filter(p=>String(p.category_id)===cat).map(p=>p.campeonato||'Sin campeonato'))].sort();
+ sel.innerHTML='<option value="">Todos los campeonatos</option>'+nombres.map(n=>'<option value="'+feriaStatsEsc(n)+'">'+feriaStatsEsc(n)+'</option>').join('');
+ if(nombres.includes(old))sel.value=old;
+ feriaStatsDibujar();
+}
+function feriaStatsCalcular(){
+ const cat=document.getElementById('feriaStatsCategoria').value,cam=document.getElementById('feriaStatsCampeonato').value;
+ const partidos=feriaStatsBase.partidos.filter(p=>String(p.category_id)===cat&&(!cam||(p.campeonato||'Sin campeonato')===cam)).sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))||Number(a.jornada||0)-Number(b.jornada||0));
+ const ids=new Set(partidos.map(p=>String(p.id)));
+ const convocados=feriaStatsBase.convocados.filter(c=>ids.has(String(c.partido_id)));
+ const goles=feriaStatsBase.goles.filter(g=>ids.has(String(g.partido_id)));
+ const asistencias=new Map(),golesJugador=new Map();
+ for(const c of convocados){const k=String(c.jugador_id);if(!asistencias.has(k))asistencias.set(k,new Set());asistencias.get(k).add(String(c.partido_id));}
+ for(const g of goles){const k=String(g.jugador_id);golesJugador.set(k,(golesJugador.get(k)||0)+1);}
+ const jugadores=new Map(feriaStatsBase.jugadores.map(j=>[String(j.id),j]));
+ const claves=new Set([...asistencias.keys(),...golesJugador.keys(),...feriaStatsBase.jugadores.filter(j=>String(j.category_id)===cat).map(j=>String(j.id))]);
+ const filas=[...claves].map(id=>({id,nombre:jugadores.get(id)?.name||'Jugador #'+id,asistencias:asistencias.get(id)||new Set(),goles:golesJugador.get(id)||0})).sort((a,b)=>b.asistencias.size-a.asistencias.size||a.nombre.localeCompare(b.nombre,'es'));
+ return {partidos,filas,cam,cat};
+}
+function feriaStatsDibujar(){
+ const d=feriaStatsCalcular();feriaStatsDatos=d;
+ const minimo=Math.max(1,Number(document.getElementById('feriaStatsMinimo').value)||1),jugadoresConvocados=d.filas.filter(f=>f.asistencias.size).length;
+ document.getElementById('feriaStatsResumen').innerHTML=[['Partidos registrados',d.partidos.length],['Jugadores convocados',jugadoresConvocados],['Cumplen mínimo',d.filas.filter(f=>f.asistencias.size>=minimo).length],['Goles registrados',d.filas.reduce((a,f)=>a+f.goles,0)]].map(([t,v])=>'<div class="feria-stats-kpi"><strong>'+v+'</strong><span>'+t+'</span></div>').join('');
+ const encabezados=d.partidos.map(p=>'<th title="'+feriaStatsEsc((p.fecha||'')+' · '+(p.rival||''))+'">J'+feriaStatsEsc(p.jornada||'—')+'</th>').join('');
+ const cuerpo=d.filas.map(f=>'<tr><td>'+feriaStatsEsc(f.nombre)+'</td>'+d.partidos.map(p=>'<td class="'+(f.asistencias.has(String(p.id))?'feria-stats-si':'feria-stats-no')+'">'+(f.asistencias.has(String(p.id))?'✓':'—')+'</td>').join('')+'<td><strong>'+f.asistencias.size+'</strong></td><td>'+ (d.partidos.length?Math.round(f.asistencias.size*100/d.partidos.length):0)+'%</td><td class="'+(f.asistencias.size>=minimo?'feria-stats-cumple':'')+'">'+(f.asistencias.size>=minimo?'Cumple':'Faltan '+(minimo-f.asistencias.size))+'</td></tr>').join('');
+ document.getElementById('feriaStatsAsistencia').innerHTML=d.partidos.length?'<table class="feria-stats-tabla"><thead><tr><th>Jugador</th>'+encabezados+'<th>Total</th><th>%</th><th>Playoffs*</th></tr></thead><tbody>'+cuerpo+'</tbody></table><p style="font-size:11px;color:#b6c9e8">*Referencia según el mínimo indicado. Confirma el reglamento oficial y las jornadas válidas.</p>':'<p>No hay partidos registrados para este filtro.</p>';
+ const ranking=[...d.filas].filter(f=>f.goles>0).sort((a,b)=>b.goles-a.goles||a.nombre.localeCompare(b.nombre,'es'));
+ document.getElementById('feriaStatsGoleadores').innerHTML=ranking.length?'<table class="feria-stats-tabla"><thead><tr><th>Jugador</th><th>Goles</th><th>Asistencias</th></tr></thead><tbody>'+ranking.map(f=>'<tr><td>'+feriaStatsEsc(f.nombre)+'</td><td><strong>'+f.goles+'</strong></td><td>'+f.asistencias.size+'</td></tr>').join('')+'</tbody></table>':'<p>No hay goles registrados para estos partidos.</p>';
+}
+function feriaStatsPDF(){
+ if(!feriaStatsDatos){alert('Primero carga las estadísticas');return;}
+ const d=feriaStatsDatos,cat=feriaStatsBase.categorias.find(c=>String(c.id)===d.cat)?.name||'Categoría',minimo=Math.max(1,Number(document.getElementById('feriaStatsMinimo').value)||1);
+ const cab='<tr><th>Jugador</th>'+d.partidos.map(p=>'<th>J'+feriaStatsEsc(p.jornada||'—')+'</th>').join('')+'<th>Total</th><th>%</th><th>Estado*</th></tr>';
+ const filas=d.filas.map(f=>'<tr><td>'+feriaStatsEsc(f.nombre)+'</td>'+d.partidos.map(p=>'<td>'+(f.asistencias.has(String(p.id))?'Sí':'—')+'</td>').join('')+'<td>'+f.asistencias.size+'</td><td>'+(d.partidos.length?Math.round(f.asistencias.size*100/d.partidos.length):0)+'%</td><td>'+(f.asistencias.size>=minimo?'Cumple':'Faltan '+(minimo-f.asistencias.size))+'</td></tr>').join('');
+ const goleadores=[...d.filas].filter(f=>f.goles).sort((a,b)=>b.goles-a.goles).map(f=>'<tr><td>'+feriaStatsEsc(f.nombre)+'</td><td>'+f.goles+'</td></tr>').join('');
+ const w=window.open('','_blank');if(!w){alert('Permite ventanas emergentes para guardar el PDF');return;}
+ w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Estadísticas '+feriaStatsEsc(cat)+'<\/title><style>body{font:12px Arial;color:#14233d;padding:20px}h1{color:#0a2859}h2{color:#c61e36}table{border-collapse:collapse;width:100%;margin:12px 0 24px}th,td{border:1px solid #b9c7d9;padding:5px;text-align:center}td:first-child,th:first-child{text-align:left}th{background:#e7eef9}@page{size:landscape;margin:12mm}.ayuda{color:#52627a}<\/style><\/head><body><h1>CD FERIA OSORNO · ESTADÍSTICAS INTERNAS<\/h1><p><b>'+feriaStatsEsc(cat)+'<\/b> · '+feriaStatsEsc(d.cam||'Todos los campeonatos')+' · '+d.partidos.length+' partidos<\/p><h2>Asistencia por jornada<\/h2><table><thead>'+cab+'<\/thead><tbody>'+filas+'<\/tbody><\/table><p class="ayuda">*Titulares y suplentes convocados suman asistencia. Mínimo configurado: '+minimo+'. Verificar reglamento oficial.<\/p><h2>Tabla de goleadores<\/h2><table><thead><tr><th>Jugador<\/th><th>Goles<\/th><\/tr><\/thead><tbody>'+goleadores+'<\/tbody><\/table><\/body><\/html>');
+ w.document.close();
+ w.onload=()=>w.print();
+}
 </script>
 </body>  </html>
