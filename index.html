@@ -7388,6 +7388,17 @@ body:has(#feriaEscuelaInterna:not(.oculto)) #feriaEscuelaInterna .feria-escuela-
 #feriaEspecialContenido.feria-cabecera-especial>.feria-lead,#feriaEspecialContenido.feria-cabecera-especial>.feria-lead+h2{display:none!important;}
 #portalSociosPublico>.feria-cabecera-unificada{margin:0 auto;max-width:500px;}
 </style>
+<style>
+/* FERIA | Barra de 5 accesos en Editar jugador */
+.feria-nav-editar-fija{display:none!important;z-index:9998!important}
+body:has(#editarJugador:not(.oculto)) .feria-nav-editar-fija{display:flex!important}
+body:has(#editarJugador:not(.oculto)) #editarJugador{padding-bottom:125px!important}
+.feria-estadisticas-jugador{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.feria-estadistica-tarjeta{background:linear-gradient(145deg,#15396f,#091d41);border:1px solid #315486;border-radius:14px;padding:16px 9px;text-align:center}
+.feria-estadistica-tarjeta strong{display:block;color:#fff;font-size:28px;font-weight:900}
+.feria-estadistica-tarjeta span{display:block;color:#b9cdef;font-size:10px;font-weight:800;margin-top:5px}
+.feria-estadisticas-nota{font-size:10px;color:#9eb3d4;line-height:1.5;margin:8px 0 0}
+</style>
 </head>  
   
   <body>
@@ -11677,7 +11688,7 @@ class="seccion oculto formulario-jugador-moderno">
   <div class="feria-edicion-extra">
     <h3>📖 Trayectoria Feriana</h3><p>Escribe la historia que se verá en la ficha pública del jugador.</p>
     <textarea id="feriaTrayectoriaJugador" rows="4" maxlength="2500" placeholder="Ej.: Llegó al club en 2020 y ha defendido nuestros colores..."></textarea>
-    <h3>🏆 Palmarés</h3><p>Agrega títulos individuales o colectivos. La copa y su descripción aparecerán en la ficha pública.</p>
+    <h3>🏆 Palmarés</h3><p>Registra los campeonatos y podios del jugador. Elige oro, plata o bronce y escribe el torneo, categoría y año. Si no tiene títulos, esta sección no aparecerá en su ficha pública.</p>
     <div id="feriaPalmaresEditor"></div><button type="button" class="boton" onclick="feriaAgregarPalmares()">＋ Agregar copa</button>
     <h3>📸 Momentos</h3><p>Sube fotografías del jugador (máximo 5 MB por imagen).</p>
     <div id="feriaMomentosEditor"></div>
@@ -13156,6 +13167,12 @@ function verJugador(
       </section>
 
 
+
+      <!-- ESTADÍSTICAS INDIVIDUALES REALES -->
+      <section class="perfil-jugador-bloque" id="feriaEstadisticasBloque" style="display:none">
+        <div class="perfil-jugador-encabezado"><span></span><h2>Estadísticas</h2></div>
+        <div id="feriaEstadisticasJugador" class="feria-estadisticas-jugador"></div>
+      </section>
 
       <!-- =========================
            GALERÍA
@@ -21328,6 +21345,13 @@ async function guardarEdicionJugador(){
   }
 
 
+  // Verificar que Supabase haya conservado todas las copas, no solo la primera.
+  const copasEsperadas=feriaLeerPalmares();
+  const verificacionCopas=await supabaseClient.from('Jugadores').select('palmares_feriano').eq('id',id).maybeSingle();
+  if(!verificacionCopas.error && verificacionCopas.data && copasEsperadas.length !== (Array.isArray(verificacionCopas.data.palmares_feriano)?verificacionCopas.data.palmares_feriano.length:0)){
+    mensaje.innerText='⚠️ Supabase no conservó todas las copas. Revisa el campo palmares_feriano antes de continuar.';
+    mensaje.style.color='#c82032';return;
+  }
   // Comprobar que la trayectoria realmente quedó persistida en Supabase.
   const trayectoriaEsperada = document.getElementById('feriaTrayectoriaJugador').value.trim();
   if ((jugadorActualizado.trayectoria_feriana || '') !== trayectoriaEsperada) {
@@ -23169,18 +23193,123 @@ async function tiendaEliminarProducto(id){if(!confirm('¿Eliminar producto? Si t
 
 </script>
 <style>
-.feria-noticias-home{margin:0 14px 105px!important;padding:0!important;background:transparent!important;border-radius:0!important;color:white}.feria-noticias-titulo{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:12px 0 16px}.feria-noticias-titulo span{color:#ed3345;font-size:10px;font-weight:900;letter-spacing:1px}.feria-noticias-titulo h2{font-size:25px;font-weight:900;margin-top:5px}.feria-noticias-titulo em{font-style:normal;color:#ed3345}.feria-noticias-contador{color:#a6bbdf!important}.feria-noticia-destacada{background:linear-gradient(160deg,#102b5c,#071b3c);border:1px solid #284a81;border-radius:20px;overflow:hidden;box-shadow:0 12px 25px #0004}.feria-noticia-imagen{height:195px;position:relative;background:linear-gradient(130deg,#0b2b61,#b91f34);display:flex;align-items:end}.feria-noticia-imagen.sin-foto:before{content:'⚽  FERIA OSORNO  🔵🔴';position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:#fff;font-size:19px}.feria-noticia-imagen img{width:100%;height:100%;object-fit:cover}.feria-noticia-imagen span{position:absolute;left:12px;bottom:12px;background:#d71920;color:#fff;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900}.feria-noticia-texto{padding:19px}.feria-noticia-texto small{color:#ed3345;font-weight:900;font-size:10px}.feria-noticia-texto h3{font-size:23px;margin:8px 0 10px}.feria-noticia-texto p{font-size:13px;line-height:1.6;color:#d4e0f3}.feria-noticias-proximas{display:grid;gap:10px;margin-top:12px}.feria-noticias-proximas article{display:flex;align-items:center;gap:12px;background:#0c2149;border:1px solid #243e69;border-radius:14px;padding:15px}.feria-noticias-proximas article>span{font-size:25px}.feria-noticias-proximas strong{font-size:13px}.feria-noticias-proximas p{font-size:11px;color:#aebdd6;margin-top:4px}.feria-pagina-informativa{background:#06142f!important;color:#fff!important;min-height:85vh;margin:0!important;padding:22px 17px 105px!important;border-radius:0!important}.feria-pagina-informativa>span{color:#ed3345;font-weight:900;font-size:10px}.feria-pagina-informativa h2{font-size:27px;margin:12px 0}.feria-pagina-informativa p{color:#c8d6ef;line-height:1.7}.feria-info-caja{padding:20px;margin-top:25px;background:#0d2859;border-radius:16px;border-left:4px solid #ed3345}.feria-edicion-extra{background:#102650;color:white;border-radius:16px;padding:17px;margin:15px 0}.feria-edicion-extra h3{margin:20px 0 6px;font-size:17px;color:white}.feria-edicion-extra p{color:#b6c7e4;font-size:12px;line-height:1.5;margin-bottom:10px}.feria-edicion-extra textarea,.feria-edicion-extra input,.feria-edicion-extra select{display:block;width:100%;padding:12px;background:#071a3b;color:white;border:1px solid #48648d;border-radius:10px;margin:7px 0}.feria-copa-fila,.feria-momento-fila{padding:10px;border:1px solid #36527f;border-radius:10px;margin:9px 0}.feria-copa-fila button,.feria-momento-fila button{background:#bd2033;color:white;border:0;border-radius:8px;padding:8px}.feria-momento-fila img{width:80px;height:80px;object-fit:cover;border-radius:10px}.feria-palmares-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feria-copa-publica{background:#0d2a5b;border:1px solid #2a4b80;border-radius:15px;text-align:center;padding:17px 8px}.feria-copa-publica span{display:block;font-size:40px}.feria-copa-publica strong{display:block;color:#fff;font-size:12px;margin:8px 0 3px}.feria-momentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feria-momentos-grid img{width:100%;height:170px;object-fit:cover;border-radius:13px}
+.feria-noticias-home{margin:0 14px 105px!important;padding:0!important;background:transparent!important;border-radius:0!important;color:white}.feria-noticias-titulo{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:12px 0 16px}.feria-noticias-titulo span{color:#ed3345;font-size:10px;font-weight:900;letter-spacing:1px}.feria-noticias-titulo h2{font-size:25px;font-weight:900;margin-top:5px}.feria-noticias-titulo em{font-style:normal;color:#ed3345}.feria-noticias-contador{color:#a6bbdf!important}.feria-noticia-destacada{background:linear-gradient(160deg,#102b5c,#071b3c);border:1px solid #284a81;border-radius:20px;overflow:hidden;box-shadow:0 12px 25px #0004}.feria-noticia-imagen{height:195px;position:relative;background:linear-gradient(130deg,#0b2b61,#b91f34);display:flex;align-items:end}.feria-noticia-imagen.sin-foto:before{content:'⚽  FERIA OSORNO  🔵🔴';position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:#fff;font-size:19px}.feria-noticia-imagen img{width:100%;height:100%;object-fit:cover}.feria-noticia-imagen span{position:absolute;left:12px;bottom:12px;background:#d71920;color:#fff;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900}.feria-noticia-texto{padding:19px}.feria-noticia-texto small{color:#ed3345;font-weight:900;font-size:10px}.feria-noticia-texto h3{font-size:23px;margin:8px 0 10px}.feria-noticia-texto p{font-size:13px;line-height:1.6;color:#d4e0f3}.feria-noticias-proximas{display:grid;gap:10px;margin-top:12px}.feria-noticias-proximas article{display:flex;align-items:center;gap:12px;background:#0c2149;border:1px solid #243e69;border-radius:14px;padding:15px}.feria-noticias-proximas article>span{font-size:25px}.feria-noticias-proximas strong{font-size:13px}.feria-noticias-proximas p{font-size:11px;color:#aebdd6;margin-top:4px}.feria-pagina-informativa{background:#06142f!important;color:#fff!important;min-height:85vh;margin:0!important;padding:22px 17px 105px!important;border-radius:0!important}.feria-pagina-informativa>span{color:#ed3345;font-weight:900;font-size:10px}.feria-pagina-informativa h2{font-size:27px;margin:12px 0}.feria-pagina-informativa p{color:#c8d6ef;line-height:1.7}.feria-info-caja{padding:20px;margin-top:25px;background:#0d2859;border-radius:16px;border-left:4px solid #ed3345}.feria-edicion-extra{background:#102650;color:white;border-radius:16px;padding:17px;margin:15px 0}.feria-edicion-extra h3{margin:20px 0 6px;font-size:17px;color:white}.feria-edicion-extra p{color:#b6c7e4;font-size:12px;line-height:1.5;margin-bottom:10px}.feria-edicion-extra textarea,.feria-edicion-extra input,.feria-edicion-extra select{display:block;width:100%;padding:12px;background:#071a3b;color:white;border:1px solid #48648d;border-radius:10px;margin:7px 0}.feria-copa-fila,.feria-momento-fila{padding:10px;border:1px solid #36527f;border-radius:10px;margin:9px 0}.feria-copa-fila button,.feria-momento-fila button{background:#bd2033;color:white;border:0;border-radius:8px;padding:8px}.feria-momento-fila img{width:80px;height:80px;object-fit:cover;border-radius:10px}.feria-palmares-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.feria-copa-publica{background:#0d2a5b;border:1px solid #2a4b80;border-radius:15px;text-align:center;padding:17px 8px}.feria-copa-publica span{display:block;font-size:40px}.feria-copa-publica strong{display:block;color:#fff;font-size:12px;margin:8px 0 3px}.feria-momentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.feria-momentos-grid img{width:100%;height:170px;object-fit:cover;border-radius:13px}.feria-momentos-carrusel{position:relative;overflow:hidden;border-radius:17px;background:#071936;border:1px solid #254779}.feria-momentos-pista{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}.feria-momentos-pista::-webkit-scrollbar{display:none}.feria-momentos-slide{flex:0 0 100%;scroll-snap-align:center;position:relative;min-width:0}.feria-momentos-slide img{display:block;width:100%;height:260px;object-fit:contain;background:#06142f;cursor:zoom-in}.feria-momentos-controles{display:flex;align-items:center;justify-content:center;gap:13px;padding:11px;background:#0b2451}.feria-momentos-controles button{background:#d71920;border:0;border-radius:50%;color:white;width:32px;height:32px;font-size:19px;cursor:pointer}.feria-momentos-contador{font-size:12px;color:#e7efff;font-weight:800;min-width:48px;text-align:center}.feria-momentos-ampliada{position:fixed;inset:0;z-index:999999;background:rgba(1,8,22,.96);display:flex;align-items:center;justify-content:center;padding:50px 12px}.feria-momentos-ampliada img{max-width:100%;max-height:88vh;object-fit:contain}.feria-momentos-ampliada button{position:absolute;top:14px;right:14px;background:#d71920;color:white;border:0;border-radius:50%;width:40px;height:40px;font-size:23px}
+
+/* FERIA | Palmarés premium: copas ilustradas con colores por posición */
+.feria-palmares-premium{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:14px}
+.feria-copa-premium{--copa-brillo:#fff2ae;--copa-metal:#e8b83d;--copa-sombra:#95601a;--copa-borde:#ffd976;position:relative;overflow:hidden;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;padding:10px 4px 12px;background:linear-gradient(155deg,#15376b,#081b3d 75%);border:1px solid rgba(255,215,111,.48);border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.feria-copa-premium::before{content:'';position:absolute;top:-55px;right:-40px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(255,225,138,.13),transparent 70%);pointer-events:none}
+.feria-copa-puesto-2{--copa-brillo:#fff;--copa-metal:#b9c9d9;--copa-sombra:#667b92;--copa-borde:#d9e6f3;border-color:rgba(193,213,235,.42)}
+.feria-copa-puesto-3{--copa-brillo:#ffdfb2;--copa-metal:#c98a55;--copa-sombra:#794527;--copa-borde:#e5ab7b;border-color:rgba(224,161,107,.42)}
+.feria-copa-ilustracion{width:55px;height:62px;filter:drop-shadow(0 7px 8px rgba(0,0,0,.3));flex-shrink:0}
+.feria-copa-ilustracion svg{display:block;width:100%;height:100%}
+.feria-copa-premium .feria-copa-distincion{display:block;color:#ffda79;font-size:7px;line-height:1.3;font-weight:900;letter-spacing:0;text-align:center}
+.feria-copa-puesto-2 .feria-copa-distincion{color:#dce9f6}.feria-copa-puesto-3 .feria-copa-distincion{color:#f0bd91}
+.feria-copa-premium strong{color:white;font-size:10px;line-height:1.4;text-align:center;overflow-wrap:anywhere;margin:0}
+@media(max-width:360px){.feria-palmares-premium{gap:8px}.feria-copa-premium{padding:13px 7px}.feria-copa-ilustracion{width:48px;height:55px}}
 </style>
 <script>
 let feriaMomentosEditados=[];
 let feriaPalmaresEditados=[];
 function feriaPrepararExtrasJugador(j){document.getElementById('feriaTrayectoriaJugador').value=j.trayectoria_feriana||'';feriaPalmaresEditados=Array.isArray(j.palmares_feriano)?j.palmares_feriano:[];feriaMomentosEditados=Array.isArray(j.momentos_ferianos)?j.momentos_ferianos:[];document.getElementById('feriaMomentosArchivos').value='';feriaRenderPalmares();feriaRenderMomentos()}
 function feriaAgregarPalmares(){feriaPalmaresEditados.push({puesto:1,texto:''});feriaRenderPalmares()}
-function feriaRenderPalmares(){const el=document.getElementById('feriaPalmaresEditor');el.replaceChildren();feriaPalmaresEditados.forEach((p,i)=>{const fila=document.createElement('div');fila.className='feria-copa-fila';const select=document.createElement('select');[1,2,3].forEach(n=>{const op=document.createElement('option');op.value=n;op.textContent=n===1?'🥇 Primer lugar':n===2?'🥈 Segundo lugar':'🥉 Tercer lugar';select.appendChild(op)});select.value=p.puesto||1;select.onchange=()=>p.puesto=Number(select.value);const input=document.createElement('input');input.placeholder='Ej.: 1er lugar Apertura 2026';input.maxLength=120;input.value=p.texto||'';input.oninput=()=>p.texto=input.value;const quitar=document.createElement('button');quitar.type='button';quitar.textContent='Eliminar copa';quitar.onclick=()=>{feriaPalmaresEditados.splice(i,1);feriaRenderPalmares()};fila.append(select,input,quitar);el.append(fila)})}
+function feriaRenderPalmares(){const el=document.getElementById('feriaPalmaresEditor');el.replaceChildren();feriaPalmaresEditados.forEach((p,i)=>{const fila=document.createElement('div');fila.className='feria-copa-fila';const select=document.createElement('select');[1,2,3].forEach(n=>{const op=document.createElement('option');op.value=n;op.textContent=n===1?'🏆 Oro · Campeón':n===2?'🏆 Plata · Subcampeón':'🏆 Bronce · Tercer lugar';select.appendChild(op)});select.value=p.puesto||1;select.onchange=()=>p.puesto=Number(select.value);const input=document.createElement('input');input.placeholder='Ej.: Apertura 2026 · Senior';input.maxLength=120;input.value=p.texto||'';input.oninput=()=>p.texto=input.value;const quitar=document.createElement('button');quitar.type='button';quitar.textContent='Eliminar copa';quitar.onclick=()=>{feriaPalmaresEditados.splice(i,1);feriaRenderPalmares()};fila.append(select,input,quitar);el.append(fila)})}
 function feriaLeerPalmares(){return feriaPalmaresEditados.filter(p=>String(p.texto||'').trim()).map(p=>({puesto:Number(p.puesto)||1,texto:String(p.texto).trim()}))}
 function feriaRenderMomentos(){const el=document.getElementById('feriaMomentosEditor');el.replaceChildren();feriaMomentosEditados.forEach((url,i)=>{const fila=document.createElement('div');fila.className='feria-momento-fila';const img=document.createElement('img');img.src=url;img.alt='Momento del jugador';const b=document.createElement('button');b.type='button';b.textContent='Quitar de la galería';b.onclick=()=>{feriaMomentosEditados.splice(i,1);feriaRenderMomentos()};fila.append(img,b);el.append(fila)})}
 async function feriaSubirMomentosJugador(id){const input=document.getElementById('feriaMomentosArchivos');const archivos=Array.from(input.files||[]);if(feriaMomentosEditados.length+archivos.length>20)throw new Error('Máximo 20 imágenes por jugador');for(const f of archivos){if(!f.type.startsWith('image/')||f.size>5*1024*1024)throw new Error('Las imágenes deben ser JPG, PNG o WEBP de hasta 5 MB');const extension=(f.name.split('.').pop()||'jpg').toLowerCase();const path=id+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+extension;const {error}=await supabaseClient.storage.from('momentos-jugadores').upload(path,f,{contentType:f.type,upsert:false});if(error)throw error;const {data}=supabaseClient.storage.from('momentos-jugadores').getPublicUrl(path);feriaMomentosEditados.push(data.publicUrl)}return feriaMomentosEditados}
-async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();if(error){console.error('Error al cargar trayectoria pública:',error);return;}if(!data)return;const historia=document.getElementById('feriaTrayectoriaPublica');if(historia){const p=historia.querySelector('.feria-trayectoria-guardada');if(p)p.remove();if(data.trayectoria_feriana){const nuevo=document.createElement('p');nuevo.className='feria-trayectoria-guardada';nuevo.textContent=data.trayectoria_feriana;historia.append(nuevo);historia.querySelectorAll('p:not(.feria-trayectoria-guardada)').forEach(x=>x.style.display='none')}else{const pred=historia.querySelector('.feria-trayectoria-default');if(pred)pred.style.display=''}}const palmares=document.getElementById('feriaPalmaresPublico');if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){palmares.replaceChildren();palmares.className='feria-palmares-grid';data.palmares_feriano.forEach(item=>{const box=document.createElement('div');box.className='feria-copa-publica';const copa=document.createElement('span');copa.textContent=Number(item.puesto)===1?'🏆':Number(item.puesto)===2?'🥈':'🥉';const texto=document.createElement('strong');texto.textContent=item.texto;box.append(copa,texto);palmares.append(box)})}const momentos=document.getElementById('feriaMomentosPublico');if(momentos&&Array.isArray(data.momentos_ferianos)&&data.momentos_ferianos.length){momentos.replaceChildren();momentos.className='feria-momentos-grid';data.momentos_ferianos.forEach(url=>{if(typeof url!=='string'||!url.startsWith('https://'))return;const img=document.createElement('img');img.src=url;img.alt='Momento feriano';img.loading='lazy';momentos.append(img)})}}catch(e){console.warn('Datos de trayectoria:',e)}}
+function feriaAbrirMomento(url){
+  const capa=document.createElement('div');capa.className='feria-momentos-ampliada';capa.setAttribute('role','dialog');capa.setAttribute('aria-label','Fotografía ampliada');
+  const img=document.createElement('img');img.src=url;img.alt='Momento feriano ampliado';
+  const cerrar=document.createElement('button');cerrar.type='button';cerrar.textContent='×';cerrar.setAttribute('aria-label','Cerrar fotografía');
+  const cerrarCapa=()=>{capa.remove();document.removeEventListener('keydown',tecla)};
+  const tecla=e=>{if(e.key==='Escape')cerrarCapa()};
+  cerrar.onclick=cerrarCapa;capa.onclick=e=>{if(e.target===capa)cerrarCapa()};
+  capa.append(img,cerrar);document.body.append(capa);document.addEventListener('keydown',tecla);
+}
+function feriaRenderCarruselMomentos(contenedor,urls){
+  contenedor.replaceChildren();contenedor.className='feria-momentos-carrusel';
+  const pista=document.createElement('div');pista.className='feria-momentos-pista';
+  urls.forEach((url,i)=>{const slide=document.createElement('div');slide.className='feria-momentos-slide';const img=document.createElement('img');img.src=url;img.alt='Momento feriano '+(i+1);img.loading=i===0?'eager':'lazy';img.onclick=()=>feriaAbrirMomento(url);slide.append(img);pista.append(slide)});
+  contenedor.append(pista);
+  if(urls.length>1){
+    const controles=document.createElement('div');controles.className='feria-momentos-controles';
+    const anterior=document.createElement('button');anterior.type='button';anterior.textContent='‹';anterior.setAttribute('aria-label','Foto anterior');
+    const contador=document.createElement('span');contador.className='feria-momentos-contador';contador.textContent='1 / '+urls.length;
+    const siguiente=document.createElement('button');siguiente.type='button';siguiente.textContent='›';siguiente.setAttribute('aria-label','Foto siguiente');
+    const actual=()=>Math.max(0,Math.min(urls.length-1,Math.round(pista.scrollLeft/(pista.clientWidth||1))));
+    const mover=d=>pista.scrollTo({left:(Math.max(0,Math.min(urls.length-1,actual()+d)))*pista.clientWidth,behavior:'smooth'});
+    anterior.onclick=()=>mover(-1);siguiente.onclick=()=>mover(1);
+    pista.addEventListener('scroll',()=>{contador.textContent=(actual()+1)+' / '+urls.length},{passive:true});
+    controles.append(anterior,contador,siguiente);contenedor.append(controles);
+  }
+}
+async function feriaCargarEstadisticasPublicas(jugadorId){
+ const bloque=document.getElementById('feriaEstadisticasBloque'),destino=document.getElementById('feriaEstadisticasJugador');
+ if(!bloque||!destino||jugadorId==null)return;
+ bloque.style.display='none';destino.replaceChildren();
+ try{
+  const [participaciones,goles]=await Promise.all([
+   supabaseClient.from('PartidoJugadores').select('partido_id,tipo').eq('jugador_id',jugadorId),
+   supabaseClient.from('GolesPartido').select('id,partido_id').eq('jugador_id',jugadorId)
+  ]);
+  if(participaciones.error||goles.error){console.warn('Estadísticas del jugador:',participaciones.error||goles.error);return;}
+  if(document.getElementById('feriaEstadisticasJugador')!==destino)return;
+  const convocatorias=new Set((participaciones.data||[]).map(x=>String(x.partido_id)));
+  const titulares=new Set((participaciones.data||[]).filter(x=>String(x.tipo||'').toLowerCase().includes('titular')).map(x=>String(x.partido_id)));
+  const suplentes=new Set((participaciones.data||[]).filter(x=>String(x.tipo||'').toLowerCase().includes('suplente')).map(x=>String(x.partido_id)));
+  const golesTotal=(goles.data||[]).length;
+  if(!convocatorias.size&&!golesTotal)return;
+  [['Convocatorias',convocatorias.size],['Titularidades',titulares.size],['Suplencias',suplentes.size],['Goles',golesTotal]].forEach(([etiqueta,valor])=>{
+    const tarjeta=document.createElement('div');tarjeta.className='feria-estadistica-tarjeta';
+    const numero=document.createElement('strong');numero.textContent=valor;
+    const nombre=document.createElement('span');nombre.textContent=etiqueta;
+    tarjeta.append(numero,nombre);destino.append(tarjeta);
+  });
+  const nota=document.createElement('p');nota.className='feria-estadisticas-nota';nota.textContent='Datos registrados en convocatorias y goles del club. Convocatoria no equivale necesariamente a minutos jugados.';
+  destino.after(nota);bloque.style.display='';
+ }catch(e){console.warn('Estadísticas públicas:',e)}
+}
+async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
+  feriaCargarEstadisticasPublicas(jugadorId);
+  const palmares=document.getElementById('feriaPalmaresPublico');
+  const momentos=document.getElementById('feriaMomentosPublico');
+  // Evita que se vean módulos vacíos o información anterior mientras carga el perfil.
+  if(palmares)palmares.closest('.perfil-jugador-bloque').style.display='none';
+  if(momentos)momentos.closest('.perfil-jugador-bloque').style.display='none';
+  try{
+    const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();
+    if(error){console.error('Error al cargar trayectoria pública:',error);return;}
+    if(!data)return;
+    // Evita pintar datos de un jugador anterior si el usuario cambió rápidamente de ficha.
+    if(document.getElementById('feriaMomentosPublico')!==momentos)return;
+    const historia=document.getElementById('feriaTrayectoriaPublica');
+    if(historia){
+      const p=historia.querySelector('.feria-trayectoria-guardada');if(p)p.remove();
+      if(data.trayectoria_feriana){const nuevo=document.createElement('p');nuevo.className='feria-trayectoria-guardada';nuevo.textContent=data.trayectoria_feriana;historia.append(nuevo);historia.querySelectorAll('p:not(.feria-trayectoria-guardada)').forEach(x=>x.style.display='none')}
+      else{const pred=historia.querySelector('.feria-trayectoria-default');if(pred)pred.style.display=''}
+    }
+    if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){
+      const titulos=data.palmares_feriano.filter(item=>item&&String(item.texto||'').trim());
+      if(titulos.length){
+        palmares.replaceChildren();palmares.className='feria-palmares-grid feria-palmares-premium';
+        titulos.forEach(item=>{
+          const puesto=[1,2,3].includes(Number(item.puesto))?Number(item.puesto):1;
+          const box=document.createElement('article');box.className='feria-copa-publica feria-copa-premium feria-copa-puesto-'+puesto;
+          const ilustracion=document.createElement('div');ilustracion.className='feria-copa-ilustracion';ilustracion.setAttribute('aria-hidden','true');
+          ilustracion.innerHTML='<svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="copaMetal'+puesto+'" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="var(--copa-brillo)"/><stop offset=".48" stop-color="var(--copa-metal)"/><stop offset="1" stop-color="var(--copa-sombra)"/></linearGradient></defs><path d="M27 15h46v17c0 22-9 35-23 39-14-4-23-17-23-39z" fill="url(#copaMetal'+puesto+')" stroke="var(--copa-borde)" stroke-width="2"/><path d="M27 22H14v10c0 14 10 20 24 20M73 22h13v10c0 14-10 20-24 20" fill="none" stroke="var(--copa-metal)" stroke-width="7" stroke-linejoin="round"/><path d="M46 69h8v17H46zM35 86h30v7H35zM29 93h42v9H29z" fill="url(#copaMetal'+puesto+')"/><path d="M38 22h7c-1 17-2 24 3 34-12-5-15-20-10-34" fill="var(--copa-brillo)" opacity=".42"/><path d="m50 27 3.5 7 7.5 1-5.5 5.3 1.3 7.5L50 44l-6.8 3.8 1.3-7.5L39 35l7.5-1z" fill="var(--copa-sombra)" opacity=".55"/></svg>';
+          const puestoTexto=document.createElement('span');puestoTexto.className='feria-copa-distincion';puestoTexto.textContent=puesto===1?'CAMPEÓN · ORO':puesto===2?'SUBCAMPEÓN · PLATA':'TERCER LUGAR · BRONCE';
+          const texto=document.createElement('strong');texto.textContent=String(item.texto).trim();
+          box.append(ilustracion,puestoTexto,texto);palmares.append(box);
+        });
+        palmares.closest('.perfil-jugador-bloque').style.display='';
+      }
+    }
+    if(momentos&&Array.isArray(data.momentos_ferianos)){
+      const urls=data.momentos_ferianos.filter(url=>typeof url==='string'&&url.startsWith('https://'));
+      if(urls.length){feriaRenderCarruselMomentos(momentos,urls);momentos.closest('.perfil-jugador-bloque').style.display=''}
+    }
+  }catch(e){console.warn('Datos de trayectoria:',e)}
+}
 // Historial real de pantallas: guarda el estado anterior a cada navegación.
 // Incluye subpantallas de socios, administración, partidos y jugadores.
 (function(){
@@ -24253,4 +24382,11 @@ window.feriaJuegoReiniciar=()=>{actual=0;aciertos=0;elegida=-1;intento=false;pai
 window.feriaJuegoCerrar=()=>{if(modal){modal.remove();modal=null;}document.body.style.overflow='';};
 })();
 </script>
+<nav class="menu-inferior-publico feria-nav-editar-fija" aria-label="Navegación de administración en editar jugador">
+  <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminPartidos')"><span class="menu-inferior-icono">⚽</span><span>Partidos</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminJugadores')"><span class="menu-inferior-icono">♟</span><span>Jugadores</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminSocios')"><span class="menu-inferior-icono">👥</span><span>Socios</span></button>
+  <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminFinanzas')"><span class="menu-inferior-icono">▦</span><span>Finanzas</span></button>
+</nav>
 </body>  </html>
