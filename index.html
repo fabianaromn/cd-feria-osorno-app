@@ -13361,7 +13361,7 @@ window.scrollTo(0,0);
   await supabaseClient
   .from("Jugadores")
   .select(
-    "name, number, position, photo_url, birth_date, category_id, year_joined"
+    "id, name, number, position, photo_url, birth_date, category_id, year_joined"
   )
   .eq(
     "category_id",
@@ -21274,7 +21274,7 @@ async function guardarEdicionJugador(){
 
     })
     .eq("id", id)
-    .select("id")
+    .select("id,trayectoria_feriana")
     .maybeSingle();
 
 
@@ -21297,7 +21297,7 @@ async function guardarEdicionJugador(){
 
 
     mensaje.innerText =
-    "❌ Error al guardar los cambios.";
+    "❌ Error al guardar los cambios: " + (error.message || 'Revisa permisos y columnas de Jugadores.');
 
     mensaje.style.color =
     "#c82032";
@@ -21328,8 +21328,16 @@ async function guardarEdicionJugador(){
   }
 
 
+  // Comprobar que la trayectoria realmente quedó persistida en Supabase.
+  const trayectoriaEsperada = document.getElementById('feriaTrayectoriaJugador').value.trim();
+  if ((jugadorActualizado.trayectoria_feriana || '') !== trayectoriaEsperada) {
+    mensaje.innerText = '⚠️ La trayectoria no quedó guardada. Revisa los permisos de la tabla Jugadores.';
+    mensaje.style.color = '#c82032';
+    return;
+  }
+
   mensaje.innerText =
-  "✅ Jugador actualizado correctamente.";
+  "✅ Jugador y Trayectoria Feriana guardados correctamente.";
 
   mensaje.style.color =
   "#16803c";
@@ -23172,7 +23180,7 @@ function feriaRenderPalmares(){const el=document.getElementById('feriaPalmaresEd
 function feriaLeerPalmares(){return feriaPalmaresEditados.filter(p=>String(p.texto||'').trim()).map(p=>({puesto:Number(p.puesto)||1,texto:String(p.texto).trim()}))}
 function feriaRenderMomentos(){const el=document.getElementById('feriaMomentosEditor');el.replaceChildren();feriaMomentosEditados.forEach((url,i)=>{const fila=document.createElement('div');fila.className='feria-momento-fila';const img=document.createElement('img');img.src=url;img.alt='Momento del jugador';const b=document.createElement('button');b.type='button';b.textContent='Quitar de la galería';b.onclick=()=>{feriaMomentosEditados.splice(i,1);feriaRenderMomentos()};fila.append(img,b);el.append(fila)})}
 async function feriaSubirMomentosJugador(id){const input=document.getElementById('feriaMomentosArchivos');const archivos=Array.from(input.files||[]);if(feriaMomentosEditados.length+archivos.length>20)throw new Error('Máximo 20 imágenes por jugador');for(const f of archivos){if(!f.type.startsWith('image/')||f.size>5*1024*1024)throw new Error('Las imágenes deben ser JPG, PNG o WEBP de hasta 5 MB');const extension=(f.name.split('.').pop()||'jpg').toLowerCase();const path=id+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+extension;const {error}=await supabaseClient.storage.from('momentos-jugadores').upload(path,f,{contentType:f.type,upsert:false});if(error)throw error;const {data}=supabaseClient.storage.from('momentos-jugadores').getPublicUrl(path);feriaMomentosEditados.push(data.publicUrl)}return feriaMomentosEditados}
-async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();if(error||!data)return;const historia=document.getElementById('feriaTrayectoriaPublica');if(historia){const p=historia.querySelector('.feria-trayectoria-guardada');if(p)p.remove();if(data.trayectoria_feriana){const nuevo=document.createElement('p');nuevo.className='feria-trayectoria-guardada';nuevo.textContent=data.trayectoria_feriana;historia.append(nuevo);historia.querySelectorAll('p:not(.feria-trayectoria-guardada)').forEach(x=>x.style.display='none')}else{const pred=historia.querySelector('.feria-trayectoria-default');if(pred)pred.style.display=''}}const palmares=document.getElementById('feriaPalmaresPublico');if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){palmares.replaceChildren();palmares.className='feria-palmares-grid';data.palmares_feriano.forEach(item=>{const box=document.createElement('div');box.className='feria-copa-publica';const copa=document.createElement('span');copa.textContent=Number(item.puesto)===1?'🏆':Number(item.puesto)===2?'🥈':'🥉';const texto=document.createElement('strong');texto.textContent=item.texto;box.append(copa,texto);palmares.append(box)})}const momentos=document.getElementById('feriaMomentosPublico');if(momentos&&Array.isArray(data.momentos_ferianos)&&data.momentos_ferianos.length){momentos.replaceChildren();momentos.className='feria-momentos-grid';data.momentos_ferianos.forEach(url=>{if(typeof url!=='string'||!url.startsWith('https://'))return;const img=document.createElement('img');img.src=url;img.alt='Momento feriano';img.loading='lazy';momentos.append(img)})}}catch(e){console.warn('Datos de trayectoria:',e)}}
+async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){try{const {data,error}=await supabaseClient.from('Jugadores').select('trayectoria_feriana,palmares_feriano,momentos_ferianos').eq('id',jugadorId).limit(1).maybeSingle();if(error){console.error('Error al cargar trayectoria pública:',error);return;}if(!data)return;const historia=document.getElementById('feriaTrayectoriaPublica');if(historia){const p=historia.querySelector('.feria-trayectoria-guardada');if(p)p.remove();if(data.trayectoria_feriana){const nuevo=document.createElement('p');nuevo.className='feria-trayectoria-guardada';nuevo.textContent=data.trayectoria_feriana;historia.append(nuevo);historia.querySelectorAll('p:not(.feria-trayectoria-guardada)').forEach(x=>x.style.display='none')}else{const pred=historia.querySelector('.feria-trayectoria-default');if(pred)pred.style.display=''}}const palmares=document.getElementById('feriaPalmaresPublico');if(palmares&&Array.isArray(data.palmares_feriano)&&data.palmares_feriano.length){palmares.replaceChildren();palmares.className='feria-palmares-grid';data.palmares_feriano.forEach(item=>{const box=document.createElement('div');box.className='feria-copa-publica';const copa=document.createElement('span');copa.textContent=Number(item.puesto)===1?'🏆':Number(item.puesto)===2?'🥈':'🥉';const texto=document.createElement('strong');texto.textContent=item.texto;box.append(copa,texto);palmares.append(box)})}const momentos=document.getElementById('feriaMomentosPublico');if(momentos&&Array.isArray(data.momentos_ferianos)&&data.momentos_ferianos.length){momentos.replaceChildren();momentos.className='feria-momentos-grid';data.momentos_ferianos.forEach(url=>{if(typeof url!=='string'||!url.startsWith('https://'))return;const img=document.createElement('img');img.src=url;img.alt='Momento feriano';img.loading='lazy';momentos.append(img)})}}catch(e){console.warn('Datos de trayectoria:',e)}}
 // Historial real de pantallas: guarda el estado anterior a cada navegación.
 // Incluye subpantallas de socios, administración, partidos y jugadores.
 (function(){
