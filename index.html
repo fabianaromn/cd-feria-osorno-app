@@ -7403,7 +7403,7 @@ body:has(#editarJugador:not(.oculto)) #editarJugador{padding-bottom:125px!import
   
   <body>
     
-    <div id="splashScreen">
+    <div id="splashScreen" style="display:none!important" aria-hidden="true">
 
   <img
   src="img/splash-feria.png"
@@ -10151,11 +10151,12 @@ onclick="volverGestionJugadores()">
   ">
 
 
-  <label>Número de camiseta</label>
+  <label for="nuevoNumero" style="display:none">Número de camiseta (no utilizado)</label>
 
   <input
   id="nuevoNumero"
-  type="number"
+  type="hidden"
+  value="0"
   min="0"
   placeholder="Ej: 13"
   style="
@@ -11112,15 +11113,6 @@ class="seccion oculto formulario-partido-moderno">
   </p>
 
 
-  <button
-  class="guardar-partido-moderno"
-  onclick="guardarEdicionPartido()">
-
-    GUARDAR DATOS DEL PARTIDO
-
-  </button>
-
-
   <!-- DETALLES DEPORTIVOS -->
 
   <div class="detalle-deportivo-admin">
@@ -11144,6 +11136,7 @@ class="seccion oculto formulario-partido-moderno">
     <div class="editar-partido-bloque formacion-admin-feria">
       <div class="editar-partido-titulo"><span>ALINEACIÓN</span><strong>Formación táctica oficial</strong></div>
       <p class="ayuda-formacion-admin">Selecciona una formación y toca cada jugador en la cancha para asignar un titular.</p>
+      <button type="button" class="boton-convocatoria-formacion" onclick="abrirAdministrarTitulares()">👥 Elegir los 11 jugadores del partido →</button>
       <select id="editarFormacionOficial" class="selector-formacion-oculto" onchange="prepararFormacionAdmin()" aria-label="Esquema táctico">
         <option value="">Por confirmar</option>
         <option value="4-3-3">4-3-3</option>
@@ -11151,6 +11144,12 @@ class="seccion oculto formulario-partido-moderno">
         <option value="3-4-3">3-4-3</option>
         <option value="4-2-1-3">4-2-1-3</option>
       </select>
+      <label for="feriaEsquemaPersonalizado" style="display:block;margin-top:12px;color:#071b4a;font-weight:800">✍️ Diseñar formación personalizada</label>
+      <div style="display:flex;gap:8px;margin:8px 0 12px">
+        <input id="feriaEsquemaPersonalizado" type="text" inputmode="numeric" maxlength="9" placeholder="Ej.: 3-5-2 o 4-3-1-2" style="flex:1;min-width:0;padding:12px;border:1px solid #bfc8d8;border-radius:10px">
+        <button type="button" class="boton-convocatoria-formacion" style="margin:0" onclick="feriaAplicarEsquemaPersonalizado()">Dibujar</button>
+      </div>
+      <p style="font-size:12px;color:#667085">Hasta 4 líneas de campo; deben sumar 10 jugadores. El arquero se agrega automáticamente.</p>
       <div id="puestosFormacionAdmin"></div>
       <div class="botones-esquema-feria" id="botonesEsquemaFeria">
         <button type="button" onclick="elegirEsquemaAdmin('4-3-3')">4-3-3</button>
@@ -11159,9 +11158,9 @@ class="seccion oculto formulario-partido-moderno">
         <button type="button" onclick="elegirEsquemaAdmin('4-2-1-3')">4-2-1-3</button>
       </div>
       <p class="ayuda-formacion-admin">Selecciona los 11 jugadores disponibles y después ubícalos en la cancha.</p>
-      <button type="button" class="boton-convocatoria-formacion" onclick="abrirAdministrarTitulares()">👥 Elegir los 11 jugadores del partido →</button>
+      
       <p id="mensajeFormacionAdmin" class="mensaje-editar-partido"></p>
-      <button class="guardar-partido-moderno" type="button" onclick="guardarFormacionAdmin()">GUARDAR FORMACIÓN OFICIAL</button>
+      
     </div>
 
     <!-- SUPLENTES -->
@@ -11223,6 +11222,7 @@ class="seccion oculto formulario-partido-moderno">
 
   </div>
 
+  <button type="button" class="guardar-partido-moderno" style="display:block;width:100%;color:#fff;margin:28px 0 20px" onclick="feriaGuardarTodoPartido()">💾 GUARDAR TODAS LAS MODIFICACIONES</button>
 </section>
 
 
@@ -12535,7 +12535,7 @@ onclick="volver()">
 </div></section>
 <section id="feriaEspecial" class="seccion oculto feria-pagina-informativa feria-especial"><button class="feria-volver-icono" onclick="feriaVolverEspecial()" aria-label="Volver">←</button><div id="feriaEspecialContenido"></div></section>
 <section id="feriaEscuelaInterna" class="seccion oculto feria-pagina-informativa feria-especial feria-panel-exclusivo">
-<header class="feria-escuela-header"><button class="feria-volver-icono" onclick="feriaSalirEscuelaInterna()" aria-label="Volver a escuela">←</button><button type="button" class="feria-escuela-salir" onclick="feriaCerrarSesionEscuela()">Cerrar sesión ↗</button></header>
+<header class="feria-escuela-header"><button type="button" class="feria-escuela-salir" onclick="feriaCerrarSesionEscuela()">Cerrar sesión ↗</button></header>
 <div class="feria-escuela-marca"><img src="img/logo-feria.png" alt="Escudo Feria Osorno" onerror="this.style.display='none'"><div><span>FERIA SOMOS TODOS</span><h1>Escuela de Fútbol</h1><p>Formando personas, construyendo sueños.</p></div></div>
 <div id="feriaEscuelaInternaContenido"></div>
 <nav class="feria-escuela-nav" aria-label="Navegación exclusiva de la escuela"><button type="button" data-escuela="beneficios" onclick="feriaModuloEscuela('beneficios')">🎁<small>Beneficios</small></button><button type="button" data-escuela="nutricion" onclick="feriaModuloEscuela('nutricion')">🥗<small>Nutrición</small></button><button type="button" data-escuela="academia" onclick="feriaModuloEscuela('academia')">📚<small>Apoyo escolar</small></button><button type="button" data-escuela="documentos" onclick="feriaModuloEscuela('documentos')">📄<small>Documentos</small></button><button type="button" data-escuela="finanzas" onclick="feriaModuloEscuela('finanzas')">💰<small>Finanzas</small></button></nav></section>
@@ -17904,11 +17904,7 @@ async function guardarEdicionPartido(){
   mensaje.style.color = "#16803c";
 
 
-  setTimeout(function(){
-
-    mostrar("administracion");
-
-  }, 1200);
+  return true;
 
 }
 
@@ -21455,7 +21451,7 @@ const ESQUEMAS_FERIA = {
 };
 
 function puestosEsquemaFeria(esquema){
-  const filas = ESQUEMAS_FERIA[esquema] || [];
+  const filas = feriaFilasEsquema(esquema);
   const puestos = [];
   filas.forEach(function(cantidad, fila){
     for(let i=1;i<=cantidad;i++) puestos.push("F"+(fila+1)+"P"+i);
@@ -21484,7 +21480,8 @@ async function cargarFormacionAdmin(partidoId){
     mensaje.textContent = "⚠️ No se pudo cargar la formación. Comprueba la columna formacion en Supabase.";
     return;
   }
-  selector.value = ESQUEMAS_FERIA[partidoRes.data.formacion] ? partidoRes.data.formacion : "";
+  if(partidoRes.data.formacion && feriaFilasEsquema(partidoRes.data.formacion).length && !Array.from(selector.options).some(o=>o.value===partidoRes.data.formacion)) selector.add(new Option(partidoRes.data.formacion,partidoRes.data.formacion));
+  selector.value = feriaFilasEsquema(partidoRes.data.formacion).length ? partidoRes.data.formacion : "";
   titularesFormacionAdmin = jugadoresRes.data || [];
   titularesFormacionAdmin.forEach(function(item){
     if(item.posicion_cancha && /^F[1-5]P[1-4]$/.test(item.posicion_cancha)){
@@ -21511,7 +21508,7 @@ function prepararFormacionAdmin(conservar=false){
     contenedor.innerHTML = '<div class="cancha-admin-feria cancha-admin-vacia"><span>⚽ Selecciona una formación abajo para comenzar</span></div>';
     return;
   }
-  const filas = ESQUEMAS_FERIA[esquema];
+  const filas = feriaFilasEsquema(esquema);
   contenedor.innerHTML = '<div class="cancha-admin-feria">' + filas.map(function(cantidad, fila){
     return '<div class="linea-admin-feria">' + Array.from({length:cantidad},function(_, i){
       const puesto = "F"+(fila+1)+"P"+(i+1);
@@ -21520,7 +21517,7 @@ function prepararFormacionAdmin(conservar=false){
       const jugador = item && item.Jugadores;
       const nombre = jugador ? String(jugador.name || "Jugador") : "Elegir";
       const foto = jugador && jugador.photo_url ? '<img src="'+jugador.photo_url+'" alt="">' : '<span>👤</span>';
-      const inicial = jugador ? String(jugador.number ?? "-") : "+";
+      const inicial = jugador ? "⚽" : "+";
       const opciones = titularesFormacionAdmin.map(function(item){
         const j = item.Jugadores;
         if(!j) return "";
@@ -21568,6 +21565,7 @@ async function guardarFormacionAdmin(){
   const {error} = await supabaseClient.from("Partidos").update({formacion:esquema || null}).eq("id",id);
   if(error){console.error(error);mensaje.textContent="❌ Error guardando el esquema.";return;}
   mensaje.textContent = "✅ Formación oficial guardada correctamente.";
+  return true;
 }
 
 function crearCanchaTacticaPublica(titulares, esquema){
@@ -21579,7 +21577,7 @@ function crearCanchaTacticaPublica(titulares, esquema){
       <div class="linea-cancha linea-defensas">${crearLineaCancha(titulares,"Defensa")}</div>
       <div class="linea-cancha linea-arquero">${crearLineaCancha(titulares,"Arquero")}</div>`;
   }
-  const filas = ESQUEMAS_FERIA[esquema];
+  const filas = feriaFilasEsquema(esquema);
   return filas.map(function(cantidad,fila){
     const jugadores = Array.from({length:cantidad},function(_,i){
       return asignados.find(item=>item.posicion_cancha==="F"+(fila+1)+"P"+(i+1));
@@ -23609,6 +23607,8 @@ function feriaSalirEscuelaInterna(){if(window.feriaEscuelaDesdeAdmin){window.fer
 #feriaEscuelaInterna .feria-escuela-nav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:2600!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));background:#071b42!important;border-top:1px solid #365784!important;padding-bottom:env(safe-area-inset-bottom,0px)}#feriaEscuelaInterna .feria-escuela-nav button{color:#aabbd6;font-size:21px;padding:11px 1px 12px}#feriaEscuelaInterna .feria-escuela-nav button.activo{color:#fff;background:#12366d;border-top:3px solid #ed2941}#feriaEscuelaInterna .feria-escuela-nav small{font-size:9px}
 body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-publico,body:has(#feriaEscuelaInterna:not(.oculto)) .menu-inferior-admin,body:has(#feriaEscuelaInterna:not(.oculto)) .navegacion-publica-fija{display:none!important}
 .feria-editor-historia:not(.oculto){position:fixed!important;inset:0!important;z-index:2501!important;overflow-y:auto!important;margin:0!important;border-radius:0!important}.feria-editor-historia{background:#06142f!important;color:white!important;padding:20px 16px 110px!important;min-height:100vh}.feria-editor-historia h2{color:white;font-size:24px;margin:14px 0}.feria-editor-historia p{color:#d5e1f5;line-height:1.6}.feria-editor-aviso{padding:12px;border:1px solid #5377a7;background:#102c5a;border-radius:12px;margin:16px 0;font-size:12px}.feria-editor-historia label{display:block;font-weight:700;color:white;margin:16px 0 6px;font-size:13px}.feria-editor-historia input,.feria-editor-historia textarea{width:100%;border:1px solid #5675a2;border-radius:11px;padding:12px;background:#f7faff;color:#071b4a;font-size:14px}.feria-editor-historia textarea{min-height:110px;resize:vertical}.feria-editor-historia .feria-boton{display:block;width:100%;background:#c82032;border:0;border-radius:12px;padding:14px;color:white;font-weight:800;margin:12px 0}.feria-editor-historia .feria-editor-preview{background:#1b437d}
+#detallePartido .suplente-publico-foto,
+#detallePartido .suplente-publico-foto img {border-radius:50%!important;aspect-ratio:1/1!important;width:58px!important;height:58px!important;object-fit:cover!important;}
 </style>
 <script id="feria-ajustes-escuela-historia-js">
 (function(){
@@ -23617,7 +23617,7 @@ window.feriaModuloEscuela=async function(tipo){await modOriginal(tipo);const pan
 })();
 async function feriaCerrarSesionEscuela(){
  if(!confirm('¿Cerrar la sesión de la directiva de la escuela?'))return;
- try{const {error}=await supabaseClient.auth.signOut();if(error)throw error;window.feriaLoginDesdeEscuela=false;feriaSalirEscuelaInterna();}catch(e){alert('No se pudo cerrar la sesión: '+(e.message||e));}
+ try{const {error}=await supabaseClient.auth.signOut();if(error)throw error;window.feriaLoginDesdeEscuela=false;window.feriaEscuelaDesdeAdmin=false;mostrar('inicio');}catch(e){alert('No se pudo cerrar la sesión: '+(e.message||e));}
 }
 const feriaHistoriaCampos=[['origenTitulo','Título de nuestros orígenes'],['origenTexto','Relato de nuestros orígenes'],['origenFoto','Fotografía de nuestros orígenes (ruta o URL)'],['copasTexto','Texto de vitrina de títulos'],['copasVideo','Video de las copas (ruta o URL)'],['identidadTexto','Nuestra identidad'],['personas','Personas históricas (JSON: nombre, ingreso, foto, resena)']];
 function feriaHistoriaBorrador(){try{return JSON.parse(localStorage.getItem('feria_historia_borrador_2026')||'{}')}catch(e){return {}}}
@@ -24419,4 +24419,39 @@ window.feriaJuegoCerrar=()=>{if(modal){modal.remove();modal=null;}document.body.
   <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminSocios')"><span class="menu-inferior-icono">👥</span><span>Socios</span></button>
   <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminFinanzas')"><span class="menu-inferior-icono">▦</span><span>Finanzas</span></button>
 </nav>
+<script id="feria-mejoras-octubre-2026">
+/* Mejoras de interfaz. La seguridad financiera exige permisos RLS del servidor. */
+function feriaFilasEsquema(esquema){
+  if(!esquema)return [];
+  if(typeof ESQUEMAS_FERIA!=='undefined' && ESQUEMAS_FERIA[esquema])return ESQUEMAS_FERIA[esquema];
+  if(!/^\d(?:-\d){1,3}$/.test(esquema))return [];
+  const lineas=esquema.split('-').map(Number);
+  if(lineas.some(x=>x<1||x>5)||lineas.reduce((a,b)=>a+b,0)!==10)return [];
+  return [...lineas].reverse().concat(1);
+}
+function feriaAplicarEsquemaPersonalizado(){
+  const input=document.getElementById('feriaEsquemaPersonalizado');
+  const esquema=input.value.trim().replace(/\s+/g,'-');
+  if(!/^\d(?:-\d){1,3}$/.test(esquema)||!feriaFilasEsquema(esquema).length){alert('Usa entre 2 y 4 líneas que sumen 10 jugadores. Ejemplo: 3-5-2 o 4-3-1-2. El arquero es automático.');return;}
+  const selector=document.getElementById('editarFormacionOficial');
+  if(!Array.from(selector.options).some(o=>o.value===esquema))selector.add(new Option(esquema,esquema));
+  selector.value=esquema;
+  prepararFormacionAdmin();
+}
+async function feriaGuardarTodoPartido(){
+  const btn=document.querySelector('#editarPartido .guardar-partido-moderno:last-of-type');
+  if(btn){btn.disabled=true;btn.textContent='⏳ Guardando modificaciones...';}
+  try{
+    const ok=await guardarEdicionPartido();
+    if(ok!==true)throw Error('Revisa los datos del partido.');
+    const esquema=document.getElementById('editarFormacionOficial').value;
+    if(esquema){
+      const formOk=await guardarFormacionAdmin();
+      if(formOk!==true)throw Error(document.getElementById('mensajeFormacionAdmin').textContent||'No se pudo guardar la formación.');
+    }
+    alert('✅ Datos del partido y formación guardados correctamente.');
+    mostrar('administracion');
+  }catch(e){alert('⚠️ '+e.message);}finally{if(btn){btn.disabled=false;btn.textContent='💾 GUARDAR TODAS LAS MODIFICACIONES';}}
+}
+</script>
 </body>  </html>
