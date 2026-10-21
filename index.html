@@ -23310,77 +23310,107 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     }
   }catch(e){console.warn('Datos de trayectoria:',e)}
 }
-// Historial real de pantallas: guarda el estado anterior a cada navegación.
-// Incluye subpantallas de socios, administración, partidos y jugadores.
+// FERIA: historial de navegación unificado (público + administración).
+// Conserva el estado anterior y la posición de desplazamiento de cada vista.
 (function(){
-  const pila=[];
+  'use strict';
+  const historial=[];
+  const LIMITE=60;
+  const SELECTOR='[id],.menu-inferior-item,.portada-app-feria,.proximo-partido-home';
   let restaurando=false;
-  let inicio=null;
-  const MAX=45;
-  const selectores='[id],.menu-inferior-item,.portada-app-feria,.proximo-partido-home';
-  function captura(){
-    return {
-      elementos:Array.from(document.querySelectorAll(selectores)).map(el=>({
-        el:el,
-        oculto:el.classList.contains('oculto'),
-        activo:el.classList.contains('activo')
-      })),
-      scroll:window.scrollY
-    };
-  }
-  function firma(estado){
-    return estado.elementos.filter(x=>x.oculto||x.activo).map(x=>
-      (x.el.id||x.el.className||x.el.tagName)+':'+Number(x.oculto)+Number(x.activo)
-    ).join('|');
-  }
+  let gesto=null;
+  let pendiente=null;
+  let temporizador=null;
 
-
-  function recuperar(estado){
+  function tomarEstado(){
+    const elementos=[];
+    document.querySelectorAll(SELECTOR).forEach(el=>{
+      elementos.push({el,oculto:el.classList.contains('oculto'),
+        activo:el.classList.contains('activo')});
+    });
+    return {elementos,scrollX:window.scrollX,scrollY:window.scrollY,
+      scrollAdmin:document.getElementById('administracion')?.scrollTop||0};
+  }
+  function huella(estado){
+    // Identidad DOM, no nombres repetidos: distingue subpantallas y menús.
+    return estado.elementos.map((x,i)=>(x.oculto?'0':'1')+(x.activo?'A':'-'))
+      .join('')+'|'+estado.elementos.length;
+  }
+  function registrar(antes){
+    if(restaurando||!antes)return;
+    const ahora=tomarEstado();
+    if(huella(antes)===huella(ahora))return;
+    const ultimo=historial[historial.length-1];
+    if(ultimo&&huella(ultimo)===huella(antes))return;
+    historial.push(antes);
+    if(historial.length>LIMITE)historial.shift();
+  }
+  function programar(antes){
+    if(restaurando)return;
+    if(pendiente)registrar(pendiente);
+    pendiente=antes;
+    clearTimeout(temporizador);
+    // Las funciones mostrar() hacen comprobaciones asíncronas en Supabase.
+    temporizador=setTimeout(()=>{
+      registrar(pendiente);
+      pendiente=null;
+    },650);
+  }
+  function restaurar(estado){
     restaurando=true;
+    clearTimeout(temporizador);
+    pendiente=null;
     estado.elementos.forEach(x=>{
       if(!x.el.isConnected)return;
       x.el.classList.toggle('oculto',x.oculto);
       x.el.classList.toggle('activo',x.activo);
     });
     requestAnimationFrame(()=>{
-      window.scrollTo(0,estado.scroll||0);
-      setTimeout(()=>{restaurando=false;},100);
+      window.scrollTo({left:estado.scrollX||0,top:estado.scrollY||0,behavior:'instant'});
+      const admin=document.getElementById('administracion');
+      if(admin)admin.scrollTop=estado.scrollAdmin||0;
+      setTimeout(()=>{restaurando=false;},150);
     });
   }
-  // Se registra ANTES del onclick para recordar exactamente de dónde se entró.
-  document.addEventListener('click',function(e){
-    if(restaurando)return;
-    const control=e.target.closest('button,a,[onclick],.menu-inferior-item,.card,.accion-admin,.feria-chip,.categoria-partido,.jugador-card-publico');
-    if(!control)return;
-    const anterior=captura();
-    const clave=firma(anterior);
-    setTimeout(()=>{
-      if(restaurando)return;
-      if(firma(captura())===clave)return; // No fue una navegación.
-      if(pila.length && firma(pila[pila.length-1])===clave)return;
-      pila.push(anterior);
-      if(pila.length>MAX)pila.shift();
-    },450);
-  },true);
-  document.addEventListener('touchstart',function(e){
-    if(e.touches.length!==1){inicio=null;return;}
-    const t=e.touches[0];
-    inicio={x:t.clientX,y:t.clientY,elemento:e.target};
-  },{passive:true});
-  document.addEventListener('touchend',function(e){
-    if(!inicio||e.changedTouches.length!==1)return;
-    const a=inicio;inicio=null;
-    const t=e.changedTouches[0],dx=t.clientX-a.x,dy=t.clientY-a.y;
-    if(a.x>45||dx<85||Math.abs(dy)>Math.abs(dx)*.55)return;
-    if(a.elemento.closest('input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad'))return;
-    if(!pila.length)return;
-    const actual=firma(captura());
-    while(pila.length){
-      const anterior=pila.pop();
-      if(firma(anterior)===actual)continue;
-      recuperar(anterior);
-      break;
+  function volverPantalla(){
+    if(pendiente){registrar(pendiente);pendiente=null;clearTimeout(temporizador);}
+    const actual=huella(tomarEstado());
+    while(historial.length){
+      const anterior=historial.pop();
+      if(huella(anterior)===actual)continue;
+      restaurar(anterior);
+      return true;
     }
+    return false;
+  }
+  window.feriaVolverPantallaAnterior=volverPantalla;
+
+  // Captura antes del onclick (incluye accesos públicos y menú inferior).
+  document.addEventListener('click',e=>{
+    if(restaurando)return;
+    const objetivo=e.target instanceof Element?e.target:null;
+    const boton=objetivo?.closest('button,a,[onclick],.menu-inferior-item,.card,.accion-admin,.feria-chip,.categoria-partido,.jugador-card-publico');
+    if(!boton)return;
+    programar(tomarEstado());
+  },true);
+
+  document.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1){gesto=null;return;}
+    const t=e.touches[0];
+    gesto={x:t.clientX,y:t.clientY,elemento:e.target};
+  },{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(!gesto||e.changedTouches.length!==1)return;
+    const origen=gesto;gesto=null;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-origen.x,dy=t.clientY-origen.y;
+    if(origen.x>85||dx<75||Math.abs(dy)>Math.abs(dx)*0.55)return;
+    if(origen.elemento instanceof Element && origen.elemento.closest(
+      'input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad,.feria-carrusel,.feria-momentos-carrusel'))return;
+    // Evita cambiar una página mientras un diálogo está abierto.
+    const dialogo=document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]');
+    if(dialogo)return;
+    volverPantalla();
   },{passive:true});
 })();
 </script>
