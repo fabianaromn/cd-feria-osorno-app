@@ -7407,6 +7407,188 @@ body:has(#editarJugador:not(.oculto)) #editarJugador{padding-bottom:125px!import
 .feria-estadistica-tarjeta span{display:block;color:#b9cdef;font-size:10px;font-weight:800;margin-top:5px}
 .feria-estadisticas-nota{font-size:10px;color:#9eb3d4;line-height:1.5;margin:8px 0 0}
 </style>
+<style id="feria-cabeceras-publicas-2026">
+/* ===== FERIA OSORNO · CABECERAS PÚBLICAS UNIFICADAS (2026) ===== */
+#partidos .cabecera-partidos-premium,
+#jugadores .cabecera-jugadores-premium,
+#estadisticas .mas-cabecera,
+#store .feria-tienda-identidad {
+  position:relative!important; isolation:isolate; overflow:hidden;
+  box-sizing:border-box; width:100%; max-width:100%;
+  margin:0 auto 20px!important; padding:30px 20px 29px!important;
+  border-radius:0 0 24px 24px!important;
+  background:linear-gradient(126deg,#071739 0%,#103b85 60%,#173f81 100%)!important;
+  border:0!important; border-bottom:4px solid #d52c42!important;
+  box-shadow:0 12px 26px rgba(3,17,45,.19)!important;
+  text-align:center!important; color:#fff!important;
+}
+#partidos .cabecera-partidos-premium::before,
+#jugadores .cabecera-jugadores-premium::before,
+#estadisticas .mas-cabecera::before,
+#store .feria-tienda-identidad::before {
+  content:''; position:absolute; z-index:-1; width:240px; height:240px;
+  right:-105px; top:-130px; border-radius:50%;
+  border:35px solid rgba(255,255,255,.045); pointer-events:none;
+}
+#partidos .cabecera-partidos-premium::after,
+#jugadores .cabecera-jugadores-premium::after,
+#estadisticas .mas-cabecera::after,
+#store .feria-tienda-identidad::after {
+  content:''; position:absolute; left:0; bottom:0; height:4px; width:34%;
+  background:#ed4053; pointer-events:none;
+}
+#partidos .cabecera-partidos-premium h2,
+#jugadores .cabecera-jugadores-premium h2,
+#estadisticas .mas-cabecera h2,
+#store .feria-tienda-identidad h1 {
+  color:#fff!important; font-size:clamp(28px,6vw,38px)!important;
+  font-weight:900!important; line-height:1.13!important;
+  letter-spacing:-.7px!important; margin:10px 0 9px!important;
+  text-transform:none!important; text-shadow:none!important;
+}
+#partidos .cabecera-partidos-premium p,
+#jugadores .cabecera-jugadores-premium p,
+#estadisticas .mas-cabecera p,
+#store .feria-tienda-identidad p {
+  color:#e1eaf8!important; opacity:1!important; font-size:14px!important;
+  line-height:1.5!important; margin:0!important;
+}
+#partidos .cabecera-partidos-club,
+#jugadores .cabecera-jugadores-club,
+#estadisticas .mas-cabecera > span,
+#store .feria-tienda-identidad > span {
+  display:inline-block!important; color:#e5edff!important; opacity:1!important;
+  font-size:10px!important; font-weight:800!important; letter-spacing:1.8px!important;
+  text-transform:uppercase!important;
+}
+#store .feria-tienda-identidad img {
+  display:block!important; width:70px!important; height:70px!important;
+  object-fit:contain!important; margin:0 auto 12px!important;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.25));
+}
+#store .feria-tienda-identidad h1 em {color:#fff!important;font-style:normal!important;}
+@media(max-width:480px){
+  #partidos .cabecera-partidos-premium,
+  #jugadores .cabecera-jugadores-premium,
+  #estadisticas .mas-cabecera,
+  #store .feria-tienda-identidad {padding:25px 14px 23px!important;margin-bottom:16px!important;}
+}
+/* ===== FIN CABECERAS ===== */
+</style>
+<style id="feria-cambio-visual-controlado-20261022">
+/* Usa exactamente la misma portada de Inicio en las cinco secciones */
+#partidos .feria-portada-seccion,#jugadores .feria-portada-seccion,
+#estadisticas .feria-portada-seccion,#store .feria-portada-seccion,
+#portalSociosPublico .feria-portada-seccion{
+ width:100%!important;max-width:none!important;height:330px!important;
+ margin:0 0 20px!important;padding:0!important;border:0!important;border-radius:0!important;
+ display:block!important;position:relative!important;overflow:hidden!important;
+ background-image:url("img/fondo-feria.png")!important;
+ background-size:cover!important;background-position:center 42%!important;
+ box-shadow:none!important;
+}
+.feria-portada-seccion .portada-app-overlay{position:absolute!important;inset:0!important;
+ background:linear-gradient(180deg,rgba(3,22,58,.68) 0%,rgba(3,24,63,.80) 58%,#06142f 100%),rgba(5,35,82,.25)!important;}
+.feria-portada-seccion .portada-app-identidad{position:relative!important;z-index:2!important;
+ height:100%!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;text-align:center!important;
+ padding:calc(15px + env(safe-area-inset-top)) 20px 18px!important;}
+.feria-portada-seccion .portada-app-logo{width:100px!important;height:100px!important;object-fit:contain!important;margin-bottom:8px!important}
+.feria-portada-seccion .portada-app-identidad h1{color:white!important;font-size:clamp(27px,7vw,36px)!important;
+ font-weight:900!important;line-height:1.1!important;letter-spacing:0!important;margin:0!important;text-transform:uppercase!important}
+.feria-portada-seccion .portada-app-club-pequeno,.feria-portada-seccion .portada-app-ciudad{color:#fff!important}
+#partidos,#jugadores,#estadisticas,#store{padding-top:0!important}
+#partidos>.feria-portada-seccion,#jugadores>.feria-portada-seccion,
+#estadisticas>.feria-portada-seccion,#store>.feria-portada-seccion{
+ width:calc(100% + 32px)!important;margin-left:-16px!important;
+}
+#portalSociosPublico>.feria-portada-seccion{width:100%!important}
+</style>
+<style id="feria-portadas-ajuste-final">
+/* Las cabeceras siguen exactamente la composición de Partidos. */
+#jugadores.pantalla-jugadores-publica,
+#estadisticas.pantalla-mas-publica,
+#store.tienda-feria,
+#portalSociosPublico,
+#feriaHistoria.feria-pagina-informativa,
+#feriaComunidad.feria-pagina-informativa{
+ padding-top:0!important;
+}
+/* La fotografía llega al borde izquierdo y derecho de la pantalla. */
+#jugadores>.feria-portada-seccion,
+#estadisticas>.feria-portada-seccion,
+#store>.feria-portada-seccion,
+#portalSociosPublico>.feria-portada-seccion,
+#feriaHistoria>.feria-portada-seccion,
+#feriaComunidad>.feria-portada-seccion{
+ width:calc(100% + 32px)!important;
+ max-width:none!important;
+ margin:0 -16px 22px!important;
+ height:330px!important;
+ border:0!important;
+ border-radius:0!important;
+ padding:0!important;
+ box-shadow:none!important;
+}
+/* Cada sección usa su padding lateral propio. */
+#jugadores>.feria-portada-seccion{width:calc(100% + 28px)!important;margin-left:-14px!important;margin-right:-14px!important}
+#store>.feria-portada-seccion{width:calc(100% + 28px)!important;margin-left:-14px!important;margin-right:-14px!important}
+#portalSociosPublico>.feria-portada-seccion{width:calc(100% + 36px)!important;margin-left:-18px!important;margin-right:-18px!important}
+#feriaHistoria>.feria-portada-seccion,#feriaComunidad>.feria-portada-seccion{width:calc(100% + 34px)!important;margin-left:-17px!important;margin-right:-17px!important}
+/* Eliminar flechas de regreso exclusivamente en las secciones pedidas. */
+#store>.feria-volver-icono,#feriaHistoria>.feria-volver-icono,#feriaComunidad>.feria-volver-icono{display:none!important}
+/* Socios: tarjeta centrada, sin alterar formulario ni acciones. */
+#portalSociosPublico .portal-socios-tarjeta{width:100%!important;max-width:480px!important;margin:12px auto 24px!important;box-sizing:border-box!important}
+/* Evitar encabezados antiguos duplicados en Historia/Comunidad. */
+#feriaHistoria>.feria-portada-seccion+ h2,#feriaComunidad>.feria-portada-seccion+ h2{margin-top:20px!important}
+@media(max-width:480px){
+ #jugadores>.feria-portada-seccion{width:calc(100% + 22px)!important;margin-left:-11px!important;margin-right:-11px!important}
+}
+</style>
+<style id="feria-historia-comunidad-portadas-fix">
+/* Portadas internas sin margen superior, respetando contenido y navegación */
+#feriaHistoria,#feriaComunidad{padding-top:0!important}
+#feriaHistoria>.feria-portada-seccion,#feriaComunidad>.feria-portada-seccion{
+  width:calc(100% + 32px)!important;max-width:none!important;
+  margin:-16px -16px 22px!important;padding:0!important;
+  height:330px!important;position:relative!important;overflow:hidden!important;
+  border-radius:0!important;box-shadow:none!important;
+  background-image:url('img/fondo-feria.png')!important;
+  background-size:cover!important;background-position:center 42%!important;
+}
+#feriaHistoria>.feria-portada-seccion .portada-app-overlay,
+#feriaComunidad>.feria-portada-seccion .portada-app-overlay{position:absolute!important;inset:0!important;
+ background:linear-gradient(180deg,rgba(3,22,58,.68),rgba(3,24,63,.80) 58%,#06142f)!important}
+#feriaHistoria>.feria-portada-seccion .portada-app-identidad,
+#feriaComunidad>.feria-portada-seccion .portada-app-identidad{position:relative!important;z-index:2!important;
+ height:100%!important;display:flex!important;flex-direction:column!important;justify-content:center!important;
+ align-items:center!important;text-align:center!important;padding:15px 20px 18px!important}
+#feriaHistoria>.feria-portada-seccion .portada-app-identidad h1,
+#feriaComunidad>.feria-portada-seccion .portada-app-identidad h1{
+ color:#fff!important;font-size:clamp(25px,6vw,36px)!important;line-height:1.08!important;
+ text-align:center!important;font-weight:900!important;margin:0!important}
+.feria-volver-a-descubre{position:absolute!important;top:15px!important;left:15px!important;z-index:5!important;
+ width:44px!important;height:40px!important;border:1px solid #5273a4!important;border-radius:12px!important;
+ background:#12376c!important;color:#fff!important;font-size:25px!important;cursor:pointer!important}
+</style>
+
+<style id="feria-socios-portada-ajuste-definitivo">
+/* Único cambio de esta versión: pantalla pública de Socios. */
+#portalSociosPublico{padding:0 0 35px!important;box-sizing:border-box!important;}
+#portalSociosPublico>.portada-app-feria.feria-portada-seccion{
+ display:block!important;position:relative!important;box-sizing:border-box!important;
+ width:100%!important;max-width:none!important;height:330px!important;
+ margin:0 0 20px!important;padding:0!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ background-image:url('img/fondo-feria.png')!important;
+ background-size:cover!important;background-position:center 42%!important;
+}
+#portalSociosPublico>.portal-socios-tarjeta{
+ box-sizing:border-box!important;width:calc(100% - 36px)!important;
+ max-width:480px!important;margin:0 auto 24px!important;
+}
+@media(max-width:380px){#portalSociosPublico>.portal-socios-tarjeta{width:calc(100% - 28px)!important}}
+</style>
 </head>  
   
   <body>
@@ -7736,10 +7918,10 @@ body:has(#editarJugador:not(.oculto)) #editarJugador{padding-bottom:125px!import
 
   <button
   class="menu-inferior-item"
-  onclick="mostrarPortalSociosPublico(this)">
+  onclick="mostrar('store')">
 
-    <span class="menu-inferior-icono">👥</span>
-    <span>Socios</span>
+    <span class="menu-inferior-icono">🛍️</span>
+    <span>Tienda</span>
 
   </button>
 
@@ -7766,19 +7948,24 @@ class="seccion oculto pantalla-jugadores-publica">
 
   <!-- CABECERA -->
 
-  <div class="cabecera-jugadores-premium">
+  <section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>JUGADORES</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
 
-    <span class="cabecera-jugadores-club">
-      CLUB DEPORTIVO FERIA OSORNO
-    </span>
-
-    <h2>JUGADORES</h2>
-
-    <p>
-      Planteles oficiales de nuestro Club
-    </p>
-
-  </div>
+</section>
 
 
   <!-- CATEGORÍAS -->
@@ -12174,19 +12361,24 @@ id="detalleJugador">
 id="partidos"
 class="seccion oculto pantalla-partidos-publica">
 
-  <div class="cabecera-partidos-premium">
+  <section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>PARTIDOS</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
 
-    <span class="cabecera-partidos-club">
-      CLUB DEPORTIVO FERIA OSORNO
-    </span>
-
-    <h2>Partidos</h2>
-
-    <p>
-      Calendario y resultados del club
-    </p>
-
-  </div>
+</section>
 
 
   <div class="categorias-partidos-scroll">
@@ -12312,8 +12504,24 @@ class="seccion oculto detalle-partido-publico">
 
   
 <section id="portalSociosPublico" class="oculto" aria-label="Portal de socios">
- <button type="button" class="boton-volver-solo" aria-label="Volver" onclick="mostrarInicioPublico()">←</button>
- <div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Socios</h1><p>Tu espacio privado en el club.</p></div>
+ <section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>SOCIOS</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
+
+</section>
  <div class="portal-socios-tarjeta">
    <span class="login-feria-etiqueta">ACCESO EXCLUSIVO</span>
    <h3>Bienvenido de nuevo</h3>
@@ -12416,11 +12624,24 @@ Aquí aparecerá la tabla de cada campeonato.
 id="estadisticas"
 class="seccion oculto pantalla-mas-publica">
 
-  <div class="mas-cabecera">
-    <span>CLUB DEPORTIVO FERIA OSORNO</span>
-    <h2>Descubre la Feria</h2>
-    <p>Historias, actividades y todo lo que nos une</p>
-  </div>
+  <section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>DESCUBRE</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
+
+</section>
 
   <div class="mas-grupo">
 
@@ -12430,12 +12651,7 @@ class="seccion oculto pantalla-mas-publica">
 
     <button class="mas-opcion" onclick="mostrar('feriaHistoria')"><span>🏆</span><strong>Nuestra historia</strong><span>›</span></button>
 
-    <button class="mas-opcion"
-    onclick="mostrar('store')">
-      <span>🛍️</span>
-      <strong>Tienda oficial</strong>
-      <span>›</span>
-    </button>
+    <button class="mas-opcion" onclick="mostrarPortalSociosPublico(this)"><span>👥</span><strong>Socios</strong><span>›</span></button>
 
   </div>
 
@@ -12484,7 +12700,25 @@ onclick="volver()">
   </p>  </section>
 <section id="feriaEditorHistoria" class="seccion oculto feria-admin-pantalla feria-editor-historia"><button type="button" class="feria-volver-icono" onclick="feriaCerrarEditorHistoria()">←</button><span class="feria-lead">ADMINISTRACIÓN · PATRIMONIO DEL CLUB</span><h2>📜 Nuestra historia</h2><p>Prepara y revisa el contenido histórico del club. Los cambios se guardan como borrador en este dispositivo, <strong>no se publican todavía</strong>. La publicación para todos los socios requerirá conectar el editor a Supabase.</p><div class="feria-editor-aviso">📝 Borrador local · Pendiente de sincronización con Supabase</div><div id="feriaEditorHistoriaCampos"></div><button type="button" class="feria-boton" onclick="feriaGuardarBorradorHistoria()">💾 Guardar borrador</button><button type="button" class="feria-boton feria-editor-preview" onclick="feriaPrevisualizarHistoria()">👁 Vista previa pública</button><p id="feriaEditorHistoriaEstado" role="status"></p></section>
 <section id="feriaHistoria" class="seccion oculto feria-pagina-informativa">
-<button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Volver">←</button><div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Nuestra <em>historia</em></h1><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p></div><h2>🏆 Nuestra historia</h2><p>Más de medio siglo de esfuerzo, amistad y amor por nuestros colores.</p>
+<section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<button type="button" class="feria-volver-a-descubre" onclick="mostrar('estadisticas')" aria-label="Volver a Descubre">←</button>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>NUESTRA HISTORIA</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
+
+</section>
 <div class="feria-historia-grid">
 <button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('origenes')"><span>📜</span><h3>Nuestros orígenes</h3><p>Todo comenzó con trabajadores, sueños y un club que se convirtió en familia.</p></button>
 <button type="button" class="feria-historia-tarjeta feria-tarjeta-boton" onclick="feriaAbrirEspecial('titulos')"><span>🏆</span><h3>Vitrina de títulos</h3><p>Más de 150 copas y una sede llena de recuerdos.</p></button>
@@ -12524,15 +12758,44 @@ onclick="volver()">
 <div class="feria-escuela-marca"><img src="img/logo-feria.png" alt="Escudo Feria Osorno" onerror="this.style.display='none'"><div><span>FERIA SOMOS TODOS</span><h1>Escuela de Fútbol</h1><p>Formando personas, construyendo sueños.</p></div></div>
 <div id="feriaEscuelaInternaContenido"></div>
 <nav class="feria-escuela-nav" aria-label="Navegación exclusiva de la escuela"><button type="button" data-escuela="beneficios" onclick="feriaModuloEscuela('beneficios')">🎁<small>Beneficios</small></button><button type="button" data-escuela="nutricion" onclick="feriaModuloEscuela('nutricion')">🥗<small>Nutrición</small></button><button type="button" data-escuela="academia" onclick="feriaModuloEscuela('academia')">📚<small>Apoyo escolar</small></button><button type="button" data-escuela="documentos" onclick="feriaModuloEscuela('documentos')">📄<small>Documentos</small></button><button type="button" data-escuela="finanzas" onclick="feriaModuloEscuela('finanzas')">💰<small>Finanzas</small></button></nav></section>
-<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><button class="feria-volver-icono" onclick="mostrar('estadisticas')" aria-label="Regresar" title="Regresar">←</button><div class="feria-cabecera-unificada"><img src="img/logo-feria.png" alt="Escudo CD Feria Osorno"><span>CLUB DEPORTIVO FERIA OSORNO</span><h1>Comunidad <em>feriana</em></h1><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p></div><h2>🤝 Comunidad feriana</h2><p>La Feria se construye con sus socios, familias, hinchas y vecinos.</p><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
-<section id="store" class="seccion oculto tienda-feria">
-<button class="feria-volver-icono" onclick="feriaVolverDesdeTienda()" aria-label="Regresar a Descubre la Feria" title="Regresar">←</button>
-<div class="feria-tienda-identidad">
-  <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
-  <span>CLUB DEPORTIVO FERIA OSORNO</span>
-  <h1>Tienda <em>Oficial</em></h1>
-  <p>Productos oficiales del club.</p>
+<section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<button type="button" class="feria-volver-a-descubre" onclick="mostrar('estadisticas')" aria-label="Volver a Descubre">←</button>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>COMUNIDAD FERIANA</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
 </div>
+</div>
+
+</section><div class="feria-historia-grid"><article class="feria-historia-tarjeta"><span>🎉</span><h3>Actividades y beneficios</h3><p>Un lugar para informar rifas, encuentros, beneficios y jornadas comunitarias.</p></article><article class="feria-historia-tarjeta"><span>🤝</span><h3>Colaboradores</h3><p>Conoce a quienes apoyan el desarrollo deportivo y social del club.</p></article><article class="feria-historia-tarjeta"><span>📣</span><h3>Participa con nosotros</h3><p>Pronto podrás encontrar campañas, convocatorias y oportunidades de colaborar.</p></article></div></section>
+<section id="store" class="seccion oculto tienda-feria">
+<section class="portada-app-feria feria-portada-seccion">
+<div class="portada-app-overlay"></div>
+<div class="portada-app-identidad">
+<img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+<span class="portada-app-club-pequeno">
+    CLUB DEPORTIVO
+  </span>
+<h1>TIENDA</h1>
+<span class="portada-app-ciudad">
+    PUERTO MONTT
+  </span>
+<div class="portada-app-linea">
+<span></span>
+<i></i>
+</div>
+</div>
+
+</section>
 <div id="tiendaAviso" role="status"></div><div id="tiendaCatalogo" class="tienda-grid"></div>
 <div class="tienda-panel"><div class="tienda-carrito-cabecera"><div><small>TIENDA OFICIAL · CD FERIA OSORNO</small><h3>🛍️ Mi carrito <span id="tiendaContador">(0)</span></h3></div><span class="tienda-carrito-icono">🛒</span></div><div id="tiendaCarrito"></div><div class="tienda-resumen"><span>RESUMEN DEL PEDIDO</span><div class="tienda-resumen-linea"><span>Subtotal</span><strong id="tiendaSubtotal">$0</strong></div><div class="tienda-resumen-linea tienda-resumen-total"><span>Total a pagar</span><strong id="tiendaTotal">$0</strong></div><button type="button" id="tiendaContinuar" class="tienda-continuar" onclick="tiendaMostrarCheckout()">🔒 Continuar compra →</button></div>
 <div id="tiendaCheckout" class="oculto"><h3 class="tienda-checkout-titulo">Datos para finalizar tu pedido</h3>
