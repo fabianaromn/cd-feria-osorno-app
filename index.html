@@ -14,7 +14,7 @@ document.querySelectorAll('.feria-series-scroll').forEach(function(bar){
 </script>  
 <head>  <meta charset="UTF-8">  <meta name="viewport"    
 content="width=device-width, initial-scale=1.0">  
-<title>CD Feria Osorno</title>  
+<title>CD FERIA OSORNO</title>
   
 <style>   
 
@@ -7087,7 +7087,7 @@ overflow-x:hidden;
  text-decoration:none!important;vertical-align:middle;}
 /* Portal de socios (público, sin datos personales antes de autenticar) */
 #portalSociosPublico{position:fixed;inset:0 0 72px;z-index:100;background:#06142f;
- color:#fff;overflow-y:auto;padding:22px 18px 35px;overscroll-behavior:contain;}
+ color:#fff;overflow-y:auto;padding:0 0 35px;overscroll-behavior:contain;}
 #portalSociosPublico.oculto{display:none!important;}
 .portal-socios-hero{padding:25px 20px;background:linear-gradient(130deg,#102b62,#071b3f);
  border-radius:18px;border:1px solid #2e4c83;margin:14px 0 18px;}
@@ -7588,6 +7588,26 @@ body:has(#editarJugador:not(.oculto)) #editarJugador{padding-bottom:125px!import
  max-width:480px!important;margin:0 auto 24px!important;
 }
 @media(max-width:380px){#portalSociosPublico>.portal-socios-tarjeta{width:calc(100% - 28px)!important}}
+</style>
+<style id="feria-socios-ancho-correccion-puntual">
+#portalSociosPublico{left:0!important;right:0!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0 0 35px!important;box-sizing:border-box!important;}
+#portalSociosPublico>.portada-app-feria.feria-portada-seccion{width:100%!important;max-width:100%!important;margin:0 0 20px!important;padding:0!important;box-sizing:border-box!important;border-radius:0!important;}
+#portalSociosPublico>.portal-socios-tarjeta{width:calc(100% - 28px)!important;max-width:none!important;margin:0 14px 24px!important;box-sizing:border-box!important;}
+</style>
+
+<style id="feria-socios-solo-portada-fullbleed-v3">
+/* Ajuste aislado: la portada de Socios se extiende al ancho visible del dispositivo. */
+html body #portalSociosPublico{position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:72px!important;width:100vw!important;max-width:100vw!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;transform:none!important;box-sizing:border-box!important;}
+html body #portalSociosPublico > section.portada-app-feria.feria-portada-seccion{position:relative!important;display:block!important;left:0!important;right:auto!important;top:0!important;transform:none!important;width:100vw!important;max-width:100vw!important;min-width:100vw!important;height:330px!important;margin:0 0 20px!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;box-sizing:border-box!important;background-size:cover!important;background-position:center 42%!important;}
+/* El formulario conserva sus márgenes interiores para facilitar la lectura. */
+</style>
+<style id="feria-cuatro-cabeceras-historia">
+/* Solo los cuatro módulos de Nuestra historia */
+#feriaEspecial:has(.feria-portada-historia-modulo){padding:0!important;}
+#feriaEspecial .feria-portada-historia-modulo{width:100%!important;max-width:none!important;height:330px!important;margin:0!important;border:0!important;border-radius:0!important;padding:0!important;display:block!important;position:relative!important;overflow:hidden!important;background-image:url("img/fondo-feria.png")!important;background-size:cover!important;background-position:center 42%!important;}
+#feriaEspecial .feria-portada-historia-modulo .portada-app-identidad{width:100%!important;box-sizing:border-box!important;}
+#feriaEspecial .feria-especial-cuerpo-historia{padding:20px 17px 115px;}
+#feriaEspecial:has(.feria-portada-historia-modulo)>.feria-volver-icono{position:fixed!important;top:16px!important;left:16px!important;z-index:110!important;}
 </style>
 </head>  
   
@@ -23952,6 +23972,13 @@ function feriaAbrirEspecial(tipo){let html='';let origen=['valores','entrenamien
  if(tipo==='valores')html=`<span class="feria-lead">Escuela gratuita · CD Feria Osorno</span><h2>Formación y valores</h2>${feriaCarrusel(feriaContenido2026.escuelaFotos)}<h3>Formamos personas, además de futbolistas</h3><div class="feria-valor"><strong>🤝 Respeto</strong><p>Aprender a valorar al compañero, al rival y a quienes nos enseñan.</p></div><div class="feria-valor"><strong>💙 Compañerismo</strong><p>Entender que nadie gana solo y que todos tienen un lugar en el equipo.</p></div><div class="feria-valor"><strong>🌱 Disciplina y perseverancia</strong><p>Descubrir que mejorar requiere constancia, paciencia y esfuerzo.</p></div><div class="feria-valor"><strong>📚 Crecimiento integral</strong><p>El deporte acompaña los estudios, los hábitos saludables y la confianza de cada niño.</p></div><div class="feria-valor"><strong>❤️ Inclusión y alegría</strong><p>Una escuela gratuita para que la posibilidad de jugar no dependa del bolsillo de la familia.</p></div>`;
  if(tipo==='entrenamientos')html=`<span class="feria-lead">Horarios actuales informados por el club</span><h2>Entrenamientos</h2><div class="feria-horario"><strong>📅 Lunes · 17:00 a 18:00</strong><span>Niños de 5 a 9 años</span><span>📍 Gimnasio Chile Barrio</span></div><div class="feria-horario"><strong>📅 Lunes · 18:00 a 19:00</strong><span>Niños de 10 a 13 años</span><span>📍 Gimnasio Chile Barrio</span></div><div class="feria-horario"><strong>📅 Miércoles · 17:00 a 18:10</strong><span>Niños de 10 a 15 años</span><span>📍 Cancha Asociación</span></div><p>Los horarios pueden variar por actividades o disponibilidad de recinto. Consulta con la escuela antes de asistir por primera vez.</p>`;
  if(tipo==='personasLista'){origen='feriaHistoria';}
+ // Portada exclusiva de los cuatro accesos de Nuestra historia; sin alterar el contenido.
+ const titulosHistoria={origenes:'NUESTROS ORÍGENES',titulos:'VITRINA DE TÍTULOS',personas:'PERSONAS HISTÓRICAS',identidad:'NUESTRA IDENTIDAD'};
+ if(Object.prototype.hasOwnProperty.call(titulosHistoria,tipo)){
+   const titulo=titulosHistoria[tipo];
+   const portada=`<section class="portada-app-feria feria-portada-seccion feria-portada-historia-modulo" aria-label="${titulo}"><div class="portada-app-overlay"></div><div class="portada-app-identidad"><img alt="Escudo Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"><span class="portada-app-club-pequeno">CLUB DEPORTIVO</span><h1>${titulo}</h1><span class="portada-app-ciudad">PUERTO MONTT</span><div class="portada-app-linea"><span></span><i></i></div></div></section>`;
+   html=portada+`<div class="feria-especial-cuerpo-historia">${html}</div>`;
+ }
  feriaMostrarEspecial(html,origen);
 }
 // Las fichas de personas vuelven a la cuadrícula, no a una página inexistente.
@@ -25032,4 +25059,21 @@ async function feriaExportarFinanzasPDF(){
 }
 
 </script>
+
+<style id="feria-socios-ajuste-confirmado">
+/* Único cambio: ancho completo de la pantalla y portada pública de Socios.
+   Reproduce la prueba realizada en Chrome DevTools. */
+/* Igualamos la especificidad de la regla antigua con :not(:has(...)),
+   que ganaba al selector simple de la prueba anterior. */
+#portalSociosPublico:not(:has(#portalSocioPrivado:not(.oculto))) {
+  padding: 0 !important;
+}
+/* Mantenemos el acceso privado sin alterar. */
+#portalSociosPublico > .feria-portada-seccion {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+</style>
 </body>  </html>
