@@ -7362,6 +7362,13 @@ overflow-x:hidden;
 #feriaPinEntrada{display:block;width:100%;font-size:28px;text-align:center;letter-spacing:12px;border:2px solid #cbd5e1;border-radius:12px;padding:12px;margin-bottom:12px;min-width:0}
 #feriaPinError{color:#b42318;font-weight:700;min-height:18px;margin:0 0 8px}.feria-pin-acciones{display:flex;gap:10px}.feria-pin-acciones button{flex:1;min-width:0;padding:12px 8px;border-radius:10px;font-weight:800;border:1px solid #cbd5e1;background:#f1f5f9;color:#071b4a}.feria-pin-acciones button[type=submit]{background:#c82032;color:white;border-color:#c82032}
 
+
+/* V8.20 · registro de jornada múltiple */
+#agregarPartido [hidden]{display:none !important;}
+#agregarPartido .feria-modo-partido{background:#112c56;border:1px solid #355580;border-radius:15px;padding:15px;margin:15px 0;color:#fff;}
+#agregarPartido .feria-modo-partido label{display:block;font-weight:800;font-size:13px;margin-bottom:8px;}
+#agregarPartido .feria-modo-partido select{width:100%;min-height:46px;border-radius:10px;padding:10px;background:#fff;color:#081a37;}
+#agregarPartido .feria-aviso-mayores{margin-top:12px;background:#092042;border-left:4px solid #ef1741;padding:12px;border-radius:8px;font-size:13px;line-height:1.5;color:#e9f1ff;}
 </style>  
 
   
@@ -7777,6 +7784,22 @@ html body #portalSociosPublico>.feria-portada-seccion{margin-top:0!important}
 #editarBannerPartido .feria-banner-guardar{display:block;width:100%;min-height:52px;border:0;border-radius:12px;background:#e71938;color:white;font-size:15px;font-weight:900;cursor:pointer;padding:14px}
 #editarBannerPartido .feria-banner-guardar:active{transform:scale(.99)}
 @media(max-width:360px){#editarBannerPartido .feria-banner-grid{grid-template-columns:1fr}#editarBannerPartido .feria-banner-ancho{grid-column:auto}}
+</style>
+
+<style id="feria-v8-21-volver-administracion">
+/* Flecha circular uniforme en subpantallas de administración. */
+html body #administracion button.boton.feria-regreso-admin,
+html body section.seccion button.boton.feria-regreso-admin,
+html body section.seccion button.volver-publico,
+html body #editarBannerPartido button.feria-banner-volver {
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ padding:0!important;margin:0 0 14px!important;border-radius:50%!important;
+ background:rgba(13,43,91,.86)!important;color:#fff!important;
+ border:1px solid rgba(164,197,241,.48)!important;
+ font-size:25px!important;font-weight:500!important;line-height:1!important;
+ box-shadow:0 2px 9px rgba(0,0,0,.15)!important;cursor:pointer!important;
+}
 </style>
 </head>  
   
@@ -8997,7 +9020,7 @@ class="seccion oculto">
 
   <button
   class="boton"
-  onclick="mostrar('administracion')">
+  onclick="volverGestionSocios()">
     ←
   </button>
 
@@ -9144,7 +9167,7 @@ class="seccion oculto">
 
   <button
   class="boton"
-  onclick="mostrar('administracion')">
+  onclick="volverGestionSocios()">
     ←
   </button>
 
@@ -9326,7 +9349,7 @@ class="seccion oculto">
 
   <button
   class="boton"
-  onclick="mostrar('administracion')">
+  onclick="volverGestionSocios()">
     ←
   </button>
 
@@ -9573,7 +9596,7 @@ class="seccion oculto">
 
   <button
   class="boton"
-  onclick="mostrar('administracion')">
+  onclick="volverGestionSocios()">
     ←
   </button>
 
@@ -12293,6 +12316,17 @@ onclick="volverGestionPartidos()">
     Ingresa los datos del nuevo partido.
   </p>
 
+  <div class="feria-modo-partido">
+    <label for="modoRegistroPartido">Modalidad de registro</label>
+    <select id="modoRegistroPartido" onchange="actualizarModoRegistroPartido()">
+      <option value="individual">⚽ Partido individual</option>
+      <option value="mayores">🏆 Jornada completa · 3 series mayores</option>
+    </select>
+    <div id="avisoJornadaMayores" class="feria-aviso-mayores" hidden>
+      Se crearán <strong>3 partidos independientes</strong> con los mismos datos: Primera Serie, Segunda Serie y Serie Senior. Podrás editar cada resultado por separado.
+    </div>
+  </div>
+
   <input
   id="nuevoCampeonato"
   type="text"
@@ -12331,6 +12365,7 @@ onclick="volverGestionPartidos()">
 
   </select>
 
+  <div id="contenedorCategoriaPartido">
   <select
   id="nuevaCategoriaPartido"
   style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;">
@@ -12373,6 +12408,8 @@ onclick="volverGestionPartidos()">
 
   </select>
 
+  </div>
+
   <input
   id="nuevaJornada"
   type="number"
@@ -12398,6 +12435,7 @@ onclick="volverGestionPartidos()">
 
   </select>
 
+  <div id="contenedorMarcadoresNuevoPartido">
   <input
   id="nuevosGolesFavor"
   type="number"
@@ -12413,6 +12451,8 @@ onclick="volverGestionPartidos()">
   min="0"
   style="width:100%; padding:14px; margin:7px 0; border:1px solid #ddd; border-radius:10px;"
   >
+
+  </div>
 
   <button
   class="boton"
@@ -19869,6 +19909,20 @@ async function guardarBannerPartido(){
 }
   
   
+function actualizarModoRegistroPartido(){
+  const masivo = document.getElementById('modoRegistroPartido')?.value === 'mayores';
+  document.getElementById('contenedorCategoriaPartido').hidden = masivo;
+  document.getElementById('contenedorMarcadoresNuevoPartido').hidden = masivo;
+  document.getElementById('avisoJornadaMayores').hidden = !masivo;
+  document.querySelector('#agregarPartido button[onclick="guardarPartido()"]').textContent = masivo
+    ? '💾 Crear los 3 partidos' : '💾 Guardar partido';
+  if(masivo){
+    document.getElementById('nuevoEstadoPartido').value = 'Pendiente';
+    document.getElementById('nuevosGolesFavor').value = '';
+    document.getElementById('nuevosGolesContra').value = '';
+  }
+}
+
 async function guardarPartido(){
 
 const campeonato =
@@ -19883,8 +19937,8 @@ document.getElementById("nuevaFecha").value;
 const localVisitante =
 document.getElementById("nuevoLocalVisitante").value;
 
-const categoria =
-document.getElementById("nuevaCategoriaPartido").value;
+const modoMayores = document.getElementById('modoRegistroPartido').value === 'mayores';
+const categoria = document.getElementById("nuevaCategoriaPartido").value;
 
 const jornada =
 document.getElementById("nuevaJornada").value;
@@ -19902,10 +19956,10 @@ const mensaje =
 document.getElementById("mensajePartido");
 
 
-if(!campeonato || !rival || !fecha || !localVisitante || !categoria){
+if(!campeonato || !rival || !fecha || !localVisitante || (!modoMayores && !categoria)){
 
 mensaje.innerText =
-"⚠️ Completa campeonato, rival, fecha, local/visitante y categoría.";
+"⚠️ Completa campeonato, rival, fecha, local/visitante" + (modoMayores ? "." : " y categoría.");
 
 mensaje.style.color = "#c82032";
 
@@ -19915,58 +19969,49 @@ return;
 
 
 mensaje.innerText =
-"⏳ Guardando partido...";
+modoMayores ? "⏳ Creando los 3 partidos..." : "⏳ Guardando partido...";
 
 mensaje.style.color = "#17479e";
 
 
-const { data: categoriaData, error: categoriaError } =
-await supabaseClient
-.from("categories")
-.select("id")
-.eq("name", categoria)
-.single();
+const nombresCategorias = modoMayores
+  ? ['Primera Serie', 'Segunda Serie', 'Serie Senior']
+  : [categoria];
 
+const { data: categoriasEncontradas, error: categoriaError } = await supabaseClient
+  .from('categories').select('id,name').in('name', nombresCategorias);
 
-if(categoriaError){
-
-console.error(categoriaError);
-
-mensaje.innerText =
-"❌ No se encontró la categoría.";
-
-mensaje.style.color = "#c82032";
-
-return;
-
+if(categoriaError || !categoriasEncontradas || nombresCategorias.some(
+  nombre => !categoriasEncontradas.some(c => c.name === nombre)
+)){
+  console.error('Categorías faltantes:', categoriaError);
+  mensaje.innerText = '❌ No se encontraron todas las categorías requeridas.';
+  mensaje.style.color = '#c82032';
+  return;
 }
 
+const registros = nombresCategorias.map(nombre => ({
+  campeonato,
+  rival,
+  fecha,
+  local_visitante: localVisitante,
+  goles_favor: modoMayores ? null : (golesFavor !== '' ? Number(golesFavor) : null),
+  goles_contra: modoMayores ? null : (golesContra !== '' ? Number(golesContra) : null),
+  estado: modoMayores ? 'Pendiente' : estado,
+  tipo_partido: 'campeonato',
+  category_id: categoriasEncontradas.find(c => c.name === nombre).id,
+  jornada: jornada ? Number(jornada) : null
+}));
 
-const { error: partidoError } =
-await supabaseClient
-.from("Partidos")
-.insert([
-{
-campeonato: campeonato,
-rival: rival,
-fecha: fecha,
-local_visitante: localVisitante,
-goles_favor: golesFavor !== "" ? Number(golesFavor) : null,
-goles_contra: golesContra !== "" ? Number(golesContra) : null,
-estado: estado,
-tipo_partido: "campeonato",
-category_id: categoriaData.id,
-jornada: jornada ? Number(jornada) : null
-}
-]);
-
+// Una sola inserción SQL: evita guardar solo una parte de la jornada.
+const { error: partidoError } = await supabaseClient.from('Partidos').insert(registros);
 
 if(partidoError){
 
 console.error(partidoError);
 
 mensaje.innerText =
-"❌ Error al guardar el partido.";
+"❌ No se pudieron guardar los partidos. No se creó la jornada.";
 
 mensaje.style.color = "#c82032";
 
@@ -19976,7 +20021,7 @@ return;
 
 
 mensaje.innerText =
-"✅ Partido guardado correctamente.";
+modoMayores ? "✅ Jornada creada: Primera, Segunda y Senior." : "✅ Partido guardado correctamente.";
 
 mensaje.style.color = "#16803c";
 
@@ -21833,12 +21878,13 @@ async function guardarEdicionJugador(){
 
 }
 
-function volverGestionPartidos(){
-
-  mostrar("administracion");
-
-  mostrarMenuAdmin("menuAdminPartidos");
-
+async function volverGestionPartidos(){
+  // Esperar la validación de permisos y la apertura de Administración.
+  await mostrar("administracion");
+  const admin = document.getElementById("administracion");
+  if (!admin || admin.classList.contains("oculto")) return;
+  await mostrarMenuAdmin("menuAdminPartidos");
+  window.scrollTo(0, 0);
 }
 
 async function confirmarEliminarJugador(id, nombre, categoria){
@@ -21894,12 +21940,13 @@ window.addEventListener("load", function(){
 
 });
 
-function volverGestionJugadores(){
-
-  mostrar("administracion");
-
-  mostrarMenuAdmin("menuAdminJugadores");
-
+async function volverGestionJugadores(){
+  // Esperar la validación de permisos y la apertura de Administración.
+  await mostrar("administracion");
+  const admin = document.getElementById("administracion");
+  if (!admin || admin.classList.contains("oculto")) return;
+  await mostrarMenuAdmin("menuAdminJugadores");
+  window.scrollTo(0, 0);
 }
 
 // =====================================
@@ -25231,6 +25278,27 @@ async function feriaExportarFinanzasPDF(){
   padding: 0 !important;
 }
 </style>
+
+<script id="feria-v8-21-navegacion-admin">
+function volverGestionSocios(){
+  mostrar('administracion').then(()=>mostrarMenuAdmin('menuAdminSocios')).catch(e=>console.error('Regreso a socios:',e));
+}
+(function(){
+ function aplicarFlechas(){
+  document.querySelectorAll('section.seccion button.boton, #administracion button.boton').forEach(function(b){
+   if(b.textContent.trim()==='←' || b.textContent.trim()==='⟵') {
+    b.classList.add('feria-regreso-admin');
+    b.setAttribute('aria-label','Volver');
+   }
+  });
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',aplicarFlechas);
+ else aplicarFlechas();
+ // Los formularios que generan botones después de consultar Supabase también se actualizan.
+ const obs=new MutationObserver(aplicarFlechas);
+ document.addEventListener('DOMContentLoaded',()=>{obs.observe(document.body,{childList:true,subtree:true});});
+})();
+</script>
 </body>  </html>
 
 <style id="feria-v8-informacion-partido">
