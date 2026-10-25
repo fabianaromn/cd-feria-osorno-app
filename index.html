@@ -7606,6 +7606,49 @@ html body #portalSociosPublico > section.portada-app-feria.feria-portada-seccion
 #feriaEspecial .feria-especial-cuerpo-historia{padding:20px 17px 115px;}
 #feriaEspecial:has(.feria-portada-historia-modulo)>.feria-volver-icono{position:fixed!important;top:16px!important;left:16px!important;z-index:110!important;}
 </style>
+
+<style id="feria-v8-match-center">
+/* Tarjetas públicas — Digital Match Center */
+.partido-card-publico{background:linear-gradient(155deg,#07152f 0%,#0b2149 75%,#07152e 100%)!important;border:1px solid #244675!important;border-radius:20px!important;color:#fff!important;box-shadow:0 12px 28px rgba(0,9,35,.24)!important;margin:0 0 17px!important;position:relative;overflow:hidden}
+.partido-card-publico:before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(#e82142,#3b83ff)}
+.partido-card-publico .partido-card-superior{background:transparent!important;padding:15px 17px 6px!important;gap:8px}
+.partido-card-publico .partido-card-tipo{color:#8eb9f4!important;font-size:9px!important}
+.partido-card-publico .partido-card-superior strong{color:#fff!important;font-size:14px!important}
+.partido-card-publico .partido-card-jornada{background:#173966!important;color:#bcd7ff!important;border:1px solid #28517d;border-radius:8px!important;font-size:9px!important}
+.partido-card-publico .partido-card-meta{padding:4px 17px!important}
+.partido-card-publico .partido-card-meta>span:first-child{color:#b4c9e8!important;font-size:10px!important}
+.partido-card-publico .partido-card-estado{background:#123c3b!important;color:#91f1c4!important;border:1px solid #23655d!important;border-radius:20px!important;font-size:9px!important}
+.partido-card-publico .partido-card-fecha{color:#8faed7!important;text-align:center;padding:10px 8px 0!important;font-size:11px!important}
+.partido-card-publico .partido-card-enfrentamiento{padding:15px 12px 18px!important;gap:4px}
+.partido-card-publico .partido-card-equipo{width:32%!important;min-width:0}
+.partido-card-publico .partido-card-equipo strong{color:#fff!important;font-size:11px!important;line-height:1.3!important;min-height:32px!important}
+.partido-card-publico .partido-card-escudo{width:55px!important;height:55px!important;object-fit:contain}
+.partido-card-publico .partido-card-escudo-rival{width:55px!important;height:55px!important;background:#17335a!important;border-color:#355782!important;color:#e8efff!important}
+.partido-card-publico .partido-card-centro{width:34%;gap:6px}
+.partido-card-publico .partido-card-centro>span{background:#d81d3b!important;border-radius:7px!important;width:auto!important;min-width:56px;height:auto!important;padding:7px 9px!important;font-size:10px!important;order:2}
+.partido-card-publico .partido-card-centro small{color:#93b3dd!important;font-size:9px!important;order:3}
+.partido-card-publico .partido-card-goles{background:transparent!important;color:#fff!important;font-size:32px!important;padding:0!important;margin:8px 0 0!important;line-height:1!important;font-variant-numeric:tabular-nums}
+@media(max-width:380px){.partido-card-publico .partido-card-goles{font-size:27px!important}.partido-card-publico .partido-card-escudo,.partido-card-publico .partido-card-escudo-rival{width:45px!important;height:45px!important}}
+</style>
+
+<style id="feria-match-center-real-v810">
+/* Diseño B aplicado al componente REAL de filtrarPartidos() */
+#partidos #listaPartidos .partido-card{background:linear-gradient(150deg,#09172f,#102e5a 82%,#091a39)!important;color:#fff!important;border:1px solid #31517c!important;border-left:4px solid #e31e43!important;border-radius:20px!important;box-shadow:0 12px 25px rgba(0,0,0,.25)!important;overflow:hidden!important;margin:14px 0 19px!important}
+#partidos #listaPartidos .partido-cabecera{background:transparent!important;border-bottom:1px solid rgba(162,193,238,.15);padding:16px 17px 11px!important}
+#partidos #listaPartidos .partido-cabecera strong{color:#fff!important;font-size:16px!important;letter-spacing:.15px}
+#partidos #listaPartidos .partido-cabecera small{color:#9ebbe6!important;font-size:11px!important}
+#partidos #listaPartidos .partido-fecha{color:#b0c8e9!important;padding:11px 10px 0!important;font-size:11px!important}
+#partidos #listaPartidos .partido-equipos{padding:17px 12px 12px!important;gap:7px!important;justify-content:space-between!important}
+#partidos #listaPartidos .partido-equipos .equipo{color:#f6faff!important;width:34%!important;min-width:0!important;font-size:12px!important;line-height:1.4!important;overflow-wrap:anywhere}
+#partidos #listaPartidos .partido-equipos .nombre-equipo-partido{display:block;min-height:35px}
+#partidos #listaPartidos .partido-equipos .partido-resultado{color:#fff!important;font-size:37px!important;line-height:1.15!important;margin-top:8px!important;font-variant-numeric:tabular-nums}
+#partidos #listaPartidos .partido-equipos .partido-vs{background:#d81b3e!important;border-radius:9px!important;min-width:64px!important;width:64px!important;height:32px!important;font-size:10px!important;box-shadow:0 0 18px rgba(216,27,62,.22)!important}
+#partidos #listaPartidos .partido-info{border-top:1px solid rgba(162,193,238,.15);padding:13px 13px 15px!important;align-items:center!important}
+#partidos #listaPartidos .partido-info .partido-etiqueta{background:#193c68!important;color:#c6dcfb!important;border:1px solid #2c5683!important;font-size:10px!important;padding:6px 9px!important}
+#partidos #listaPartidos .partido-info .estado-terminado{background:#133d3d!important;color:#80f2b5!important;border-color:#245c52!important}
+#partidos #listaPartidos .boton-ver-partido{background:#e31e43!important;color:white!important;font-size:10px!important;padding:11px 13px!important;border-radius:11px!important;box-shadow:0 4px 13px rgba(227,30,67,.22)!important}
+@media(max-width:370px){#partidos #listaPartidos .partido-equipos .partido-resultado{font-size:30px!important}#partidos #listaPartidos .partido-equipos .partido-vs{min-width:48px!important;width:48px!important}}
+</style>
 </head>  
   
   <body>
@@ -12493,19 +12536,17 @@ class="seccion oculto pantalla-partidos-publica">
 id="detallePartido"
 class="seccion oculto detalle-partido-publico">
 
-  <div class="cabecera-seccion-publica">
-
-    <button
-    class="volver-publico"
-    onclick="volverDesdeDetallePartido()">
-      ←
-    </button>
-
-    <span>PARTIDO</span>
-
-    <h2>DETALLE DEL PARTIDO</h2>
-
-  </div>
+  <section class="portada-app-feria feria-portada-seccion feria-portada-informacion" aria-label="Información del partido">
+    <div class="portada-app-overlay"></div>
+    <button type="button" class="volver-publico feria-informacion-volver" onclick="volverDesdeDetallePartido()" aria-label="Volver a partidos de la categoría">←</button>
+    <div class="portada-app-identidad">
+      <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
+      <span class="portada-app-club-pequeno">CLUB DEPORTIVO</span>
+      <h1>INFORMACIÓN</h1>
+      <span class="portada-app-ciudad">PUERTO MONTT</span>
+      <div class="portada-app-linea"><span></span><i></i></div>
+    </div>
+  </section>
 
 
   <div id="contenidoDetallePartido">
@@ -13119,7 +13160,12 @@ if(id === "partidos"){
     proximoPartido.classList.add("oculto");
   }
 
-  cargarPartidos();
+  await cargarPartidos();
+  if(window.feriaRestaurarCategoriaPartidos){
+    const categoria = window.feriaRestaurarCategoriaPartidos;
+    window.feriaRestaurarCategoriaPartidos = null;
+    filtrarPartidos(categoria);
+  }
 }
 
   if(id === "listaSocios"){
@@ -20386,8 +20432,8 @@ return;
 
 
 function filtrarPartidos(categoriaSeleccionada){
+  window.feriaUltimaCategoriaPartidos = categoriaSeleccionada;
 
-  
 
   const lista =
   document.getElementById("listaPartidos");
@@ -21976,6 +22022,11 @@ function crearJugadorCanchaTactica(jugador){
 
 async function verDetallePartido(partidoId){
 
+  // Conservar la categoría y el punto del listado desde el que se abrió.
+  window.feriaOrigenDetallePartido = {
+    categoria: window.feriaUltimaCategoriaPartidos || null,
+    scroll: window.scrollY || 0
+  };
   mostrar("detallePartido");
 
 
@@ -22686,12 +22737,15 @@ function crearSuplenteDetallePublico(jugador){
 
 
 
-function volverDesdeDetallePartido(){
-
-  mostrar("partidos");
-
+async function volverDesdeDetallePartido(){
+  // mostrar('partidos') vuelve a cargar los datos: restaurar la categoría DESPUÉS de la carga.
+  window.feriaRestaurarCategoriaPartidos = window.feriaOrigenDetallePartido?.categoria || window.feriaUltimaCategoriaPartidos || 'Primera Serie';
+  await mostrar('partidos');
+  const destino=document.querySelector('.partidos-registrados');
+  if(destino){
+    setTimeout(()=>destino.scrollIntoView({behavior:'smooth',block:'start'}),160);
+  }
 }
-
 
 
 
@@ -23008,6 +23062,29 @@ supabaseClient.auth.onAuthStateChange((event, session) => {
    =========================================================== */
 const FERIA_URL_PUBLICA = "https://fabianaromn.github.io/cd-feria-osorno-app/";
 let feriaActivacionEnCurso = false;
+let feriaActivacionDestino = 'socios';
+async function feriaDetectarDestinoActivacion(){
+  try {
+    const {data:{user},error} = await supabaseClient.auth.getUser();
+    if(error||!user) return 'socios';
+    const {data: escuela,error: errorEscuela} = await supabaseClient.from('escuela_usuarios')
+      .select('rol').eq('usuario_id',user.id).eq('activo',true).limit(1);
+    if(!errorEscuela && escuela?.length) return 'escuela';
+  }catch(e){console.warn('No se pudo determinar el destino de activación',e);}
+  return 'socios';
+}
+function feriaAplicarDestinoActivacion(destino){
+  feriaActivacionDestino=destino;
+  const esEscuela=destino==='escuela';
+  const panel=document.getElementById('feriaActivacionSocio');
+  if(!panel)return;
+  panel.setAttribute('aria-label',esEscuela?'Activar cuenta de la Escuela de Fútbol':'Activar cuenta de socio');
+  const etiqueta=panel.querySelector('[data-feria-activacion-etiqueta]');
+  if(etiqueta)etiqueta.textContent=esEscuela?'CD FERIA OSORNO · ESCUELA DE FÚTBOL':'CD FERIA OSORNO · PORTAL DE SOCIOS';
+  const boton=panel.querySelector('#feriaIrPortal');
+  if(boton)boton.textContent=esEscuela?'Ir a la Escuela de Fútbol':'Ir al Portal de Socios';
+}
+
 
 
 function feriaEsEnlaceActivacion(){
@@ -23036,7 +23113,7 @@ function feriaMostrarActivacion(mensaje = "Crea una contraseña para activar tu 
     panel.style.cssText = "position:fixed;inset:0;z-index:200000;background:#06142f;color:white;overflow-y:auto;padding:55px 18px;display:flex;align-items:flex-start;justify-content:center";
     panel.innerHTML = `
       <div style="width:100%;max-width:440px;background:#102650;border:1px solid #34548a;border-radius:20px;padding:25px 20px;box-shadow:0 16px 45px #0005">
-        <p style="font-size:11px;font-weight:900;color:#ff4657;letter-spacing:1px">CD FERIA OSORNO · PORTAL DE SOCIOS</p>
+        <p data-feria-activacion-etiqueta style="font-size:11px;font-weight:900;color:#ff4657;letter-spacing:1px">CD FERIA OSORNO · PORTAL DE SOCIOS</p>
         <h2 style="font-size:26px;margin:12px 0;color:white">Activa tu cuenta</h2>
         <p id="feriaActivacionMensaje" style="font-size:13px;line-height:1.5;color:#d4e0f5;margin-bottom:20px"></p>
         <form id="feriaFormularioActivacion">
@@ -23054,7 +23131,12 @@ function feriaMostrarActivacion(mensaje = "Crea una contraseña para activar tu 
     document.getElementById("feriaIrPortal").addEventListener("click", () => {
       window.history.replaceState({}, "", window.location.pathname);
       panel.remove();
-      mostrarPortalSociosPublico();
+      if(feriaActivacionDestino==='escuela'){
+        mostrar('feriaEscuela');
+        if(typeof window.feriaIngresarEscuela==='function') window.feriaIngresarEscuela();
+      }else{
+        mostrarPortalSociosPublico();
+      }
     });
   }
   document.getElementById("feriaActivacionMensaje").textContent = mensaje;
@@ -23080,9 +23162,15 @@ async function feriaGuardarContrasenaInvitado(event){
     if(error) throw error;
     document.getElementById("feriaFormularioActivacion").hidden = true;
     estado.style.color = "#86efac";
-    estado.textContent = "✅ Contraseña creada correctamente. Ya puedes ingresar al Portal de Socios.";
+    const destino=await feriaDetectarDestinoActivacion();
+    feriaAplicarDestinoActivacion(destino);
+    estado.textContent = destino==='escuela'
+      ? '✅ Contraseña creada correctamente. Ya puedes ingresar a la Escuela de Fútbol.'
+      : '✅ Contraseña creada correctamente. Ya puedes ingresar al Portal de Socios.';
     document.getElementById("feriaIrPortal").hidden = false;
-    await supabaseClient.auth.signOut();
+    // Para la escuela se conserva la sesión verificada y se abre su módulo.
+    // Para socios se mantiene el comportamiento anterior de inicio de sesión.
+    if(destino!=='escuela') await supabaseClient.auth.signOut();
     window.history.replaceState({}, "", window.location.pathname);
   }catch(err){
     estado.textContent = "❌ " + (err.message || "No se pudo activar la cuenta.");
@@ -23114,6 +23202,10 @@ async function feriaProcesarInvitacion(){
     }
     if(!sesion) throw new Error("No se pudo validar la invitación. Solicita al club que envíe un enlace nuevo.");
     feriaMostrarActivacion();
+    feriaAplicarDestinoActivacion(await feriaDetectarDestinoActivacion());
+    document.getElementById('feriaActivacionMensaje').textContent = feriaActivacionDestino==='escuela'
+      ? 'Crea una contraseña para activar tu acceso a la Escuela de Fútbol.'
+      : 'Crea una contraseña para activar tu acceso al Portal de Socios.';
   }catch(err){
     const panel = feriaMostrarActivacion("No fue posible validar este enlace.");
     panel.querySelector("#feriaFormularioActivacion").hidden = true;
@@ -24217,14 +24309,15 @@ window.feriaAbrirInvitacionesEscuela=async function(){
 window.feriaEnviarInvitacionEscuela=async function(){
  const email=get('escInvEmail')?.value.trim().toLowerCase(),rol=get('escInvRol')?.value;
  const msg=get('escInvMensaje');if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.textContent='⚠️ Ingresa un correo válido.';return;}
+ if(rol!=='apoderado'){msg.textContent='⚠️ La función actual solo admite invitaciones de apoderados. Debemos habilitar el rol directiva en el servidor antes de utilizarlo.';return;}
  if(!confirm('¿Enviar invitación de '+rol+' a '+email+'?'))return;
  msg.textContent='⏳ Enviando invitación...';
  try{
-  const {data,error}=await supabaseClient.functions.invoke('invitar-escuela',{body:{email,rol}});
+  const {data,error}=await supabaseClient.functions.invoke('invitar-escuela',{body:{correo:email}});
   if(error)throw error;
   if(data?.error)throw Error(typeof data.error==='string'?data.error:JSON.stringify(data.error));
   msg.textContent='✅ Solicitud de invitación procesada. Verifica que el correo haya llegado y que el usuario figure en Supabase.';
- }catch(e){msg.textContent='❌ No se pudo enviar: '+(e.message||e)+'. Verifica la configuración de la función invitar-escuela.';}
+ }catch(e){let detalle=e.message||String(e);try{if(e.context&&typeof e.context.json==='function'){const respuesta=await e.context.json();detalle=respuesta?.error||respuesta?.message||detalle;}}catch(_){/* Mantener mensaje original */}msg.textContent='❌ No se pudo enviar: '+detalle;}
 };
 })();
 </script>
@@ -25087,3 +25180,12 @@ async function feriaExportarFinanzasPDF(){
 }
 </style>
 </body>  </html>
+
+<style id="feria-v8-informacion-partido">
+#detallePartido.detalle-partido-publico:not(.oculto){padding:0 0 95px!important}
+#detallePartido .feria-portada-informacion{width:100%!important;max-width:100%!important;min-width:0!important;height:300px!important;position:relative!important;display:block!important;margin:0 0 20px!important;padding:0!important;border-radius:0!important;background-image:url("img/fondo-feria.png")!important;background-size:cover!important;background-position:center 42%!important;overflow:hidden!important}
+#detallePartido .feria-portada-informacion .portada-app-identidad{height:100%;padding:32px 20px 20px}
+#detallePartido .feria-portada-informacion h1{font-size:clamp(26px,7vw,40px);line-height:1.05;letter-spacing:1.5px;overflow-wrap:anywhere}
+#detallePartido .feria-informacion-volver{position:absolute;top:14px;left:16px;z-index:5;border-radius:50%;width:44px;height:44px;padding:0;margin:0;font-size:22px;background:rgba(8,28,66,.82);border:1px solid rgba(255,255,255,.28)}
+#detallePartido #contenidoDetallePartido{padding:0 14px}
+</style>
