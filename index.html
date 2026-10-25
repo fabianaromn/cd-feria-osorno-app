@@ -7649,6 +7649,135 @@ html body #portalSociosPublico > section.portada-app-feria.feria-portada-seccion
 #partidos #listaPartidos .boton-ver-partido{background:#e31e43!important;color:white!important;font-size:10px!important;padding:11px 13px!important;border-radius:11px!important;box-shadow:0 4px 13px rgba(227,30,67,.22)!important}
 @media(max-width:370px){#partidos #listaPartidos .partido-equipos .partido-resultado{font-size:30px!important}#partidos #listaPartidos .partido-equipos .partido-vs{min-width:48px!important;width:48px!important}}
 </style>
+<style id="feria-v8-11-portadas-publicas">
+/* Identidad uniforme en las portadas públicas, incluido Nuestros orígenes. */
+.feria-portada-seccion .portada-app-club-pequeno{
+ display:block!important;max-width:calc(100% - 20px)!important;
+ color:#fff!important;font-size:clamp(8px,2.35vw,11px)!important;
+ font-weight:800!important;letter-spacing:clamp(1px,.6vw,3px)!important;
+ line-height:1.35!important;text-align:center!important;
+ margin:0 0 4px!important;
+}
+.feria-portada-seccion .portada-app-identidad h1{
+ max-width:100%!important;overflow-wrap:normal!important;
+ font-size:clamp(24px,7vw,36px)!important;line-height:1.08!important;
+ margin:0!important;text-align:center!important;
+}
+.feria-portada-seccion .portada-app-ciudad{
+ font-size:10px!important;letter-spacing:3px!important;margin-top:7px!important;
+}
+.feria-portada-seccion .portada-app-linea{margin-top:12px!important}
+/* La flecha de los capítulos históricos permanece visible sobre la fotografía. */
+#feriaEspecial:has(.feria-portada-historia-modulo)>.feria-volver-icono{
+ position:absolute!important;top:17px!important;left:17px!important;z-index:120!important;
+ width:45px!important;height:42px!important;
+ background:rgba(10,40,88,.83)!important;
+ border:1px solid rgba(255,255,255,.28)!important;
+ border-radius:12px!important;
+}
+#feriaEspecial .feria-portada-historia-modulo .portada-app-identidad{
+ padding:48px 15px 18px!important;
+}
+</style>
+
+<style id="feria-v8-14-historia-cabecera-unica">
+/* Las cuatro subsecciones usan una única portada, a sangre, sin títulos duplicados. */
+html body #feriaEspecial.seccion:not(.oculto):has(.feria-portada-historia-modulo){padding:0!important;box-sizing:border-box!important;}
+html body #feriaEspecial:has(.feria-portada-historia-modulo) #feriaEspecialContenido{margin:0!important;padding:0!important;width:100%!important;max-width:100%!important;}
+html body #feriaEspecial #feriaEspecialContenido>.feria-portada-historia-modulo{width:100%!important;max-width:100%!important;margin:0!important;border-radius:0!important;box-sizing:border-box!important;}
+html body #feriaEspecial #feriaEspecialContenido>.feria-especial-cuerpo-historia{padding:18px 17px 115px!important;}
+/* El nombre de la sección ya aparece en la portada fotográfica. */
+#feriaEspecialContenido>.feria-especial-cuerpo-historia>.feria-lead:first-child,
+#feriaEspecialContenido>.feria-especial-cuerpo-historia>.feria-lead:first-child+h2{display:none!important;}
+/* El botón de regreso se superpone a la fotografía sin reservar espacio. */
+html body #feriaEspecial:has(.feria-portada-historia-modulo)>.feria-volver-icono{position:fixed!important;top:25px!important;left:max(18px,calc((100vw - 500px)/2 + 18px))!important;z-index:300!important;}
+</style>
+
+<style id="feria-v8-15-flechas-unificadas">
+/* Flecha circular azul, consistente en los módulos públicos y administrativos. */
+html body button.feria-volver-unificado,
+html body button.volver-publico,
+html body button.feria-volver-icono,
+html body button.boton-volver-solo,
+html body button.login-feria-volver,
+html body button.feria-informacion-volver {
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:44px!important;height:44px!important;min-width:44px!important;
+  padding:0!important;margin-bottom:14px!important;
+  background:rgba(13,43,91,.82)!important;color:#fff!important;
+  border:1px solid rgba(164,197,241,.48)!important;border-radius:50%!important;
+  font-size:25px!important;font-weight:500!important;line-height:1!important;
+  text-decoration:none!important;box-shadow:0 2px 9px rgba(0,0,0,.15)!important;
+  cursor:pointer!important;
+}
+html body button.feria-volver-unificado:focus-visible,
+html body button.volver-publico:focus-visible,
+html body button.feria-volver-icono:focus-visible,
+html body button.boton-volver-solo:focus-visible{outline:3px solid #8cbcff!important;outline-offset:3px!important}
+/* La flecha de Socios queda sobre la fotografía, sin desplazar el encabezado. */
+html body #portalSociosPublico{position:fixed!important}
+html body #portalSociosPublico>.feria-volver-socios{
+  position:absolute!important;top:19px!important;left:17px!important;z-index:35!important;
+  margin:0!important;
+}
+/* La portada continúa ocupando el ancho completo. */
+html body #portalSociosPublico>.feria-portada-seccion{margin-top:0!important}
+</style>
+
+<style id="feria-v8-17-acceso-directiva-portada">
+/* Portada de acceso: misma fotografía y composición que Tienda; texto bicolor. */
+#login.login-feria-premium:not(.oculto){padding:0 0 42px!important;}
+#login .login-feria-contenido{max-width:500px!important;margin:0 auto!important;position:relative;}
+#login .login-feria-identidad{
+  position:relative!important;height:330px!important;padding:0!important;margin:0 0 25px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:#06142f url('img/fondo-feria.png') center 42%/cover no-repeat!important;
+  overflow:hidden!important;
+}
+#login .login-feria-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,22,58,.68),rgba(3,24,63,.80) 58%,#06142f 100%),rgba(5,35,82,.25);}
+#login .login-feria-identidad-interior{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:18px 18px 8px;width:100%;box-sizing:border-box;}
+#login .login-feria-identidad img{width:100px!important;height:100px!important;object-fit:contain!important;margin:0 0 8px!important;}
+#login .login-feria-identidad span:not(.login-feria-ciudad){font-size:10px!important;font-weight:900!important;letter-spacing:2.2px!important;color:#fff!important;margin:0 0 7px!important;}
+#login .login-feria-identidad h1{font-size:clamp(29px,7vw,36px)!important;line-height:1.08!important;letter-spacing:0!important;text-transform:uppercase!important;margin:0!important;color:#fff!important;}
+#login .login-feria-identidad h1 em{color:#ed1c3a!important;font-style:normal!important;}
+#login .login-feria-ciudad{display:block;color:#fff!important;font-size:10px!important;font-weight:900!important;letter-spacing:3.3px!important;margin-top:9px!important;}
+#login .login-feria-linea{display:flex;height:4px;width:76px;margin-top:14px;overflow:hidden;border-radius:5px;}
+#login .login-feria-linea i{display:block;width:50%;background:#ed1c3a;}
+#login .login-feria-linea b{display:block;width:50%;background:#1475da;}
+#login button.login-feria-volver{position:absolute!important;top:25px!important;left:18px!important;z-index:5!important;margin:0!important;}
+#login .login-feria-tarjeta{margin:0 18px 25px!important;}
+@media(max-width:520px){#login .login-feria-identidad{height:330px!important;}}
+</style>
+
+<style id="feria-v818-editor-proximo-partido">
+#editarBannerPartido.feria-banner-editor{background:#071733!important;color:#fff!important;padding:0!important;margin:0!important;border-radius:0!important;min-height:calc(100dvh - 65px);overflow:hidden;box-shadow:none!important}
+#editarBannerPartido .feria-banner-editor-hero{position:relative;background:linear-gradient(145deg,#102e62,#081832);padding:88px 22px 26px;border-bottom:1px solid #2d4c7d}
+#editarBannerPartido .feria-banner-volver{position:absolute;top:22px;left:20px;width:44px;height:44px;border-radius:50%;border:1px solid #6283b1;background:#10305f;color:white;font-size:25px;line-height:1;display:grid;place-items:center;cursor:pointer}
+#editarBannerPartido .feria-banner-kicker{display:block;color:#ff425d;font-size:10px;font-weight:900;letter-spacing:1.4px;line-height:1.5;margin-bottom:9px}
+#editarBannerPartido .feria-banner-editor-hero h2{font-size:clamp(26px,6vw,34px)!important;font-weight:900!important;line-height:1.12!important;color:white!important;margin:0 0 10px!important}
+#editarBannerPartido .feria-banner-editor-hero h2 span{color:#f52242}
+#editarBannerPartido .feria-banner-editor-hero p{color:#c7d6ef;font-size:13px;line-height:1.55;margin:0;max-width:380px}
+#editarBannerPartido .feria-banner-acento{display:flex;gap:0;margin-top:19px}#editarBannerPartido .feria-banner-acento i{width:37px;height:4px;background:#f21e42}#editarBannerPartido .feria-banner-acento i+i{background:#1974da}
+#editarBannerPartido .feria-banner-editor-body{padding:23px 18px 90px;max-width:720px;margin:auto}
+#editarBannerPartido .feria-banner-bloque-titulo{font-size:15px;font-weight:900;color:#fff;margin:8px 0 16px;padding-left:11px;border-left:3px solid #f21e42}
+#editarBannerPartido .feria-banner-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:28px}
+#editarBannerPartido .feria-banner-campo{min-width:0;display:flex;flex-direction:column;gap:7px}
+#editarBannerPartido .feria-banner-ancho{grid-column:1/-1}
+#editarBannerPartido .feria-banner-campo label{display:block;font-size:12px;font-weight:800;color:#dce7fa;margin:0!important}
+#editarBannerPartido .feria-banner-campo input,#editarBannerPartido .feria-banner-campo select{display:block;width:100%!important;min-width:0!important;max-width:100%!important;height:48px!important;padding:11px 12px!important;background:#122e59!important;border:1px solid #365787!important;border-radius:11px!important;color:#fff!important;font-size:14px!important;box-shadow:none!important;margin:0!important}
+#editarBannerPartido .feria-banner-campo input::placeholder{color:#a2b7d7}
+#editarBannerPartido .feria-banner-campo input:focus,#editarBannerPartido .feria-banner-campo select:focus{outline:2px solid #5795f0;outline-offset:1px}
+#editarBannerPartido .feria-banner-campo input[type="date"],#editarBannerPartido .feria-banner-campo input[type="time"]{color-scheme:dark}
+#editarBannerPartido .feria-banner-campo select option{background:#122e59;color:#fff}
+#editarBannerPartido .feria-banner-archivo{background:#0d2448;border:1px solid #294976;border-radius:15px;padding:16px;margin-bottom:18px}
+#editarBannerPartido .feria-banner-archivo input{height:auto!important;min-height:49px;padding:10px!important}
+#editarBannerPartido .feria-banner-archivo input::file-selector-button{background:#234879;border:0;border-radius:7px;color:#fff;font-weight:700;padding:8px;margin-right:9px}
+#editarBannerPartido .feria-banner-archivo small{font-size:11px;line-height:1.5;color:#aebfda}
+#editarBannerPartido .feria-banner-mensaje{font-size:13px;margin:0 0 12px!important;min-height:18px;color:#b6f8cf}
+#editarBannerPartido .feria-banner-guardar{display:block;width:100%;min-height:52px;border:0;border-radius:12px;background:#e71938;color:white;font-size:15px;font-weight:900;cursor:pointer;padding:14px}
+#editarBannerPartido .feria-banner-guardar:active{transform:scale(.99)}
+@media(max-width:360px){#editarBannerPartido .feria-banner-grid{grid-template-columns:1fr}#editarBannerPartido .feria-banner-ancho{grid-column:auto}}
+</style>
 </head>  
   
   <body>
@@ -7665,10 +7794,14 @@ html body #portalSociosPublico > section.portada-app-feria.feria-portada-seccion
     <div class="login-feria-contenido">
       <button type="button" class="login-feria-volver" onclick="mostrarInicioPublico()">←</button>
       <div class="login-feria-identidad">
-        <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
-        <span>CLUB DEPORTIVO FERIA OSORNO</span>
-        <h1>Acceso <em>directiva</em></h1>
-        <p>Panel privado de administración del club.</p>
+        <div class="login-feria-overlay" aria-hidden="true"></div>
+        <div class="login-feria-identidad-interior">
+          <img src="img/logo-feria.png" alt="Escudo CD Feria Osorno">
+          <span>CLUB DEPORTIVO FERIA OSORNO</span>
+          <h1>Acceso <em>directiva</em></h1>
+          <span class="login-feria-ciudad">PUERTO MONTT</span>
+          <div class="login-feria-linea" aria-hidden="true"><i></i><b></b></div>
+        </div>
       </div>
       <div class="login-feria-tarjeta">
         <span class="login-feria-etiqueta">ÁREA RESTRINGIDA</span>
@@ -7776,9 +7909,7 @@ html body #portalSociosPublico > section.portada-app-feria.feria-portada-seccion
   class="portada-app-logo"
   alt="Club Deportivo Feria Osorno">
 
-  <span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+  <span class="portada-app-club-pequeno">CLUB DEPORTIVO</span>
 
   <h1>
     FERIA OSORNO
@@ -8012,9 +8143,7 @@ class="seccion oculto pantalla-jugadores-publica">
 <div class="portada-app-overlay"></div>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>JUGADORES</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12118,126 +12247,30 @@ class="seccion oculto pantalla-eliminar-partido">
 </section>
 
 
-<section
-id="editarBannerPartido"
-class="seccion oculto">
-
-  <button
-  class="volver"
-  onclick="mostrar('administracion')">
-    ←
-  </button>
-
-  <h2>
-    ⚽ Editar próximo partido
-  </h2>
-
-  <p>
-    Configura el partido destacado que aparecerá en la portada del club.
-  </p>
-
-
-  <label>
-    Campeonato
-  </label>
-
-  <input
-  type="text"
-  id="bannerCampeonato"
-  placeholder="Ej: Clausura 2026">
-
-
-  <label>
-    Jornada
-  </label>
-
-  <input
-  type="number"
-  id="bannerJornada"
-  min="1"
-  placeholder="Ej: 5">
-
-
-  <label>
-    Rival
-  </label>
-
-  <input
-  type="text"
-  id="bannerRival"
-  placeholder="Nombre del equipo rival">
-
-
-  <label>
-    Fecha
-  </label>
-
-  <input
-  type="date"
-  id="bannerFecha">
-
-
-  <label>
-    Hora
-  </label>
-
-  <input
-  type="time"
-  id="bannerHora">
-
-
-  <label>
-    Local / Visitante
-  </label>
-
-  <select id="bannerLocalVisitante">
-
-    <option value="Local">
-      Local
-    </option>
-
-    <option value="Visitante">
-      Visitante
-    </option>
-
-  </select>
-
-
-  <label>
-    Cancha
-  </label>
-
-  <input
-  type="text"
-  id="bannerCancha"
-  placeholder="Ej: Cancha Feria Osorno">
-
-
-  <label>
-    Escudo del rival
-  </label>
-
-  <input
-  type="file"
-  id="bannerEscudoRival"
-  accept="image/*">
-
-
-  <p
-  id="mensajeBannerPartido"
-  style="margin-top:15px;">
-  </p>
-
-
-  <button
-  class="boton"
-  style="width:100%; margin-top:10px;"
-  onclick="guardarBannerPartido()">
-
-    💾 Guardar banner
-
-  </button>
-
+<section id="editarBannerPartido" class="seccion oculto feria-banner-editor">
+  <div class="feria-banner-editor-hero">
+    <button type="button" class="feria-banner-volver" onclick="mostrar('administracion')" aria-label="Volver a administración">←</button>
+    <span class="feria-banner-kicker">CLUB DEPORTIVO FERIA OSORNO · ADMINISTRACIÓN</span>
+    <h2>Editar próximo <span>partido</span></h2>
+    <p>Configura el encuentro destacado que se mostrará en la portada del club.</p>
+    <div class="feria-banner-acento"><i></i><i></i></div>
+  </div>
+  <div class="feria-banner-editor-body">
+    <div class="feria-banner-bloque-titulo">🏆 Información del encuentro</div>
+    <div class="feria-banner-grid">
+      <div class="feria-banner-campo"><label for="bannerCampeonato">Campeonato</label><input type="text" id="bannerCampeonato" placeholder="Ej: Clausura 2026"></div>
+      <div class="feria-banner-campo"><label for="bannerJornada">Jornada</label><input type="number" id="bannerJornada" min="1" placeholder="Ej: 5"></div>
+      <div class="feria-banner-campo feria-banner-ancho"><label for="bannerRival">Equipo rival</label><input type="text" id="bannerRival" placeholder="Nombre del equipo rival"></div>
+      <div class="feria-banner-campo"><label for="bannerFecha">Fecha del partido</label><input type="date" id="bannerFecha"></div>
+      <div class="feria-banner-campo"><label for="bannerHora">Hora del partido</label><input type="time" id="bannerHora"></div>
+      <div class="feria-banner-campo"><label for="bannerLocalVisitante">Condición</label><select id="bannerLocalVisitante"><option value="Local">🏠 Local</option><option value="Visitante">✈️ Visitante</option></select></div>
+      <div class="feria-banner-campo"><label for="bannerCancha">Cancha</label><input type="text" id="bannerCancha" placeholder="Ej: Cancha Feria Osorno"></div>
+    </div>
+    <div class="feria-banner-bloque-titulo">🛡️ Identidad del rival</div>
+    <div class="feria-banner-campo feria-banner-archivo"><label for="bannerEscudoRival">Escudo del equipo rival</label><input type="file" id="bannerEscudoRival" accept="image/*"><small>Selecciona una imagen si necesitas actualizar el escudo.</small></div>
+    <p id="mensajeBannerPartido" class="feria-banner-mensaje" aria-live="polite"></p>
+    <button type="button" class="feria-banner-guardar" onclick="guardarBannerPartido()">💾 Guardar próximo partido</button>
+  </div>
 </section>
     
     
@@ -12425,9 +12458,7 @@ class="seccion oculto pantalla-partidos-publica">
 <div class="portada-app-overlay"></div>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>PARTIDOS</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12541,7 +12572,7 @@ class="seccion oculto detalle-partido-publico">
     <button type="button" class="volver-publico feria-informacion-volver" onclick="volverDesdeDetallePartido()" aria-label="Volver a partidos de la categoría">←</button>
     <div class="portada-app-identidad">
       <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-      <span class="portada-app-club-pequeno">CLUB DEPORTIVO</span>
+      <span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
       <h1>INFORMACIÓN</h1>
       <span class="portada-app-ciudad">PUERTO MONTT</span>
       <div class="portada-app-linea"><span></span><i></i></div>
@@ -12562,13 +12593,12 @@ class="seccion oculto detalle-partido-publico">
 
   
 <section id="portalSociosPublico" class="oculto" aria-label="Portal de socios">
+ <button type="button" class="feria-volver-unificado feria-volver-socios" onclick="mostrarInicioPublico()" aria-label="Volver al inicio" title="Volver al inicio">←</button>
  <section class="portada-app-feria feria-portada-seccion">
 <div class="portada-app-overlay"></div>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>SOCIOS</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12686,9 +12716,7 @@ class="seccion oculto pantalla-mas-publica">
 <div class="portada-app-overlay"></div>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>DESCUBRE</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12720,9 +12748,8 @@ class="seccion oculto pantalla-mas-publica">
     </div>
 
     <button class="mas-opcion" onclick="mostrar('feriaEscuela')"><span>⚽</span><strong>Escuela de fútbol</strong><span>›</span></button>
-    <button class="mas-opcion" onclick="mostrar('feriaComunidad')"><span>🤝</span><strong>Comunidad feriana</strong><span>›</span></button>
 
-  </div>
+</div>
 
   <div class="mas-grupo mas-grupo-admin">
 
@@ -12763,9 +12790,7 @@ onclick="volver()">
 <button type="button" class="feria-volver-a-descubre" onclick="mostrar('estadisticas')" aria-label="Volver a Descubre">←</button>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>NUESTRA HISTORIA</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12812,18 +12837,39 @@ onclick="volver()">
 </div></section>
 <section id="feriaEspecial" class="seccion oculto feria-pagina-informativa feria-especial"><button class="feria-volver-icono" onclick="feriaVolverEspecial()" aria-label="Volver">←</button><div id="feriaEspecialContenido"></div></section>
 <section id="feriaEscuelaInterna" class="seccion oculto feria-pagina-informativa feria-especial feria-panel-exclusivo">
-<header class="feria-escuela-header"><button type="button" class="feria-escuela-salir" onclick="feriaCerrarSesionEscuela()">Cerrar sesión ↗</button></header>
+<header class="feria-escuela-header"><button type="button" id="feriaVolverDirectivaDesdeEscuela" class="feria-volver-icono feria-escuela-volver-directiva" onclick="feriaRegresarDirectivaDesdeEscuela()" aria-label="Volver a Acceso directiva" title="Volver a Acceso directiva" hidden>←</button><button type="button" class="feria-escuela-salir" onclick="feriaCerrarSesionEscuela()">Cerrar sesión ↗</button></header>
 <div class="feria-escuela-marca"><img src="img/logo-feria.png" alt="Escudo Feria Osorno" onerror="this.style.display='none'"><div><span>FERIA SOMOS TODOS</span><h1>Escuela de Fútbol</h1><p>Formando personas, construyendo sueños.</p></div></div>
 <div id="feriaEscuelaInternaContenido"></div>
 <nav class="feria-escuela-nav" aria-label="Navegación exclusiva de la escuela"><button type="button" data-escuela="beneficios" onclick="feriaModuloEscuela('beneficios')">🎁<small>Beneficios</small></button><button type="button" data-escuela="nutricion" onclick="feriaModuloEscuela('nutricion')">🥗<small>Nutrición</small></button><button type="button" data-escuela="academia" onclick="feriaModuloEscuela('academia')">📚<small>Apoyo escolar</small></button><button type="button" data-escuela="documentos" onclick="feriaModuloEscuela('documentos')">📄<small>Documentos</small></button><button type="button" data-escuela="finanzas" onclick="feriaModuloEscuela('finanzas')">💰<small>Finanzas</small></button></nav></section>
+<style id="feria-escuela-retorno-directiva-estilo">
+#feriaEscuelaInterna .feria-escuela-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#feriaEscuelaInterna .feria-escuela-volver-directiva{width:44px!important;height:44px!important;min-width:44px!important;border-radius:50%!important;display:inline-flex;align-items:center;justify-content:center;background:#103260!important;border:1px solid #6085bb!important;color:#fff!important;font-size:25px!important;line-height:1!important;padding:0!important;cursor:pointer}
+#feriaEscuelaInterna .feria-escuela-volver-directiva[hidden]{display:none!important}
+</style>
+<script id="feria-escuela-retorno-directiva-js">
+window.feriaSincronizarVolverDirectiva=function(){
+ const btn=document.getElementById('feriaVolverDirectivaDesdeEscuela');
+ if(btn)btn.hidden=window.feriaEscuelaDesdeAdmin!==true;
+};
+window.feriaRegresarDirectivaDesdeEscuela=async function(){
+ if(window.feriaEscuelaDesdeAdmin!==true)return;
+ // Volver a administración sin cerrar sesión ni modificar el rol escolar.
+ try{
+   await mostrar('administracion');
+   const admin=document.getElementById('administracion');
+   if(admin&&!admin.classList.contains('oculto')){
+     window.feriaEscuelaDesdeAdmin=false;
+     window.feriaSincronizarVolverDirectiva();
+   }
+ }catch(error){console.error('No se pudo regresar a directiva:',error);alert('No se pudo abrir el panel de directiva.');}
+};
+</script>
 <section id="feriaComunidad" class="seccion oculto feria-pagina-informativa"><section class="portada-app-feria feria-portada-seccion">
 <div class="portada-app-overlay"></div>
 <button type="button" class="feria-volver-a-descubre" onclick="mostrar('estadisticas')" aria-label="Volver a Descubre">←</button>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>COMUNIDAD FERIANA</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -12840,9 +12886,7 @@ onclick="volver()">
 <div class="portada-app-overlay"></div>
 <div class="portada-app-identidad">
 <img alt="Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"/>
-<span class="portada-app-club-pequeno">
-    CLUB DEPORTIVO
-  </span>
+<span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span>
 <h1>TIENDA</h1>
 <span class="portada-app-ciudad">
     PUERTO MONTT
@@ -24065,7 +24109,7 @@ function feriaAbrirEspecial(tipo){let html='';let origen=['valores','entrenamien
  const titulosHistoria={origenes:'NUESTROS ORÍGENES',titulos:'VITRINA DE TÍTULOS',personas:'PERSONAS HISTÓRICAS',identidad:'NUESTRA IDENTIDAD'};
  if(Object.prototype.hasOwnProperty.call(titulosHistoria,tipo)){
    const titulo=titulosHistoria[tipo];
-   const portada=`<section class="portada-app-feria feria-portada-seccion feria-portada-historia-modulo" aria-label="${titulo}"><div class="portada-app-overlay"></div><div class="portada-app-identidad"><img alt="Escudo Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"><span class="portada-app-club-pequeno">CLUB DEPORTIVO</span><h1>${titulo}</h1><span class="portada-app-ciudad">PUERTO MONTT</span><div class="portada-app-linea"><span></span><i></i></div></div></section>`;
+   const portada=`<section class="portada-app-feria feria-portada-seccion feria-portada-historia-modulo" aria-label="${titulo}"><div class="portada-app-overlay"></div><div class="portada-app-identidad"><img alt="Escudo Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"><span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span><h1>${titulo}</h1><span class="portada-app-ciudad">PUERTO MONTT</span><div class="portada-app-linea"><span></span><i></i></div></div></section>`;
    html=portada+`<div class="feria-especial-cuerpo-historia">${html}</div>`;
  }
  feriaMostrarEspecial(html,origen);
@@ -24141,6 +24185,14 @@ function renderEspecial(tipo){
   if(d.video_url&&urlSegura(d.video_url))html+='<video controls playsinline preload="metadata" style="width:min(100%,360px);display:block;margin:16px auto;border-radius:16px" src="'+esc(urlSegura(d.video_url))+'"></video>';
   const archivos=multimedia.filter(m=>m.seccion_id===tipo&&m.visible);
   if(archivos.length)html+='<div class="feria-carrusel">'+archivos.map(m=>m.tipo==='video'?'<video controls playsinline src="'+esc(urlSegura(m.archivo_url))+'"></video>':imagenHTML(m.archivo_url,m.descripcion||d.titulo)).join('')+'</div>';
+ }
+ // Mantener la cabecera aun cuando Supabase reemplaza el contenido publicado.
+ const titulos={origenes:'NUESTROS ORÍGENES',titulos:'VITRINA DE TÍTULOS',personas:'PERSONAS HISTÓRICAS',identidad:'NUESTRA IDENTIDAD'};
+ if(Object.prototype.hasOwnProperty.call(titulos,tipo)){
+   const cabecera=cont.querySelector('.feria-portada-historia-modulo');
+   const titulo=esc(titulos[tipo]);
+   const portada=cabecera?cabecera.outerHTML:`<section class="portada-app-feria feria-portada-seccion feria-portada-historia-modulo" aria-label="${titulo}"><div class="portada-app-overlay"></div><div class="portada-app-identidad"><img alt="Escudo Club Deportivo Feria Osorno" class="portada-app-logo" src="img/logo-feria.png"><span class="portada-app-club-pequeno">CLUB DEPORTIVO FERIA OSORNO</span><h1>${titulo}</h1><span class="portada-app-ciudad">PUERTO MONTT</span><div class="portada-app-linea"><span></span><i></i></div></div></section>`;
+   html=portada+'<div class="feria-especial-cuerpo-historia">'+html+'</div>';
  }
  cont.innerHTML=html;return true;
 }
@@ -24224,10 +24276,10 @@ async function getRol(){const {data:{user}}=await supabaseClient.auth.getUser();
 async function isAdmin(){try{return await rpc('es_administrador')===true;}catch(e){console.warn(e);return false;}}
 async function puedeEditarEscuela(){try{return await isAdmin()||await rpc('es_directiva_escuela')===true;}catch(e){console.warn(e);return false;}}
 window.feriaEscuelaRol=getRol;
-window.feriaIngresarEscuela=async()=>{window.feriaEscuelaDesdeAdmin=false;try{const {data:{session}}=await supabaseClient.auth.getSession();if(!session){window.feriaLoginDesdeEscuela=true;mostrar('login');return;}if(!await getRol()){alert('Esta cuenta no tiene acceso escolar.');return;}await feriaModuloEscuela('beneficios');}catch(e){alert(e.message);}};
-function showPanel(){ocultarTodo();$('pantallaPublica').classList.remove('oculto');if(typeof controlarPortadaPublica==='function')controlarPortadaPublica(false);$('feriaEscuelaInterna').classList.remove('oculto');}
+window.feriaIngresarEscuela=async()=>{window.feriaEscuelaDesdeAdmin=false;window.feriaSincronizarVolverDirectiva?.();try{const {data:{session}}=await supabaseClient.auth.getSession();if(!session){window.feriaLoginDesdeEscuela=true;mostrar('login');return;}if(!await getRol()){alert('Esta cuenta no tiene acceso escolar.');return;}await feriaModuloEscuela('beneficios');}catch(e){alert(e.message);}};
+function showPanel(){ocultarTodo();$('pantallaPublica').classList.remove('oculto');if(typeof controlarPortadaPublica==='function')controlarPortadaPublica(false);$('feriaEscuelaInterna').classList.remove('oculto');window.feriaSincronizarVolverDirectiva?.();}
 window.feriaModuloEscuela=async(tipo)=>{try{rol=await getRol();if(!rol)throw Error('Cuenta sin autorización escolar');if(!MOD[tipo])tipo='beneficios';if(['finanzas','documentos'].includes(tipo)&&rol!=='directiva')throw Error('Solo la directiva puede ingresar');admin=false;actual=tipo;showPanel();const nav=$('feriaEscuelaInterna').querySelectorAll('.feria-escuela-nav button');nav.forEach(b=>{b.classList.toggle('activo',b.dataset.escuela===tipo);b.classList.remove('esc-inaccesible');if(['finanzas','documentos'].includes(b.dataset.escuela)){b.innerHTML=(b.dataset.escuela==='finanzas'?'💰':'📁')+'🔒<small>'+(b.dataset.escuela==='finanzas'?'Finanzas':'Documentos')+'</small>';}});if(['finanzas','documentos'].includes(tipo)){await privado(tipo);}else{await contenidos(false);}if(rol==='directiva'){feriaBotonInvitacionesEscuela();if(!['finanzas','documentos'].includes(tipo)){const zona=$('feriaEscuelaInternaContenido');if(zona&&!$('escuelaBotonGestionar')){const boton=document.createElement('button');boton.id='escuelaBotonGestionar';boton.className='esc-btn sec';boton.textContent='✏️ Gestionar publicaciones';boton.onclick=()=>feriaAdminEscuelaSeccion(tipo);zona.prepend(boton);}}}}catch(e){alert(e.message);}};
-window.feriaAdminEscuela=async()=>{if(!await puedeEditarEscuela()){alert('No tienes autorización para editar estos contenidos.');return;}window.feriaEscuelaDesdeAdmin=true;admin=true;actual='beneficios';showPanel();await contenidos(true);};
+window.feriaAdminEscuela=async()=>{if(!await puedeEditarEscuela()){alert('No tienes autorización para editar estos contenidos.');return;}window.feriaEscuelaDesdeAdmin=true;window.feriaSincronizarVolverDirectiva?.();admin=true;actual='beneficios';showPanel();await contenidos(true);};
 const CURSOS_FERIA=['1.º básico','2.º básico','3.º básico','4.º básico','5.º básico','6.º básico','7.º básico','8.º básico','1.º medio','2.º medio'];
 const MATERIAS_FERIA=['Matemáticas','Lenguaje','Inglés','Historia'];
 const etiquetaFeria=(curso,materia)=>'[AULA:'+curso+'|'+materia+']';
