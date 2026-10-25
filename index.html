@@ -7804,7 +7804,7 @@ html body #editarBannerPartido button.feria-banner-volver {
 <style id="feria-v25-videos">
 .feria-nutri-tabs,.feria-video-filtros{display:flex;gap:9px;overflow-x:auto;padding:8px 0 15px;scrollbar-width:thin}.feria-nutri-tabs button,.feria-video-filtros button{border:1px solid #32578e;background:#112c56;color:#e6efff;padding:12px 14px;border-radius:13px;font-weight:800;white-space:nowrap;cursor:pointer}.feria-nutri-tabs button.activo,.feria-video-filtros button.activo{background:#e51938;color:#fff;border-color:#e51938}.feria-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:15px}.feria-video-card{border:1px solid #365a88;border-radius:19px;overflow:hidden;background:#102951;color:#fff}.feria-video-cover{height:180px;background-color:#153b70;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative}.feria-video-play{display:grid;place-items:center;border-radius:50%;background:#ed183a;width:60px;height:60px;box-shadow:0 8px 26px #0007;font-size:23px}.feria-video-tiempo{position:absolute;bottom:12px;right:12px;background:#07172bdd;padding:6px 10px;border-radius:8px;font-weight:800;font-size:11px}.feria-video-info{padding:16px}.feria-video-categoria{color:#ff536d;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.feria-video-info h3{margin:7px 0 8px;font-size:19px}.feria-video-info p{font-size:13px;line-height:1.55;color:#c7d7ef}.feria-video-acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.feria-video-acciones button{background:#244e86;color:white;border:0;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}.feria-video-acciones button:first-child{background:#ed183a;flex:1}.feria-video-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.feria-video-modal{position:fixed;inset:0;z-index:999999;background:#010a1de8;display:flex;align-items:center;justify-content:center;padding:15px}.feria-video-dialog{width:min(100%,760px);max-height:92dvh;overflow:auto;border:1px solid #3a6193;border-radius:18px;background:#091c3d;color:#fff;padding:20px}.feria-video-cerrar{border:1px solid #4c6a94;border-radius:30px;padding:10px 16px;background:#15345f;color:white;font-weight:800}.feria-video-dialog h2{font-size:22px;margin:18px 0}.feria-video-dialog p{line-height:1.6}.feria-video-player{width:100%;aspect-ratio:16/9;background:#000;border:0;border-radius:12px}
 </style>
-</head>  
+<style id="feria-pdf-simple-css">.feria-pdf-vacio{padding:24px 14px;border:1px solid #49648d;border-radius:14px;background:#173965;color:#fff;line-height:1.7}.feria-pdf-vacio small{color:#c6d8ef}.feria-pdf-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feria-pdf-acciones>*{flex:1;text-align:center}</style></head>  
   
   <body>
     
@@ -25014,23 +25014,33 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function get(){return document.getElementById(rootId);}
 function header(name,subtitle){return '<div class="feria-escuela-header-curso"><img src="img/logo-feria.png" alt="Escudo Feria Osorno"><div class="feria-kicker">CLUB DEPORTIVO FERIA OSORNO</div><h1>'+esc(name)+'</h1><p>'+esc(subtitle)+'</p></div>';}
 function makeButton(label,handler){return '<button type="button" onclick="'+handler+'">'+label+'</button>';}
-function renderGrades(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentGrade=-1;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card feria-cursos-premium"><h3>🎓 Mis cursos</h3><p class="feria-cursos-intro">Selecciona tu curso para explorar las asignaturas y materiales.</p><div class="feria-cursos-grid">'+grades.map((g,i)=>'<button type="button" class="feria-curso-premium" onclick="feriaCursoElegir('+i+')"><span class="feria-curso-premium-visual" aria-hidden="true">'+(i%2===0?'📖':'🎓')+'</span><span class="feria-curso-premium-info"><strong>'+esc(g)+'</strong><span class="feria-curso-premium-sub">Explorar curso <b aria-hidden="true">›</b></span></span></button>').join('')+'</div></div>';}
-function renderSubjects(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card feria-cursos-premium">'+makeButton('← Todos los cursos','feriaCursosInicio()').replace('<button','<button class="feria-curso-volver"')+'<h3>📚 '+esc(grades[currentGrade])+'</h3><p class="feria-curso-note">Elige la asignatura que quieres estudiar.</p><div class="feria-cursos-grid">'+materiasPorCurso(currentGrade).map(i=>{const [icon,nombre]=subjects[i];return '<button type="button" class="feria-curso-premium" onclick="feriaCursoMateria('+i+')"><span class="feria-curso-premium-visual" aria-hidden="true">'+icon+'</span><span class="feria-curso-premium-info"><strong>'+esc(nombre)+'</strong><span class="feria-curso-premium-sub">'+(materiasOptativas(currentGrade,i)?'Complementaria · ':'')+'Explorar asignatura <b aria-hidden="true">›</b></span></span></button>';}).join('')+'</div></div>'; }
+function renderGrades(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentGrade=-1;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card feria-cursos-premium"><h3>🎓 Mis cursos</h3><p class="feria-cursos-intro">Selecciona tu curso y abre la guía de cada asignatura.</p><div class="feria-cursos-grid">'+grades.map((g,i)=>'<button type="button" class="feria-curso-premium" onclick="feriaCursoElegir('+i+')"><span class="feria-curso-premium-visual" aria-hidden="true">'+(i%2===0?'📖':'🎓')+'</span><span class="feria-curso-premium-info"><strong>'+esc(g)+'</strong><span class="feria-curso-premium-sub">Explorar curso <b aria-hidden="true">›</b></span></span></button>').join('')+'</div></div>';}
+function renderSubjects(){const area=document.getElementById('feriaCursosArea');if(!area)return;currentSubject=-1;area.innerHTML='<div class="feria-cursos-card feria-cursos-premium">'+makeButton('← Todos los cursos','feriaCursosInicio()').replace('<button','<button class="feria-curso-volver"')+'<h3>📚 '+esc(grades[currentGrade])+'</h3><p class="feria-curso-note">Elige la asignatura que quieres estudiar.</p><div class="feria-cursos-grid">'+materiasPorCurso(currentGrade).map(i=>{const [icon,nombre]=subjects[i];return '<button type="button" class="feria-curso-premium" onclick="feriaCursoMateria('+i+')"><span class="feria-curso-premium-visual" aria-hidden="true">'+icon+'</span><span class="feria-curso-premium-info"><strong>'+esc(nombre)+'</strong><span class="feria-curso-premium-sub">'+(materiasOptativas(currentGrade,i)?'Complementaria · ':'')+'Abrir PDF <b aria-hidden="true">›</b></span></span></button>';}).join('')+'</div></div>'; }
 async function renderSubject(){
  const area=document.getElementById('feriaCursosArea');if(!area)return;
  const curso=currentGrade,materia=currentSubject,subj=subjects[materia][1];
- area.innerHTML='<div class="feria-cursos-card">'+makeButton('← Asignaturas','feriaCursoElegir('+curso+')').replace('<button','<button class="feria-curso-volver"')+'<h3>'+subjects[materia][0]+' '+esc(subj)+' · '+esc(grades[curso])+'</h3>'+'<p class="feria-curso-note">'+(materia<4?'Aprende jugando y comprueba tus respuestas.':'Explora los materiales de esta asignatura.')+'</p>'+(materia<4?'<button type="button" class="feria-curso-jugar" onclick="feriaJuegoMateriaAbrir('+curso+','+materia+')">🐂 🎮 ¡Jugar y aprender con el Profe Toro!</button>':'')+'<h3 style="margin-top:20px">📚 Material de estudio</h3><div id="feriaMaterialAsignatura">⏳ Buscando cuadernillo publicado…</div></div>';
+ window.feriaPdfAcademiaActual=null;
+ area.innerHTML='<div class="feria-cursos-card feria-cursos-premium">'+makeButton('← Asignaturas','feriaCursoElegir('+curso+')').replace('<button','<button class="feria-curso-volver"')+'<h3>'+subjects[materia][0]+' '+esc(subj)+'</h3><p class="feria-curso-note">'+esc(grades[curso])+' · Guía explicativa</p><div id="feriaMaterialAsignatura" role="status">⏳ Abriendo el PDF de esta asignatura…</div></div>';
  try{
- const {data,error}=await supabaseClient.from('escuela_contenidos').select('titulo,descripcion,archivo_url').eq('modulo','apoyo_escolar').eq('publicado',true).like('titulo','[AULA:'+curso+'|'+materia+']%').order('id',{ascending:false}).limit(1);
- if(error)throw error;if(currentGrade!==curso||currentSubject!==materia)return;
- const zona=document.getElementById('feriaMaterialAsignatura');if(!zona)return;
- const r=data&&data[0];if(!r||!r.archivo_url){zona.innerHTML='<p class="feria-curso-note">📘 Aún no hay PDF publicado para esta asignatura. El administrador puede subirlo desde Gestión de Escuela.</p>';return;}
- const ruta=r.archivo_url.replace(/^escuela-publico\//,'');
- const firmado=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,3600);if(firmado.error)throw firmado.error;
- if(currentGrade!==curso||currentSubject!==materia)return;
- const url=firmado.data.signedUrl;window.feriaPdfAcademiaActual={url,nombre:r.titulo.replace(/^\[AULA:[^\]]+\]\s*/,''),descripcion:r.descripcion};
- zona.innerHTML='<p class="feria-curso-note">'+esc(r.descripcion||'Cuadernillo de estudio del Profe Toro')+'</p><button class="feria-curso-pdf" onclick="feriaCursoVerPdf()">📖 Visualizar PDF en la app</button><a class="feria-curso-pdf" href="'+esc(url)+'" target="_blank" rel="noopener" download>⬇️ Descargar PDF</a>';
- }catch(e){const zona=document.getElementById('feriaMaterialAsignatura');if(zona)zona.textContent='No se pudo cargar el material: '+e.message;}
+  const {data,error}=await supabaseClient.from('escuela_contenidos').select('titulo,descripcion,archivo_url').eq('modulo','apoyo_escolar').eq('publicado',true).like('titulo','[AULA:'+curso+'|'+materia+']%').order('id',{ascending:false}).limit(1);
+  if(error)throw error;
+  if(currentGrade!==curso||currentSubject!==materia)return;
+  const zona=document.getElementById('feriaMaterialAsignatura');if(!zona)return;
+  const r=data&&data[0];
+  if(!r||!r.archivo_url){zona.innerHTML='<div class="feria-pdf-vacio">📘 Todavía no hay un PDF publicado para esta asignatura.<br><small>La directiva puede subirlo desde Gestión de Escuela.</small></div>';return;}
+  const ruta=r.archivo_url.replace(/^escuela-publico\//,'');
+  let url=r.archivo_url;
+  if(!/^https?:\/\//i.test(url)){
+   const firmado=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,3600);
+   if(firmado.error)throw firmado.error;
+   url=firmado.data.signedUrl;
+  }
+  if(currentGrade!==curso||currentSubject!==materia)return;
+  window.feriaPdfAcademiaActual={url,nombre:r.titulo.replace(/^\[AULA:[^\]]+\]\s*/,''),descripcion:r.descripcion};
+  zona.innerHTML='<div class="feria-pdf-cargando">📖 Abriendo tu guía de estudio…</div><div class="feria-pdf-acciones"><button type="button" class="feria-curso-pdf" onclick="feriaCursoVerPdf()">📖 Volver a abrir PDF</button><a class="feria-curso-pdf" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">⬇️ Ver o descargar</a></div>';
+  window.feriaCursoVerPdf();
+  const cargando=zona.querySelector('.feria-pdf-cargando');if(cargando)cargando.remove();
+ }catch(e){const zona=document.getElementById('feriaMaterialAsignatura');if(zona)zona.textContent='No se pudo abrir el PDF: '+e.message;}
 }
 window.feriaCursoVerPdf=()=>{const p=window.feriaPdfAcademiaActual;if(!p)return;if(typeof window.feriaEscuelaMostrarPdf==='function')window.feriaEscuelaMostrarPdf(p.url,p.nombre);else window.open(p.url,'_blank','noopener');};
 
@@ -25056,60 +25066,7 @@ function start(){if(document.body)obs.observe(document.body,{childList:true,subt
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
 </script>
-<script id="feria-juegos-40">
-(function(){
-'use strict';
-const niveles=['1.º básico','2.º básico','3.º básico','4.º básico','5.º básico','6.º básico','7.º básico','8.º básico','1.º medio','2.º medio'];
-const materias=['Matemáticas','Lenguaje','Inglés','Historia']; // Juegos disponibles para las cuatro asignaturas originales.
-let modal=null, preguntas=[], actual=0, aciertos=0, elegida=-1, intento=false, curso=0, materia=0;
-const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function q(t,opts,correct,why){return {t,opts,correct,why};}
-function banco(c,m){
-const alto=c>=8, medio=c>=5, menor=c<=2;
-if(m===0){const n=[5,12,24,35,48,60,75,90,120,150][c];return [
-q(`¿Cuánto es ${n} + ${n-2}?`,[String(n*2-2),String(n*2+2),String(n*2-4)],0,'Sumamos las dos cantidades.'),
-q(`¿Cuánto es ${n+10} − ${n}?`,['5','10','20'],1,'Al quitar '+n+' quedan 10.'),
-q(`¿Cuánto es ${n} + 10?`,[String(n+1),String(n+10),String(n+20)],1,'Agregar diez aumenta una decena.'),
-q('¿Qué figura tiene tres lados?',['Cuadrado','Triángulo','Círculo'],1,'El triángulo tiene tres lados.'),
-q('Completa el patrón: 3, 6, 9, __',['10','12','15'],1,'La regla es sumar 3.'),
-q(menor?'¿Cuántas decenas hay en 40?':alto?'¿Cuánto es 25% de 200?':'¿Cuánto es 6 × 4?',menor?['4','40','2']:alto?['25','50','75']:['20','24','28'],menor?0:1,menor?'40 tiene cuatro decenas.':alto?'Un cuarto de 200 es 50.':'6 grupos de 4 son 24.'),
-q(alto?'Resuelve: 3x = 21. ¿Cuánto vale x?':medio?'¿Cuánto es 1/2 de 30?':'Si tienes 8 pelotas y recibes 4, ¿cuántas tienes?',alto?['6','7','8']:medio?['10','15','20']:['11','12','13'],1,alto?'21 dividido por 3 es 7.':medio?'La mitad de 30 es 15.':'8 + 4 = 12.')];}
-if(m===1)return [
-q('¿Cuál palabra es un sustantivo?',['Correr','Pelota','Rápidamente'],1,'Pelota nombra un objeto.'),
-q('¿Cuál es un verbo?',['Jugar','Azul','Estadio'],0,'Jugar indica una acción.'),
-q('¿Qué signo cierra una pregunta?',['!','.', '?'],2,'Una pregunta termina con ?.'),
-q('¿Cuál está escrita correctamente?',['mañana','manana','mañána'],0,'Mañana se escribe con ñ.'),
-q('En «El toro lee un libro», ¿quién realiza la acción?',['El libro','El toro','La escuela'],1,'El toro es quien lee.'),
-q(alto?'¿Qué es una tesis en un texto argumentativo?':'¿Qué palabra describe cómo es algo?',['Una idea que se defiende','Una fecha','Una rima'],0,alto?'La tesis expresa la postura principal.':'Una descripción aporta características.'),
-q(alto?'¿Qué recurso compara usando «como»?':'¿Cuál palabra significa lo contrario de feliz?',['Metáfora','Comparación','Hipérbole'],alto?1:0,alto?'La comparación suele usar «como».':'Para cursos iniciales, busca antónimos como triste.')];
-if(m===2)return [
-q('¿Cómo se dice «hola» en inglés?',['Hello','Bye','Please'],0,'Hello significa hola.'),
-q('¿Qué significa «book»?',['Pelota','Libro','Casa'],1,'Book es libro.'),
-q('Completa: I ___ a student.',['is','are','am'],2,'Con I usamos am.'),
-q('¿Qué color es «blue»?',['Rojo','Azul','Verde'],1,'Blue significa azul.'),
-q('¿Cuál es el plural de «cat»?',['cats','cates','caties'],0,'Normalmente añadimos s.'),
-q(alto?'Choose the past tense of «go».':'¿Cómo se dice «gracias»? ',alto?['goed','went','gone']:['Sorry','Thank you','Goodbye'],1,alto?'Went es el pasado simple de go.':'Thank you significa gracias.'),
-q(alto?'Choose: She ___ studying now.':'¿Qué significa «school»?',alto?['am','is','are']:['Escuela','Calle','Mesa'],alto?1:0,alto?'She usa is en presente continuo.':'School es escuela.')];
-return [
-q('¿En qué continente está Chile?',['Europa','América','Asia'],1,'Chile se encuentra en América del Sur.'),
-q('¿Cuál es la capital de Chile?',['Santiago','Valparaíso','Puerto Montt'],0,'Santiago es la capital.'),
-q('¿Qué indica una brújula?',['Temperatura','Direcciones','Horas'],1,'La brújula ayuda a orientarse.'),
-q('¿Qué es una fuente histórica?',['Una evidencia del pasado','Una pelota','Un planeta'],0,'Las fuentes permiten estudiar el pasado.'),
-q('¿Cuál es un derecho de niños y niñas?',['No estudiar','Recibir educación','No jugar'],1,'La educación es un derecho.'),
-q(alto?'¿Qué caracteriza a una democracia?':'¿Qué océano está frente a Chile?',['Participación ciudadana','Un único gobernante sin elecciones','Prohibición de votar'],alto?0:0,alto?'La participación y las elecciones son elementos de la democracia.':'Chile limita al oeste con el océano Pacífico.'),
-q(alto?'¿Qué estudia la geografía humana?':'¿Para qué sirve un mapa?',['Solo volcanes','Poblaciones y actividades humanas','Solo estrellas'],alto?1:0,alto?'Estudia la relación de las personas con el espacio.':'Un mapa ayuda a localizar lugares.')];
-}
-// Correcciones específicas de alternativas para nivel inicial.
-function getPreguntas(c,m){let a=banco(c,m);if(m===1&&c<8)a[5]=q('¿Cuál es un adjetivo?',['Bonito','Correr','Pelota'],0,'Bonito describe una característica.');if(m===1&&c<8)a[6]=q('¿Qué palabra significa lo contrario de feliz?',['Triste','Alegre','Contento'],0,'Triste es antónimo de feliz.');if(m===3&&c<8)a[5]=q('¿Qué océano está frente a Chile?',['Pacífico','Atlántico','Índico'],0,'Es el océano Pacífico.');if(m===3&&c<8)a[6]=q('¿Para qué sirve un mapa?',['Ubicar lugares','Cocinar','Medir peso'],0,'Los mapas permiten localizar lugares.');return a;}
-function paint(){if(!modal)return;const p=preguntas[actual];let body='';if(p){body=`<div class="fjm-card"><div style="font-size:13px;color:#bfd7ff">Desafío ${actual+1} de ${preguntas.length} · ⭐ ${aciertos} aciertos</div><div style="height:9px;border-radius:8px;background:#375887;margin:12px 0"><div style="width:${actual/preguntas.length*100}%;height:100%;background:#ffcd47;border-radius:8px"></div></div><h2 style="color:white;font-size:23px">${html(p.t)}</h2>${p.opts.map((x,i)=>`<button class="fjm-option ${elegida===i?'selected':''}" onclick="feriaJuegoElegir(${i})">${html(x)}</button>`).join('')}${intento?`<div style="padding:13px;border-radius:10px;background:#0b2248;margin:12px 0">${elegida===p.correct?'🎉 ¡Goooool! Respuesta correcta.':'💪 Buen intento, vuelve a probar.'}<p>${html(p.why)}</p></div>`:''}<button class="fjm-action" ${elegida<0?'disabled':''} onclick="feriaJuegoRevisar()">${intento&&elegida===p.correct?'Siguiente desafío →':'Comprobar respuesta'}</button></div>`;}else body=`<div class="fjm-card" style="text-align:center"><h1>🏆 ¡Felicitaciones!</h1><p>Completaste ${html(materias[materia])} de ${html(niveles[curso])}.</p><h2>${aciertos} de ${preguntas.length} aciertos al primer intento</h2><button class="fjm-action" onclick="feriaJuegoReiniciar()">Volver a jugar</button></div>`;
-modal.innerHTML=`<div class="fjm-wrap"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><button class="fjm-back" onclick="feriaJuegoCerrar()">← Volver</button><strong>🐂 PROFE TORO</strong></div><div class="fjm-card" style="text-align:center"><div style="font-size:34px">🐂 📚 ⚽</div><h2 style="color:white;margin:7px 0">${html(materias[materia])}</h2><div>${html(niveles[curso])} · Aprende jugando</div></div>${body}</div>`;modal.scrollTop=0;}
-window.feriaJuegoMateriaAbrir=function(c,m){curso=c;materia=m;preguntas=getPreguntas(c,m);actual=0;aciertos=0;elegida=-1;intento=false;modal=document.createElement('div');modal.id='feriaJuegoMateria';document.body.appendChild(modal);document.body.style.overflow='hidden';paint();};
-window.feriaJuegoElegir=i=>{elegida=i;intento=false;paint();};
-window.feriaJuegoRevisar=()=>{if(elegida<0)return;if(intento&&elegida===preguntas[actual].correct){actual++;elegida=-1;intento=false;paint();return;}if(!intento&&elegida===preguntas[actual].correct)aciertos++;intento=true;paint();};
-window.feriaJuegoReiniciar=()=>{actual=0;aciertos=0;elegida=-1;intento=false;paint();};
-window.feriaJuegoCerrar=()=>{if(modal){modal.remove();modal=null;}document.body.style.overflow='';};
-})();
-</script>
+
 <nav class="menu-inferior-publico feria-nav-editar-fija" aria-label="Navegación de administración en editar jugador">
   <button type="button" class="menu-inferior-item activo" onclick="mostrarInicioAdmin(this)"><span class="menu-inferior-icono">⌂</span><span>Inicio</span></button>
   <button type="button" class="menu-inferior-item" onclick="mostrarMenuAdmin('menuAdminPartidos')"><span class="menu-inferior-icono">⚽</span><span>Partidos</span></button>
@@ -25430,6 +25387,8 @@ function volverGestionSocios(){
 #feriaEscuelaInterna .esc-premium-cargando{font-size:12px;color:#d2e4fc;font-weight:700}
 #feriaEscuelaInterna .esc-premium-portada img{object-position:center top}
 </style>
+
+
 </body>  </html>
 
 <style id="feria-v8-informacion-partido">
