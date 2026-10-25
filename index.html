@@ -24339,9 +24339,69 @@ async function contenidos(edicion){
  const q=supabaseClient.from('escuela_contenidos').select('*').eq('modulo',modulo).order('id',{ascending:false});if(!edicion)q.eq('publicado',true);
  const {data,error}=await q;if(error){notice(error.message,true);return;}items=data||[];
  const visibles=academia&&!edicion?items.filter(r=>!separarFeria(r.titulo)):items;
- $('escListado').innerHTML=visibles.length?visibles.map(r=>{const i=items.indexOf(r),meta=separarFeria(r.titulo);return '<article class="esc-card"><h3>'+esc(meta?meta.titulo:r.titulo)+'</h3>'+(meta?'<p>📚 '+esc(CURSOS_FERIA[meta.curso]||'Curso')+' · '+esc(MATERIAS_FERIA[meta.materia]||'Asignatura')+'</p>':'')+'<p>'+esc(r.descripcion)+'</p>'+(r.archivo_url?'<button class="esc-btn sec" onclick="feriaEscuelaAbrirArchivo('+i+')">📖 Ver material</button>':'')+(edicion?'<button class="esc-btn sec" onclick="feriaEscuelaEditar('+i+')">Editar</button><button class="esc-btn sec" onclick="feriaEscuelaEliminar('+i+')">Eliminar</button>':'')+'</article>';}).join(''):'<div class="esc-card">'+(academia&&!edicion?'Selecciona un curso y asignatura para ver sus materiales.':'Aún no hay publicaciones.')+'</div>';
+ const icono=actual==='beneficios'?'🎁':actual==='nutricion'?'🥗':'📚';
+ const categoria=actual==='beneficios'?'BENEFICIO ESCOLAR':actual==='nutricion'?'NUTRICIÓN ESCOLAR':'APOYO ACADÉMICO';
+ $('escListado').innerHTML=visibles.length?'<div class="esc-premium-grid">'+visibles.map(r=>{
+  const i=items.indexOf(r),meta=separarFeria(r.titulo);
+  const nombre=esc(meta?meta.titulo:r.titulo);
+  const descripcion=esc(r.descripcion||'Sin descripción disponible.');
+  const url=String(r.archivo_url||'').trim();
+  const portada=url?'<span class="esc-premium-cargando">Cargando vista previa…</span>':'<span class="esc-premium-icono" aria-hidden="true">'+icono+'</span>';
+  const acciones=(url?'<button type="button" class="esc-premium-accion" onclick="feriaEscuelaAbrirArchivo('+i+')">📖 Ver material</button>':'')+(edicion?'<button type="button" class="esc-premium-accion" onclick="feriaEscuelaEditar('+i+')">✏️ Editar</button><button type="button" class="esc-premium-accion esc-premium-eliminar" onclick="feriaEscuelaEliminar('+i+')">🗑️ Eliminar</button>':'');
+  return '<article class="esc-premium-card"><div class="esc-premium-portada esc-premium-sin-imagen" data-esc-portada="'+i+'">'+portada+'</div><div class="esc-premium-cuerpo"><div class="esc-premium-meta"><span>'+categoria+'</span>'+(edicion?'<span class="esc-premium-estado '+(r.publicado?'':'esc-premium-borrador')+'">'+(r.publicado?'● Publicado':'● No publicado')+'</span>':'')+'</div><h3>'+nombre+'</h3>'+(meta?'<p class="esc-premium-curso">📚 '+esc(CURSOS_FERIA[meta.curso]||'Curso')+' · '+esc(MATERIAS_FERIA[meta.materia]||'Asignatura')+'</p>':'')+'<p class="esc-premium-descripcion">'+descripcion+'</p>'+(acciones?'<div class="esc-premium-acciones">'+acciones+'</div>':'')+'</div></article>';
+ }).join('')+'</div>':'<div class="esc-card">'+(academia&&!edicion?'Selecciona un curso y asignatura para ver sus materiales.':'Aún no hay publicaciones.')+'</div>';
+ // Las rutas almacenadas son privadas: resolver URL temporal y dibujar la portada después del render.
+ void feriaEscuelaCargarPortadas(visibles);
 }
 
+let feriaEscuelaPdfCarga=null;
+async function feriaEscuelaPrepararPdf(){
+ if(window.pdfjsLib)return window.pdfjsLib;
+ if(!feriaEscuelaPdfCarga){feriaEscuelaPdfCarga=new Promise((resolve,reject)=>{
+  const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  sc.onload=()=>resolve(window.pdfjsLib);sc.onerror=()=>reject(Error('No se pudo cargar el visor PDF'));document.head.appendChild(sc);
+ }).catch(e=>{feriaEscuelaPdfCarga=null;throw e;});}
+ const lib=await feriaEscuelaPdfCarga;
+ lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+ return lib;
+}
+async function feriaEscuelaCargarPortadas(visibles){
+ const contenedor=$('escListado');if(!contenedor)return;
+ const token=crypto.randomUUID();contenedor.dataset.portadasToken=token;
+ const tareas=visibles.map(async r=>{
+  const idx=items.indexOf(r),archivo=String(r.archivo_url||'').trim();if(!archivo)return;
+  const elemento=()=>contenedor.isConnected&&contenedor.dataset.portadasToken===token?contenedor.querySelector('[data-esc-portada="'+idx+'"]'):null;
+  try{
+   let url=archivo;
+   if(!/^https:\/\//i.test(archivo)){
+    const ruta=archivo.replace(/^escuela-publico\//,'');
+    const respuesta=await supabaseClient.storage.from('escuela-publico').createSignedUrl(ruta,600);
+    if(respuesta.error)throw respuesta.error;
+    url=respuesta.data.signedUrl;
+   }
+   const rutaTipo=archivo.split('?')[0].toLowerCase();
+   const caja=elemento();if(!caja)return;
+   if(/\.(png|jpe?g|webp|gif|avif|bmp)$/.test(rutaTipo)){
+    const img=document.createElement('img');img.alt='Vista previa del material';img.loading='lazy';img.referrerPolicy='no-referrer';
+    img.onerror=()=>{if(elemento())caja.textContent='No se pudo cargar la imagen';};
+    img.src=url;caja.replaceChildren(img);caja.classList.remove('esc-premium-sin-imagen');
+   }else if(/\.pdf$/.test(rutaTipo)){
+    const lib=await feriaEscuelaPrepararPdf();
+    const doc=await lib.getDocument({url}).promise;
+    try{
+     const page=await doc.getPage(1),v=page.getViewport({scale:1});
+     const scale=Math.min(2,Math.max(0.6,640/v.width));
+     const viewport=page.getViewport({scale});const canvas=document.createElement('canvas');
+     canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
+     canvas.setAttribute('aria-label','Vista previa de la primera página del PDF');
+     await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+     if(elemento()){caja.replaceChildren(canvas);caja.classList.remove('esc-premium-sin-imagen');}
+    }finally{await doc.destroy();}
+   }else{caja.textContent='📎 Archivo adjunto';}
+  }catch(error){console.warn('Portada de material escolar:',error);const caja=elemento();if(caja)caja.textContent='📄 Vista previa no disponible';}
+ });
+ await Promise.allSettled(tareas);
+}
 window.feriaAdminEscuelaSeccion=async t=>{if(!await puedeEditarEscuela())return;admin=true;actual=t;await contenidos(true);};
 window.feriaEscuelaEditar=i=>{if(!admin)return;const r=items[i];if(!r)return;editId=r.id;const meta=separarFeria(r.titulo);$('escTitulo').value=meta?meta.titulo:r.titulo;$('escTexto').value=r.descripcion||'';$('escPublicado').checked=!!r.publicado;if(meta&&$('escCurso')){$('escCurso').value=meta.curso;$('escMateria').value=meta.materia;}notice('Editando publicación');};
 window.feriaEscuelaGuardar=async()=>{if(!admin||!await puedeEditarEscuela())return;try{
@@ -25299,6 +25359,32 @@ function volverGestionSocios(){
  document.addEventListener('DOMContentLoaded',()=>{obs.observe(document.body,{childList:true,subtree:true});});
 })();
 </script>
+
+<style id="feria-escuela-catalogo-premium-v823">
+#feriaEscuelaInterna .esc-premium-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin:16px 0 24px}
+#feriaEscuelaInterna .esc-premium-card{overflow:hidden;border-radius:19px;border:1px solid #315586;background:#112b55;color:#fff;box-shadow:0 12px 28px rgba(0,0,0,.15)}
+#feriaEscuelaInterna .esc-premium-portada{height:170px;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#1b4b83,#0b1e42);overflow:hidden}
+#feriaEscuelaInterna .esc-premium-portada:after{content:"";position:absolute;inset:auto 0 0;height:35px;background:linear-gradient(transparent,rgba(5,18,42,.28));pointer-events:none}
+#feriaEscuelaInterna .esc-premium-portada img{width:100%;height:100%;object-fit:cover;display:block}
+#feriaEscuelaInterna .esc-premium-icono{font-size:64px;filter:drop-shadow(0 7px 12px rgba(0,0,0,.24))}
+#feriaEscuelaInterna .esc-premium-cuerpo{padding:17px}
+#feriaEscuelaInterna .esc-premium-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#ff6377;font-size:10px;font-weight:900;letter-spacing:1px}
+#feriaEscuelaInterna .esc-premium-estado{color:#a2f2c6;letter-spacing:0;font-size:11px}
+#feriaEscuelaInterna .esc-premium-borrador{color:#ffd29a}
+#feriaEscuelaInterna .esc-premium-card h3{margin:11px 0 8px;color:#fff;font-size:20px;line-height:1.3;overflow-wrap:anywhere}
+#feriaEscuelaInterna .esc-premium-descripcion{margin:0 0 15px;color:#d3e2f5;white-space:pre-wrap;line-height:1.55;font-size:14px;overflow-wrap:anywhere}
+#feriaEscuelaInterna .esc-premium-curso{color:#a7c5ef;font-size:12px;margin:0 0 10px}
+#feriaEscuelaInterna .esc-premium-acciones{display:flex;flex-wrap:wrap;gap:8px;padding-top:13px;border-top:1px solid #345480}
+#feriaEscuelaInterna .esc-premium-accion{border:1px solid #45689c;border-radius:10px;background:#244a80;color:#fff;padding:10px 12px;font-size:12px;font-weight:800;cursor:pointer;flex:1 1 auto}
+#feriaEscuelaInterna .esc-premium-accion:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#feriaEscuelaInterna .esc-premium-eliminar{background:#9d1c38;border-color:#c33b56}
+@media(max-width:540px){#feriaEscuelaInterna .esc-premium-grid{grid-template-columns:1fr}#feriaEscuelaInterna .esc-premium-portada{height:165px}}
+</style>
+<style id="feria-portadas-reales-v824">
+#feriaEscuelaInterna .esc-premium-portada canvas{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;background:#fff}
+#feriaEscuelaInterna .esc-premium-cargando{font-size:12px;color:#d2e4fc;font-weight:700}
+#feriaEscuelaInterna .esc-premium-portada img{object-position:center top}
+</style>
 </body>  </html>
 
 <style id="feria-v8-informacion-partido">
