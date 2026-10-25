@@ -24453,8 +24453,63 @@ window.feriaValidarPin=async()=>{const pin=$('escPin')?.value||'';if($('escPin')
 async function abrirPrivado(t){if(!await rpc('escuela_desbloqueada')){await privado(t);return;}if(t==='documentos')await documentos();else await finanzas('resumen');}
 function pesos(n){return new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP',maximumFractionDigits:0}).format(n||0);}
 async function cargarFin(){const [i,g]=await Promise.all(['escuela_ingresos','escuela_gastos'].map(t=>supabaseClient.from(t).select('*').order('fecha',{ascending:false})));if(i.error)throw i.error;if(g.error)throw g.error;return [...(i.data||[]).map(x=>({...x,clase:'ingresos'})),...(g.data||[]).map(x=>({...x,clase:'gastos'}))].sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));}
+
+window.feriaDescargarInformeEscuela=async()=>{
+ const boton=document.getElementById('escDescargarInforme');
+ const original=boton?.textContent;
+ try{
+  if(!await rpc('escuela_desbloqueada'))throw Error('El acceso privado expiró. Ingresa nuevamente tu PIN.');
+  if(boton){boton.disabled=true;boton.textContent='⏳ Generando informe...';}
+  const movimientos=await cargarFin();
+  if(!window.jspdf?.jsPDF){
+   await new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js';sc.onload=resolve;sc.onerror=()=>reject(Error('No se pudo cargar el generador de PDF.'));document.head.appendChild(sc);});
+  }
+  if(!window.jspdf.jsPDF.API.autoTable){
+   await new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js';sc.onload=resolve;sc.onerror=()=>reject(Error('No se pudo cargar el formato de tablas.'));document.head.appendChild(sc);});
+  }
+  const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+  const fecha=new Date();
+  const monto=n=>'$ '+new Intl.NumberFormat('es-CL',{maximumFractionDigits:0}).format(Number(n)||0);
+  const ingresos=movimientos.filter(x=>x.clase==='ingresos').reduce((t,x)=>t+Number(x.monto||0),0);
+  const gastos=movimientos.filter(x=>x.clase==='gastos').reduce((t,x)=>t+Number(x.monto||0),0);
+  const fechaTexto=fecha.toLocaleString('es-CL',{dateStyle:'long',timeStyle:'short'});
+  doc.setFillColor(15,40,92);doc.rect(0,0,210,39,'F');
+  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(17);
+  doc.text('CLUB DEPORTIVO FERIA OSORNO',14,16);
+  doc.setFontSize(11);doc.text('Informe financiero - Escuela de Futbol',14,25);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Generado: '+fechaTexto,14,33);
+  doc.setTextColor(25,35,50);doc.setFontSize(11);doc.setFont('helvetica','bold');
+  doc.text('RESUMEN GENERAL',14,49);
+  doc.autoTable({startY:54,head:[['Ingresos','Gastos','Saldo final']],body:[[monto(ingresos),monto(gastos),monto(ingresos-gastos)]],theme:'grid',styles:{fontSize:11,cellPadding:5},headStyles:{fillColor:[22,57,110]},margin:{left:14,right:14}});
+  let y=doc.lastAutoTable.finalY+10;
+  doc.setFontSize(11);doc.text('DETALLE DE MOVIMIENTOS ('+movimientos.length+')',14,y);
+  const ordenados=[...movimientos].sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||'')));
+  const filas=ordenados.map(x=>[
+   String(x.fecha||''),x.clase==='ingresos'?'Ingreso':'Gasto',
+   String(x.tipo||'Otros'),String(x.descripcion||''),monto(x.monto),
+   String(x.clase==='ingresos'?(x.origen||''):(x.destino||'')),
+   String(x.metodo_pago||''),String(x.numero_documento||''),
+   String(x.responsable||''),String(x.observaciones||'')
+  ]);
+  doc.autoTable({
+   startY:y+5,
+   head:[['Fecha','Clase','Tipo','Descripcion','Monto','Origen / destino','Metodo','Documento','Responsable','Observaciones']],
+   body:filas.length?filas:[['Sin movimientos registrados','','','','','','','','','']],
+   theme:'striped',
+   styles:{fontSize:7,cellPadding:2,overflow:'linebreak'},
+   headStyles:{fillColor:[22,57,110],fontSize:7},
+   columnStyles:{0:{cellWidth:18},1:{cellWidth:15},2:{cellWidth:20},3:{cellWidth:28},4:{cellWidth:19},5:{cellWidth:20},6:{cellWidth:17},7:{cellWidth:16},8:{cellWidth:17},9:{cellWidth:17}},
+   margin:{left:11,right:11,top:15,bottom:15},
+   didDrawPage:()=>{const n=doc.internal.getNumberOfPages();doc.setFontSize(8);doc.setTextColor(110);doc.text('Escuela de Futbol Feria Osorno - Uso interno',11,289);doc.text('Pagina '+n,196,289,{align:'right'});}
+  });
+  const nombre='Informe_Finanzas_Escuela_Feria_Osorno_'+fecha.toISOString().slice(0,10)+'.pdf';
+  doc.save(nombre);
+  notice('Informe PDF generado correctamente.');
+ }catch(e){console.error('Informe escuela:',e);notice(e.message||'No se pudo generar el informe.',true);}
+ finally{if(boton){boton.disabled=false;boton.textContent=original;}}
+};
 window.feriaFinanzasEscuela=async t=>{try{if(!await rpc('escuela_desbloqueada')){await privado('finanzas');return;}await finanzas(t);}catch(e){notice(e.message,true);}};
-async function finanzas(v){actual='finanzas';finDatos=await cargarFin();const ing=finDatos.filter(x=>x.clase==='ingresos').reduce((s,x)=>s+Number(x.monto||0),0),gas=finDatos.filter(x=>x.clase==='gastos').reduce((s,x)=>s+Number(x.monto||0),0);const nav='<div class="esc-card"><h2>💰 Gestión financiera escolar</h2><div class="esc-fin-menu">'+[['resumen','📊 Resumen financiero'],['movimientos','📋 Movimientos financieros'],['ingreso','➕ Registrar ingreso'],['gasto','➖ Registrar gasto']].map(([k,t])=>'<button class="esc-btn '+(v===k?'':'sec')+'" onclick="feriaFinanzasEscuela(\''+k+'\')">'+t+'</button>').join('')+'</div></div><div id="escEstado"></div>';
+async function finanzas(v){actual='finanzas';finDatos=await cargarFin();const ing=finDatos.filter(x=>x.clase==='ingresos').reduce((s,x)=>s+Number(x.monto||0),0),gas=finDatos.filter(x=>x.clase==='gastos').reduce((s,x)=>s+Number(x.monto||0),0);const nav='<div class="esc-card"><h2>💰 Gestión financiera escolar</h2><div class="esc-fin-menu">'+[['resumen','📊 Resumen financiero'],['movimientos','📋 Movimientos financieros'],['ingreso','➕ Registrar ingreso'],['gasto','➖ Registrar gasto']].map(([k,t])=>'<button class="esc-btn '+(v===k?'':'sec')+'" onclick="feriaFinanzasEscuela(\''+k+'\')">'+t+'</button>').join('')+'<div style="margin-top:12px"><button id="escDescargarInforme" class="esc-btn" onclick="feriaDescargarInformeEscuela()">📄 Descargar informe PDF</button></div></div></div><div id="escEstado"></div>';
 if(v==='resumen'){const detalle=(tipo)=>{const mapa={};finDatos.filter(x=>x.clase===tipo).forEach(x=>mapa[x.tipo||'Otros']=(mapa[x.tipo||'Otros']||0)+Number(x.monto||0));return Object.entries(mapa).map(([k,n])=>'<p>'+esc(k)+': <strong>'+pesos(n)+'</strong></p>').join('')||'<p>Sin movimientos</p>';};box(nav+'<div class="esc-card"><h3>Resumen financiero</h3><div class="esc-fin-resumen"><div>Ingresos<strong>'+pesos(ing)+'</strong></div><div>Gastos<strong>'+pesos(gas)+'</strong></div><div>Saldo<strong>'+pesos(ing-gas)+'</strong></div></div><h3>Detalle de ingresos</h3>'+detalle('ingresos')+'<h3>Detalle de gastos</h3>'+detalle('gastos')+'</div>');return;}
 if(v==='movimientos'){box(nav+'<div class="esc-card"><h3>Movimientos financieros</h3><select id="escFiltroTipo" onchange="feriaFiltrarMovimientos()"><option value="todos">Todos</option><option value="ingresos">Ingresos</option><option value="gastos">Gastos</option></select><input id="escFiltroMes" type="month" onchange="feriaFiltrarMovimientos()"><button class="esc-btn sec" onclick="document.getElementById(\'escFiltroMes\').value=\'\';feriaFiltrarMovimientos()">Todos los meses</button><div id="escMovLista"></div></div>');window.feriaFiltrarMovimientos();return;}
 const isIn=v==='ingreso',fila=window.escFinEdit||null;window.escFinEdit=null;const x=fila||{};const field=(id,label,value='',type='text')=>'<label>'+label+'<input id="'+id+'" type="'+type+'" value="'+esc(value)+'"></label>';box(nav+'<div class="esc-card"><h3>'+(fila?'Editar':'Registrar')+' '+(isIn?'ingreso':'gasto')+'</h3>'+field('efFecha','Fecha',x.fecha||new Date().toISOString().slice(0,10),'date')+field('efMonto','Monto $',x.monto||'','number')+field('efTipo','Tipo',x.tipo||'')+field('efDescripcion','Descripción',x.descripcion||'')+field('efDestino',isIn?'Origen':'Destino',isIn?x.origen:x.destino)+field('efMetodo','Método de pago',x.metodo_pago||'')+field('efDocumento','Número de documento',x.numero_documento||'')+field('efResponsable','Responsable',x.responsable||'')+field('efObservaciones','Observaciones',x.observaciones||'')+'<label>Comprobante (archivo)<input id="efComprobante" type="file" accept="image/*,.pdf"></label><button class="esc-btn" onclick="feriaGuardarFinEscuela(\''+(isIn?'ingresos':'gastos')+'\','+(fila?Number(fila.id):'null')+')">💾 Guardar</button></div>');}
