@@ -13,7 +13,7 @@ document.querySelectorAll('.feria-series-scroll').forEach(function(bar){
 
 </script>  
 <head>  <meta charset="UTF-8">  <meta name="viewport"    
-content="width=device-width, initial-scale=1.0">  
+content="width=device-width, initial-scale=1.0, viewport-fit=cover">  
 <title>CD FERIA OSORNO</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a2556' stroke='%23e3263f' stroke-width='4'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='29' font-family='Arial' font-weight='bold' fill='white'%3EFO%3C/text%3E%3C/svg%3E">
   
@@ -7804,7 +7804,59 @@ html body #editarBannerPartido button.feria-banner-volver {
 <style id="feria-v25-videos">
 .feria-nutri-tabs,.feria-video-filtros{display:flex;gap:9px;overflow-x:auto;padding:8px 0 15px;scrollbar-width:thin}.feria-nutri-tabs button,.feria-video-filtros button{border:1px solid #32578e;background:#112c56;color:#e6efff;padding:12px 14px;border-radius:13px;font-weight:800;white-space:nowrap;cursor:pointer}.feria-nutri-tabs button.activo,.feria-video-filtros button.activo{background:#e51938;color:#fff;border-color:#e51938}.feria-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:15px}.feria-video-card{border:1px solid #365a88;border-radius:19px;overflow:hidden;background:#102951;color:#fff}.feria-video-cover{height:180px;background-color:#153b70;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative}.feria-video-play{display:grid;place-items:center;border-radius:50%;background:#ed183a;width:60px;height:60px;box-shadow:0 8px 26px #0007;font-size:23px}.feria-video-tiempo{position:absolute;bottom:12px;right:12px;background:#07172bdd;padding:6px 10px;border-radius:8px;font-weight:800;font-size:11px}.feria-video-info{padding:16px}.feria-video-categoria{color:#ff536d;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.feria-video-info h3{margin:7px 0 8px;font-size:19px}.feria-video-info p{font-size:13px;line-height:1.55;color:#c7d7ef}.feria-video-acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.feria-video-acciones button{background:#244e86;color:white;border:0;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}.feria-video-acciones button:first-child{background:#ed183a;flex:1}.feria-video-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.feria-video-modal{position:fixed;inset:0;z-index:999999;background:#010a1de8;display:flex;align-items:center;justify-content:center;padding:15px}.feria-video-dialog{width:min(100%,760px);max-height:92dvh;overflow:auto;border:1px solid #3a6193;border-radius:18px;background:#091c3d;color:#fff;padding:20px}.feria-video-cerrar{border:1px solid #4c6a94;border-radius:30px;padding:10px 16px;background:#15345f;color:white;font-weight:800}.feria-video-dialog h2{font-size:22px;margin:18px 0}.feria-video-dialog p{line-height:1.6}.feria-video-player{width:100%;aspect-ratio:16/9;background:#000;border:0;border-radius:12px}
 </style>
-<style id="feria-pdf-simple-css">.feria-pdf-vacio{padding:24px 14px;border:1px solid #49648d;border-radius:14px;background:#173965;color:#fff;line-height:1.7}.feria-pdf-vacio small{color:#c6d8ef}.feria-pdf-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feria-pdf-acciones>*{flex:1;text-align:center}</style></head>  
+<style id="feria-pdf-simple-css">.feria-pdf-vacio{padding:24px 14px;border:1px solid #49648d;border-radius:14px;background:#173965;color:#fff;line-height:1.7}.feria-pdf-vacio small{color:#c6d8ef}.feria-pdf-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feria-pdf-acciones>*{flex:1;text-align:center}</style>
+<!-- Ajustes de barras de sistema Android: cabeceras y navegación -->
+<style id="feria-android-safe-area-fix">
+  /* Se aplica solamente dentro de la APK, sin alterar la versión web. */
+  html.feria-android-apk {
+    --feria-top-safe: max(28px, env(safe-area-inset-top, 0px));
+    --feria-bottom-safe: max(32px, env(safe-area-inset-bottom, 0px));
+  }
+  html.feria-android-apk .header-admin,
+  html.feria-android-apk .header-publico {
+    padding-top: calc(12px + var(--feria-top-safe)) !important;
+    box-sizing: border-box;
+  }
+  html.feria-android-apk .marca-publica { flex: 1 1 auto; min-width: 0; }
+  html.feria-android-apk .lema-header {
+    white-space: normal;
+    overflow-wrap: normal;
+    font-size: clamp(11px, 3.3vw, 14px);
+    line-height: 1.15;
+  }
+  html.feria-android-apk .cerrar-admin,
+  html.feria-android-apk .login-publico {
+    flex: 0 0 auto;
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+  html.feria-android-apk .menu-inferior-publico {
+    height: auto;
+    min-height: 72px;
+    padding-bottom: calc(6px + var(--feria-bottom-safe));
+    box-sizing: content-box;
+  }
+  html.feria-android-apk #pantallaPublica {
+    padding-bottom: calc(100px + var(--feria-bottom-safe));
+  }
+  @media (max-width: 360px) {
+    html.feria-android-apk .logo-header { width: 40px; height: 40px; }
+    html.feria-android-apk .header-admin,
+    html.feria-android-apk .header-publico { gap: 6px; padding-left: 9px; padding-right: 9px; }
+  }
+</style>
+<script>
+(function () {
+  try {
+    if (window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function'
+        && window.Capacitor.isNativePlatform()
+        && window.Capacitor.getPlatform() === 'android') {
+      document.documentElement.classList.add('feria-android-apk');
+    }
+  } catch (e) {}
+})();
+</script>
+</head>  
   
   <body>
     
@@ -24518,8 +24570,29 @@ window.feriaDescargarInformeEscuela=async()=>{
    didDrawPage:()=>{const n=doc.internal.getNumberOfPages();doc.setFontSize(8);doc.setTextColor(110);doc.text('Escuela de Futbol Feria Osorno - Uso interno',11,289);doc.text('Pagina '+n,196,289,{align:'right'});}
   });
   const nombre='Informe_Finanzas_Escuela_Feria_Osorno_'+fecha.toISOString().slice(0,10)+'.pdf';
-  doc.save(nombre);
-  notice('Informe PDF generado correctamente.');
+  const cap=window.Capacitor;
+  if(cap?.isNativePlatform?.()){
+   const fs=cap.Plugins?.Filesystem;
+   if(!fs)throw new Error('Filesystem no está disponible en esta APK. Actualiza la aplicación.');
+   const data=doc.output('datauristring').split(',')[1];
+   let guardado;
+   let ubicacion='Documentos';
+   try{
+    guardado=await fs.writeFile({path:nombre,data,directory:'DOCUMENTS',recursive:true});
+   }catch(errorDocumentos){
+    console.warn('Documentos no disponible; guardando en DATA:',errorDocumentos);
+    guardado=await fs.writeFile({path:nombre,data,directory:'DATA',recursive:true});
+    ubicacion='archivos de la aplicación';
+   }
+   notice('Informe PDF guardado en '+ubicacion+'.');
+   if(cap.Plugins?.Share){
+    try{await cap.Plugins.Share.share({title:'Informe financiero Escuela Feria Osorno',url:guardado.uri,dialogTitle:'Compartir informe PDF'});}
+    catch(errorCompartir){console.warn('No se pudo compartir el informe:',errorCompartir);}
+   }
+  }else{
+   doc.save(nombre);
+   notice('Informe PDF generado correctamente.');
+  }
  }catch(e){console.error('Informe escuela:',e);notice(e.message||'No se pudo generar el informe.',true);}
  finally{if(boton){boton.disabled=false;boton.textContent=original;}}
 };

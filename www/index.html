@@ -12,7 +12,7 @@ document.querySelectorAll('.feria-series-scroll').forEach(function(bar){
 });
 
 </script>  
-<head><meta name="theme-color" content="#123c85"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Feria Osorno"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="icon" type="image/png" href="icons/icon-192.png">  <meta charset="UTF-8">  <meta name="viewport"    
+<head>  <meta charset="UTF-8">  <meta name="viewport"    
 content="width=device-width, initial-scale=1.0">  
 <title>CD FERIA OSORNO</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a2556' stroke='%23e3263f' stroke-width='4'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='29' font-family='Arial' font-weight='bold' fill='white'%3EFO%3C/text%3E%3C/svg%3E">
@@ -23956,22 +23956,37 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     programar(tomarEstado());
   },true);
 
+  // Gesto global: iniciar cerca del borde izquierdo y deslizar a la derecha.
+  // Se ignoran movimientos verticales, controles y carruseles horizontales.
+  const SELECTOR_SIN_GESTO='input,textarea,select,[contenteditable="true"],'+
+    '.feria-series-scroll,.menu-publico,.tienda-cantidad,.feria-carrusel,'+
+    '.feria-momentos-carrusel,[data-no-swipe-back]';
   document.addEventListener('touchstart',e=>{
     if(e.touches.length!==1){gesto=null;return;}
     const t=e.touches[0];
-    gesto={x:t.clientX,y:t.clientY,elemento:e.target};
+    const elemento=e.target;
+    if(t.clientX>120 || (elemento instanceof Element &&
+        elemento.closest(SELECTOR_SIN_GESTO))){gesto=null;return;}
+    gesto={x:t.clientX,y:t.clientY,vertical:false};
   },{passive:true});
+  document.addEventListener('touchmove',e=>{
+    if(!gesto || e.touches.length!==1)return;
+    const t=e.touches[0];
+    const dx=t.clientX-gesto.x,dy=t.clientY-gesto.y;
+    // Si comenzó como desplazamiento vertical, nunca se interpreta como volver.
+    if(Math.abs(dy)>16 && Math.abs(dy)>Math.abs(dx)*1.15)
+      gesto.vertical=true;
+  },{passive:true});
+  document.addEventListener('touchcancel',()=>{gesto=null;},{passive:true});
   document.addEventListener('touchend',e=>{
-    if(!gesto||e.changedTouches.length!==1)return;
+    if(!gesto)return;
     const origen=gesto;gesto=null;
+    if(origen.vertical || e.changedTouches.length!==1)return;
     const t=e.changedTouches[0];
     const dx=t.clientX-origen.x,dy=t.clientY-origen.y;
-    if(origen.x>85||dx<75||Math.abs(dy)>Math.abs(dx)*0.55)return;
-    if(origen.elemento instanceof Element && origen.elemento.closest(
-      'input,textarea,select,[contenteditable="true"],.feria-series-scroll,.menu-publico,.tienda-cantidad,.feria-carrusel,.feria-momentos-carrusel'))return;
-    // Evita cambiar una página mientras un diálogo está abierto.
-    const dialogo=document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]');
-    if(dialogo)return;
+    if(dx<60 || Math.abs(dy)>Math.abs(dx)*0.55)return;
+    // No retroceder cuando hay un diálogo modal abierto.
+    if(document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]'))return;
     volverPantalla();
   },{passive:true});
 })();
@@ -24503,8 +24518,29 @@ window.feriaDescargarInformeEscuela=async()=>{
    didDrawPage:()=>{const n=doc.internal.getNumberOfPages();doc.setFontSize(8);doc.setTextColor(110);doc.text('Escuela de Futbol Feria Osorno - Uso interno',11,289);doc.text('Pagina '+n,196,289,{align:'right'});}
   });
   const nombre='Informe_Finanzas_Escuela_Feria_Osorno_'+fecha.toISOString().slice(0,10)+'.pdf';
-  doc.save(nombre);
-  notice('Informe PDF generado correctamente.');
+  const cap=window.Capacitor;
+  if(cap?.isNativePlatform?.()){
+   const fs=cap.Plugins?.Filesystem;
+   if(!fs)throw new Error('Filesystem no está disponible en esta APK. Actualiza la aplicación.');
+   const data=doc.output('datauristring').split(',')[1];
+   let guardado;
+   let ubicacion='Documentos';
+   try{
+    guardado=await fs.writeFile({path:nombre,data,directory:'DOCUMENTS',recursive:true});
+   }catch(errorDocumentos){
+    console.warn('Documentos no disponible; guardando en DATA:',errorDocumentos);
+    guardado=await fs.writeFile({path:nombre,data,directory:'DATA',recursive:true});
+    ubicacion='archivos de la aplicación';
+   }
+   notice('Informe PDF guardado en '+ubicacion+'.');
+   if(cap.Plugins?.Share){
+    try{await cap.Plugins.Share.share({title:'Informe financiero Escuela Feria Osorno',url:guardado.uri,dialogTitle:'Compartir informe PDF'});}
+    catch(errorCompartir){console.warn('No se pudo compartir el informe:',errorCompartir);}
+   }
+  }else{
+   doc.save(nombre);
+   notice('Informe PDF generado correctamente.');
+  }
  }catch(e){console.error('Informe escuela:',e);notice(e.message||'No se pudo generar el informe.',true);}
  finally{if(boton){boton.disabled=false;boton.textContent=original;}}
 };
