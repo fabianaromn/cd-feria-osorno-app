@@ -7805,17 +7805,16 @@ html body #editarBannerPartido button.feria-banner-volver {
 .feria-nutri-tabs,.feria-video-filtros{display:flex;gap:9px;overflow-x:auto;padding:8px 0 15px;scrollbar-width:thin}.feria-nutri-tabs button,.feria-video-filtros button{border:1px solid #32578e;background:#112c56;color:#e6efff;padding:12px 14px;border-radius:13px;font-weight:800;white-space:nowrap;cursor:pointer}.feria-nutri-tabs button.activo,.feria-video-filtros button.activo{background:#e51938;color:#fff;border-color:#e51938}.feria-video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:15px}.feria-video-card{border:1px solid #365a88;border-radius:19px;overflow:hidden;background:#102951;color:#fff}.feria-video-cover{height:180px;background-color:#153b70;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative}.feria-video-play{display:grid;place-items:center;border-radius:50%;background:#ed183a;width:60px;height:60px;box-shadow:0 8px 26px #0007;font-size:23px}.feria-video-tiempo{position:absolute;bottom:12px;right:12px;background:#07172bdd;padding:6px 10px;border-radius:8px;font-weight:800;font-size:11px}.feria-video-info{padding:16px}.feria-video-categoria{color:#ff536d;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase}.feria-video-info h3{margin:7px 0 8px;font-size:19px}.feria-video-info p{font-size:13px;line-height:1.55;color:#c7d7ef}.feria-video-acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.feria-video-acciones button{background:#244e86;color:white;border:0;border-radius:10px;padding:11px;font-weight:800;cursor:pointer}.feria-video-acciones button:first-child{background:#ed183a;flex:1}.feria-video-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.feria-video-modal{position:fixed;inset:0;z-index:999999;background:#010a1de8;display:flex;align-items:center;justify-content:center;padding:15px}.feria-video-dialog{width:min(100%,760px);max-height:92dvh;overflow:auto;border:1px solid #3a6193;border-radius:18px;background:#091c3d;color:#fff;padding:20px}.feria-video-cerrar{border:1px solid #4c6a94;border-radius:30px;padding:10px 16px;background:#15345f;color:white;font-weight:800}.feria-video-dialog h2{font-size:22px;margin:18px 0}.feria-video-dialog p{line-height:1.6}.feria-video-player{width:100%;aspect-ratio:16/9;background:#000;border:0;border-radius:12px}
 </style>
 <style id="feria-pdf-simple-css">.feria-pdf-vacio{padding:24px 14px;border:1px solid #49648d;border-radius:14px;background:#173965;color:#fff;line-height:1.7}.feria-pdf-vacio small{color:#c6d8ef}.feria-pdf-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feria-pdf-acciones>*{flex:1;text-align:center}</style>
-<!-- Ajustes de barras de sistema Android: cabeceras y navegación -->
+<!-- Ajuste de barras Android: detecta también WebView cuando Capacitor se inicializa tarde. -->
 <style id="feria-android-safe-area-fix">
-  /* Se aplica solamente dentro de la APK, sin alterar la versión web. */
   html.feria-android-apk {
-    --feria-top-safe: max(28px, env(safe-area-inset-top, 0px));
-    --feria-bottom-safe: max(32px, env(safe-area-inset-bottom, 0px));
+    --feria-top-safe: max(38px, env(safe-area-inset-top, 0px));
+    --feria-bottom-safe: max(28px, env(safe-area-inset-bottom, 0px));
   }
   html.feria-android-apk .header-admin,
   html.feria-android-apk .header-publico {
     padding-top: calc(12px + var(--feria-top-safe)) !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
   }
   html.feria-android-apk .marca-publica { flex: 1 1 auto; min-width: 0; }
   html.feria-android-apk .lema-header {
@@ -7831,13 +7830,14 @@ html body #editarBannerPartido button.feria-banner-volver {
     font-size: 10px;
   }
   html.feria-android-apk .menu-inferior-publico {
-    height: auto;
+    height: auto !important;
     min-height: 72px;
-    padding-bottom: calc(6px + var(--feria-bottom-safe));
-    box-sizing: content-box;
+    padding: 6px 6px calc(8px + var(--feria-bottom-safe)) !important;
+    box-sizing: border-box !important;
   }
+  html.feria-android-apk #administracion:not(.oculto),
   html.feria-android-apk #pantallaPublica {
-    padding-bottom: calc(100px + var(--feria-bottom-safe));
+    padding-bottom: calc(115px + var(--feria-bottom-safe)) !important;
   }
   @media (max-width: 360px) {
     html.feria-android-apk .logo-header { width: 40px; height: 40px; }
@@ -7847,13 +7847,23 @@ html body #editarBannerPartido button.feria-banner-volver {
 </style>
 <script>
 (function () {
-  try {
-    if (window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function'
-        && window.Capacitor.isNativePlatform()
-        && window.Capacitor.getPlatform() === 'android') {
-      document.documentElement.classList.add('feria-android-apk');
-    }
-  } catch (e) {}
+  function activarSiEsAPK() {
+    try {
+      var cap = window.Capacitor;
+      var nativeAndroid = !!(cap && (
+        (typeof cap.isNativePlatform === 'function' && cap.isNativePlatform() && cap.getPlatform() === 'android') ||
+        (typeof cap.getPlatform === 'function' && cap.getPlatform() === 'android' && window.androidBridge)
+      ));
+      var webViewAndroid = /Android/i.test(navigator.userAgent) && /; wv[);]/i.test(navigator.userAgent);
+      if (nativeAndroid || webViewAndroid) {
+        document.documentElement.classList.add('feria-android-apk');
+      }
+    } catch (e) { /* No modificar el navegador normal */ }
+  }
+  activarSiEsAPK();
+  document.addEventListener('DOMContentLoaded', activarSiEsAPK);
+  window.addEventListener('load', activarSiEsAPK);
+  setTimeout(activarSiEsAPK, 800);
 })();
 </script>
 </head>  
