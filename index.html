@@ -24018,7 +24018,8 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     programar(tomarEstado());
   },true);
 
-  // Gesto global: iniciar cerca del borde izquierdo y deslizar a la derecha.
+  // Gesto global de retroceso para todas las vistas internas: iniciar desde el borde izquierdo.
+  // Zona de inicio adaptable hasta 180 px; respeta formularios y carruseles.
   // Se ignoran movimientos verticales, controles y carruseles horizontales.
   const SELECTOR_SIN_GESTO='input,textarea,select,[contenteditable="true"],'+
     '.feria-series-scroll,.menu-publico,.tienda-cantidad,.feria-carrusel,'+
@@ -24027,8 +24028,10 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     if(e.touches.length!==1){gesto=null;return;}
     const t=e.touches[0];
     const elemento=e.target;
-    if(t.clientX>120 || (elemento instanceof Element &&
+    if(t.clientX>Math.min(180,window.innerWidth*0.38) || (elemento instanceof Element &&
         elemento.closest(SELECTOR_SIN_GESTO))){gesto=null;return;}
+    // Confirmar navegación pendiente antes de intentar retroceder.
+    if(pendiente){registrar(pendiente);pendiente=null;clearTimeout(temporizador);}
     gesto={x:t.clientX,y:t.clientY,vertical:false};
   },{passive:true});
   document.addEventListener('touchmove',e=>{
