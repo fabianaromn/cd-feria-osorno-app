@@ -24018,17 +24018,17 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     programar(tomarEstado());
   },true);
 
-  // Gesto global de retroceso para todas las vistas internas: iniciar desde el borde izquierdo.
-  // Zona de inicio adaptable hasta 180 px; respeta formularios y carruseles.
+  // Gesto global: iniciar DENTRO de la pantalla (35 a 210 px) para evitar el borde reservado por Chrome.
+  // Respeta formularios y carruseles.
   // Se ignoran movimientos verticales, controles y carruseles horizontales.
   const SELECTOR_SIN_GESTO='input,textarea,select,[contenteditable="true"],'+
-    '.feria-series-scroll,.menu-publico,.tienda-cantidad,.feria-carrusel,'+
+    '.feria-series-scroll,.tienda-cantidad,.feria-carrusel,'+
     '.feria-momentos-carrusel,[data-no-swipe-back]';
   document.addEventListener('touchstart',e=>{
     if(e.touches.length!==1){gesto=null;return;}
     const t=e.touches[0];
     const elemento=e.target;
-    if(t.clientX>Math.min(180,window.innerWidth*0.38) || (elemento instanceof Element &&
+    if(t.clientX<35 || t.clientX>Math.min(210,window.innerWidth*0.65) || (elemento instanceof Element &&
         elemento.closest(SELECTOR_SIN_GESTO))){gesto=null;return;}
     // Confirmar navegación pendiente antes de intentar retroceder.
     if(pendiente){registrar(pendiente);pendiente=null;clearTimeout(temporizador);}
@@ -24053,7 +24053,7 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     if(origen.vertical || e.changedTouches.length!==1)return;
     const t=e.changedTouches[0];
     const dx=t.clientX-origen.x,dy=t.clientY-origen.y;
-    if(dx<60 || Math.abs(dy)>Math.abs(dx)*0.55)return;
+    if(dx<65 || Math.abs(dy)>Math.abs(dx)*0.55)return;
     // No retroceder cuando hay un diálogo modal abierto.
     if(document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]'))return;
     volverPantalla();
