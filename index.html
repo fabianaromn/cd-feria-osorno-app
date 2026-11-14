@@ -24010,28 +24010,8 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
   }
   window.feriaVolverPantallaAnterior=volverPantalla;
 
-  // Chrome Android puede capturar el gesto del sistema antes de touchstart.
-  // Un estado centinela convierte ese retroceso del navegador en popstate,
-  // que devolvemos al historial INTERNO sin abandonar Feria Osorno.
-  const MARCA='__feria_gesto_guard_v3';
-  function armarProteccion(){
-    try{
-      if(!history.state || history.state[MARCA]!==true){
-        history.pushState(Object.assign({},history.state||{}, {[MARCA]:true}), '', location.href);
-      }
-    }catch(err){console.warn('Protección de navegación Feria:',err);}
-  }
-  armarProteccion();
-  window.addEventListener('pageshow',armarProteccion);
-  window.addEventListener('popstate',function(){
-    // Rearmar inmediatamente para que el siguiente gesto tampoco salga del sitio.
-    armarProteccion();
-    if(!volverPantalla()){
-      // Sin historial interno: permanecer en la aplicación.
-      console.info('Feria Osorno: ya estás en la pantalla inicial.');
-    }
-  });
-
+  // Evitar que Chrome interprete un deslizamiento horizontal como navegación
+  // del documento. No modifica la navegación ni el historial del navegador.
   // Captura antes del onclick (incluye accesos públicos y menú inferior).
   document.addEventListener('click',e=>{
     if(restaurando)return;
@@ -24041,7 +24021,7 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     programar(tomarEstado());
   },true);
 
-  // Gesto global: iniciar DENTRO de la pantalla (35 a 210 px) para evitar el borde reservado por Chrome.
+  // Gesto global: iniciar entre 18 y 210 px, sin interceptar controles ni carruseles.
   // Respeta formularios y carruseles.
   // Se ignoran movimientos verticales, controles y carruseles horizontales.
   const SELECTOR_SIN_GESTO='input,textarea,select,[contenteditable="true"],'+
@@ -24051,7 +24031,7 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     if(e.touches.length!==1){gesto=null;return;}
     const t=e.touches[0];
     const elemento=e.target;
-    if(t.clientX<35 || t.clientX>Math.min(210,window.innerWidth*0.65) || (elemento instanceof Element &&
+    if(t.clientX<18 || t.clientX>Math.min(210,window.innerWidth*0.65) || (elemento instanceof Element &&
         elemento.closest(SELECTOR_SIN_GESTO))){gesto=null;return;}
     // Confirmar navegación pendiente antes de intentar retroceder.
     if(pendiente){registrar(pendiente);pendiente=null;clearTimeout(temporizador);}
@@ -24083,6 +24063,9 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
   },{passive:true});
 })();
 </script>
+<style id="feria-control-gesto-android">
+html,body{overscroll-behavior-x:none;touch-action:pan-y pinch-zoom;}
+</style>
 <style id="feria-revision-octubre">
 #feriaAccesoTiendaInicio.oculto,#feriaEstadisticasAcceso.oculto{display:none!important}
 .feria-pagina-informativa{padding-top:20px!important;min-height:calc(100dvh - 78px)!important;align-content:start!important;justify-content:flex-start!important}
