@@ -24038,10 +24038,14 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     if(!gesto || e.touches.length!==1)return;
     const t=e.touches[0];
     const dx=t.clientX-gesto.x,dy=t.clientY-gesto.y;
-    // Si comenzó como desplazamiento vertical, nunca se interpreta como volver.
+    // Distinguir desplazamiento vertical del gesto horizontal de retroceso.
     if(Math.abs(dy)>16 && Math.abs(dy)>Math.abs(dx)*1.15)
       gesto.vertical=true;
-  },{passive:true});
+    // En Chrome Android, impedir que el desplazamiento horizontal de la página
+    // compita con el gesto de la aplicación una vez reconocida su dirección.
+    if(!gesto.vertical && dx>18 && Math.abs(dy)<Math.abs(dx)*0.55 && e.cancelable)
+      e.preventDefault();
+  },{passive:false});
   document.addEventListener('touchcancel',()=>{gesto=null;},{passive:true});
   document.addEventListener('touchend',e=>{
     if(!gesto)return;
