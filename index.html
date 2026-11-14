@@ -7866,6 +7866,7 @@ html body #editarBannerPartido button.feria-banner-volver {
   setTimeout(activarSiEsAPK, 800);
 })();
 </script>
+<style id="feria-chrome-back-guard">html,body{overscroll-behavior-x:none}</style>
 </head>  
   
   <body>
@@ -24008,6 +24009,28 @@ async function feriaCargarExtrasPublicos(nombre,categoria,jugadorId){
     return false;
   }
   window.feriaVolverPantallaAnterior=volverPantalla;
+
+  // Chrome Android puede capturar el gesto del sistema antes de touchstart.
+  // Un estado centinela convierte ese retroceso del navegador en popstate,
+  // que devolvemos al historial INTERNO sin abandonar Feria Osorno.
+  const MARCA='__feria_gesto_guard_v3';
+  function armarProteccion(){
+    try{
+      if(!history.state || history.state[MARCA]!==true){
+        history.pushState(Object.assign({},history.state||{}, {[MARCA]:true}), '', location.href);
+      }
+    }catch(err){console.warn('Protección de navegación Feria:',err);}
+  }
+  armarProteccion();
+  window.addEventListener('pageshow',armarProteccion);
+  window.addEventListener('popstate',function(){
+    // Rearmar inmediatamente para que el siguiente gesto tampoco salga del sitio.
+    armarProteccion();
+    if(!volverPantalla()){
+      // Sin historial interno: permanecer en la aplicación.
+      console.info('Feria Osorno: ya estás en la pantalla inicial.');
+    }
+  });
 
   // Captura antes del onclick (incluye accesos públicos y menú inferior).
   document.addEventListener('click',e=>{
